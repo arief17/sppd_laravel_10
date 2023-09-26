@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AlatAngkut;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 
 class AlatAngkutController extends Controller
@@ -12,7 +13,10 @@ class AlatAngkutController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.alat-angkut.index', [
+            'title' => 'Daftar alat angkut',
+            'alat_angkuts' => AlatAngkut::all(),
+        ]);
     }
 
     /**
@@ -20,7 +24,9 @@ class AlatAngkutController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.alat-angkut.create', [
+            'title' => 'Tambah alat angkut',
+        ]);
     }
 
     /**
@@ -28,7 +34,15 @@ class AlatAngkutController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required|min:3|max:100',
+        ]);
+        
+        $validatedData['slug'] = SlugService::createSlug(AlatAngkut::class, 'slug', $request->nama);
+        $validatedData['user_id'] = auth()->user()->id;
+        
+        AlatAngkut::create($validatedData);
+        return redirect()->route('dashboard.alat-angkut.index')->with('success', 'Alat Angkut berhasil ditambahkan!');
     }
 
     /**
@@ -36,7 +50,10 @@ class AlatAngkutController extends Controller
      */
     public function show(AlatAngkut $alatAngkut)
     {
-        //
+        return view('dashboard.alat-angkut.show', [
+            'title' => 'Detail alat angkut',
+            'alat_angkut' => $alatAngkut,
+        ]);
     }
 
     /**
@@ -44,7 +61,10 @@ class AlatAngkutController extends Controller
      */
     public function edit(AlatAngkut $alatAngkut)
     {
-        //
+        return view('dashboard.alat-angkut.edit', [
+            'title' => 'Perbarui alat angkut',
+            'alat_angkut' => $alatAngkut,
+        ]);
     }
 
     /**
@@ -52,7 +72,15 @@ class AlatAngkutController extends Controller
      */
     public function update(Request $request, AlatAngkut $alatAngkut)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required|min:3|max:100',
+        ]);
+        
+        $validatedData['slug'] = SlugService::createSlug(AlatAngkut::class, 'slug', $request->nama);
+        $validatedData['user_id'] = auth()->user()->id;
+        
+        AlatAngkut::update($validatedData);
+        return redirect()->route('dashboard.alat-angkut.index')->with('success', 'Alat Angkut berhasil ditambahkan!');
     }
 
     /**
@@ -60,6 +88,7 @@ class AlatAngkutController extends Controller
      */
     public function destroy(AlatAngkut $alatAngkut)
     {
-        //
+        $alatAngkut->delete();
+        return redirect()->route('dashboard.alat-angkut.index')->with('success', 'Alat Angkut berhasil dihapus!');
     }
 }

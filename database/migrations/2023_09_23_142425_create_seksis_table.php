@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('nama');
             $table->string('slug')->unique();
             $table->unsignedBigInteger('bidang');
+            $table->unsignedBigInteger('author');
             $table->timestamps();
+            $table->boolean('deleted')->default(false);
         });
     }
 

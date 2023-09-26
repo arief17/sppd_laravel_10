@@ -12,13 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('biaya_perdins', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->string('slug')->unique();
             $table->unsignedBigInteger('area');
             $table->unsignedBigInteger('dari');
             $table->unsignedBigInteger('ke');
             $table->unsignedBigInteger('transport');
             $table->unsignedBigInteger('harian');
+            $table->unsignedBigInteger('author');
             $table->timestamps();
+            $table->boolean('deleted')->default(false);
         });
     }
 

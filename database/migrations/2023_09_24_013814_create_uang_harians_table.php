@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('uang_harians', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('keterangan');
             $table->string('slug')->unique();
             $table->string('eselon_i');
@@ -23,7 +23,9 @@ return new class extends Migration
             $table->string('golongan_iii');
             $table->string('golongan_ii');
             $table->string('golongan_i');
+            $table->unsignedBigInteger('author');
             $table->timestamps();
+            $table->boolean('deleted')->default(false);
         });
     }
 

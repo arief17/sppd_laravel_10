@@ -21,7 +21,9 @@ return new class extends Migration
             $table->string('eselon');
             $table->unsignedBigInteger('jabatan');
             $table->date('last_perdin');
+            $table->unsignedBigInteger('author');
             $table->timestamps();
+            $table->boolean('deleted')->default(false);
         });
     }
 

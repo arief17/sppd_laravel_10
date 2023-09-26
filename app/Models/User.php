@@ -17,11 +17,104 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $guarded = ['id'];
+    protected $with = ['level_admin', 'seksi', 'bidang'];
+
+    public function level_admin()
+    {
+        return $this->belongsTo(LevelAdmin::class, 'level_admin');
+    }
+    
+    public function seksi_authors()
+    {
+        return $this->hasMany(Bidang::class, 'author');
+    }
+    
+    public function seksi()
+    {
+        return $this->belongsTo(Bidang::class, 'seksi');
+    }
+
+    public function bidang_authors()
+    {
+        return $this->hasMany(Bidang::class, 'author');
+    }
+    
+    public function bidang()
+    {
+        return $this->belongsTo(Bidang::class, 'bidang');
+    }
+
+    public function kegiatans()
+    {
+        return $this->hasMany(Kegiatan::class, 'kegiatan');
+    }
+
+    public function pegawais()
+    {
+        return $this->hasMany(Pegawai::class, 'pegawai');
+    }
+
+    public function tanda_tangans()
+    {
+        return $this->hasMany(TandaTangan::class, 'tanda_tangan');
+    }
+
+    public function alat_angkuts()
+    {
+        return $this->hasMany(AlatAngkut::class, 'author');
+    }
+
+    public function jabatans()
+    {
+        return $this->hasMany(Jabatan::class, 'author');
+    }
+
+    public function ketentuans()
+    {
+        return $this->hasMany(Ketentuan::class, 'author');
+    }
+
+    public function golongans()
+    {
+        return $this->hasMany(Golongan::class, 'author');
+    }
+
+    public function jenis_perdins()
+    {
+        return $this->hasMany(JenisPerdin::class, 'author');
+    }
+
+    public function provinsis()
+    {
+        return $this->hasMany(Provinsi::class, 'author');
+    }
+
+    public function kota_kabupatens()
+    {
+        return $this->hasMany(KotaKabupaten::class, 'author');
+    }
+
+    public function uang_harians()
+    {
+        return $this->hasMany(UangHarian::class, 'author');
+    }
+
+    public function uang_transports()
+    {
+        return $this->hasMany(UangTransport::class, 'author');
+    }
+
+    public function biaya_perdins()
+    {
+        return $this->hasMany(BiayaPerdin::class, 'author');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'username';
+    }
+
 
     /**
      * The attributes that should be hidden for serialization.

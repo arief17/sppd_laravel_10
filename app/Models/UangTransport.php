@@ -2,10 +2,38 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class UangTransport extends Model
 {
-    use HasFactory;
+    use HasFactory, Sluggable;
+
+    protected $guarded = ['id'];
+    protected $with = ['author'];
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'author');
+    }
+
+    public function biaya_perdins()
+    {
+        return $this->hasMany(BiayaPerdin::class, 'transport');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'keterangan'
+            ]
+        ];
+    }
 }

@@ -19,12 +19,13 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->unsignedBigInteger('level_admin');
-            $table->unsignedBigInteger('seksi');
-            $table->unsignedBigInteger('bidang');
+            $table->unsignedBigInteger('seksi')->nullable();
+            $table->unsignedBigInteger('bidang')->nullable();
             $table->dateTime('last_login');
             $table->string('photo');
             $table->rememberToken();
             $table->timestamps();
+            $table->boolean('deleted')->default(false);
         });
     }
 
