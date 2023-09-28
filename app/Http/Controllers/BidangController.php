@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bidang;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 
 class BidangController extends Controller
@@ -12,7 +13,10 @@ class BidangController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.bidang.index', [
+            'title' => 'Daftar Bidang',
+            'bidangs' => Bidang::all(),
+        ]);
     }
 
     /**
@@ -20,7 +24,9 @@ class BidangController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.bidang.create', [
+            'title' => 'Tambah Bidang',
+        ]);
     }
 
     /**
@@ -28,7 +34,16 @@ class BidangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required|min:3|max:100',
+            'jenis' => 'required|min:3|max:100',
+        ]);
+        
+        $validatedData['slug'] = SlugService::createSlug(Bidang::class, 'slug', $request->nama);
+        $validatedData['author'] = auth()->user()->id;
+        
+        Bidang::create($validatedData);
+        return redirect()->route('dashboard.bidang.index')->with('success', 'Bidang berhasil ditambahkan!');
     }
 
     /**
@@ -36,7 +51,10 @@ class BidangController extends Controller
      */
     public function show(Bidang $bidang)
     {
-        //
+        return view('dashboard.bidang.show', [
+            'title' => 'Detail Bidang',
+            'bidang' => $bidang,
+        ]);
     }
 
     /**
@@ -44,7 +62,10 @@ class BidangController extends Controller
      */
     public function edit(Bidang $bidang)
     {
-        //
+        return view('dashboard.bidang.edit', [
+            'title' => 'Perbarui Bidang',
+            'bidang' => $bidang,
+        ]);
     }
 
     /**
@@ -52,7 +73,16 @@ class BidangController extends Controller
      */
     public function update(Request $request, Bidang $bidang)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required|min:3|max:100',
+            'jenis' => 'required|min:3|max:100',
+        ]);
+        
+        $validatedData['slug'] = SlugService::createSlug(Bidang::class, 'slug', $request->nama);
+        $validatedData['author'] = auth()->user()->id;
+        
+        Bidang::update($validatedData);
+        return redirect()->route('dashboard.bidang.index')->with('success', 'Bidang berhasil ditambahkan!');
     }
 
     /**
@@ -60,6 +90,7 @@ class BidangController extends Controller
      */
     public function destroy(Bidang $bidang)
     {
-        //
+        $bidang->delete();
+        return redirect()->route('dashboard.bidang.index')->with('success', 'Bidang berhasil dihapus!');
     }
 }

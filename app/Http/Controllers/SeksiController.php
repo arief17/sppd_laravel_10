@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bidang;
 use App\Models\Seksi;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 
 class SeksiController extends Controller
@@ -12,7 +14,10 @@ class SeksiController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.seksi.index', [
+            'title' => 'Daftar Seksi',
+            'seksis' => Seksi::all(),
+        ]);
     }
 
     /**
@@ -20,7 +25,10 @@ class SeksiController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.seksi.create', [
+            'title' => 'Tambah Seksi',
+            'bidangs' => Bidang::all(),
+        ]);
     }
 
     /**
@@ -28,7 +36,16 @@ class SeksiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required|min:3|max:100',
+            'bidang' => 'required',
+        ]);
+        
+        $validatedData['slug'] = SlugService::createSlug(Seksi::class, 'slug', $request->nama);
+        $validatedData['author'] = auth()->user()->id;
+        
+        Seksi::create($validatedData);
+        return redirect()->route('dashboard.seksi.index')->with('success', 'Seksi berhasil ditambahkan!');
     }
 
     /**
@@ -36,7 +53,10 @@ class SeksiController extends Controller
      */
     public function show(Seksi $seksi)
     {
-        //
+        return view('dashboard.seksi.show', [
+            'title' => 'Detail Seksi',
+            'seksi' => $seksi,
+        ]);
     }
 
     /**
@@ -44,7 +64,11 @@ class SeksiController extends Controller
      */
     public function edit(Seksi $seksi)
     {
-        //
+        return view('dashboard.seksi.edit', [
+            'title' => 'Perbarui Seksi',
+            'seksi' => $seksi,
+            'bidangs' => Bidang::all(),
+        ]);
     }
 
     /**
@@ -52,7 +76,16 @@ class SeksiController extends Controller
      */
     public function update(Request $request, Seksi $seksi)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required|min:3|max:100',
+            'bidang' => 'required',
+        ]);
+        
+        $validatedData['slug'] = SlugService::createSlug(Seksi::class, 'slug', $request->nama);
+        $validatedData['author'] = auth()->user()->id;
+        
+        Seksi::update($validatedData);
+        return redirect()->route('dashboard.seksi.index')->with('success', 'Seksi berhasil ditambahkan!');
     }
 
     /**
@@ -60,6 +93,7 @@ class SeksiController extends Controller
      */
     public function destroy(Seksi $seksi)
     {
-        //
+        $seksi->delete();
+        return redirect()->route('dashboard.seksi.index')->with('success', 'Seksi berhasil dihapus!');
     }
 }

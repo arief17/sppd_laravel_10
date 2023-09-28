@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\KotaKabupaten;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 
 class KotaKabupatenController extends Controller
@@ -12,7 +13,10 @@ class KotaKabupatenController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.kota-kabupaten.index', [
+            'title' => 'Daftar Kota/Kabupaten',
+            'kota_kabupatens' => KotaKabupaten::all(),
+        ]);
     }
 
     /**
@@ -20,7 +24,9 @@ class KotaKabupatenController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.kota-kabupaten.create', [
+            'title' => 'Tambah Kota/Kabupaten',
+        ]);
     }
 
     /**
@@ -28,7 +34,15 @@ class KotaKabupatenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required|min:3|max:100',
+        ]);
+        
+        $validatedData['slug'] = SlugService::createSlug(KotaKabupaten::class, 'slug', $request->nama);
+        $validatedData['author'] = auth()->user()->id;
+        
+        KotaKabupaten::create($validatedData);
+        return redirect()->route('dashboard.kota-kabupaten.index')->with('success', 'Kota/Kabupaten berhasil ditambahkan!');
     }
 
     /**
@@ -36,7 +50,10 @@ class KotaKabupatenController extends Controller
      */
     public function show(KotaKabupaten $kotaKabupaten)
     {
-        //
+        return view('dashboard.kota-kabupaten.show', [
+            'title' => 'Detail Kota/Kabupaten',
+            'kota_kabupaten' => $kotaKabupaten,
+        ]);
     }
 
     /**
@@ -44,7 +61,10 @@ class KotaKabupatenController extends Controller
      */
     public function edit(KotaKabupaten $kotaKabupaten)
     {
-        //
+        return view('dashboard.kota-kabupaten.edit', [
+            'title' => 'Perbarui Kota/Kabupaten',
+            'kota_kabupaten' => $kotaKabupaten,
+        ]);
     }
 
     /**
@@ -52,7 +72,15 @@ class KotaKabupatenController extends Controller
      */
     public function update(Request $request, KotaKabupaten $kotaKabupaten)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required|min:3|max:100',
+        ]);
+        
+        $validatedData['slug'] = SlugService::createSlug(KotaKabupaten::class, 'slug', $request->nama);
+        $validatedData['author'] = auth()->user()->id;
+        
+        KotaKabupaten::update($validatedData);
+        return redirect()->route('dashboard.kota-kabupaten.index')->with('success', 'Kota/Kabupaten berhasil ditambahkan!');
     }
 
     /**
@@ -60,6 +88,7 @@ class KotaKabupatenController extends Controller
      */
     public function destroy(KotaKabupaten $kotaKabupaten)
     {
-        //
+        $kotaKabupaten->delete();
+        return redirect()->route('dashboard.kota-kabupaten.index')->with('success', 'Kota/Kabupaten berhasil dihapus!');
     }
 }

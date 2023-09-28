@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\UangTransport;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 
 class UangTransportController extends Controller
@@ -12,7 +13,10 @@ class UangTransportController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.uang-transport.index', [
+            'title' => 'Daftar Uang Transport',
+            'uang_transports' => UangTransport::all(),
+        ]);
     }
 
     /**
@@ -20,7 +24,9 @@ class UangTransportController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.uang-transport.create', [
+            'title' => 'Tambah Uang Transport',
+        ]);
     }
 
     /**
@@ -28,7 +34,23 @@ class UangTransportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'keterangan' => 'required',
+            'eselon_i' => 'required|number',
+            'eselon_ii' => 'required|number',
+            'eselon_iii' => 'required|number',
+            'eselon_iv' => 'required|number',
+            'golongan_iv' => 'required|number',
+            'golongan_iii' => 'required|number',
+            'golongan_ii' => 'required|number',
+            'golongan_i' => 'required|number',
+        ]);
+        
+        $validatedData['slug'] = SlugService::createSlug(UangTransport::class, 'slug', $request->keterangan);
+        $validatedData['author'] = auth()->user()->id;
+        
+        UangTransport::create($validatedData);
+        return redirect()->route('dashboard.uang-transport.index')->with('success', 'Uang Transport berhasil ditambahkan!');
     }
 
     /**
@@ -36,7 +58,10 @@ class UangTransportController extends Controller
      */
     public function show(UangTransport $uangTransport)
     {
-        //
+        return view('dashboard.uang-transport.show', [
+            'title' => 'Detail Uang Transport',
+            'uang_transport' => $uangTransport,
+        ]);
     }
 
     /**
@@ -44,7 +69,10 @@ class UangTransportController extends Controller
      */
     public function edit(UangTransport $uangTransport)
     {
-        //
+        return view('dashboard.uang-transport.edit', [
+            'title' => 'Perbarui Uang Transport',
+            'uang_transport' => $uangTransport,
+        ]);
     }
 
     /**
@@ -52,7 +80,23 @@ class UangTransportController extends Controller
      */
     public function update(Request $request, UangTransport $uangTransport)
     {
-        //
+        $validatedData = $request->validate([
+            'keterangan' => 'required',
+            'eselon_i' => 'required|number',
+            'eselon_ii' => 'required|number',
+            'eselon_iii' => 'required|number',
+            'eselon_iv' => 'required|number',
+            'golongan_iv' => 'required|number',
+            'golongan_iii' => 'required|number',
+            'golongan_ii' => 'required|number',
+            'golongan_i' => 'required|number',
+        ]);
+        
+        $validatedData['slug'] = SlugService::createSlug(UangTransport::class, 'slug', $request->keterangan);
+        $validatedData['author'] = auth()->user()->id;
+        
+        UangTransport::update($validatedData);
+        return redirect()->route('dashboard.uang-transport.index')->with('success', 'Uang Transport berhasil ditambahkan!');
     }
 
     /**
@@ -60,6 +104,7 @@ class UangTransportController extends Controller
      */
     public function destroy(UangTransport $uangTransport)
     {
-        //
+        $uangTransport->delete();
+        return redirect()->route('dashboard.uang-transport.index')->with('success', 'Uang Transport berhasil dihapus!');
     }
 }

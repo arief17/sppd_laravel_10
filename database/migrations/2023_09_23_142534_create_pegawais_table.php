@@ -18,12 +18,12 @@ return new class extends Migration
             $table->string('nip')->unique();
             $table->boolean('pptk');
             $table->string('ruang');
-            $table->string('eselon');
+            $table->unsignedBigInteger('eselon');
             $table->unsignedBigInteger('jabatan');
             $table->date('last_perdin');
             $table->unsignedBigInteger('author');
             $table->timestamps();
-            $table->boolean('deleted')->default(false);
+            $table->softDeletes();
         });
     }
 
@@ -32,6 +32,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pegawais');
+        Schema::table('pegawais', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };

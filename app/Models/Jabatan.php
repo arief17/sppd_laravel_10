@@ -5,10 +5,11 @@ namespace App\Models;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Jabatan extends Model
 {
-    use HasFactory, Sluggable;
+    use HasFactory, Sluggable, SoftDeletes;
 
     protected $guarded = ['id'];
     protected $with = ['author'];
@@ -16,6 +17,11 @@ class Jabatan extends Model
     public function author()
     {
         return $this->belongsTo(User::class, 'author');
+    }
+
+    public function pegawais()
+    {
+        return $this->hasMany(Pegawai::class, 'jabatan');
     }
 
     public function tanda_tangans()

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jabatan;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 
 class JabatanController extends Controller
@@ -12,7 +13,10 @@ class JabatanController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.jabatan.index', [
+            'title' => 'Daftar Jabatan',
+            'jabatans' => Jabatan::all(),
+        ]);
     }
 
     /**
@@ -20,7 +24,9 @@ class JabatanController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.jabatan.create', [
+            'title' => 'Tambah Jabatan',
+        ]);
     }
 
     /**
@@ -28,7 +34,16 @@ class JabatanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required|min:3|max:100',
+            'jabatan_singkat' => 'required|min:3|max:100',
+        ]);
+        
+        $validatedData['slug'] = SlugService::createSlug(Jabatan::class, 'slug', $request->nama);
+        $validatedData['author'] = auth()->user()->id;
+        
+        Jabatan::create($validatedData);
+        return redirect()->route('dashboard.jabatan.index')->with('success', 'Jabatan berhasil ditambahkan!');
     }
 
     /**
@@ -36,7 +51,10 @@ class JabatanController extends Controller
      */
     public function show(Jabatan $jabatan)
     {
-        //
+        return view('dashboard.jabatan.show', [
+            'title' => 'Detail Jabatan',
+            'jabatan' => $jabatan,
+        ]);
     }
 
     /**
@@ -44,7 +62,10 @@ class JabatanController extends Controller
      */
     public function edit(Jabatan $jabatan)
     {
-        //
+        return view('dashboard.jabatan.edit', [
+            'title' => 'Perbarui Jabatan',
+            'jabatan' => $jabatan,
+        ]);
     }
 
     /**
@@ -52,7 +73,16 @@ class JabatanController extends Controller
      */
     public function update(Request $request, Jabatan $jabatan)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required|min:3|max:100',
+            'jabatan_singkat' => 'required|min:3|max:100',
+        ]);
+        
+        $validatedData['slug'] = SlugService::createSlug(Jabatan::class, 'slug', $request->nama);
+        $validatedData['author'] = auth()->user()->id;
+        
+        Jabatan::update($validatedData);
+        return redirect()->route('dashboard.jabatan.index')->with('success', 'Jabatan berhasil ditambahkan!');
     }
 
     /**
@@ -60,6 +90,7 @@ class JabatanController extends Controller
      */
     public function destroy(Jabatan $jabatan)
     {
-        //
+        $jabatan->delete();
+        return redirect()->route('dashboard.jabatan.index')->with('success', 'Jabatan berhasil dihapus!');
     }
 }

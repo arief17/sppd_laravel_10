@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kegiatan;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 
 class KegiatanController extends Controller
@@ -12,7 +13,10 @@ class KegiatanController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.kegiatan.index', [
+            'title' => 'Daftar Kegiatan',
+            'kegiatans' => Kegiatan::all(),
+        ]);
     }
 
     /**
@@ -20,7 +24,9 @@ class KegiatanController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.kegiatan.create', [
+            'title' => 'Tambah Kegiatan',
+        ]);
     }
 
     /**
@@ -28,7 +34,15 @@ class KegiatanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required|min:3|max:100',
+        ]);
+        
+        $validatedData['slug'] = SlugService::createSlug(Kegiatan::class, 'slug', $request->nama);
+        $validatedData['author'] = auth()->user()->id;
+        
+        Kegiatan::create($validatedData);
+        return redirect()->route('dashboard.kegiatan.index')->with('success', 'Kegiatan berhasil ditambahkan!');
     }
 
     /**
@@ -36,7 +50,10 @@ class KegiatanController extends Controller
      */
     public function show(Kegiatan $kegiatan)
     {
-        //
+        return view('dashboard.kegiatan.show', [
+            'title' => 'Detail Kegiatan',
+            'kegiatan' => $kegiatan,
+        ]);
     }
 
     /**
@@ -44,7 +61,10 @@ class KegiatanController extends Controller
      */
     public function edit(Kegiatan $kegiatan)
     {
-        //
+        return view('dashboard.kegiatan.edit', [
+            'title' => 'Perbarui Kegiatan',
+            'kegiatan' => $kegiatan,
+        ]);
     }
 
     /**
@@ -52,7 +72,15 @@ class KegiatanController extends Controller
      */
     public function update(Request $request, Kegiatan $kegiatan)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required|min:3|max:100',
+        ]);
+        
+        $validatedData['slug'] = SlugService::createSlug(Kegiatan::class, 'slug', $request->nama);
+        $validatedData['author'] = auth()->user()->id;
+        
+        Kegiatan::update($validatedData);
+        return redirect()->route('dashboard.kegiatan.index')->with('success', 'Kegiatan berhasil ditambahkan!');
     }
 
     /**
@@ -60,6 +88,7 @@ class KegiatanController extends Controller
      */
     public function destroy(Kegiatan $kegiatan)
     {
-        //
+        $kegiatan->delete();
+        return redirect()->route('dashboard.kegiatan.index')->with('success', 'Kegiatan berhasil dihapus!');
     }
 }

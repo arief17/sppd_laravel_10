@@ -21,7 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('harian');
             $table->unsignedBigInteger('author');
             $table->timestamps();
-            $table->boolean('deleted')->default(false);
+            $table->softDeletes();
         });
     }
 
@@ -30,6 +30,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('biaya_perdins');
+        Schema::table('biaya_perdins', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };

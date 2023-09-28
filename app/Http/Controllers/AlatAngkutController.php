@@ -14,7 +14,7 @@ class AlatAngkutController extends Controller
     public function index()
     {
         return view('dashboard.alat-angkut.index', [
-            'title' => 'Daftar alat angkut',
+            'title' => 'Daftar Alat Angkut',
             'alat_angkuts' => AlatAngkut::all(),
         ]);
     }
@@ -25,7 +25,7 @@ class AlatAngkutController extends Controller
     public function create()
     {
         return view('dashboard.alat-angkut.create', [
-            'title' => 'Tambah alat angkut',
+            'title' => 'Tambah Alat Angkut',
         ]);
     }
 
@@ -39,7 +39,7 @@ class AlatAngkutController extends Controller
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(AlatAngkut::class, 'slug', $request->nama);
-        $validatedData['user_id'] = auth()->user()->id;
+        $validatedData['author'] = auth()->user()->id;
         
         AlatAngkut::create($validatedData);
         return redirect()->route('dashboard.alat-angkut.index')->with('success', 'Alat Angkut berhasil ditambahkan!');
@@ -51,7 +51,7 @@ class AlatAngkutController extends Controller
     public function show(AlatAngkut $alatAngkut)
     {
         return view('dashboard.alat-angkut.show', [
-            'title' => 'Detail alat angkut',
+            'title' => 'Detail Alat Angkut',
             'alat_angkut' => $alatAngkut,
         ]);
     }
@@ -62,7 +62,7 @@ class AlatAngkutController extends Controller
     public function edit(AlatAngkut $alatAngkut)
     {
         return view('dashboard.alat-angkut.edit', [
-            'title' => 'Perbarui alat angkut',
+            'title' => 'Perbarui Alat Angkut',
             'alat_angkut' => $alatAngkut,
         ]);
     }
@@ -77,7 +77,7 @@ class AlatAngkutController extends Controller
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(AlatAngkut::class, 'slug', $request->nama);
-        $validatedData['user_id'] = auth()->user()->id;
+        $validatedData['author'] = auth()->user()->id;
         
         AlatAngkut::update($validatedData);
         return redirect()->route('dashboard.alat-angkut.index')->with('success', 'Alat Angkut berhasil ditambahkan!');

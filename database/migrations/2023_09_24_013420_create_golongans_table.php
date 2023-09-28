@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->unsignedBigInteger('author');
             $table->timestamps();
-            $table->boolean('deleted')->default(false);
+            $table->softDeletes();
         });
     }
 
@@ -26,6 +26,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('golongans');
+        Schema::table('golongans', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('slug')->unique();
             $table->timestamps();
-            $table->boolean('deleted')->default(false);
+            $table->softDeletes();
         });
     }
 
@@ -25,6 +25,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('level_admins');
+        Schema::table('level_admins', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };

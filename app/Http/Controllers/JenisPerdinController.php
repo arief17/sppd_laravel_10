@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JenisPerdin;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 
 class JenisPerdinController extends Controller
@@ -12,7 +13,10 @@ class JenisPerdinController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.jenis-perdin.index', [
+            'title' => 'Daftar Jenis Perdin',
+            'jenis_perdins' => JenisPerdin::all(),
+        ]);
     }
 
     /**
@@ -20,7 +24,9 @@ class JenisPerdinController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.jenis-perdin.create', [
+            'title' => 'Tambah Jenis Perdin',
+        ]);
     }
 
     /**
@@ -28,7 +34,15 @@ class JenisPerdinController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required|min:3|max:100',
+        ]);
+        
+        $validatedData['slug'] = SlugService::createSlug(JenisPerdin::class, 'slug', $request->nama);
+        $validatedData['author'] = auth()->user()->id;
+        
+        JenisPerdin::create($validatedData);
+        return redirect()->route('dashboard.jenis-perdin.index')->with('success', 'Jenis Perdin berhasil ditambahkan!');
     }
 
     /**
@@ -36,7 +50,10 @@ class JenisPerdinController extends Controller
      */
     public function show(JenisPerdin $jenisPerdin)
     {
-        //
+        return view('dashboard.jenis-perdin.show', [
+            'title' => 'Detail Jenis Perdin',
+            'jenis_perdin' => $jenisPerdin,
+        ]);
     }
 
     /**
@@ -44,7 +61,10 @@ class JenisPerdinController extends Controller
      */
     public function edit(JenisPerdin $jenisPerdin)
     {
-        //
+        return view('dashboard.jenis-perdin.edit', [
+            'title' => 'Perbarui Jenis Perdin',
+            'jenis_perdin' => $jenisPerdin,
+        ]);
     }
 
     /**
@@ -52,7 +72,15 @@ class JenisPerdinController extends Controller
      */
     public function update(Request $request, JenisPerdin $jenisPerdin)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required|min:3|max:100',
+        ]);
+        
+        $validatedData['slug'] = SlugService::createSlug(JenisPerdin::class, 'slug', $request->nama);
+        $validatedData['author'] = auth()->user()->id;
+        
+        JenisPerdin::update($validatedData);
+        return redirect()->route('dashboard.jenis-perdin.index')->with('success', 'Jenis Perdin berhasil ditambahkan!');
     }
 
     /**
@@ -60,6 +88,7 @@ class JenisPerdinController extends Controller
      */
     public function destroy(JenisPerdin $jenisPerdin)
     {
-        //
+        $jenisPerdin->delete();
+        return redirect()->route('dashboard.jenis-perdin.index')->with('success', 'Jenis Perdin berhasil dihapus!');
     }
 }

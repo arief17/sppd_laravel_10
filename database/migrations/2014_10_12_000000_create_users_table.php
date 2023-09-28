@@ -21,11 +21,11 @@ return new class extends Migration
             $table->unsignedBigInteger('level_admin');
             $table->unsignedBigInteger('seksi')->nullable();
             $table->unsignedBigInteger('bidang')->nullable();
-            $table->dateTime('last_login');
-            $table->string('photo');
+            $table->dateTime('last_login')->nullable();
+            $table->string('photo')->default('not found');
             $table->rememberToken();
             $table->timestamps();
-            $table->boolean('deleted')->default(false);
+            $table->softDeletes();
         });
     }
 
@@ -34,6 +34,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };

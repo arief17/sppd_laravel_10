@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('golongan_i');
             $table->unsignedBigInteger('author');
             $table->timestamps();
-            $table->boolean('deleted')->default(false);
+            $table->softDeletes();
         });
     }
 
@@ -34,6 +34,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('uang_transports');
+        Schema::table('uang_transports', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };

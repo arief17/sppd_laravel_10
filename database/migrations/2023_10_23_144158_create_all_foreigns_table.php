@@ -28,6 +28,7 @@ return new class extends Migration
 
         Schema::table('pegawais', function (Blueprint $table) {
             $table->foreign('jabatan')->references('id')->on('jabatans');
+            $table->foreign('eselon')->references('id')->on('golongans');
             $table->foreign('author')->references('id')->on('users');
         });
 
