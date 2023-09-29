@@ -49,7 +49,7 @@ class TandaTanganController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         TandaTangan::create($validatedData);
-        return redirect()->route('dashboard.tanda-tangan.index')->with('success', 'Tanda Tangan berhasil ditambahkan!');
+        return redirect()->route('tanda-tangan.index')->with('success', 'Tanda Tangan berhasil ditambahkan!');
     }
 
     /**
@@ -92,7 +92,7 @@ class TandaTanganController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         TandaTangan::update($validatedData);
-        return redirect()->route('dashboard.tanda-tangan.index')->with('success', 'Tanda Tangan berhasil ditambahkan!');
+        return redirect()->route('tanda-tangan.index')->with('success', 'Tanda Tangan berhasil ditambahkan!');
     }
 
     /**
@@ -101,6 +101,6 @@ class TandaTanganController extends Controller
     public function destroy(TandaTangan $tandaTangan)
     {
         $tandaTangan->delete();
-        return redirect()->route('dashboard.tanda-tangan.index')->with('success', 'Tanda Tangan berhasil dihapus!');
+        return redirect()->route('tanda-tangan.index')->with('success', 'Tanda Tangan berhasil dihapus!');
     }
 }

@@ -16,17 +16,17 @@ class TandaTangan extends Model
 
     public function author()
     {
-        return $this->belongsTo(User::class, 'author');
+        return $this->belongsTo(User::class, 'user_id', 'author');
     }
 
     public function pegawai()
     {
-        return $this->belongsTo(Pegawai::class, 'pegawai');
+        return $this->belongsTo(Pegawai::class, 'pegawai_id', 'pegawai');
     }
 
     public function jabatan()
     {
-        return $this->belongsTo(Jabatan::class, 'jabatan');
+        return $this->belongsTo(Jabatan::class, 'jabatan_id', 'jabatan');
     }
 
     public function getRouteKeyName()

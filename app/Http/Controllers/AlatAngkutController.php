@@ -42,7 +42,7 @@ class AlatAngkutController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         AlatAngkut::create($validatedData);
-        return redirect()->route('dashboard.alat-angkut.index')->with('success', 'Alat Angkut berhasil ditambahkan!');
+        return redirect()->route('alat-angkut.index')->with('success', 'Alat Angkut berhasil ditambahkan!');
     }
 
     /**
@@ -80,7 +80,7 @@ class AlatAngkutController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         AlatAngkut::update($validatedData);
-        return redirect()->route('dashboard.alat-angkut.index')->with('success', 'Alat Angkut berhasil ditambahkan!');
+        return redirect()->route('alat-angkut.index')->with('success', 'Alat Angkut berhasil ditambahkan!');
     }
 
     /**
@@ -89,6 +89,6 @@ class AlatAngkutController extends Controller
     public function destroy(AlatAngkut $alatAngkut)
     {
         $alatAngkut->delete();
-        return redirect()->route('dashboard.alat-angkut.index')->with('success', 'Alat Angkut berhasil dihapus!');
+        return redirect()->route('alat-angkut.index')->with('success', 'Alat Angkut berhasil dihapus!');
     }
 }

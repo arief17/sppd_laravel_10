@@ -42,7 +42,7 @@ class KotaKabupatenController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         KotaKabupaten::create($validatedData);
-        return redirect()->route('dashboard.kota-kabupaten.index')->with('success', 'Kota/Kabupaten berhasil ditambahkan!');
+        return redirect()->route('kota-kabupaten.index')->with('success', 'Kota/Kabupaten berhasil ditambahkan!');
     }
 
     /**
@@ -80,7 +80,7 @@ class KotaKabupatenController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         KotaKabupaten::update($validatedData);
-        return redirect()->route('dashboard.kota-kabupaten.index')->with('success', 'Kota/Kabupaten berhasil ditambahkan!');
+        return redirect()->route('kota-kabupaten.index')->with('success', 'Kota/Kabupaten berhasil ditambahkan!');
     }
 
     /**
@@ -89,6 +89,6 @@ class KotaKabupatenController extends Controller
     public function destroy(KotaKabupaten $kotaKabupaten)
     {
         $kotaKabupaten->delete();
-        return redirect()->route('dashboard.kota-kabupaten.index')->with('success', 'Kota/Kabupaten berhasil dihapus!');
+        return redirect()->route('kota-kabupaten.index')->with('success', 'Kota/Kabupaten berhasil dihapus!');
     }
 }

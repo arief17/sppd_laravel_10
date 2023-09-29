@@ -16,27 +16,27 @@ class Ketentuan extends Model
 
     public function author()
     {
-        return $this->belongsTo(User::class, 'author');
+        return $this->belongsTo(User::class, 'user_id', 'author');
     }
 
     public function kegiatan()
     {
-        return $this->belongsTo(Kegiatan::class, 'kegiatan');
+        return $this->belongsTo(Kegiatan::class, 'kegiatan_id', 'kegiatan');
     }
 
     public function pptk()
     {
-        return $this->belongsTo(Pegawai::class, 'pptk');
+        return $this->belongsTo(Pegawai::class, 'pegawai_id', 'pptk');
     }
 
     public function bendahara()
     {
-        return $this->belongsTo(Pegawai::class, 'bendahara');
+        return $this->belongsTo(Pegawai::class, 'pegawai_id', 'bendahara');
     }
 
     public function pelaksana_administrasi()
     {
-        return $this->belongsTo(Pegawai::class, 'pelaksana_administrasi');
+        return $this->belongsTo(Pegawai::class, 'pegawai_id', 'pelaksana_administrasi');
     }
 
     public function getRouteKeyName()

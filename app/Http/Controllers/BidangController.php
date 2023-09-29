@@ -43,7 +43,7 @@ class BidangController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         Bidang::create($validatedData);
-        return redirect()->route('dashboard.bidang.index')->with('success', 'Bidang berhasil ditambahkan!');
+        return redirect()->route('bidang.index')->with('success', 'Bidang berhasil ditambahkan!');
     }
 
     /**
@@ -82,7 +82,7 @@ class BidangController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         Bidang::update($validatedData);
-        return redirect()->route('dashboard.bidang.index')->with('success', 'Bidang berhasil ditambahkan!');
+        return redirect()->route('bidang.index')->with('success', 'Bidang berhasil ditambahkan!');
     }
 
     /**
@@ -91,6 +91,6 @@ class BidangController extends Controller
     public function destroy(Bidang $bidang)
     {
         $bidang->delete();
-        return redirect()->route('dashboard.bidang.index')->with('success', 'Bidang berhasil dihapus!');
+        return redirect()->route('bidang.index')->with('success', 'Bidang berhasil dihapus!');
     }
 }

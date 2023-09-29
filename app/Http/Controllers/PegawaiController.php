@@ -50,7 +50,7 @@ class PegawaiController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         Pegawai::create($validatedData);
-        return redirect()->route('dashboard.pegawai.index')->with('success', 'Pegawai berhasil ditambahkan!');
+        return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil ditambahkan!');
     }
 
     /**
@@ -95,7 +95,7 @@ class PegawaiController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         Pegawai::update($validatedData);
-        return redirect()->route('dashboard.pegawai.index')->with('success', 'Pegawai berhasil ditambahkan!');
+        return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil ditambahkan!');
     }
 
     /**
@@ -104,6 +104,6 @@ class PegawaiController extends Controller
     public function destroy(Pegawai $pegawai)
     {
         $pegawai->delete();
-        return redirect()->route('dashboard.pegawai.index')->with('success', 'Pegawai berhasil dihapus!');
+        return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil dihapus!');
     }
 }

@@ -16,32 +16,32 @@ class BiayaPerdin extends Model
 
     public function author()
     {
-        return $this->belongsTo(User::class, 'author');
+        return $this->belongsTo(User::class, 'user_id', 'author');
     }
 
     public function area()
     {
-        return $this->belongsTo(JenisPerdin::class, 'area');
+        return $this->belongsTo(JenisPerdin::class, 'jenis_perdin_id', 'area');
     }
 
     public function dari()
     {
-        return $this->belongsTo(KotaKabupaten::class, 'dari');
+        return $this->belongsTo(KotaKabupaten::class, 'kota_kabupaten_id', 'dari');
     }
 
     public function ke()
     {
-        return $this->belongsTo(KotaKabupaten::class, 'ke');
+        return $this->belongsTo(KotaKabupaten::class, 'kota_kabupaten_id', 'ke');
     }
 
     public function transport()
     {
-        return $this->belongsTo(UangTransport::class, 'transport');
+        return $this->belongsTo(UangTransport::class, 'uang_transport_id', 'transport');
     }
 
     public function harian()
     {
-        return $this->belongsTo(UangHarian::class, 'harian');
+        return $this->belongsTo(UangHarian::class, 'uang_harian_id', 'harian');
     }
 
     public function getRouteKeyName()

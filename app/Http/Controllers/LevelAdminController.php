@@ -42,7 +42,7 @@ class LevelAdminController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         LevelAdmin::create($validatedData);
-        return redirect()->route('dashboard.level-admin.index')->with('success', 'Level Admin berhasil ditambahkan!');
+        return redirect()->route('level-admin.index')->with('success', 'Level Admin berhasil ditambahkan!');
     }
 
     /**
@@ -80,7 +80,7 @@ class LevelAdminController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         LevelAdmin::update($validatedData);
-        return redirect()->route('dashboard.level-admin.index')->with('success', 'Level Admin berhasil ditambahkan!');
+        return redirect()->route('level-admin.index')->with('success', 'Level Admin berhasil ditambahkan!');
     }
 
     /**
@@ -89,6 +89,6 @@ class LevelAdminController extends Controller
     public function destroy(LevelAdmin $levelAdmin)
     {
         $levelAdmin->delete();
-        return redirect()->route('dashboard.level-admin.index')->with('success', 'Level Admin berhasil dihapus!');
+        return redirect()->route('level-admin.index')->with('success', 'Level Admin berhasil dihapus!');
     }
 }

@@ -42,7 +42,7 @@ class ProvinsiController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         Provinsi::create($validatedData);
-        return redirect()->route('dashboard.provinsi.index')->with('success', 'Provinsi berhasil ditambahkan!');
+        return redirect()->route('provinsi.index')->with('success', 'Provinsi berhasil ditambahkan!');
     }
 
     /**
@@ -80,7 +80,7 @@ class ProvinsiController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         Provinsi::update($validatedData);
-        return redirect()->route('dashboard.provinsi.index')->with('success', 'Provinsi berhasil ditambahkan!');
+        return redirect()->route('provinsi.index')->with('success', 'Provinsi berhasil ditambahkan!');
     }
 
     /**
@@ -89,6 +89,6 @@ class ProvinsiController extends Controller
     public function destroy(Provinsi $provinsi)
     {
         $provinsi->delete();
-        return redirect()->route('dashboard.provinsi.index')->with('success', 'Provinsi berhasil dihapus!');
+        return redirect()->route('provinsi.index')->with('success', 'Provinsi berhasil dihapus!');
     }
 }

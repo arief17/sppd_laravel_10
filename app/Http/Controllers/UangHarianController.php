@@ -50,7 +50,7 @@ class UangHarianController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         UangHarian::create($validatedData);
-        return redirect()->route('dashboard.uang-harian.index')->with('success', 'Uang Harian berhasil ditambahkan!');
+        return redirect()->route('uang-harian.index')->with('success', 'Uang Harian berhasil ditambahkan!');
     }
 
     /**
@@ -96,7 +96,7 @@ class UangHarianController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         UangHarian::update($validatedData);
-        return redirect()->route('dashboard.uang-harian.index')->with('success', 'Uang Harian berhasil ditambahkan!');
+        return redirect()->route('uang-harian.index')->with('success', 'Uang Harian berhasil ditambahkan!');
     }
 
     /**
@@ -105,6 +105,6 @@ class UangHarianController extends Controller
     public function destroy(UangHarian $uangHarian)
     {
         $uangHarian->delete();
-        return redirect()->route('dashboard.uang-harian.index')->with('success', 'Uang Harian berhasil dihapus!');
+        return redirect()->route('uang-harian.index')->with('success', 'Uang Harian berhasil dihapus!');
     }
 }

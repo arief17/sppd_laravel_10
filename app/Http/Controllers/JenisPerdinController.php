@@ -42,7 +42,7 @@ class JenisPerdinController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         JenisPerdin::create($validatedData);
-        return redirect()->route('dashboard.jenis-perdin.index')->with('success', 'Jenis Perdin berhasil ditambahkan!');
+        return redirect()->route('jenis-perdin.index')->with('success', 'Jenis Perdin berhasil ditambahkan!');
     }
 
     /**
@@ -80,7 +80,7 @@ class JenisPerdinController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         JenisPerdin::update($validatedData);
-        return redirect()->route('dashboard.jenis-perdin.index')->with('success', 'Jenis Perdin berhasil ditambahkan!');
+        return redirect()->route('jenis-perdin.index')->with('success', 'Jenis Perdin berhasil ditambahkan!');
     }
 
     /**
@@ -89,6 +89,6 @@ class JenisPerdinController extends Controller
     public function destroy(JenisPerdin $jenisPerdin)
     {
         $jenisPerdin->delete();
-        return redirect()->route('dashboard.jenis-perdin.index')->with('success', 'Jenis Perdin berhasil dihapus!');
+        return redirect()->route('jenis-perdin.index')->with('success', 'Jenis Perdin berhasil dihapus!');
     }
 }

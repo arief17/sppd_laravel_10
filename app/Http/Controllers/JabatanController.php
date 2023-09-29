@@ -43,7 +43,7 @@ class JabatanController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         Jabatan::create($validatedData);
-        return redirect()->route('dashboard.jabatan.index')->with('success', 'Jabatan berhasil ditambahkan!');
+        return redirect()->route('jabatan.index')->with('success', 'Jabatan berhasil ditambahkan!');
     }
 
     /**
@@ -82,7 +82,7 @@ class JabatanController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         Jabatan::update($validatedData);
-        return redirect()->route('dashboard.jabatan.index')->with('success', 'Jabatan berhasil ditambahkan!');
+        return redirect()->route('jabatan.index')->with('success', 'Jabatan berhasil ditambahkan!');
     }
 
     /**
@@ -91,6 +91,6 @@ class JabatanController extends Controller
     public function destroy(Jabatan $jabatan)
     {
         $jabatan->delete();
-        return redirect()->route('dashboard.jabatan.index')->with('success', 'Jabatan berhasil dihapus!');
+        return redirect()->route('jabatan.index')->with('success', 'Jabatan berhasil dihapus!');
     }
 }

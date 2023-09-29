@@ -52,7 +52,7 @@ class UserController extends Controller
         ]);
         
         User::create($validatedData);
-        return redirect()->route('dashboard.user.index')->with('success', 'User berhasil ditambahkan!');
+        return redirect()->route('user.index')->with('success', 'User berhasil ditambahkan!');
     }
 
     /**
@@ -96,7 +96,7 @@ class UserController extends Controller
         ]);
         
         User::update($validatedData);
-        return redirect()->route('dashboard.user.index')->with('success', 'User berhasil ditambahkan!');
+        return redirect()->route('user.index')->with('success', 'User berhasil ditambahkan!');
     }
 
     /**
@@ -105,6 +105,6 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('dashboard.user.index')->with('success', 'User berhasil dihapus!');
+        return redirect()->route('user.index')->with('success', 'User berhasil dihapus!');
     }
 }

@@ -50,7 +50,7 @@ class UangTransportController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         UangTransport::create($validatedData);
-        return redirect()->route('dashboard.uang-transport.index')->with('success', 'Uang Transport berhasil ditambahkan!');
+        return redirect()->route('uang-transport.index')->with('success', 'Uang Transport berhasil ditambahkan!');
     }
 
     /**
@@ -96,7 +96,7 @@ class UangTransportController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         UangTransport::update($validatedData);
-        return redirect()->route('dashboard.uang-transport.index')->with('success', 'Uang Transport berhasil ditambahkan!');
+        return redirect()->route('uang-transport.index')->with('success', 'Uang Transport berhasil ditambahkan!');
     }
 
     /**
@@ -105,6 +105,6 @@ class UangTransportController extends Controller
     public function destroy(UangTransport $uangTransport)
     {
         $uangTransport->delete();
-        return redirect()->route('dashboard.uang-transport.index')->with('success', 'Uang Transport berhasil dihapus!');
+        return redirect()->route('uang-transport.index')->with('success', 'Uang Transport berhasil dihapus!');
     }
 }

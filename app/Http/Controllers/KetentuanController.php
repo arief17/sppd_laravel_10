@@ -57,7 +57,7 @@ class KetentuanController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         Ketentuan::create($validatedData);
-        return redirect()->route('dashboard.ketentuan.index')->with('success', 'Ketentuan berhasil ditambahkan!');
+        return redirect()->route('ketentuan.index')->with('success', 'Ketentuan berhasil ditambahkan!');
     }
 
     /**
@@ -108,7 +108,7 @@ class KetentuanController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         Ketentuan::update($validatedData);
-        return redirect()->route('dashboard.ketentuan.index')->with('success', 'Ketentuan berhasil ditambahkan!');
+        return redirect()->route('ketentuan.index')->with('success', 'Ketentuan berhasil ditambahkan!');
     }
 
     /**
@@ -117,6 +117,6 @@ class KetentuanController extends Controller
     public function destroy(Ketentuan $ketentuan)
     {
         $ketentuan->delete();
-        return redirect()->route('dashboard.ketentuan.index')->with('success', 'Ketentuan berhasil dihapus!');
+        return redirect()->route('ketentuan.index')->with('success', 'Ketentuan berhasil dihapus!');
     }
 }

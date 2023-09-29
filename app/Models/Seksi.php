@@ -16,7 +16,7 @@ class Seksi extends Model
 
     public function author()
     {
-        return $this->belongsTo(User::class, 'author');
+        return $this->belongsTo(User::class, 'user_id', 'author');
     }
 
     public function users()

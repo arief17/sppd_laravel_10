@@ -45,7 +45,7 @@ class SeksiController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         Seksi::create($validatedData);
-        return redirect()->route('dashboard.seksi.index')->with('success', 'Seksi berhasil ditambahkan!');
+        return redirect()->route('seksi.index')->with('success', 'Seksi berhasil ditambahkan!');
     }
 
     /**
@@ -85,7 +85,7 @@ class SeksiController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         Seksi::update($validatedData);
-        return redirect()->route('dashboard.seksi.index')->with('success', 'Seksi berhasil ditambahkan!');
+        return redirect()->route('seksi.index')->with('success', 'Seksi berhasil ditambahkan!');
     }
 
     /**
@@ -94,6 +94,6 @@ class SeksiController extends Controller
     public function destroy(Seksi $seksi)
     {
         $seksi->delete();
-        return redirect()->route('dashboard.seksi.index')->with('success', 'Seksi berhasil dihapus!');
+        return redirect()->route('seksi.index')->with('success', 'Seksi berhasil dihapus!');
     }
 }

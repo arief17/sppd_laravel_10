@@ -16,17 +16,17 @@ class Pegawai extends Model
 
     public function author()
     {
-        return $this->belongsTo(User::class, 'author');
+        return $this->belongsTo(User::class, 'user_id', 'author');
     }
 
     public function eselon()
     {
-        return $this->belongsTo(Golongan::class, 'eselon');
+        return $this->belongsTo(Golongan::class, 'golongan_id', 'eselon');
     }
 
     public function jabatan()
     {
-        return $this->belongsTo(Jabatan::class, 'jabatan');
+        return $this->belongsTo(Jabatan::class, 'jabatan_id', 'jabatan');
     }
 
     public function ketentuan_pptks()

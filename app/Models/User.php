@@ -23,7 +23,7 @@ class User extends Authenticatable
 
     public function level_admin()
     {
-        return $this->belongsTo(LevelAdmin::class, 'level_admin');
+        return $this->belongsTo(LevelAdmin::class, 'level_admin_id', 'level_admin');
     }
     
     public function seksi_authors()
@@ -33,7 +33,7 @@ class User extends Authenticatable
     
     public function seksi()
     {
-        return $this->belongsTo(Bidang::class, 'seksi');
+        return $this->belongsTo(Bidang::class, 'seksi_id', 'seksi');
     }
 
     public function bidang_authors()
@@ -43,7 +43,7 @@ class User extends Authenticatable
     
     public function bidang()
     {
-        return $this->belongsTo(Bidang::class, 'bidang');
+        return $this->belongsTo(Bidang::class, 'bidang_id', 'bidang');
     }
 
     public function kegiatans()

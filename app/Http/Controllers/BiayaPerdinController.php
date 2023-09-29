@@ -58,7 +58,7 @@ class BiayaPerdinController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         BiayaPerdin::create($validatedData);
-        return redirect()->route('dashboard.biaya-perdin.index')->with('success', 'Biaya Perdin berhasil ditambahkan!');
+        return redirect()->route('biaya-perdin.index')->with('success', 'Biaya Perdin berhasil ditambahkan!');
     }
 
     /**
@@ -108,7 +108,7 @@ class BiayaPerdinController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         BiayaPerdin::update($validatedData);
-        return redirect()->route('dashboard.biaya-perdin.index')->with('success', 'Biaya Perdin berhasil ditambahkan!');
+        return redirect()->route('biaya-perdin.index')->with('success', 'Biaya Perdin berhasil ditambahkan!');
     }
 
     /**
@@ -117,6 +117,6 @@ class BiayaPerdinController extends Controller
     public function destroy(BiayaPerdin $biayaPerdin)
     {
         $biayaPerdin->delete();
-        return redirect()->route('dashboard.biaya-perdin.index')->with('success', 'Biaya Perdin berhasil dihapus!');
+        return redirect()->route('biaya-perdin.index')->with('success', 'Biaya Perdin berhasil dihapus!');
     }
 }

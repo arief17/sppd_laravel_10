@@ -15,7 +15,7 @@ class LevelAdmin extends Model
 
     public function users()
     {
-        return $this->hasMany(User::class, 'author');
+        return $this->hasMany(User::class, 'user_id', 'author');
     }
 
     public function getRouteKeyName()

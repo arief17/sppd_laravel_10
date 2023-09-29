@@ -42,7 +42,7 @@ class KegiatanController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         Kegiatan::create($validatedData);
-        return redirect()->route('dashboard.kegiatan.index')->with('success', 'Kegiatan berhasil ditambahkan!');
+        return redirect()->route('kegiatan.index')->with('success', 'Kegiatan berhasil ditambahkan!');
     }
 
     /**
@@ -80,7 +80,7 @@ class KegiatanController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         Kegiatan::update($validatedData);
-        return redirect()->route('dashboard.kegiatan.index')->with('success', 'Kegiatan berhasil ditambahkan!');
+        return redirect()->route('kegiatan.index')->with('success', 'Kegiatan berhasil ditambahkan!');
     }
 
     /**
@@ -89,6 +89,6 @@ class KegiatanController extends Controller
     public function destroy(Kegiatan $kegiatan)
     {
         $kegiatan->delete();
-        return redirect()->route('dashboard.kegiatan.index')->with('success', 'Kegiatan berhasil dihapus!');
+        return redirect()->route('kegiatan.index')->with('success', 'Kegiatan berhasil dihapus!');
     }
 }

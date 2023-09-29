@@ -42,7 +42,7 @@ class GolonganController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         Golongan::create($validatedData);
-        return redirect()->route('dashboard.golongan.index')->with('success', 'Golongan berhasil ditambahkan!');
+        return redirect()->route('golongan.index')->with('success', 'Golongan berhasil ditambahkan!');
     }
 
     /**
@@ -80,7 +80,7 @@ class GolonganController extends Controller
         $validatedData['author'] = auth()->user()->id;
         
         Golongan::update($validatedData);
-        return redirect()->route('dashboard.golongan.index')->with('success', 'Golongan berhasil ditambahkan!');
+        return redirect()->route('golongan.index')->with('success', 'Golongan berhasil ditambahkan!');
     }
 
     /**
@@ -89,6 +89,6 @@ class GolonganController extends Controller
     public function destroy(Golongan $golongan)
     {
         $golongan->delete();
-        return redirect()->route('dashboard.golongan.index')->with('success', 'Golongan berhasil dihapus!');
+        return redirect()->route('golongan.index')->with('success', 'Golongan berhasil dihapus!');
     }
 }
