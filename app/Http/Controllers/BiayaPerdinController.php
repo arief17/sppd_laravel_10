@@ -107,8 +107,8 @@ class BiayaPerdinController extends Controller
         $validatedData['slug'] = SlugService::createSlug(BiayaPerdin::class, 'slug', "$area $dari $ke");
         $validatedData['author'] = auth()->user()->id;
         
-        BiayaPerdin::update($validatedData);
-        return redirect()->route('biaya-perdin.index')->with('success', 'Biaya Perdin berhasil ditambahkan!');
+        BiayaPerdin::where('id', $biayaPerdin->id)->update($validatedData);
+        return redirect()->route('biaya-perdin.index')->with('success', 'Biaya Perdin berhasil diperbarui!');
     }
 
     /**

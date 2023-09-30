@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Golongan;
 use App\Models\Jabatan;
 use App\Models\Pegawai;
 use Cviebrock\EloquentSluggable\Services\SlugService;
@@ -28,6 +29,7 @@ class PegawaiController extends Controller
         return view('dashboard.pegawai.create', [
             'title' => 'Tambah Pegawai',
             'jabatans' => Jabatan::all(),
+            'golongans' => Golongan::all(),
         ]);
     }
 
@@ -38,19 +40,18 @@ class PegawaiController extends Controller
     {
         $validatedData = $request->validate([
             'nama' => 'required|min:3|max:100',
-            'nip' => 'required|number|unique:pegawais|max:8',
-            'pptk' => 'required',
+            'nip' => 'required|unique:pegawais|max:8',
             'ruang' => 'required|max:10',
             'eselon' => 'required',
             'jabatan' => 'required',
-            'last_perdin' => 'required|date',
+            'pptk' => 'required'
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(Pegawai::class, 'slug', $request->nama);
         $validatedData['author'] = auth()->user()->id;
         
         Pegawai::create($validatedData);
-        return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil ditambahkan!');
+        return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil diperbarui!');
     }
 
     /**
@@ -73,6 +74,7 @@ class PegawaiController extends Controller
             'title' => 'Perbarui Pegawai',
             'pegawai' => $pegawai,
             'jabatans' => Jabatan::all(),
+            'golongans' => Golongan::all(),
         ]);
     }
 
@@ -84,7 +86,6 @@ class PegawaiController extends Controller
         $validatedData = $request->validate([
             'nama' => 'required|min:3|max:100',
             'nip' => 'required|number|unique:pegawais|max:8',
-            'pptk' => 'required',
             'ruang' => 'required|max:10',
             'eselon' => 'required',
             'jabatan' => 'required',
@@ -94,7 +95,7 @@ class PegawaiController extends Controller
         $validatedData['slug'] = SlugService::createSlug(Pegawai::class, 'slug', $request->nama);
         $validatedData['author'] = auth()->user()->id;
         
-        Pegawai::update($validatedData);
+        Pegawai::where('id', $pegawai->id)->update($validatedData);
         return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil ditambahkan!');
     }
 

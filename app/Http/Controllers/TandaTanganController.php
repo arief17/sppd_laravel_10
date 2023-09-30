@@ -91,8 +91,8 @@ class TandaTanganController extends Controller
         $validatedData['slug'] = SlugService::createSlug(TandaTangan::class, 'slug', $request->nama);
         $validatedData['author'] = auth()->user()->id;
         
-        TandaTangan::update($validatedData);
-        return redirect()->route('tanda-tangan.index')->with('success', 'Tanda Tangan berhasil ditambahkan!');
+        TandaTangan::where('id', $tandaTangan->id)->update($validatedData);
+        return redirect()->route('tanda-tangan.index')->with('success', 'Tanda Tangan berhasil diperbarui!');
     }
 
     /**

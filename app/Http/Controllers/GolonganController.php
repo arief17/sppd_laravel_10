@@ -79,8 +79,8 @@ class GolonganController extends Controller
         $validatedData['slug'] = SlugService::createSlug(Golongan::class, 'slug', $request->nama);
         $validatedData['author'] = auth()->user()->id;
         
-        Golongan::update($validatedData);
-        return redirect()->route('golongan.index')->with('success', 'Golongan berhasil ditambahkan!');
+        Golongan::where('id', $golongan->id)->update($validatedData);
+        return redirect()->route('golongan.index')->with('success', 'Golongan berhasil diperbarui!');
     }
 
     /**

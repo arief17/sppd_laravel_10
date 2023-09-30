@@ -13,12 +13,12 @@
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
-					<table id="file-datatable" class="border-top-0  table table-bordered text-nowrap key-buttons border-bottom">
+					<table class="table border-top-0 table-bordered text-nowrap border-bottom" id="responsive-datatable">
 						<thead>
 							<tr>
-								<th class="border-bottom-0">No</th>
-								<th class="border-bottom-0" style="width: 100%">Nama</th>
-								<th class="border-bottom-0">Aksi</th>
+								<th class="border-bottom-0" style="width: 1%">No</th>
+								<th class="border-bottom-0">Nama</th>
+								<th class="border-bottom-0" style="width: 1%">Aksi</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -38,7 +38,7 @@
 									<form action="{{ route('alat-angkut.destroy', $alat_angkut->slug) }}" method="post" class="d-inline">
 										@method('delete')
 										@csrf
-										<button class="btn btn-danger btn-sm" id='swal-warning'>
+										<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $alat_angkut->nama }}">
 											<i class="fas fa-trash"></i>
 											Delete
 										</button>
@@ -63,6 +63,56 @@
 
 <!-- JQuery min js -->
 <script src="/assets/plugins/jquery/jquery.min.js"></script>
+
+<!-- Sweet-alert js  -->
+<script src="/assets/plugins/sweet-alert/sweetalert2.all.min.js"></script>
+
+@if(session()->has('success'))
+<script>
+    $(document).ready(function() {
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 5000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
+        
+        Toast.fire({
+            icon: 'success',
+            title: '{{ session('success') }}'
+        });
+    });
+</script>
+@endif
+
+<script>
+	$(document).ready(function() {
+		$('#deleteData').click(function(e) {
+			e.preventDefault();
+			var title = $(this).data('title');
+			
+			Swal.fire({
+				title: 'Hapus ' + title + '?',
+				html: "Apakah kamu yakin ingin menghapus <b>" + title + "</b>? Data yang sudah dihapus tidak bisa dikembalikan!",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya, Hapus',
+				cancelButtonText: 'Batal'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$(this).closest('form').submit();
+				}
+			});
+		});
+	});
+</script>
 
 <!-- Bootstrap Bundle js -->
 <script src="/assets/plugins/bootstrap/js/popper.min.js"></script>
@@ -106,10 +156,6 @@
 <script src="/assets/plugins/sidebar/sidebar.js"></script>
 <script src="/assets/plugins/sidebar/sidebar-custom.js"></script>
 
-<!-- Sweet-alert js  -->
-<script src="/assets/plugins/sweet-alert/sweetalert.min.js"></script>
-<script src="/assets/js/sweet-alert.js"></script>
-
 <!-- Sticky js -->
 <script src="/assets/js/sticky.js"></script>
 
@@ -121,30 +167,5 @@
 
 <!-- custom js -->
 <script src="/assets/js/custom.js"></script>
-
-<script>
-	$(document).ready(function() {
-		$('#swal-warning').click(function(e) {
-			e.preventDefault();
-
-			swal({
-				title: "Apakah kamu yakin?",
-				text: "Data yang sudah dihapus tidak dapat dikembalikan!",
-				type: "warning",
-				showCancelButton: true,
-				confirmButtonClass: "btn btn-danger",
-				cancelButtonClass: "btn btn-secondary",
-				confirmButtonText: "Iya, Hapus!",
-				cancelButtonText: "Batal",
-				closeOnConfirm: false
-			},
-			function(isConfirmed) {
-				if (isConfirmed) {
-					$('form').submit();
-				}
-			});
-		});
-	});
-</script>
 
 @endsection

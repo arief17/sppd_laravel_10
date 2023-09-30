@@ -79,8 +79,8 @@ class AlatAngkutController extends Controller
         $validatedData['slug'] = SlugService::createSlug(AlatAngkut::class, 'slug', $request->nama);
         $validatedData['author'] = auth()->user()->id;
         
-        AlatAngkut::update($validatedData);
-        return redirect()->route('alat-angkut.index')->with('success', 'Alat Angkut berhasil ditambahkan!');
+        AlatAngkut::where('id', $alatAngkut->id)->update($validatedData);
+        return redirect()->route('alat-angkut.index')->with('success', 'Alat Angkut berhasil diperbarui!');
     }
 
     /**

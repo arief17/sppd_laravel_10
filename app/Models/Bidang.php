@@ -19,6 +19,11 @@ class Bidang extends Model
         return $this->belongsTo(User::class, 'user_id', 'author');
     }
 
+    public function seksis()
+    {
+        return $this->hasMany(Seksi::class, 'bidang');
+    }
+
     public function users()
     {
         return $this->hasMany(User::class, 'bidang');

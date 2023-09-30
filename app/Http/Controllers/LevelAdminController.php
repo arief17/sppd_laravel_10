@@ -79,8 +79,8 @@ class LevelAdminController extends Controller
         $validatedData['slug'] = SlugService::createSlug(LevelAdmin::class, 'slug', $request->nama);
         $validatedData['author'] = auth()->user()->id;
         
-        LevelAdmin::update($validatedData);
-        return redirect()->route('level-admin.index')->with('success', 'Level Admin berhasil ditambahkan!');
+        LevelAdmin::where('id', $levelAdmin->id)->update($validatedData);
+        return redirect()->route('level-admin.index')->with('success', 'Level Admin berhasil diperbarui!');
     }
 
     /**

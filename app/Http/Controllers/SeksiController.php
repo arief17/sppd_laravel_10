@@ -84,8 +84,8 @@ class SeksiController extends Controller
         $validatedData['slug'] = SlugService::createSlug(Seksi::class, 'slug', $request->nama);
         $validatedData['author'] = auth()->user()->id;
         
-        Seksi::update($validatedData);
-        return redirect()->route('seksi.index')->with('success', 'Seksi berhasil ditambahkan!');
+        Seksi::where('id', $seksi->id)->update($validatedData);
+        return redirect()->route('seksi.index')->with('success', 'Seksi berhasil diperbarui!');
     }
 
     /**

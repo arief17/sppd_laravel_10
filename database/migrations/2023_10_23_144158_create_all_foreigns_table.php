@@ -21,7 +21,6 @@ return new class extends Migration
             $table->foreign('author')->references('id')->on('users');
         });
         
-        
         Schema::table('kegiatans', function (Blueprint $table) {
             $table->foreign('author')->references('id')->on('users');
         });

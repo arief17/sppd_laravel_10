@@ -107,8 +107,8 @@ class KetentuanController extends Controller
         $validatedData['slug'] = SlugService::createSlug(Ketentuan::class, 'slug', "$pptk $bendahara $pelaksana_administrasi");
         $validatedData['author'] = auth()->user()->id;
         
-        Ketentuan::update($validatedData);
-        return redirect()->route('ketentuan.index')->with('success', 'Ketentuan berhasil ditambahkan!');
+        Ketentuan::where('id', $ketentuan->id)->update($validatedData);
+        return redirect()->route('ketentuan.index')->with('success', 'Ketentuan berhasil diperbarui!');
     }
 
     /**

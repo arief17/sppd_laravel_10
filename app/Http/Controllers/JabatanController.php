@@ -81,8 +81,8 @@ class JabatanController extends Controller
         $validatedData['slug'] = SlugService::createSlug(Jabatan::class, 'slug', $request->nama);
         $validatedData['author'] = auth()->user()->id;
         
-        Jabatan::update($validatedData);
-        return redirect()->route('jabatan.index')->with('success', 'Jabatan berhasil ditambahkan!');
+        Jabatan::where('id', $jabatan->id)->update($validatedData);
+        return redirect()->route('jabatan.index')->with('success', 'Jabatan berhasil diperbarui!');
     }
 
     /**

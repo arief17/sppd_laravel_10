@@ -95,8 +95,8 @@ class UangTransportController extends Controller
         $validatedData['slug'] = SlugService::createSlug(UangTransport::class, 'slug', $request->keterangan);
         $validatedData['author'] = auth()->user()->id;
         
-        UangTransport::update($validatedData);
-        return redirect()->route('uang-transport.index')->with('success', 'Uang Transport berhasil ditambahkan!');
+        UangTransport::where('id', $uangTransport->id)->update($validatedData);
+        return redirect()->route('uang-transport.index')->with('success', 'Uang Transport berhasil diperbarui!');
     }
 
     /**

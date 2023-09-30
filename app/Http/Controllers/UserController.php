@@ -95,8 +95,8 @@ class UserController extends Controller
             'bidang' => 'required',
         ]);
         
-        User::update($validatedData);
-        return redirect()->route('user.index')->with('success', 'User berhasil ditambahkan!');
+        User::where('id', $user->id)->update($validatedData);
+        return redirect()->route('user.index')->with('success', 'User berhasil diperbarui!');
     }
 
     /**

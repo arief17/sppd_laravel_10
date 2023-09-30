@@ -13,22 +13,19 @@
 					@csrf
 					@method('put')
 					
-					<div class="">
-						<div class="form-group">
-							<label for="nama">Nama</label>
-							<input name="nama" value="{{ old('nama', $alat_angkut->nama) }}" type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukan nama">
-							@error('nama')
-							<div class="invalid-feedback">
-								{{ $message }}
-							</div>
-							@enderror
+					<div class="form-group">
+						<label for="nama">Nama</label>
+						<input name="nama" value="{{ old('nama', $alat_angkut->nama) }}" type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukan nama">
+						@error('nama')
+						<div class="invalid-feedback">
+							{{ $message }}
 						</div>
+						@enderror
 					</div>
+					
 					<div class="form-group mb-0 mt-3 justify-content-end">
-						<div>
-							<button type="submit" class="btn btn-primary">Simpan</button>
-							<button type="reset" class="btn btn-secondary ms-3">Batal</button>
-						</div>
+						<button type="submit" class="btn btn-primary">Simpan</button>
+						<button type="reset" class="btn btn-secondary ms-3">Batal</button>
 					</div>
 				</form>
 			</div>

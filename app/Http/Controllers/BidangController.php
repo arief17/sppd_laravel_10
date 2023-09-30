@@ -81,8 +81,8 @@ class BidangController extends Controller
         $validatedData['slug'] = SlugService::createSlug(Bidang::class, 'slug', $request->nama);
         $validatedData['author'] = auth()->user()->id;
         
-        Bidang::update($validatedData);
-        return redirect()->route('bidang.index')->with('success', 'Bidang berhasil ditambahkan!');
+        Bidang::where('id', $bidang->id)->update($validatedData);
+        return redirect()->route('bidang.index')->with('success', 'Bidang berhasil diperbarui!');
     }
 
     /**

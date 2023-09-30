@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('ruang');
             $table->unsignedBigInteger('eselon');
             $table->unsignedBigInteger('jabatan');
-            $table->date('last_perdin');
+            $table->date('last_perdin')->nullable();
             $table->unsignedBigInteger('author');
             $table->timestamps();
             $table->softDeletes();

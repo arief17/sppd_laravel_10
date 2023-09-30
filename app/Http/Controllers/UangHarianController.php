@@ -95,8 +95,8 @@ class UangHarianController extends Controller
         $validatedData['slug'] = SlugService::createSlug(UangHarian::class, 'slug', $request->keterangan);
         $validatedData['author'] = auth()->user()->id;
         
-        UangHarian::update($validatedData);
-        return redirect()->route('uang-harian.index')->with('success', 'Uang Harian berhasil ditambahkan!');
+        UangHarian::where('id', $uangHarian->id)->update($validatedData);
+        return redirect()->route('uang-harian.index')->with('success', 'Uang Harian berhasil diperbarui!');
     }
 
     /**
