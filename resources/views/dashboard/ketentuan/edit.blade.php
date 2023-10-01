@@ -14,24 +14,24 @@
 					@method('put')
 					
 					<div class="form-group">
-						<label for="kegiatan" class="form-label">Uang Harian</label>
-						<select name="kegiatan" id="kegiatan" class="form-control form-select @error('kegiatan') is-invalid @enderror">
-							<option value="">Pilih Uang Harian</option>
+						<label for="kegiatan_id" class="form-label">Kegiatan</label>
+						<select name="kegiatan_id" id="kegiatan_id" class="form-control form-select @error('kegiatan_id') is-invalid @enderror">
+							<option value="">Pilih Kegiatan</option>
 							@foreach ($kegiatans as $kegiatan)
-							<option value="{{ $kegiatan->id }}" @selected(old('kegiatan', $ketentuan->kegiatan) == $kegiatan->id)>
+							<option value="{{ $kegiatan->id }}" @selected(old('kegiatan_id', $ketentuan->kegiatan_id) == $kegiatan->id)>
 								{{ $kegiatan->nama }}
 							</option>
 							@endforeach
 						</select>
-						@error('kegiatan')
+						@error('kegiatan_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="kode_rek_dalam_daerah">Nama</label>
-						<input name="kode_rek_dalam_daerah" value="{{ old('kode_rek_dalam_daerah', $ketentuan->kode_rek_dalam_daerah) }}" type="text" class="form-control @error('kode_rek_dalam_daerah') is-invalid @enderror" id="kode_rek_dalam_daerah" placeholder="Masukan kode_rek_dalam_daerah">
+						<label for="kode_rek_dalam_daerah">Kode Rek Dalam Daerah</label>
+						<input name="kode_rek_dalam_daerah" value="{{ old('kode_rek_dalam_daerah', $ketentuan->kode_rek_dalam_daerah) }}" type="number" class="form-control @error('kode_rek_dalam_daerah') is-invalid @enderror" id="kode_rek_dalam_daerah" placeholder="Masukan kode_rek_dalam_daerah">
 						@error('kode_rek_dalam_daerah')
 						<div class="invalid-feedback">
 							{{ $message }}
@@ -39,8 +39,8 @@
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="kode_rek_luar_daerah">Nama</label>
-						<input name="kode_rek_luar_daerah" value="{{ old('kode_rek_luar_daerah', $ketentuan->kode_rek_luar_daerah) }}" type="text" class="form-control @error('kode_rek_luar_daerah') is-invalid @enderror" id="kode_rek_luar_daerah" placeholder="Masukan kode_rek_luar_daerah">
+						<label for="kode_rek_luar_daerah">Kode Rek Luar Daerah</label>
+						<input name="kode_rek_luar_daerah" value="{{ old('kode_rek_luar_daerah', $ketentuan->kode_rek_luar_daerah) }}" type="number" class="form-control @error('kode_rek_luar_daerah') is-invalid @enderror" id="kode_rek_luar_daerah" placeholder="Masukan kode_rek_luar_daerah">
 						@error('kode_rek_luar_daerah')
 						<div class="invalid-feedback">
 							{{ $message }}
@@ -48,48 +48,48 @@
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="pptk" class="form-label">Uang Harian</label>
-						<select name="pptk" id="pptk" class="form-control form-select @error('pptk') is-invalid @enderror">
-							<option value="">Pilih Uang Harian</option>
+						<label for="pptk_id" class="form-label">PPTK</label>
+						<select name="pptk_id" id="pptk_id" class="form-control form-select @error('pptk_id') is-invalid @enderror">
+							<option value="">Pilih PPTK</option>
 							@foreach ($pegawais as $pptk)
-							<option value="{{ $pptk->id }}" @selected(old('pptk', $ketentuan->pptk) == $pptk->id)>
+							<option value="{{ $pptk->id }}" @selected(old('pptk_id', $ketentuan->pptk_id) == $pptk->id)>
 								{{ $pptk->nama }}
 							</option>
 							@endforeach
 						</select>
-						@error('pptk')
+						@error('pptk_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="bendahara" class="form-label">Uang Harian</label>
-						<select name="bendahara" id="bendahara" class="form-control form-select @error('bendahara') is-invalid @enderror">
-							<option value="">Pilih Uang Harian</option>
+						<label for="bendahara_id" class="form-label">Bendahara</label>
+						<select name="bendahara_id" id="bendahara_id" class="form-control form-select @error('bendahara_id') is-invalid @enderror">
+							<option value="">Pilih Bendahara</option>
 							@foreach ($pegawais as $bendahara)
-							<option value="{{ $bendahara->id }}" @selected(old('bendahara', $ketentuan->bendahara) == $bendahara->id)>
+							<option value="{{ $bendahara->id }}" @selected(old('bendahara_id', $ketentuan->bendahara_id) == $bendahara->id)>
 								{{ $bendahara->nama }}
 							</option>
 							@endforeach
 						</select>
-						@error('bendahara')
+						@error('bendahara_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="pelaksana_administrasi" class="form-label">Uang Harian</label>
-						<select name="pelaksana_administrasi" id="pelaksana_administrasi" class="form-control form-select @error('pelaksana_administrasi') is-invalid @enderror">
-							<option value="">Pilih Uang Harian</option>
+						<label for="pelaksana_administrasi_id" class="form-label">Pelaksana Administrasi</label>
+						<select name="pelaksana_administrasi_id" id="pelaksana_administrasi_id" class="form-control form-select @error('pelaksana_administrasi_id') is-invalid @enderror">
+							<option value="">Pilih Pelaksana Administrasi</option>
 							@foreach ($pegawais as $pelaksana_administrasi)
-							<option value="{{ $pelaksana_administrasi->id }}" @selected(old('pelaksana_administrasi', $ketentuan->pelaksana_administrasi) == $pelaksana_administrasi->id)>
+							<option value="{{ $pelaksana_administrasi->id }}" @selected(old('pelaksana_administrasi_id', $ketentuan->pelaksana_administrasi_id) == $pelaksana_administrasi->id)>
 								{{ $pelaksana_administrasi->nama }}
 							</option>
 							@endforeach
 						</select>
-						@error('pelaksana_administrasi')
+						@error('pelaksana_administrasi_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>

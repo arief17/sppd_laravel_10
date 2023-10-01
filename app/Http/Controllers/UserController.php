@@ -46,9 +46,9 @@ class UserController extends Controller
             'username' => 'required|alpha_dash|min:3|max:100|unique:users',
             'email' => 'required|email|unique:users',
             'password' => ['required', 'confirmed', Password::min(5)->letters()->numbers()],
-            'level_admin' => 'required',
-            'seksi' => 'required',
-            'bidang' => 'required',
+            'level_admin_id' => 'required',
+            'seksi_id' => 'required',
+            'bidang_id' => 'required',
         ]);
         
         User::create($validatedData);
@@ -90,9 +90,9 @@ class UserController extends Controller
             'username' => 'required|alpha_dash|min:3|max:100|unique:users',
             'email' => 'required|email|unique:users',
             'password' => ['required', 'confirmed', Password::min(5)->letters()->numbers()],
-            'level_admin' => 'required',
-            'seksi' => 'required',
-            'bidang' => 'required',
+            'level_admin_id' => 'required',
+            'seksi_id' => 'required',
+            'bidang_id' => 'required',
         ]);
         
         User::where('id', $user->id)->update($validatedData);

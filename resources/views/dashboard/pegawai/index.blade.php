@@ -35,8 +35,8 @@
 								<td>{{ $pegawai->nip }}</td>
 								<td>{{ $pegawai->pptk ? 'Ya' : 'Tidak' }}</td>
 								<td>{{ $pegawai->ruang }}</td>
-								<td>{{ $pegawai->eselon }}</td>
-								<td>{{ $pegawai->jabatan }}</td>
+								<td>{{ $pegawai->eselon->nama }}</td>
+								<td>{{ $pegawai->jabatan->nama }}</td>
 								<td>{{ $pegawai->last_perdin }}</td>
 								<td>
 									<a class="btn btn-primary btn-sm" href="{{ route('pegawai.show', $pegawai->slug) }}">

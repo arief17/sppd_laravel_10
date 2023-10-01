@@ -40,32 +40,32 @@
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="eselon" class="form-label">Eselon</label>
-						<select name="eselon" id="eselon" class="form-control form-select @error('eselon') is-invalid @enderror">
+						<label for="eselon_id" class="form-label">Eselon</label>
+						<select name="eselon_id" id="eselon_id" class="form-control form-select @error('eselon_id') is-invalid @enderror">
 							<option value="">Pilih Eselon</option>
 							@foreach ($golongans as $eselon)
-							<option value="{{ $eselon->id }}" @selected(old('eselon') == $eselon->id)>
+							<option value="{{ $eselon->id }}" @selected(old('eselon_id') == $eselon->id)>
 								{{ $eselon->nama }}
 							</option>
 							@endforeach
 						</select>
-						@error('eselon')
+						@error('eselon_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="jabatan" class="form-label">Jabatan</label>
-						<select name="jabatan" id="jabatan" class="form-control form-select @error('jabatan') is-invalid @enderror">
+						<label for="jabatan_id" class="form-label">Jabatan</label>
+						<select name="jabatan_id" id="jabatan_id" class="form-control form-select @error('jabatan_id') is-invalid @enderror">
 							<option value="">Pilih Jabatan</option>
 							@foreach ($golongans as $jabatan)
-							<option value="{{ $jabatan->id }}" @selected(old('jabatan') == $jabatan->id)>
+							<option value="{{ $jabatan->id }}" @selected(old('jabatan_id') == $jabatan->id)>
 								{{ $jabatan->nama }}
 							</option>
 							@endforeach
 						</select>
-						@error('jabatan')
+						@error('jabatan_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
@@ -73,7 +73,7 @@
 					</div>
 					<div class="form-group">
 						<div class="form-check">
-							<input class="form-check-input @error('pptk') is-invalid @enderror" type="checkbox" name="pptk" value="pptk" id="pptk" @checked(old('pptk'))>
+							<input class="form-check-input @error('pptk') is-invalid @enderror" type="checkbox" name="pptk" value="1" id="pptk" @checked(old('pptk'))>
 							<label class="form-check-label" for="pptk">
 								PPTK
 							</label>

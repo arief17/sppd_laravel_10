@@ -18,10 +18,10 @@ return new class extends Migration
             $table->string('nip')->unique();
             $table->boolean('pptk');
             $table->string('ruang');
-            $table->unsignedBigInteger('eselon');
-            $table->unsignedBigInteger('jabatan');
+            $table->unsignedBigInteger('eselon_id');
+            $table->unsignedBigInteger('jabatan_id');
             $table->date('last_perdin')->nullable();
-            $table->unsignedBigInteger('author');
+            $table->unsignedBigInteger('author_id');
             $table->timestamps();
             $table->softDeletes();
         });

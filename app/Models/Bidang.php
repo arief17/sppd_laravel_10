@@ -5,6 +5,8 @@ namespace App\Models;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Bidang extends Model
@@ -14,19 +16,19 @@ class Bidang extends Model
     protected $guarded = ['id'];
     protected $with = ['author'];
 
-    public function author()
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id', 'author');
+        return $this->belongsTo(User::class, 'author_id');
     }
 
-    public function seksis()
+    public function seksis(): HasMany
     {
-        return $this->hasMany(Seksi::class, 'bidang');
+        return $this->hasMany(Seksi::class, 'bidang_id');
     }
 
-    public function users()
+    public function users(): HasMany
     {
-        return $this->hasMany(User::class, 'bidang');
+        return $this->hasMany(User::class, 'bidang_id');
     }
 
     public function getRouteKeyName()

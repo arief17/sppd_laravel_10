@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('tanda_tangans', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('slug')->unique();
-            $table->unsignedBigInteger('pegawai');
-            $table->unsignedBigInteger('jabatan');
+            $table->unsignedBigInteger('pegawai_id');
+            $table->unsignedBigInteger('jabatan_id');
             $table->boolean('status');
-            $table->unsignedBigInteger('author');
+            $table->unsignedBigInteger('author_id');
             $table->timestamps();
             $table->softDeletes();
         });

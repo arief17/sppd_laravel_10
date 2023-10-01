@@ -12,83 +12,83 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreign('level_admin')->references('id')->on('level_admins');
-            $table->foreign('seksi')->references('id')->on('seksis');
-            $table->foreign('bidang')->references('id')->on('bidangs');
+            $table->foreign('level_admin_id')->references('id')->on('level_admins');
+            $table->foreign('seksi_id')->references('id')->on('seksis');
+            $table->foreign('bidang_id')->references('id')->on('bidangs');
         });
 
         Schema::table('bidangs', function (Blueprint $table) {
-            $table->foreign('author')->references('id')->on('users');
+            $table->foreign('author_id')->references('id')->on('users');
         });
         
         Schema::table('kegiatans', function (Blueprint $table) {
-            $table->foreign('author')->references('id')->on('users');
+            $table->foreign('author_id')->references('id')->on('users');
         });
 
         Schema::table('pegawais', function (Blueprint $table) {
-            $table->foreign('jabatan')->references('id')->on('jabatans');
-            $table->foreign('eselon')->references('id')->on('golongans');
-            $table->foreign('author')->references('id')->on('users');
+            $table->foreign('jabatan_id')->references('id')->on('jabatans');
+            $table->foreign('eselon_id')->references('id')->on('golongans');
+            $table->foreign('author_id')->references('id')->on('users');
         });
 
         Schema::table('tanda_tangans', function (Blueprint $table) {
-            $table->foreign('pegawai')->references('id')->on('pegawais');
-            $table->foreign('jabatan')->references('id')->on('jabatans');
-            $table->foreign('author')->references('id')->on('users');
+            $table->foreign('pegawai_id')->references('id')->on('pegawais');
+            $table->foreign('jabatan_id')->references('id')->on('jabatans');
+            $table->foreign('author_id')->references('id')->on('users');
         });
 
         Schema::table('alat_angkuts', function (Blueprint $table) {
-            $table->foreign('author')->references('id')->on('users');
+            $table->foreign('author_id')->references('id')->on('users');
         });
 
         Schema::table('jabatans', function (Blueprint $table) {
-            $table->foreign('author')->references('id')->on('users');
+            $table->foreign('author_id')->references('id')->on('users');
         });
 
         Schema::table('ketentuans', function (Blueprint $table) {
-            $table->foreign('kegiatan')->references('id')->on('kegiatans');
-            $table->foreign('pptk')->references('id')->on('pegawais');
-            $table->foreign('bendahara')->references('id')->on('pegawais');
-            $table->foreign('pelaksana_administrasi')->references('id')->on('pegawais');
-            $table->foreign('author')->references('id')->on('users');
+            $table->foreign('kegiatan_id')->references('id')->on('kegiatans');
+            $table->foreign('pptk_id')->references('id')->on('pegawais');
+            $table->foreign('bendahara_id')->references('id')->on('pegawais');
+            $table->foreign('pelaksana_administrasi_id')->references('id')->on('pegawais');
+            $table->foreign('author_id')->references('id')->on('users');
         });
 
         Schema::table('golongans', function (Blueprint $table) {
-            $table->foreign('author')->references('id')->on('users');
+            $table->foreign('author_id')->references('id')->on('users');
         });
 
         Schema::table('jenis_perdins', function (Blueprint $table) {
-            $table->foreign('author')->references('id')->on('users');
+            $table->foreign('author_id')->references('id')->on('users');
         });
 
         Schema::table('provinsis', function (Blueprint $table) {
-            $table->foreign('author')->references('id')->on('users');
+            $table->foreign('author_id')->references('id')->on('users');
         });
 
         Schema::table('seksis', function (Blueprint $table) {
-            $table->foreign('bidang')->references('id')->on('bidangs');
-            $table->foreign('author')->references('id')->on('users');
+            $table->foreign('bidang_id')->references('id')->on('bidangs');
+            $table->foreign('author_id')->references('id')->on('users');
         });
 
         Schema::table('kota_kabupatens', function (Blueprint $table) {
-            $table->foreign('author')->references('id')->on('users');
+            $table->foreign('author_id')->references('id')->on('users');
         });
 
         Schema::table('uang_harians', function (Blueprint $table) {
-            $table->foreign('author')->references('id')->on('users');
+            $table->foreign('author_id')->references('id')->on('users');
         });
 
         Schema::table('uang_transports', function (Blueprint $table) {
-            $table->foreign('author')->references('id')->on('users');
+            $table->foreign('author_id')->references('id')->on('users');
         });
 
         Schema::table('biaya_perdins', function (Blueprint $table) {
-            $table->foreign('area')->references('id')->on('jenis_perdins');
-            $table->foreign('dari')->references('id')->on('kota_kabupatens');
-            $table->foreign('ke')->references('id')->on('kota_kabupatens');
-            $table->foreign('transport')->references('id')->on('uang_transports');
-            $table->foreign('harian')->references('id')->on('uang_harians');
-            $table->foreign('author')->references('id')->on('users');
+            $table->foreign('area_id')->references('id')->on('jenis_perdins');
+            $table->foreign('dari_id')->references('id')->on('kota_kabupatens');
+            $table->foreign('ke_id')->references('id')->on('kota_kabupatens');
+            $table->foreign('transport_id')->references('id')->on('uang_transports');
+            $table->foreign('harian_id')->references('id')->on('uang_harians');
+            $table->foreign('author_id')->references('id')->on('users');
         });
     }
 
@@ -98,9 +98,20 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('users');
-        Schema::dropIfExists('seksis');
-        Schema::dropIfExists('tanda_tangans');
-        Schema::dropIfExists('ketentuans');
+        Schema::dropIfExists('bidangs');
+        Schema::dropIfExists('kegiatans');
         Schema::dropIfExists('pegawais');
+        Schema::dropIfExists('tanda_tangans');
+        Schema::dropIfExists('alat_angkuts');
+        Schema::dropIfExists('jabatans');
+        Schema::dropIfExists('ketentuans');
+        Schema::dropIfExists('golongans');
+        Schema::dropIfExists('jenis_perdins');
+        Schema::dropIfExists('provinsis');
+        Schema::dropIfExists('seksis');
+        Schema::dropIfExists('kota_kabupatens');
+        Schema::dropIfExists('uang_harians');
+        Schema::dropIfExists('uang_transports');
+        Schema::dropIfExists('biaya_perdins');
     }
 };

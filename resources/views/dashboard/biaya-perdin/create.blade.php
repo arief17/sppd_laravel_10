@@ -13,80 +13,80 @@
 					@csrf
 					
 					<div class="form-group">
-						<label for="area" class="form-label">Area</label>
-						<select name="area" id="area" class="form-control form-select @error('area') is-invalid @enderror">
+						<label for="area_id" class="form-label">Area</label>
+						<select name="area_id" id="area_id" class="form-control form-select @error('area_id') is-invalid @enderror">
 							<option value="">Pilih Area</option>
 							@foreach ($jenis_perdins as $area)
-							<option value="{{ $area->id }}" @selected(old('area') == $area->id)>
+							<option value="{{ $area->id }}" @selected(old('area_id') == $area->id)>
 								{{ $area->nama }}
 							</option>
 							@endforeach
 						</select>
-						@error('area')
+						@error('area_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="dari" class="form-label">Dari</label>
-						<select name="dari" id="dari" class="form-control form-select @error('dari') is-invalid @enderror">
+						<label for="dari_id" class="form-label">Dari</label>
+						<select name="dari_id" id="dari_id" class="form-control form-select @error('dari_id') is-invalid @enderror">
 							<option value="">Darimana</option>
 							@foreach ($kota_kabupatens as $dari)
-							<option value="{{ $dari->id }}" @selected(old('dari') == $dari->id)>
+							<option value="{{ $dari->id }}" @selected(old('dari_id') == $dari->id)>
 								{{ $dari->nama }}
 							</option>
 							@endforeach
 						</select>
-						@error('dari')
+						@error('dari_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="ke" class="form-label">Ke</label>
-						<select name="ke" id="ke" class="form-control form-select @error('ke') is-invalid @enderror">
+						<label for="ke_id" class="form-label">Ke</label>
+						<select name="ke_id" id="ke_id" class="form-control form-select @error('ke_id') is-invalid @enderror">
 							<option value="">Kemana</option>
 							@foreach ($kota_kabupatens as $ke)
-							<option value="{{ $ke->id }}" @selected(old('ke') == $ke->id)>
+							<option value="{{ $ke->id }}" @selected(old('ke_id') == $ke->id)>
 								{{ $ke->nama }}
 							</option>
 							@endforeach
 						</select>
-						@error('ke')
+						@error('ke_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="transport" class="form-label">Uang Transport</label>
-						<select name="transport" id="transport" class="form-control form-select @error('transport') is-invalid @enderror">
+						<label for="transport_id" class="form-label">Uang Transport</label>
+						<select name="transport_id" id="transport_id" class="form-control form-select @error('transport_id') is-invalid @enderror">
 							<option value="">Pilih Uang Transport</option>
 							@foreach ($uang_transports as $transport)
-							<option value="{{ $transport->id }}" @selected(old('transport') == $transport->id)>
+							<option value="{{ $transport->id }}" @selected(old('transport_id') == $transport->id)>
 								{{ $transport->nama }}
 							</option>
 							@endforeach
 						</select>
-						@error('transport')
+						@error('transport_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="harian" class="form-label">Uang Harian</label>
-						<select name="harian" id="harian" class="form-control form-select @error('harian') is-invalid @enderror">
+						<label for="harian_id" class="form-label">Uang Harian</label>
+						<select name="harian_id" id="harian_id" class="form-control form-select @error('harian_id') is-invalid @enderror">
 							<option value="">Pilih Uang Harian</option>
 							@foreach ($uang_harians as $harian)
-							<option value="{{ $harian->id }}" @selected(old('harian') == $harian->id)>
+							<option value="{{ $harian->id }}" @selected(old('harian_id') == $harian->id)>
 								{{ $harian->nama }}
 							</option>
 							@endforeach
 						</select>
-						@error('harian')
+						@error('harian_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>

@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('biaya_perdins', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('slug')->unique();
-            $table->unsignedBigInteger('area');
-            $table->unsignedBigInteger('dari');
-            $table->unsignedBigInteger('ke');
-            $table->unsignedBigInteger('transport');
-            $table->unsignedBigInteger('harian');
-            $table->unsignedBigInteger('author');
+            $table->unsignedBigInteger('area_id');
+            $table->unsignedBigInteger('dari_id');
+            $table->unsignedBigInteger('ke_id');
+            $table->unsignedBigInteger('transport_id');
+            $table->unsignedBigInteger('harian_id');
+            $table->unsignedBigInteger('author_id');
             $table->timestamps();
             $table->softDeletes();
         });

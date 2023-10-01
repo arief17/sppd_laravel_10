@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,8 +28,11 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)){
             $request->session()->regenerate();
+            User::where('id', auth()->user()->id)->update(['last_login' => now()]);
+            
             return redirect()->intended('/');
         }
+        
 
         return back()->with('loginError', 'Gagal Login!');
     }

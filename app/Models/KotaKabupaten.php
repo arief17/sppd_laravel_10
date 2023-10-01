@@ -5,6 +5,8 @@ namespace App\Models;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class KotaKabupaten extends Model
@@ -14,19 +16,19 @@ class KotaKabupaten extends Model
     protected $guarded = ['id'];
     protected $with = ['author'];
 
-    public function author()
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id', 'author');
+        return $this->belongsTo(User::class, 'author_id');
     }
 
-    public function biaya_perdins_dari()
+    public function biaya_perdins_dari(): HasMany
     {
-        return $this->hasMany(BiayaPerdin::class, 'dari');
+        return $this->hasMany(BiayaPerdin::class, 'dari_id');
     }
 
-    public function biaya_perdins_ke()
+    public function biaya_perdins_ke(): HasMany
     {
-        return $this->hasMany(BiayaPerdin::class, 'ke');
+        return $this->hasMany(BiayaPerdin::class, 'ke_id');
     }
 
     public function getRouteKeyName()

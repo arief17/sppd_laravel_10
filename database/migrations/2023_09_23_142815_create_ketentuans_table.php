@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('ketentuans', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('slug')->unique();
-            $table->unsignedBigInteger('kegiatan');
+            $table->unsignedBigInteger('kegiatan_id');
             $table->string('kode_rek_dalam_daerah');
             $table->string('kode_rek_luar_daerah');
-            $table->unsignedBigInteger('pptk');
-            $table->unsignedBigInteger('bendahara');
-            $table->unsignedBigInteger('pelaksana_administrasi');
-            $table->unsignedBigInteger('author');
+            $table->unsignedBigInteger('pptk_id');
+            $table->unsignedBigInteger('bendahara_id');
+            $table->unsignedBigInteger('pelaksana_administrasi_id');
+            $table->unsignedBigInteger('author_id');
             $table->timestamps();
             $table->softDeletes();
         });

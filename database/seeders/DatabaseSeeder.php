@@ -32,8 +32,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin',
             'email' => 'admin@example.com',
             'password' => bcrypt('admin'),
-            'level_admin' => 1,
-            'last_login' => '2023-09-27 16:08:16'
+            'level_admin_id' => 1,
         ]);
     }
 }

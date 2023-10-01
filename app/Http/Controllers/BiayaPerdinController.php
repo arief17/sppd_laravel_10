@@ -43,19 +43,19 @@ class BiayaPerdinController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'area' => 'required',
-            'dari' => 'required',
-            'ke' => 'required',
-            'transport' => 'required',
-            'harian' => 'required',
+            'area_id' => 'required',
+            'dari_id' => 'required',
+            'ke_id' => 'required',
+            'transport_id' => 'required',
+            'harian_id' => 'required',
         ]);
 
-        $area = JenisPerdin::where('id', $request->area)->get('nama');
-        $dari = KotaKabupaten::where('id', $request->dari)->get('nama');
-        $ke = KotaKabupaten::where('id', $request->ke)->get('nama');
+        $area = JenisPerdin::where('id', $request->area_id)->get('nama');
+        $dari = KotaKabupaten::where('id', $request->dari_id)->get('nama');
+        $ke = KotaKabupaten::where('id', $request->ke_id)->get('nama');
         
         $validatedData['slug'] = SlugService::createSlug(BiayaPerdin::class, 'slug', "$area $dari $ke");
-        $validatedData['author'] = auth()->user()->id;
+        $validatedData['author_id'] = auth()->user()->id;
         
         BiayaPerdin::create($validatedData);
         return redirect()->route('biaya-perdin.index')->with('success', 'Biaya Perdin berhasil ditambahkan!');
@@ -93,19 +93,19 @@ class BiayaPerdinController extends Controller
     public function update(Request $request, BiayaPerdin $biayaPerdin)
     {
         $validatedData = $request->validate([
-            'area' => 'required',
-            'dari' => 'required',
-            'ke' => 'required',
-            'transport' => 'required',
-            'harian' => 'required',
+            'area_id' => 'required',
+            'dari_id' => 'required',
+            'ke_id' => 'required',
+            'transport_id' => 'required',
+            'harian_id' => 'required',
         ]);
         
-        $area = JenisPerdin::where('id', $request->area)->get('nama');
-        $dari = KotaKabupaten::where('id', $request->dari)->get('nama');
-        $ke = KotaKabupaten::where('id', $request->ke)->get('nama');
+        $area = JenisPerdin::where('id', $request->area_id)->get('nama');
+        $dari = KotaKabupaten::where('id', $request->dari_id)->get('nama');
+        $ke = KotaKabupaten::where('id', $request->ke_id)->get('nama');
         
         $validatedData['slug'] = SlugService::createSlug(BiayaPerdin::class, 'slug', "$area $dari $ke");
-        $validatedData['author'] = auth()->user()->id;
+        $validatedData['author_id'] = auth()->user()->id;
         
         BiayaPerdin::where('id', $biayaPerdin->id)->update($validatedData);
         return redirect()->route('biaya-perdin.index')->with('success', 'Biaya Perdin berhasil diperbarui!');

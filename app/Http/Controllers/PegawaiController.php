@@ -42,13 +42,17 @@ class PegawaiController extends Controller
             'nama' => 'required|min:3|max:100',
             'nip' => 'required|unique:pegawais|max:8',
             'ruang' => 'required|max:10',
-            'eselon' => 'required',
-            'jabatan' => 'required',
-            'pptk' => 'required'
+            'eselon_id' => 'required',
+            'jabatan_id' => 'required',
+            'pptk' => '',
         ]);
+
+        if (!$request->pptk) {
+            $validatedData['pptk'] = 0;
+        }
         
         $validatedData['slug'] = SlugService::createSlug(Pegawai::class, 'slug', $request->nama);
-        $validatedData['author'] = auth()->user()->id;
+        $validatedData['author_id'] = auth()->user()->id;
         
         Pegawai::create($validatedData);
         return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil diperbarui!');
@@ -87,13 +91,17 @@ class PegawaiController extends Controller
             'nama' => 'required|min:3|max:100',
             'nip' => 'required|number|unique:pegawais|max:8',
             'ruang' => 'required|max:10',
-            'eselon' => 'required',
-            'jabatan' => 'required',
-            'last_perdin' => 'required|date',
+            'eselon_id' => 'required',
+            'jabatan_id' => 'required',
+            'pptk' => '',
         ]);
+
+        if (!$request->pptk) {
+            $validatedData['pptk'] = 0;
+        }
         
         $validatedData['slug'] = SlugService::createSlug(Pegawai::class, 'slug', $request->nama);
-        $validatedData['author'] = auth()->user()->id;
+        $validatedData['author_id'] = auth()->user()->id;
         
         Pegawai::where('id', $pegawai->id)->update($validatedData);
         return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil ditambahkan!');

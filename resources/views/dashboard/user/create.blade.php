@@ -40,48 +40,48 @@
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="level_admin" class="form-label">Level Admin</label>
-						<select name="level_admin" id="level_admin" class="form-control form-select @error('level_admin') is-invalid @enderror">
+						<label for="level_admin_id" class="form-label">Level Admin</label>
+						<select name="level_admin_id" id="level_admin_id" class="form-control form-select @error('level_admin_id') is-invalid @enderror">
 							<option value="">Pilih Level Admin</option>
-							@foreach ($uang_harians as $level_admin)
-							<option value="{{ $level_admin->id }}" @selected(old('level_admin') == $level_admin->id)>
+							@foreach ($level_admins as $level_admin)
+							<option value="{{ $level_admin->id }}" @selected(old('level_admin_id') == $level_admin->id)>
 								{{ $level_admin->nama }}
 							</option>
 							@endforeach
 						</select>
-						@error('level_admin')
+						@error('level_admin_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="seksi" class="form-label">Level Admin</label>
-						<select name="seksi" id="seksi" class="form-control form-select @error('seksi') is-invalid @enderror">
-							<option value="">Pilih Level Admin</option>
-							@foreach ($uang_harians as $seksi)
-							<option value="{{ $seksi->id }}" @selected(old('seksi') == $seksi->id)>
+						<label for="seksi_id" class="form-label">Seksi</label>
+						<select name="seksi_id" id="seksi_id" class="form-control form-select @error('seksi_id') is-invalid @enderror">
+							<option value="">Pilih Seksi</option>
+							@foreach ($seksis as $seksi)
+							<option value="{{ $seksi->id }}" @selected(old('seksi_id') == $seksi->id)>
 								{{ $seksi->nama }}
 							</option>
 							@endforeach
 						</select>
-						@error('seksi')
+						@error('seksi_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="bidang" class="form-label">Level Admin</label>
-						<select name="bidang" id="bidang" class="form-control form-select @error('bidang') is-invalid @enderror">
-							<option value="">Pilih Level Admin</option>
-							@foreach ($uang_harians as $bidang)
-							<option value="{{ $bidang->id }}" @selected(old('bidang') == $bidang->id)>
+						<label for="bidang_id" class="form-label">Bidang</label>
+						<select name="bidang_id" id="bidang_id" class="form-control form-select @error('bidang_id') is-invalid @enderror">
+							<option value="">Pilih Bidang</option>
+							@foreach ($bidangs as $bidang)
+							<option value="{{ $bidang->id }}" @selected(old('bidang_id') == $bidang->id)>
 								{{ $bidang->nama }}
 							</option>
 							@endforeach
 						</select>
-						@error('bidang')
+						@error('bidang_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>

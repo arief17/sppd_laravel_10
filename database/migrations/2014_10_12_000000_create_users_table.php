@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->unsignedBigInteger('level_admin');
-            $table->unsignedBigInteger('seksi')->nullable();
-            $table->unsignedBigInteger('bidang')->nullable();
+            $table->unsignedBigInteger('level_admin_id');
+            $table->unsignedBigInteger('seksi_id')->nullable();
+            $table->unsignedBigInteger('bidang_id')->nullable();
             $table->dateTime('last_login')->nullable();
             $table->string('photo')->default('not found');
             $table->rememberToken();

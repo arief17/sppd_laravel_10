@@ -39,7 +39,7 @@ class KotaKabupatenController extends Controller
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(KotaKabupaten::class, 'slug', $request->nama);
-        $validatedData['author'] = auth()->user()->id;
+        $validatedData['author_id'] = auth()->user()->id;
         
         KotaKabupaten::create($validatedData);
         return redirect()->route('kota-kabupaten.index')->with('success', 'Kota/Kabupaten berhasil ditambahkan!');
@@ -77,7 +77,7 @@ class KotaKabupatenController extends Controller
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(KotaKabupaten::class, 'slug', $request->nama);
-        $validatedData['author'] = auth()->user()->id;
+        $validatedData['author_id'] = auth()->user()->id;
         
         KotaKabupaten::where('id', $kotaKabupaten->id)->update($validatedData);
         return redirect()->route('kota-kabupaten.index')->with('success', 'Kota/Kabupaten berhasil diperbarui!');

@@ -5,6 +5,8 @@ namespace App\Models;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Golongan extends Model
@@ -14,14 +16,14 @@ class Golongan extends Model
     protected $guarded = ['id'];
     protected $with = ['author'];
 
-    public function author()
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id', 'author');
+        return $this->belongsTo(User::class, 'author_id');
     }
 
-    public function pegawais()
+    public function pegawais(): HasMany
     {
-        return $this->hasMany(Pegawai::class, 'eselon');
+        return $this->hasMany(Pegawai::class, 'eselon_id');
     }
 
     public function getRouteKeyName()

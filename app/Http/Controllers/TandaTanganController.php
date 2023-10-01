@@ -39,14 +39,20 @@ class TandaTanganController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nama' => 'required|min:3|max:100',
-            'pegawai' => 'required',
-            'jabatan' => 'required',
-            'status' => 'required'
+            'pegawai_id' => 'required',
+            'jabatan_id' => 'required',
+            'status' => ''
         ]);
+
+        if (!$request->status) {
+            $validatedData['status'] = 0;
+        }
+
+        $pegawai = Pegawai::where('id', $request->pegawai_id)->get('nama');
+        $jabatan = Pegawai::where('id', $request->jabatan_id)->get('nama');
         
-        $validatedData['slug'] = SlugService::createSlug(TandaTangan::class, 'slug', $request->nama);
-        $validatedData['author'] = auth()->user()->id;
+        $validatedData['slug'] = SlugService::createSlug(TandaTangan::class, 'slug', "$pegawai $jabatan");
+        $validatedData['author_id'] = auth()->user()->id;
         
         TandaTangan::create($validatedData);
         return redirect()->route('tanda-tangan.index')->with('success', 'Tanda Tangan berhasil ditambahkan!');
@@ -82,14 +88,20 @@ class TandaTanganController extends Controller
     public function update(Request $request, TandaTangan $tandaTangan)
     {
         $validatedData = $request->validate([
-            'nama' => 'required|min:3|max:100',
-            'pegawai' => 'required',
-            'jabatan' => 'required',
-            'status' => 'required'
+            'pegawai_id' => 'required',
+            'jabatan_id' => 'required',
+            'status' => ''
         ]);
+
+        if (!$request->status) {
+            $validatedData['status'] = 0;
+        }
         
-        $validatedData['slug'] = SlugService::createSlug(TandaTangan::class, 'slug', $request->nama);
-        $validatedData['author'] = auth()->user()->id;
+        $pegawai = Pegawai::where('id', $request->pegawai_id)->get('nama');
+        $jabatan = Pegawai::where('id', $request->jabatan_id)->get('nama');
+        
+        $validatedData['slug'] = SlugService::createSlug(TandaTangan::class, 'slug', "$pegawai $jabatan");
+        $validatedData['author_id'] = auth()->user()->id;
         
         TandaTangan::where('id', $tandaTangan->id)->update($validatedData);
         return redirect()->route('tanda-tangan.index')->with('success', 'Tanda Tangan berhasil diperbarui!');

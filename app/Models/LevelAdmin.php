@@ -5,6 +5,7 @@ namespace App\Models;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class LevelAdmin extends Model
@@ -13,9 +14,9 @@ class LevelAdmin extends Model
 
     protected $guarded = ['id'];
 
-    public function users()
+    public function users(): HasMany
     {
-        return $this->hasMany(User::class, 'user_id', 'author');
+        return $this->hasMany(User::class, 'author_id');
     }
 
     public function getRouteKeyName()

@@ -39,7 +39,7 @@ class JenisPerdinController extends Controller
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(JenisPerdin::class, 'slug', $request->nama);
-        $validatedData['author'] = auth()->user()->id;
+        $validatedData['author_id'] = auth()->user()->id;
         
         JenisPerdin::create($validatedData);
         return redirect()->route('jenis-perdin.index')->with('success', 'Jenis Perdin berhasil ditambahkan!');
@@ -77,7 +77,7 @@ class JenisPerdinController extends Controller
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(JenisPerdin::class, 'slug', $request->nama);
-        $validatedData['author'] = auth()->user()->id;
+        $validatedData['author_id'] = auth()->user()->id;
         
         JenisPerdin::where('id', $jenisPerdin->id)->update($validatedData);
         return redirect()->route('jenis-perdin.index')->with('success', 'Jenis Perdin berhasil diperbarui!');

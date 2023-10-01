@@ -40,7 +40,7 @@ class BidangController extends Controller
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(Bidang::class, 'slug', $request->nama);
-        $validatedData['author'] = auth()->user()->id;
+        $validatedData['author_id'] = auth()->user()->id;
         
         Bidang::create($validatedData);
         return redirect()->route('bidang.index')->with('success', 'Bidang berhasil ditambahkan!');
@@ -79,7 +79,7 @@ class BidangController extends Controller
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(Bidang::class, 'slug', $request->nama);
-        $validatedData['author'] = auth()->user()->id;
+        $validatedData['author_id'] = auth()->user()->id;
         
         Bidang::where('id', $bidang->id)->update($validatedData);
         return redirect()->route('bidang.index')->with('success', 'Bidang berhasil diperbarui!');

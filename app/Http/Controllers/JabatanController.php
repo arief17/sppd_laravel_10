@@ -40,7 +40,7 @@ class JabatanController extends Controller
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(Jabatan::class, 'slug', $request->nama);
-        $validatedData['author'] = auth()->user()->id;
+        $validatedData['author_id'] = auth()->user()->id;
         
         Jabatan::create($validatedData);
         return redirect()->route('jabatan.index')->with('success', 'Jabatan berhasil ditambahkan!');
@@ -79,7 +79,7 @@ class JabatanController extends Controller
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(Jabatan::class, 'slug', $request->nama);
-        $validatedData['author'] = auth()->user()->id;
+        $validatedData['author_id'] = auth()->user()->id;
         
         Jabatan::where('id', $jabatan->id)->update($validatedData);
         return redirect()->route('jabatan.index')->with('success', 'Jabatan berhasil diperbarui!');

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('golongan_iii');
             $table->string('golongan_ii');
             $table->string('golongan_i');
-            $table->unsignedBigInteger('author');
+            $table->unsignedBigInteger('author_id');
             $table->timestamps();
             $table->softDeletes();
         });

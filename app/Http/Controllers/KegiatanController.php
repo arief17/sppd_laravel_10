@@ -39,7 +39,7 @@ class KegiatanController extends Controller
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(Kegiatan::class, 'slug', $request->nama);
-        $validatedData['author'] = auth()->user()->id;
+        $validatedData['author_id'] = auth()->user()->id;
         
         Kegiatan::create($validatedData);
         return redirect()->route('kegiatan.index')->with('success', 'Kegiatan berhasil ditambahkan!');
@@ -77,7 +77,7 @@ class KegiatanController extends Controller
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(Kegiatan::class, 'slug', $request->nama);
-        $validatedData['author'] = auth()->user()->id;
+        $validatedData['author_id'] = auth()->user()->id;
         
         Kegiatan::where('id', $kegiatan->id)->update($validatedData);
         return redirect()->route('kegiatan.index')->with('success', 'Kegiatan berhasil diperbarui!');

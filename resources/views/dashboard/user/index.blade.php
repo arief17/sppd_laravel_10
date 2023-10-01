@@ -34,20 +34,20 @@
 								<td>{{ $user->nama }}</td>
 								<td>{{ $user->username }}</td>
 								<td>{{ $user->email }}</td>
-								<td>{{ $user->level_admin }}</td>
-								<td>{{ $user->seksi }}</td>
-								<td>{{ $user->bidang }}</td>
+								<td>{{ $user->level_admin->nama }}</td>
+								<td>{{ $user->seksi->nama }}</td>
+								<td>{{ $user->bidang->nama }}</td>
 								<td>{{ $user->last_login }}</td>
 								<td>
-									<a class="btn btn-primary btn-sm" href="{{ route('user.show', $user->slug) }}">
+									<a class="btn btn-primary btn-sm" href="{{ route('user.show', $user->username) }}">
 										<i class="fas fa-folder"></i>
 										View
 									</a>
-									<a class="btn btn-info btn-sm" href="{{ route('user.edit', $user->slug) }}">
+									<a class="btn btn-info btn-sm" href="{{ route('user.edit', $user->username) }}">
 										<i class="fas fa-pencil-alt"></i>
 										Edit
 									</a>
-									<form action="{{ route('user.destroy', $user->slug) }}" method="post" class="d-inline">
+									<form action="{{ route('user.destroy', $user->username) }}" method="post" class="d-inline">
 										@method('delete')
 										@csrf
 										<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $user->nama }}">

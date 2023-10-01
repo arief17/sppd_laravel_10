@@ -39,7 +39,7 @@ class ProvinsiController extends Controller
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(Provinsi::class, 'slug', $request->nama);
-        $validatedData['author'] = auth()->user()->id;
+        $validatedData['author_id'] = auth()->user()->id;
         
         Provinsi::create($validatedData);
         return redirect()->route('provinsi.index')->with('success', 'Provinsi berhasil ditambahkan!');
@@ -77,7 +77,7 @@ class ProvinsiController extends Controller
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(Provinsi::class, 'slug', $request->nama);
-        $validatedData['author'] = auth()->user()->id;
+        $validatedData['author_id'] = auth()->user()->id;
         
         Provinsi::where('id', $provinsi->id)->update($validatedData);
         return redirect()->route('provinsi.index')->with('success', 'Provinsi berhasil diperbarui!');

@@ -36,18 +36,18 @@ class UangHarianController extends Controller
     {
         $validatedData = $request->validate([
             'keterangan' => 'required',
-            'eselon_i' => 'required|number',
-            'eselon_ii' => 'required|number',
-            'eselon_iii' => 'required|number',
-            'eselon_iv' => 'required|number',
-            'golongan_iv' => 'required|number',
-            'golongan_iii' => 'required|number',
-            'golongan_ii' => 'required|number',
-            'golongan_i' => 'required|number',
+            'eselon_i' => 'required|integer',
+            'eselon_ii' => 'required|integer',
+            'eselon_iii' => 'required|integer',
+            'eselon_iv' => 'required|integer',
+            'golongan_iv' => 'required|integer',
+            'golongan_iii' => 'required|integer',
+            'golongan_ii' => 'required|integer',
+            'golongan_i' => 'required|integer',
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(UangHarian::class, 'slug', $request->keterangan);
-        $validatedData['author'] = auth()->user()->id;
+        $validatedData['author_id'] = auth()->user()->id;
         
         UangHarian::create($validatedData);
         return redirect()->route('uang-harian.index')->with('success', 'Uang Harian berhasil ditambahkan!');
@@ -82,18 +82,18 @@ class UangHarianController extends Controller
     {
         $validatedData = $request->validate([
             'keterangan' => 'required',
-            'eselon_i' => 'required|number',
-            'eselon_ii' => 'required|number',
-            'eselon_iii' => 'required|number',
-            'eselon_iv' => 'required|number',
-            'golongan_iv' => 'required|number',
-            'golongan_iii' => 'required|number',
-            'golongan_ii' => 'required|number',
-            'golongan_i' => 'required|number',
+            'eselon_i' => 'required|integer',
+            'eselon_ii' => 'required|integer',
+            'eselon_iii' => 'required|integer',
+            'eselon_iv' => 'required|integer',
+            'golongan_iv' => 'required|integer',
+            'golongan_iii' => 'required|integer',
+            'golongan_ii' => 'required|integer',
+            'golongan_i' => 'required|integer',
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(UangHarian::class, 'slug', $request->keterangan);
-        $validatedData['author'] = auth()->user()->id;
+        $validatedData['author_id'] = auth()->user()->id;
         
         UangHarian::where('id', $uangHarian->id)->update($validatedData);
         return redirect()->route('uang-harian.index')->with('success', 'Uang Harian berhasil diperbarui!');

@@ -38,11 +38,11 @@ class SeksiController extends Controller
     {
         $validatedData = $request->validate([
             'nama' => 'required|min:3|max:100',
-            'bidang' => 'required',
+            'bidang_id' => 'required',
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(Seksi::class, 'slug', $request->nama);
-        $validatedData['author'] = auth()->user()->id;
+        $validatedData['author_id'] = auth()->user()->id;
         
         Seksi::create($validatedData);
         return redirect()->route('seksi.index')->with('success', 'Seksi berhasil ditambahkan!');
@@ -78,11 +78,11 @@ class SeksiController extends Controller
     {
         $validatedData = $request->validate([
             'nama' => 'required|min:3|max:100',
-            'bidang' => 'required',
+            'bidang_id' => 'required',
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(Seksi::class, 'slug', $request->nama);
-        $validatedData['author'] = auth()->user()->id;
+        $validatedData['author_id'] = auth()->user()->id;
         
         Seksi::where('id', $seksi->id)->update($validatedData);
         return redirect()->route('seksi.index')->with('success', 'Seksi berhasil diperbarui!');

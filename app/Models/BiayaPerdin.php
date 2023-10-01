@@ -5,6 +5,7 @@ namespace App\Models;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BiayaPerdin extends Model
@@ -14,34 +15,34 @@ class BiayaPerdin extends Model
     protected $guarded = ['id'];
     protected $with = ['author', 'area', 'dari', 'ke', 'transport', 'harian'];
 
-    public function author()
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id', 'author');
+        return $this->belongsTo(User::class, 'author_id');
     }
 
-    public function area()
+    public function area(): BelongsTo
     {
-        return $this->belongsTo(JenisPerdin::class, 'jenis_perdin_id', 'area');
+        return $this->belongsTo(JenisPerdin::class,  'area_id');
     }
 
-    public function dari()
+    public function dari(): BelongsTo
     {
-        return $this->belongsTo(KotaKabupaten::class, 'kota_kabupaten_id', 'dari');
+        return $this->belongsTo(KotaKabupaten::class, 'dari_id');
     }
 
-    public function ke()
+    public function ke(): BelongsTo
     {
-        return $this->belongsTo(KotaKabupaten::class, 'kota_kabupaten_id', 'ke');
+        return $this->belongsTo(KotaKabupaten::class, 'ke_id');
     }
 
-    public function transport()
+    public function transport(): BelongsTo
     {
-        return $this->belongsTo(UangTransport::class, 'uang_transport_id', 'transport');
+        return $this->belongsTo(UangTransport::class, 'transport_id');
     }
 
-    public function harian()
+    public function harian(): BelongsTo
     {
-        return $this->belongsTo(UangHarian::class, 'uang_harian_id', 'harian');
+        return $this->belongsTo(UangHarian::class, 'harian_id');
     }
 
     public function getRouteKeyName()

@@ -23,7 +23,7 @@
 					</div>
 					<div class="form-group">
 						<label for="eselon_i">Eselon I</label>
-						<input name="eselon_i" value="{{ old('eselon_i') }}" type="text" class="form-control @error('eselon_i') is-invalid @enderror" id="eselon_i" placeholder="Masukan eselon_i">
+						<input name="eselon_i" value="{{ old('eselon_i') }}" type="number" class="form-control @error('eselon_i') is-invalid @enderror" id="eselon_i" placeholder="Masukan eselon_i">
 						@error('eselon_i')
 						<div class="invalid-feedback">
 							{{ $message }}
@@ -32,7 +32,7 @@
 					</div>
 					<div class="form-group">
 						<label for="eselon_ii">Eselon II</label>
-						<input name="eselon_ii" value="{{ old('eselon_ii') }}" type="text" class="form-control @error('eselon_ii') is-invalid @enderror" id="eselon_ii" placeholder="Masukan eselon_ii">
+						<input name="eselon_ii" value="{{ old('eselon_ii') }}" type="number" class="form-control @error('eselon_ii') is-invalid @enderror" id="eselon_ii" placeholder="Masukan eselon_ii">
 						@error('eselon_ii')
 						<div class="invalid-feedback">
 							{{ $message }}
@@ -41,7 +41,7 @@
 					</div>
 					<div class="form-group">
 						<label for="eselon_iii">Eselon III</label>
-						<input name="eselon_iii" value="{{ old('eselon_iii') }}" type="text" class="form-control @error('eselon_iii') is-invalid @enderror" id="eselon_iii" placeholder="Masukan eselon_iii">
+						<input name="eselon_iii" value="{{ old('eselon_iii') }}" type="number" class="form-control @error('eselon_iii') is-invalid @enderror" id="eselon_iii" placeholder="Masukan eselon_iii">
 						@error('eselon_iii')
 						<div class="invalid-feedback">
 							{{ $message }}
@@ -50,7 +50,7 @@
 					</div>
 					<div class="form-group">
 						<label for="eselon_iv">Eselon IV</label>
-						<input name="eselon_iv" value="{{ old('eselon_iv') }}" type="text" class="form-control @error('eselon_iv') is-invalid @enderror" id="eselon_iv" placeholder="Masukan eselon_iv">
+						<input name="eselon_iv" value="{{ old('eselon_iv') }}" type="number" class="form-control @error('eselon_iv') is-invalid @enderror" id="eselon_iv" placeholder="Masukan eselon_iv">
 						@error('eselon_iv')
 						<div class="invalid-feedback">
 							{{ $message }}
@@ -59,7 +59,7 @@
 					</div>
 					<div class="form-group">
 						<label for="golongan_iv">Golongan IV</label>
-						<input name="golongan_iv" value="{{ old('golongan_iv') }}" type="text" class="form-control @error('golongan_iv') is-invalid @enderror" id="golongan_iv" placeholder="Masukan golongan_iv">
+						<input name="golongan_iv" value="{{ old('golongan_iv') }}" type="number" class="form-control @error('golongan_iv') is-invalid @enderror" id="golongan_iv" placeholder="Masukan golongan_iv">
 						@error('golongan_iv')
 						<div class="invalid-feedback">
 							{{ $message }}
@@ -68,7 +68,7 @@
 					</div>
 					<div class="form-group">
 						<label for="golongan_iii">Golongan III</label>
-						<input name="golongan_iii" value="{{ old('golongan_iii') }}" type="text" class="form-control @error('golongan_iii') is-invalid @enderror" id="golongan_iii" placeholder="Masukan golongan_iii">
+						<input name="golongan_iii" value="{{ old('golongan_iii') }}" type="number" class="form-control @error('golongan_iii') is-invalid @enderror" id="golongan_iii" placeholder="Masukan golongan_iii">
 						@error('golongan_iii')
 						<div class="invalid-feedback">
 							{{ $message }}
@@ -77,7 +77,7 @@
 					</div>
 					<div class="form-group">
 						<label for="golongan_ii">Golongan II</label>
-						<input name="golongan_ii" value="{{ old('golongan_ii') }}" type="text" class="form-control @error('golongan_ii') is-invalid @enderror" id="golongan_ii" placeholder="Masukan golongan_ii">
+						<input name="golongan_ii" value="{{ old('golongan_ii') }}" type="number" class="form-control @error('golongan_ii') is-invalid @enderror" id="golongan_ii" placeholder="Masukan golongan_ii">
 						@error('golongan_ii')
 						<div class="invalid-feedback">
 							{{ $message }}
@@ -86,7 +86,7 @@
 					</div>
 					<div class="form-group">
 						<label for="golongan_i">Golongan I</label>
-						<input name="golongan_i" value="{{ old('golongan_i') }}" type="text" class="form-control @error('golongan_i') is-invalid @enderror" id="golongan_i" placeholder="Masukan golongan_i">
+						<input name="golongan_i" value="{{ old('golongan_i') }}" type="number" class="form-control @error('golongan_i') is-invalid @enderror" id="golongan_i" placeholder="Masukan golongan_i">
 						@error('golongan_i')
 						<div class="invalid-feedback">
 							{{ $message }}

@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -21,94 +23,94 @@ class User extends Authenticatable
     protected $guarded = ['id'];
     protected $with = ['level_admin', 'seksi', 'bidang'];
 
-    public function level_admin()
+    public function level_admin(): BelongsTo
     {
-        return $this->belongsTo(LevelAdmin::class, 'level_admin_id', 'level_admin');
+        return $this->belongsTo(LevelAdmin::class, 'level_admin_id');
     }
     
-    public function seksi_authors()
+    public function seksi_authors(): HasMany
     {
-        return $this->hasMany(Bidang::class, 'author');
+        return $this->hasMany(Bidang::class, 'author_id');
     }
     
-    public function seksi()
+    public function seksi(): BelongsTo
     {
-        return $this->belongsTo(Bidang::class, 'seksi_id', 'seksi');
+        return $this->belongsTo(Bidang::class, 'seksi_id');
     }
 
-    public function bidang_authors()
+    public function bidang_authors(): HasMany
     {
-        return $this->hasMany(Bidang::class, 'author');
+        return $this->hasMany(Bidang::class, 'author_id');
     }
     
-    public function bidang()
+    public function bidang(): BelongsTo
     {
-        return $this->belongsTo(Bidang::class, 'bidang_id', 'bidang');
+        return $this->belongsTo(Bidang::class, 'bidang_id');
     }
 
-    public function kegiatans()
+    public function kegiatans(): HasMany
     {
-        return $this->hasMany(Kegiatan::class, 'kegiatan');
+        return $this->hasMany(Kegiatan::class, 'kegiatan_id');
     }
 
-    public function pegawais()
+    public function pegawais(): HasMany
     {
-        return $this->hasMany(Pegawai::class, 'pegawai');
+        return $this->hasMany(Pegawai::class, 'pegawai_id');
     }
 
-    public function tanda_tangans()
+    public function tanda_tangans(): HasMany
     {
-        return $this->hasMany(TandaTangan::class, 'tanda_tangan');
+        return $this->hasMany(TandaTangan::class, 'tanda_tangan_id');
     }
 
-    public function alat_angkuts()
+    public function alat_angkuts(): HasMany
     {
-        return $this->hasMany(AlatAngkut::class, 'author');
+        return $this->hasMany(AlatAngkut::class, 'author_id');
     }
 
-    public function jabatans()
+    public function jabatans(): HasMany
     {
-        return $this->hasMany(Jabatan::class, 'author');
+        return $this->hasMany(Jabatan::class, 'author_id');
     }
 
-    public function ketentuans()
+    public function ketentuans(): HasMany
     {
-        return $this->hasMany(Ketentuan::class, 'author');
+        return $this->hasMany(Ketentuan::class, 'author_id');
     }
 
-    public function golongans()
+    public function golongans(): HasMany
     {
-        return $this->hasMany(Golongan::class, 'author');
+        return $this->hasMany(Golongan::class, 'author_id');
     }
 
-    public function jenis_perdins()
+    public function jenis_perdins(): HasMany
     {
-        return $this->hasMany(JenisPerdin::class, 'author');
+        return $this->hasMany(JenisPerdin::class, 'author_id');
     }
 
-    public function provinsis()
+    public function provinsis(): HasMany
     {
-        return $this->hasMany(Provinsi::class, 'author');
+        return $this->hasMany(Provinsi::class, 'author_id');
     }
 
-    public function kota_kabupatens()
+    public function kota_kabupatens(): HasMany
     {
-        return $this->hasMany(KotaKabupaten::class, 'author');
+        return $this->hasMany(KotaKabupaten::class, 'author_id');
     }
 
-    public function uang_harians()
+    public function uang_harians(): HasMany
     {
-        return $this->hasMany(UangHarian::class, 'author');
+        return $this->hasMany(UangHarian::class, 'author_id');
     }
 
-    public function uang_transports()
+    public function uang_transports(): HasMany
     {
-        return $this->hasMany(UangTransport::class, 'author');
+        return $this->hasMany(UangTransport::class, 'author_id');
     }
 
-    public function biaya_perdins()
+    public function biaya_perdins(): HasMany
     {
-        return $this->hasMany(BiayaPerdin::class, 'author');
+        return $this->hasMany(BiayaPerdin::class, 'author_id');
     }
 
     public function getRouteKeyName()

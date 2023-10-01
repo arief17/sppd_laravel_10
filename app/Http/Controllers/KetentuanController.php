@@ -28,10 +28,8 @@ class KetentuanController extends Controller
     {
         return view('dashboard.ketentuan.create', [
             'title' => 'Tambah Ketentuan',
-            'kegiatan' => Kegiatan::all(),
-            'pptk' => Pegawai::all(),
-            'bendahara' => Pegawai::all(),
-            'pelaksana_administrasi' => Pegawai::all(),
+            'kegiatans' => Kegiatan::all(),
+            'pegawais' => Pegawai::all(),
         ]);
     }
 
@@ -41,20 +39,20 @@ class KetentuanController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'kegiatan' => 'required',
-            'kode_rek_dalam_daerah' => 'required|number',
-            'kode_rek_luar_daerah' => 'required|number',
-            'pptk' => 'required',
-            'bendahara' => 'required',
-            'pelaksana_administrasi' => 'required',
+            'kegiatan_id' => 'required',
+            'kode_rek_dalam_daerah' => 'required|integer',
+            'kode_rek_luar_daerah' => 'required|integer',
+            'pptk_id' => 'required',
+            'bendahara_id' => 'required',
+            'pelaksana_administrasi_id' => 'required',
         ]);
 
-        $pptk = Pegawai::where('id', $request->pptk)->get('nama');
-        $bendahara = Pegawai::where('id', $request->bendahara)->get('nama');
-        $pelaksana_administrasi = Pegawai::where('id', $request->pelaksana_administrasi)->get('nama');
+        $pptk = Pegawai::where('id', $request->pptk_id)->get('nama');
+        $bendahara = Pegawai::where('id', $request->bendahara_id)->get('nama');
+        $pelaksana_administrasi = Pegawai::where('id', $request->pelaksana_administrasi_id)->get('nama');
         
         $validatedData['slug'] = SlugService::createSlug(Ketentuan::class, 'slug', "$pptk $bendahara $pelaksana_administrasi");
-        $validatedData['author'] = auth()->user()->id;
+        $validatedData['author_id'] = auth()->user()->id;
         
         Ketentuan::create($validatedData);
         return redirect()->route('ketentuan.index')->with('success', 'Ketentuan berhasil ditambahkan!');
@@ -79,10 +77,8 @@ class KetentuanController extends Controller
         return view('dashboard.ketentuan.edit', [
             'title' => 'Perbarui Ketentuan',
             'ketentuan' => $ketentuan,
-            'kegiatan' => Kegiatan::all(),
-            'pptk' => Pegawai::all(),
-            'bendahara' => Pegawai::all(),
-            'pelaksana_administrasi' => Pegawai::all(),
+            'kegiatans' => Kegiatan::all(),
+            'pegawais' => Pegawai::all(),
         ]);
     }
 
@@ -92,20 +88,20 @@ class KetentuanController extends Controller
     public function update(Request $request, Ketentuan $ketentuan)
     {
         $validatedData = $request->validate([
-            'kegiatan' => 'required',
-            'kode_rek_dalam_daerah' => 'required|number',
-            'kode_rek_luar_daerah' => 'required|number',
-            'pptk' => 'required',
-            'bendahara' => 'required',
-            'pelaksana_administrasi' => 'required',
+            'kegiatan_id' => 'required',
+            'kode_rek_dalam_daerah' => 'required|integer',
+            'kode_rek_luar_daerah' => 'required|integer',
+            'pptk_id' => 'required',
+            'bendahara_id' => 'required',
+            'pelaksana_administrasi_id' => 'required',
         ]);
         
-        $pptk = Pegawai::where('id', $request->pptk)->get('nama');
-        $bendahara = Pegawai::where('id', $request->bendahara)->get('nama');
-        $pelaksana_administrasi = Pegawai::where('id', $request->pelaksana_administrasi)->get('nama');
+        $pptk = Pegawai::where('id', $request->pptk_id)->get('nama');
+        $bendahara = Pegawai::where('id', $request->bendahara_id)->get('nama');
+        $pelaksana_administrasi = Pegawai::where('id', $request->pelaksana_administrasi_id)->get('nama');
         
         $validatedData['slug'] = SlugService::createSlug(Ketentuan::class, 'slug', "$pptk $bendahara $pelaksana_administrasi");
-        $validatedData['author'] = auth()->user()->id;
+        $validatedData['author_id'] = auth()->user()->id;
         
         Ketentuan::where('id', $ketentuan->id)->update($validatedData);
         return redirect()->route('ketentuan.index')->with('success', 'Ketentuan berhasil diperbarui!');
