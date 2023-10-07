@@ -14,7 +14,7 @@ class SeksiController extends Controller
      */
     public function index()
     {
-        return view('dashboard.seksi.index', [
+        return view('dashboard.master.seksi.index', [
             'title' => 'Daftar Seksi',
             'seksis' => Seksi::all(),
         ]);
@@ -25,7 +25,7 @@ class SeksiController extends Controller
      */
     public function create()
     {
-        return view('dashboard.seksi.create', [
+        return view('dashboard.master.seksi.create', [
             'title' => 'Tambah Seksi',
             'bidangs' => Bidang::all(),
         ]);
@@ -53,7 +53,7 @@ class SeksiController extends Controller
      */
     public function show(Seksi $seksi)
     {
-        return view('dashboard.seksi.show', [
+        return view('dashboard.master.seksi.show', [
             'title' => 'Detail Seksi',
             'seksi' => $seksi,
         ]);
@@ -64,7 +64,7 @@ class SeksiController extends Controller
      */
     public function edit(Seksi $seksi)
     {
-        return view('dashboard.seksi.edit', [
+        return view('dashboard.master.seksi.edit', [
             'title' => 'Perbarui Seksi',
             'seksi' => $seksi,
             'bidangs' => Bidang::all(),

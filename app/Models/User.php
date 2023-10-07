@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -21,46 +22,46 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $guarded = ['id'];
-    protected $with = ['level_admin', 'seksi', 'bidang'];
+    protected $with = ['level_admin', 'seksi'];
 
     public function level_admin(): BelongsTo
     {
         return $this->belongsTo(LevelAdmin::class, 'level_admin_id');
     }
     
-    public function seksi_authors(): HasMany
-    {
-        return $this->hasMany(Bidang::class, 'author_id');
-    }
-    
     public function seksi(): BelongsTo
     {
-        return $this->belongsTo(Bidang::class, 'seksi_id');
-    }
-
-    public function bidang_authors(): HasMany
-    {
-        return $this->hasMany(Bidang::class, 'author_id');
+        return $this->belongsTo(Seksi::class, 'seksi_id');
     }
     
-    public function bidang(): BelongsTo
+    public function seksi_authors(): HasMany
     {
-        return $this->belongsTo(Bidang::class, 'bidang_id');
+        return $this->hasMany(Seksi::class, 'author_id');
+    }
+
+    public function bidang(): HasMany
+    {
+        return $this->hasMany(Bidang::class, 'author_id');
     }
 
     public function kegiatans(): HasMany
     {
-        return $this->hasMany(Kegiatan::class, 'kegiatan_id');
+        return $this->hasMany(Kegiatan::class, 'author_id');
     }
 
     public function pegawais(): HasMany
     {
-        return $this->hasMany(Pegawai::class, 'pegawai_id');
+        return $this->hasMany(Pegawai::class, 'author_id');
+    }
+
+    public function pegawai(): HasOne
+    {
+        return $this->hasOne(Pegawai::class, 'user_id');
     }
 
     public function tanda_tangans(): HasMany
     {
-        return $this->hasMany(TandaTangan::class, 'tanda_tangan_id');
+        return $this->hasMany(TandaTangan::class, 'author_id');
     }
 
     public function alat_angkuts(): HasMany

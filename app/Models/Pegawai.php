@@ -21,6 +21,11 @@ class Pegawai extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function eselon(): BelongsTo
     {
         return $this->belongsTo(Golongan::class, 'eselon_id');

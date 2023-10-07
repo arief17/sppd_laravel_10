@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('data_anggarans', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('username')->unique();
-            $table->string('password');
-            $table->unsignedBigInteger('level_admin_id');
-            $table->unsignedBigInteger('seksi_id')->nullable();
-            $table->dateTime('last_login')->nullable();
-            $table->string('photo')->default('not found');
-            $table->rememberToken();
+            $table->string('slug')->unique();
+            $table->string('saldo_awal')->default('0');
+            $table->string('saldo_akhir')->default('0');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,7 +26,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('data_anggarans', function (Blueprint $table) {
             $table->dropSoftDeletes();
         });
     }

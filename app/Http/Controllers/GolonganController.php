@@ -13,7 +13,7 @@ class GolonganController extends Controller
      */
     public function index()
     {
-        return view('dashboard.golongan.index', [
+        return view('dashboard.master.golongan.index', [
             'title' => 'Daftar Golongan',
             'golongans' => Golongan::all(),
         ]);
@@ -24,7 +24,7 @@ class GolonganController extends Controller
      */
     public function create()
     {
-        return view('dashboard.golongan.create', [
+        return view('dashboard.master.golongan.create', [
             'title' => 'Tambah Golongan',
         ]);
     }
@@ -50,7 +50,7 @@ class GolonganController extends Controller
      */
     public function show(Golongan $golongan)
     {
-        return view('dashboard.golongan.show', [
+        return view('dashboard.master.golongan.show', [
             'title' => 'Detail Golongan',
             'golongan' => $golongan,
         ]);
@@ -61,7 +61,7 @@ class GolonganController extends Controller
      */
     public function edit(Golongan $golongan)
     {
-        return view('dashboard.golongan.edit', [
+        return view('dashboard.master.golongan.edit', [
             'title' => 'Perbarui Golongan',
             'golongan' => $golongan,
         ]);

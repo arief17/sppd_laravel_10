@@ -13,7 +13,7 @@ class BidangController extends Controller
      */
     public function index()
     {
-        return view('dashboard.bidang.index', [
+        return view('dashboard.master.bidang.index', [
             'title' => 'Daftar Bidang',
             'bidangs' => Bidang::all(),
         ]);
@@ -24,7 +24,7 @@ class BidangController extends Controller
      */
     public function create()
     {
-        return view('dashboard.bidang.create', [
+        return view('dashboard.master.bidang.create', [
             'title' => 'Tambah Bidang',
         ]);
     }
@@ -51,7 +51,7 @@ class BidangController extends Controller
      */
     public function show(Bidang $bidang)
     {
-        return view('dashboard.bidang.show', [
+        return view('dashboard.master.bidang.show', [
             'title' => 'Detail Bidang',
             'bidang' => $bidang,
         ]);
@@ -62,7 +62,7 @@ class BidangController extends Controller
      */
     public function edit(Bidang $bidang)
     {
-        return view('dashboard.bidang.edit', [
+        return view('dashboard.master.bidang.edit', [
             'title' => 'Perbarui Bidang',
             'bidang' => $bidang,
         ]);

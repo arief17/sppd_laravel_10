@@ -15,7 +15,7 @@ class TandaTanganController extends Controller
      */
     public function index()
     {
-        return view('dashboard.tanda-tangan.index', [
+        return view('dashboard.master.tanda-tangan.index', [
             'title' => 'Daftar Tanda Tangan',
             'tanda_tangans' => TandaTangan::all(),
         ]);
@@ -26,7 +26,7 @@ class TandaTanganController extends Controller
      */
     public function create()
     {
-        return view('dashboard.tanda-tangan.create', [
+        return view('dashboard.master.tanda-tangan.create', [
             'title' => 'Tambah Tanda Tangan',
             'pegawais' => Pegawai::all(),
             'jabatans' => Jabatan::all(),
@@ -63,7 +63,7 @@ class TandaTanganController extends Controller
      */
     public function show(TandaTangan $tandaTangan)
     {
-        return view('dashboard.tanda-tangan.show', [
+        return view('dashboard.master.tanda-tangan.show', [
             'title' => 'Detail Tanda Tangan',
             'tanda_tangan' => $tandaTangan,
         ]);
@@ -74,7 +74,7 @@ class TandaTanganController extends Controller
      */
     public function edit(TandaTangan $tandaTangan)
     {
-        return view('dashboard.tanda-tangan.edit', [
+        return view('dashboard.master.tanda-tangan.edit', [
             'title' => 'Perbarui Tanda Tangan',
             'tanda_tangan' => $tandaTangan,
             'pegawais' => Pegawai::all(),

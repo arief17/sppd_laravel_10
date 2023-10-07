@@ -17,7 +17,7 @@ class BiayaPerdinController extends Controller
      */
     public function index()
     {
-        return view('dashboard.biaya-perdin.index', [
+        return view('dashboard.master.biaya-perdin.index', [
             'title' => 'Daftar Biaya Perdin',
             'biaya_perdins' => BiayaPerdin::all(),
         ]);
@@ -28,7 +28,7 @@ class BiayaPerdinController extends Controller
      */
     public function create()
     {
-        return view('dashboard.biaya-perdin.create', [
+        return view('dashboard.master.biaya-perdin.create', [
             'title' => 'Tambah Biaya Perdin',
             'jenis_perdins' => JenisPerdin::all(),
             'kota_kabupatens' => KotaKabupaten::all(),
@@ -66,7 +66,7 @@ class BiayaPerdinController extends Controller
      */
     public function show(BiayaPerdin $biayaPerdin)
     {
-        return view('dashboard.biaya-perdin.show', [
+        return view('dashboard.master.biaya-perdin.show', [
             'title' => 'Detail Biaya Perdin',
             'biaya_perdin' => $biayaPerdin,
         ]);
@@ -77,7 +77,7 @@ class BiayaPerdinController extends Controller
      */
     public function edit(BiayaPerdin $biayaPerdin)
     {
-        return view('dashboard.biaya-perdin.edit', [
+        return view('dashboard.master.biaya-perdin.edit', [
             'title' => 'Perbarui Biaya Perdin',
             'biaya_perdin' => $biayaPerdin,
             'jenis_perdins' => JenisPerdin::all(),

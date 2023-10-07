@@ -13,7 +13,7 @@ class UangTransportController extends Controller
      */
     public function index()
     {
-        return view('dashboard.uang-transport.index', [
+        return view('dashboard.master.uang-transport.index', [
             'title' => 'Daftar Uang Transport',
             'uang_transports' => UangTransport::all(),
         ]);
@@ -24,7 +24,7 @@ class UangTransportController extends Controller
      */
     public function create()
     {
-        return view('dashboard.uang-transport.create', [
+        return view('dashboard.master.uang-transport.create', [
             'title' => 'Tambah Uang Transport',
         ]);
     }
@@ -58,7 +58,7 @@ class UangTransportController extends Controller
      */
     public function show(UangTransport $uangTransport)
     {
-        return view('dashboard.uang-transport.show', [
+        return view('dashboard.master.uang-transport.show', [
             'title' => 'Detail Uang Transport',
             'uang_transport' => $uangTransport,
         ]);
@@ -69,7 +69,7 @@ class UangTransportController extends Controller
      */
     public function edit(UangTransport $uangTransport)
     {
-        return view('dashboard.uang-transport.edit', [
+        return view('dashboard.master.uang-transport.edit', [
             'title' => 'Perbarui Uang Transport',
             'uang_transport' => $uangTransport,
         ]);

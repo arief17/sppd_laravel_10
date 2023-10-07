@@ -15,7 +15,7 @@ class KetentuanController extends Controller
      */
     public function index()
     {
-        return view('dashboard.ketentuan.index', [
+        return view('dashboard.master.ketentuan.index', [
             'title' => 'Daftar Ketentuan',
             'ketentuans' => Ketentuan::all(),
         ]);
@@ -26,7 +26,7 @@ class KetentuanController extends Controller
      */
     public function create()
     {
-        return view('dashboard.ketentuan.create', [
+        return view('dashboard.master.ketentuan.create', [
             'title' => 'Tambah Ketentuan',
             'kegiatans' => Kegiatan::all(),
             'pegawais' => Pegawai::all(),
@@ -63,7 +63,7 @@ class KetentuanController extends Controller
      */
     public function show(Ketentuan $ketentuan)
     {
-        return view('dashboard.ketentuan.show', [
+        return view('dashboard.master.ketentuan.show', [
             'title' => 'Detail Ketentuan',
             'ketentuan' => $ketentuan,
         ]);
@@ -74,7 +74,7 @@ class KetentuanController extends Controller
      */
     public function edit(Ketentuan $ketentuan)
     {
-        return view('dashboard.ketentuan.edit', [
+        return view('dashboard.master.ketentuan.edit', [
             'title' => 'Perbarui Ketentuan',
             'ketentuan' => $ketentuan,
             'kegiatans' => Kegiatan::all(),

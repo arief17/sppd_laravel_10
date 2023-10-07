@@ -13,7 +13,7 @@ class KegiatanController extends Controller
      */
     public function index()
     {
-        return view('dashboard.kegiatan.index', [
+        return view('dashboard.master.kegiatan.index', [
             'title' => 'Daftar Kegiatan',
             'kegiatans' => Kegiatan::all(),
         ]);
@@ -24,7 +24,7 @@ class KegiatanController extends Controller
      */
     public function create()
     {
-        return view('dashboard.kegiatan.create', [
+        return view('dashboard.master.kegiatan.create', [
             'title' => 'Tambah Kegiatan',
         ]);
     }
@@ -50,7 +50,7 @@ class KegiatanController extends Controller
      */
     public function show(Kegiatan $kegiatan)
     {
-        return view('dashboard.kegiatan.show', [
+        return view('dashboard.master.kegiatan.show', [
             'title' => 'Detail Kegiatan',
             'kegiatan' => $kegiatan,
         ]);
@@ -61,7 +61,7 @@ class KegiatanController extends Controller
      */
     public function edit(Kegiatan $kegiatan)
     {
-        return view('dashboard.kegiatan.edit', [
+        return view('dashboard.master.kegiatan.edit', [
             'title' => 'Perbarui Kegiatan',
             'kegiatan' => $kegiatan,
         ]);

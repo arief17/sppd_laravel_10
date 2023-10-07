@@ -17,12 +17,8 @@ class LoginController extends Controller
 
     public function authenticate(Request $request)
     {
-        $login = request()->input('login');
-        $fieldType = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-        request()->merge([$fieldType => $login]);
-
         $credentials = $request->validate([
-            $fieldType => 'required',
+            'username' => 'required',
             'password' => 'required'
         ]);
 
@@ -32,7 +28,6 @@ class LoginController extends Controller
             
             return redirect()->intended('/');
         }
-        
 
         return back()->with('loginError', 'Gagal Login!');
     }

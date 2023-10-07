@@ -13,7 +13,7 @@ class JabatanController extends Controller
      */
     public function index()
     {
-        return view('dashboard.jabatan.index', [
+        return view('dashboard.master.jabatan.index', [
             'title' => 'Daftar Jabatan',
             'jabatans' => Jabatan::all(),
         ]);
@@ -24,7 +24,7 @@ class JabatanController extends Controller
      */
     public function create()
     {
-        return view('dashboard.jabatan.create', [
+        return view('dashboard.master.jabatan.create', [
             'title' => 'Tambah Jabatan',
         ]);
     }
@@ -51,7 +51,7 @@ class JabatanController extends Controller
      */
     public function show(Jabatan $jabatan)
     {
-        return view('dashboard.jabatan.show', [
+        return view('dashboard.master.jabatan.show', [
             'title' => 'Detail Jabatan',
             'jabatan' => $jabatan,
         ]);
@@ -62,7 +62,7 @@ class JabatanController extends Controller
      */
     public function edit(Jabatan $jabatan)
     {
-        return view('dashboard.jabatan.edit', [
+        return view('dashboard.master.jabatan.edit', [
             'title' => 'Perbarui Jabatan',
             'jabatan' => $jabatan,
         ]);

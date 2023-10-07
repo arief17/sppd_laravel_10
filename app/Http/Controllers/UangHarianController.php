@@ -13,7 +13,7 @@ class UangHarianController extends Controller
      */
     public function index()
     {
-        return view('dashboard.uang-harian.index', [
+        return view('dashboard.master.uang-harian.index', [
             'title' => 'Daftar Uang Harian',
             'uang_harians' => UangHarian::all(),
         ]);
@@ -24,7 +24,7 @@ class UangHarianController extends Controller
      */
     public function create()
     {
-        return view('dashboard.uang-harian.create', [
+        return view('dashboard.master.uang-harian.create', [
             'title' => 'Tambah Uang Harian',
         ]);
     }
@@ -58,7 +58,7 @@ class UangHarianController extends Controller
      */
     public function show(UangHarian $uangHarian)
     {
-        return view('dashboard.uang-harian.show', [
+        return view('dashboard.master.uang-harian.show', [
             'title' => 'Detail Uang Harian',
             'uang_harian' => $uangHarian,
         ]);
@@ -69,7 +69,7 @@ class UangHarianController extends Controller
      */
     public function edit(UangHarian $uangHarian)
     {
-        return view('dashboard.uang-harian.edit', [
+        return view('dashboard.master.uang-harian.edit', [
             'title' => 'Perbarui Uang Harian',
             'uang_harian' => $uangHarian,
         ]);

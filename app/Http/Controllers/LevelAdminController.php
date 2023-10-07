@@ -13,7 +13,7 @@ class LevelAdminController extends Controller
      */
     public function index()
     {
-        return view('dashboard.level-admin.index', [
+        return view('dashboard.master.level-admin.index', [
             'title' => 'Daftar Level Admin',
             'level_admins' => LevelAdmin::all(),
         ]);
@@ -24,7 +24,7 @@ class LevelAdminController extends Controller
      */
     public function create()
     {
-        return view('dashboard.level-admin.create', [
+        return view('dashboard.master.level-admin.create', [
             'title' => 'Tambah Level Admin',
         ]);
     }
@@ -50,7 +50,7 @@ class LevelAdminController extends Controller
      */
     public function show(LevelAdmin $levelAdmin)
     {
-        return view('dashboard.level-admin.show', [
+        return view('dashboard.master.level-admin.show', [
             'title' => 'Detail Level Admin',
             'level_admin' => $levelAdmin,
         ]);
@@ -61,7 +61,7 @@ class LevelAdminController extends Controller
      */
     public function edit(LevelAdmin $levelAdmin)
     {
-        return view('dashboard.level-admin.edit', [
+        return view('dashboard.master.level-admin.edit', [
             'title' => 'Perbarui Level Admin',
             'level_admin' => $levelAdmin,
         ]);

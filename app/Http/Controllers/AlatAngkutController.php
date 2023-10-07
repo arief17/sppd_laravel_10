@@ -13,7 +13,7 @@ class AlatAngkutController extends Controller
      */
     public function index()
     {
-        return view('dashboard.alat-angkut.index', [
+        return view('dashboard.master.alat-angkut.index', [
             'title' => 'Daftar Alat Angkut',
             'alat_angkuts' => AlatAngkut::all(),
         ]);
@@ -24,7 +24,7 @@ class AlatAngkutController extends Controller
      */
     public function create()
     {
-        return view('dashboard.alat-angkut.create', [
+        return view('dashboard.master.alat-angkut.create', [
             'title' => 'Tambah Alat Angkut',
         ]);
     }
@@ -50,7 +50,7 @@ class AlatAngkutController extends Controller
      */
     public function show(AlatAngkut $alatAngkut)
     {
-        return view('dashboard.alat-angkut.show', [
+        return view('dashboard.master.alat-angkut.show', [
             'title' => 'Detail Alat Angkut',
             'alat_angkut' => $alatAngkut,
         ]);
@@ -61,7 +61,7 @@ class AlatAngkutController extends Controller
      */
     public function edit(AlatAngkut $alatAngkut)
     {
-        return view('dashboard.alat-angkut.edit', [
+        return view('dashboard.master.alat-angkut.edit', [
             'title' => 'Perbarui Alat Angkut',
             'alat_angkut' => $alatAngkut,
         ]);

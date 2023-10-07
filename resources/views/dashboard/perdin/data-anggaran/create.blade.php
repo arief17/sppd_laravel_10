@@ -9,7 +9,7 @@
 				<h4 class="card-title mb-1">{{ $title }}</h4>
 			</div>
 			<div class="card-body pt-0">
-				<form action="{{ route('pegawai.index') }}" method="post">
+				<form action="{{ route('alat-angkut.index') }}" method="post">
 					@csrf
 					
 					<div class="form-group">
@@ -20,69 +20,6 @@
 							{{ $message }}
 						</div>
 						@enderror
-					</div>
-					<div class="form-group">
-						<label for="nip">NIP</label>
-						<input name="nip" value="{{ old('nip') }}" type="number" class="form-control @error('nip') is-invalid @enderror" id="nip" placeholder="Masukan nip">
-						@error('nip')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
-					<div class="form-group">
-						<label for="ruang">Ruang</label>
-						<input name="ruang" value="{{ old('ruang') }}" type="text" class="form-control @error('ruang') is-invalid @enderror" id="ruang" placeholder="Masukan ruang">
-						@error('ruang')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
-					<div class="form-group">
-						<label for="eselon_id" class="form-label">Eselon</label>
-						<select name="eselon_id" id="eselon_id" class="form-control form-select @error('eselon_id') is-invalid @enderror">
-							<option value="">Pilih Eselon</option>
-							@foreach ($golongans as $eselon)
-							<option value="{{ $eselon->id }}" @selected(old('eselon_id') == $eselon->id)>
-								{{ $eselon->nama }}
-							</option>
-							@endforeach
-						</select>
-						@error('eselon_id')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
-					<div class="form-group">
-						<label for="jabatan_id" class="form-label">Jabatan</label>
-						<select name="jabatan_id" id="jabatan_id" class="form-control form-select @error('jabatan_id') is-invalid @enderror">
-							<option value="">Pilih Jabatan</option>
-							@foreach ($golongans as $jabatan)
-							<option value="{{ $jabatan->id }}" @selected(old('jabatan_id') == $jabatan->id)>
-								{{ $jabatan->nama }}
-							</option>
-							@endforeach
-						</select>
-						@error('jabatan_id')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
-					<div class="form-group">
-						<div class="form-check">
-							<input class="form-check-input @error('pptk') is-invalid @enderror" type="checkbox" name="pptk" value="1" id="pptk" @checked(old('pptk'))>
-							<label class="form-check-label" for="pptk">
-								PPTK
-							</label>
-							@error('pptk')
-							<div class="invalid-feedback">
-								{{ $message }}
-							</div>
-							@enderror
-						</div>
 					</div>
 					
 					<div class="form-group mb-0 mt-3 justify-content-end">

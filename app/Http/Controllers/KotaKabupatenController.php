@@ -13,7 +13,7 @@ class KotaKabupatenController extends Controller
      */
     public function index()
     {
-        return view('dashboard.kota-kabupaten.index', [
+        return view('dashboard.master.kota-kabupaten.index', [
             'title' => 'Daftar Kota/Kabupaten',
             'kota_kabupatens' => KotaKabupaten::all(),
         ]);
@@ -24,7 +24,7 @@ class KotaKabupatenController extends Controller
      */
     public function create()
     {
-        return view('dashboard.kota-kabupaten.create', [
+        return view('dashboard.master.kota-kabupaten.create', [
             'title' => 'Tambah Kota/Kabupaten',
         ]);
     }
@@ -50,7 +50,7 @@ class KotaKabupatenController extends Controller
      */
     public function show(KotaKabupaten $kotaKabupaten)
     {
-        return view('dashboard.kota-kabupaten.show', [
+        return view('dashboard.master.kota-kabupaten.show', [
             'title' => 'Detail Kota/Kabupaten',
             'kota_kabupaten' => $kotaKabupaten,
         ]);
@@ -61,7 +61,7 @@ class KotaKabupatenController extends Controller
      */
     public function edit(KotaKabupaten $kotaKabupaten)
     {
-        return view('dashboard.kota-kabupaten.edit', [
+        return view('dashboard.master.kota-kabupaten.edit', [
             'title' => 'Perbarui Kota/Kabupaten',
             'kota_kabupaten' => $kotaKabupaten,
         ]);

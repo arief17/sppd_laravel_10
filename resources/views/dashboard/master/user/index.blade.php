@@ -17,9 +17,7 @@
 						<thead>
 							<tr>
 								<th class="border-bottom-0" style="width: 1%">No</th>
-								<th class="border-bottom-0">Nama</th>
 								<th class="border-bottom-0">Username</th>
-								<th class="border-bottom-0">Email</th>
 								<th class="border-bottom-0">Level Admin</th>
 								<th class="border-bottom-0">Seksi</th>
 								<th class="border-bottom-0">Bidang</th>
@@ -31,12 +29,10 @@
 							@foreach ($users as $user)
 							<tr>
 								<td>{{ $loop->iteration }}</td>
-								<td>{{ $user->nama }}</td>
 								<td>{{ $user->username }}</td>
-								<td>{{ $user->email }}</td>
 								<td>{{ $user->level_admin->nama }}</td>
-								<td>{{ $user->seksi->nama }}</td>
-								<td>{{ $user->bidang->nama }}</td>
+								<td>{{ $user->seksi->nama ?? 'Belum ditentukan' }}</td>
+								<td>{{ $user->seksi->bidang->nama ?? 'Belum ditentukan' }}</td>
 								<td>{{ $user->last_login }}</td>
 								<td>
 									<a class="btn btn-primary btn-sm" href="{{ route('user.show', $user->username) }}">

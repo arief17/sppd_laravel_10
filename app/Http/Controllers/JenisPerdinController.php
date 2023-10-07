@@ -13,7 +13,7 @@ class JenisPerdinController extends Controller
      */
     public function index()
     {
-        return view('dashboard.jenis-perdin.index', [
+        return view('dashboard.master.jenis-perdin.index', [
             'title' => 'Daftar Jenis Perdin',
             'jenis_perdins' => JenisPerdin::all(),
         ]);
@@ -24,7 +24,7 @@ class JenisPerdinController extends Controller
      */
     public function create()
     {
-        return view('dashboard.jenis-perdin.create', [
+        return view('dashboard.master.jenis-perdin.create', [
             'title' => 'Tambah Jenis Perdin',
         ]);
     }
@@ -50,7 +50,7 @@ class JenisPerdinController extends Controller
      */
     public function show(JenisPerdin $jenisPerdin)
     {
-        return view('dashboard.jenis-perdin.show', [
+        return view('dashboard.master.jenis-perdin.show', [
             'title' => 'Detail Jenis Perdin',
             'jenis_perdin' => $jenisPerdin,
         ]);
@@ -61,7 +61,7 @@ class JenisPerdinController extends Controller
      */
     public function edit(JenisPerdin $jenisPerdin)
     {
-        return view('dashboard.jenis-perdin.edit', [
+        return view('dashboard.master.jenis-perdin.edit', [
             'title' => 'Perbarui Jenis Perdin',
             'jenis_perdin' => $jenisPerdin,
         ]);

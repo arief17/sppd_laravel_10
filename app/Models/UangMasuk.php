@@ -6,26 +6,25 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Bidang extends Model
+class UangMasuk extends Model
 {
     use HasFactory, Sluggable, SoftDeletes;
 
     protected $guarded = ['id'];
-    protected $with = ['author'];
+    protected $with = ['author', 'data_anggaran'];
 
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
     }
-
-    public function seksis(): HasMany
+    
+    public function data_anggaran(): BelongsTo
     {
-        return $this->hasMany(Seksi::class, 'bidang_id');
+        return $this->belongsTo(DataAnggaran::class, 'uang_masuk_id');
     }
-
+    
     public function getRouteKeyName()
     {
         return 'slug';
@@ -35,7 +34,7 @@ class Bidang extends Model
     {
         return [
             'slug' => [
-                'source' => 'nama'
+                'source' => 'keterangan'
             ]
         ];
     }

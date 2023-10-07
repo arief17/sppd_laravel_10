@@ -32,9 +32,18 @@
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="email">Username</label>
-						<input name="email" value="{{ old('email', $user->email) }}" type="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Masukan email">
-						@error('email')
+						<label for="password">Password</label>
+						<input name="password" value="{{ old('password') }}" type="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Masukan password user...">
+						@error('password')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+						@enderror
+					</div>
+					<div class="form-group">
+						<label for="password_confirmation">Password konfirmasi</label>
+						<input name="password_confirmation" value="{{ old('password_confirmation') }}" type="password" class="form-control @error('password') is-invalid @enderror" id="password_confirmation" placeholder="Masukan password konfirmasi user...">
+						@error('password')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
@@ -67,22 +76,6 @@
 							@endforeach
 						</select>
 						@error('seksi_id')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
-					<div class="form-group">
-						<label for="bidang_id" class="form-label">Bidang</label>
-						<select name="bidang_id" id="bidang_id" class="form-control form-select @error('bidang_id') is-invalid @enderror">
-							<option value="">Pilih Bidang</option>
-							@foreach ($bidangs as $bidang)
-							<option value="{{ $bidang->id }}" @selected(old('bidang_id', $user->bidang_id) == $bidang->id)>
-								{{ $bidang->nama }}
-							</option>
-							@endforeach
-						</select>
-						@error('bidang_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>

@@ -13,7 +13,7 @@ class ProvinsiController extends Controller
      */
     public function index()
     {
-        return view('dashboard.provinsi.index', [
+        return view('dashboard.master.provinsi.index', [
             'title' => 'Daftar Provinsi',
             'provinsis' => Provinsi::all(),
         ]);
@@ -24,7 +24,7 @@ class ProvinsiController extends Controller
      */
     public function create()
     {
-        return view('dashboard.provinsi.create', [
+        return view('dashboard.master.provinsi.create', [
             'title' => 'Tambah Provinsi',
         ]);
     }
@@ -50,7 +50,7 @@ class ProvinsiController extends Controller
      */
     public function show(Provinsi $provinsi)
     {
-        return view('dashboard.provinsi.show', [
+        return view('dashboard.master.provinsi.show', [
             'title' => 'Detail Provinsi',
             'provinsi' => $provinsi,
         ]);
@@ -61,7 +61,7 @@ class ProvinsiController extends Controller
      */
     public function edit(Provinsi $provinsi)
     {
-        return view('dashboard.provinsi.edit', [
+        return view('dashboard.master.provinsi.edit', [
             'title' => 'Perbarui Provinsi',
             'provinsi' => $provinsi,
         ]);

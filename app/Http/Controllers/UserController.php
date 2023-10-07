@@ -8,6 +8,7 @@ use App\Models\Seksi;
 use App\Models\User;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 
 class UserController extends Controller
@@ -17,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('dashboard.user.index', [
+        return view('dashboard.master.user.index', [
             'title' => 'Daftar User',
             'users' => User::all(),
         ]);
@@ -28,11 +29,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('dashboard.user.create', [
+        return view('dashboard.master.user.create', [
             'title' => 'Tambah User',
             'level_admins' => LevelAdmin::all(),
             'seksis' => Seksi::all(),
-            'bidangs' => Bidang::all(),
         ]);
     }
 
@@ -44,12 +44,12 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'nama' => 'required|min:3|max:100',
             'username' => 'required|alpha_dash|min:3|max:100|unique:users',
-            'email' => 'required|email|unique:users',
             'password' => ['required', 'confirmed', Password::min(5)->letters()->numbers()],
             'level_admin_id' => 'required',
             'seksi_id' => 'required',
-            'bidang_id' => 'required',
         ]);
+
+        $validatedData['password'] = Hash::make($request->password);
         
         User::create($validatedData);
         return redirect()->route('user.index')->with('success', 'User berhasil ditambahkan!');
@@ -60,7 +60,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('dashboard.user.show', [
+        return view('dashboard.master.user.show', [
             'title' => 'Detail User',
             'user' => $user,
         ]);
@@ -71,12 +71,11 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('dashboard.user.edit', [
+        return view('dashboard.master.user.edit', [
             'title' => 'Perbarui User',
             'user' => $user,
             'level_admins' => LevelAdmin::all(),
             'seksis' => Seksi::all(),
-            'bidangs' => Bidang::all(),
         ]);
     }
 
@@ -88,12 +87,12 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'nama' => 'required|min:3|max:100',
             'username' => 'required|alpha_dash|min:3|max:100|unique:users',
-            'email' => 'required|email|unique:users',
             'password' => ['required', 'confirmed', Password::min(5)->letters()->numbers()],
             'level_admin_id' => 'required',
             'seksi_id' => 'required',
-            'bidang_id' => 'required',
         ]);
+
+        $validatedData['password'] = Hash::make($request->password);
         
         User::where('id', $user->id)->update($validatedData);
         return redirect()->route('user.index')->with('success', 'User berhasil diperbarui!');

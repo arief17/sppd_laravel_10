@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('uang_keluars', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('username')->unique();
-            $table->string('password');
-            $table->unsignedBigInteger('level_admin_id');
-            $table->unsignedBigInteger('seksi_id')->nullable();
-            $table->dateTime('last_login')->nullable();
-            $table->string('photo')->default('not found');
-            $table->rememberToken();
+            $table->string('slug')->unique();
+            $table->date('tgl_input');
+            $table->date('tgl_masuk');
+            $table->string('keterangan');
+            $table->string('saldo')->default('0');
+            $table->string('anggaran_slug');
+            $table->unsignedBigInteger('author_id');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,7 +30,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('uang_keluars', function (Blueprint $table) {
             $table->dropSoftDeletes();
         });
     }

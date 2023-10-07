@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('eselon_id');
             $table->unsignedBigInteger('jabatan_id');
             $table->date('last_perdin')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('author_id');
             $table->timestamps();
             $table->softDeletes();

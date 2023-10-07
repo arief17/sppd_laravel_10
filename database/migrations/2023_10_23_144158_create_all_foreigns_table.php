@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->foreign('level_admin_id')->references('id')->on('level_admins');
             $table->foreign('seksi_id')->references('id')->on('seksis');
-            $table->foreign('bidang_id')->references('id')->on('bidangs');
         });
 
         Schema::table('bidangs', function (Blueprint $table) {
@@ -28,6 +27,7 @@ return new class extends Migration
         Schema::table('pegawais', function (Blueprint $table) {
             $table->foreign('jabatan_id')->references('id')->on('jabatans');
             $table->foreign('eselon_id')->references('id')->on('golongans');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('author_id')->references('id')->on('users');
         });
 
@@ -90,6 +90,16 @@ return new class extends Migration
             $table->foreign('harian_id')->references('id')->on('uang_harians');
             $table->foreign('author_id')->references('id')->on('users');
         });
+        
+        Schema::table('uang_masuks', function (Blueprint $table) {
+            $table->foreign('anggaran_slug')->references('slug')->on('data_anggarans');
+            $table->foreign('author_id')->references('id')->on('users');
+        });
+        
+        Schema::table('uang_keluars', function (Blueprint $table) {
+            $table->foreign('anggaran_slug')->references('slug')->on('data_anggarans');
+            $table->foreign('author_id')->references('id')->on('users');
+        });
     }
 
     /**
@@ -113,5 +123,8 @@ return new class extends Migration
         Schema::dropIfExists('uang_harians');
         Schema::dropIfExists('uang_transports');
         Schema::dropIfExists('biaya_perdins');
+        Schema::dropIfExists('data_anggarans');
+        Schema::dropIfExists('uang_masuks');
+        Schema::dropIfExists('uang_keluars');
     }
 };
