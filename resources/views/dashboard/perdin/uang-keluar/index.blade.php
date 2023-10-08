@@ -8,113 +8,6 @@
 			<div class="card-header">
 				<div class="d-flex align-items-center">
 					<h3 class="card-title">{{ $title }}</h3>
-				</div>
-			</div>
-			<div class="card-body">
-				<div class="table-responsive">
-					<table class="table border-top-0 table-bordered text-nowrap border-bottom" id="responsive-datatable">
-						<thead>
-							<tr>
-								<th class="border-bottom-0" style="width: 1%">No</th>
-								<th class="border-bottom-0">Tahun</th>
-								<th class="border-bottom-0">Bulan</th>
-								<th class="border-bottom-0">Saldo Awal</th>
-								<th class="border-bottom-0">Uang Masuk</th>
-								<th class="border-bottom-0">Uang Keluar</th>
-								<th class="border-bottom-0">Saldo Akhir</th>
-								<th class="border-bottom-0" style="width: 1%">Aksi</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach ($data_anggarans as $data_anggaran)
-							<tr>
-								<td>{{ $loop->iteration }}</td>
-								<td>{{ $data_anggaran->created_at->format('Y') }}</td>
-								<td>{{ $data_anggaran->created_at->format('F') }}</td>
-								<td>{{ 'Rp.' . number_format($data_anggaran->saldo_awal, 0, ',', '.') }}</td>
-								<td>{{ 'Rp.' . number_format($data_anggaran->uang_masuks->sum('saldo'), 0, ',', '.') ?? '0' }}</td>
-								<td>{{ 'Rp.' . number_format($data_anggaran->uang_keluars->sum('saldo'), 0, ',', '.') ?? '0' }}</td>
-								<td>{{ 'Rp.' . number_format($data_anggaran->saldo_akhir, 0, ',', '.') }}</td>
-								<td>
-									<a class="btn btn-primary btn-sm" href="{{ route('data-anggaran.show', $data_anggaran->slug) }}">
-										<i class="fas fa-folder"></i>
-										View
-									</a>
-								</td>
-							</tr>
-							@endforeach
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="row row-sm">
-	<div class="col-lg-12">
-		<div class="card">
-			<div class="card-header">
-				<div class="d-flex align-items-center">
-					<h3 class="card-title">Detail Uang Masuk</h3>
-					<a href="{{ route('uang-masuk.create') }}" class="btn btn-primary mg-l-auto">Tambah</a>
-				</div>
-			</div>
-			<div class="card-body">
-				<div class="table-responsive">
-					<table class="table border-top-0 table-bordered text-nowrap border-bottom" id="responsive-datatable">
-						<thead>
-							<tr>
-								<th class="border-bottom-0" style="width: 1%">No</th>
-								<th class="border-bottom-0">Tanggal Input</th>
-								<th class="border-bottom-0">Tanggal Uang Masuk</th>
-								<th class="border-bottom-0">Keterangan</th>
-								<th class="border-bottom-0">Saldo</th>
-								<th class="border-bottom-0" style="width: 1%">Aksi</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach ($uang_masuks as $uang_masuk)
-							<tr>
-								<td>{{ $loop->iteration }}</td>
-								<td>{{ $uang_masuk->created_at->format('d F Y') }}</td>
-								<td>{{ $uang_masuk->tgl_anggaran }}</td>
-								<td>{{ $uang_masuk->keterangan }}</td>
-								<td>{{ 'Rp.' . number_format($uang_masuk->saldo, 0, ',', '.') }}</td>
-								<td>
-									<a class="btn btn-primary btn-sm" href="{{ route('uang-masuk.show', $uang_masuk->slug) }}">
-										<i class="fas fa-folder"></i>
-										View
-									</a>
-									<a class="btn btn-info btn-sm" href="{{ route('uang-masuk.edit', $uang_masuk->slug) }}">
-										<i class="fas fa-pencil-alt"></i>
-										Edit
-									</a>
-									<form action="{{ route('uang-masuk.destroy', $uang_masuk->slug) }}" method="post" class="d-inline">
-										@method('delete')
-										@csrf
-										<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $uang_masuk->slug }}">
-											<i class="fas fa-trash"></i>
-											Delete
-										</button>
-									</form>
-								</td>
-							</tr>
-							@endforeach
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="row row-sm">
-	<div class="col-lg-12">
-		<div class="card">
-			<div class="card-header">
-				<div class="d-flex align-items-center">
-					<h3 class="card-title">Detail Uang Keluar</h3>
 					<a href="{{ route('uang-keluar.create') }}" class="btn btn-primary mg-l-auto">Tambah</a>
 				</div>
 			</div>
@@ -136,9 +29,9 @@
 							<tr>
 								<td>{{ $loop->iteration }}</td>
 								<td>{{ $uang_keluar->created_at->format('d F Y') }}</td>
-								<td>{{ $uang_keluar->tgl_anggaran }}</td>
+								<td>{{ $uang_keluar->tgl_saldo->format('d F Y') }}</td>
 								<td>{{ $uang_keluar->keterangan }}</td>
-								<td>{{ 'Rp.' . number_format($uang_keluar->saldo, 0, ',', '.') }}</td>
+								<td>{{ number_format($uang_keluar->saldo, 0, ',', '.') }}</td>
 								<td>
 									<a class="btn btn-primary btn-sm" href="{{ route('uang-keluar.show', $uang_keluar->slug) }}">
 										<i class="fas fa-folder"></i>

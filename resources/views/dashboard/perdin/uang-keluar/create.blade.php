@@ -9,14 +9,31 @@
 				<h4 class="card-title mb-1">{{ $title }}</h4>
 			</div>
 			<div class="card-body pt-0">
-				<form action="{{ route('alat-angkut.show', $alat_angkut->slug) }}" method="post">
+				<form action="{{ route('uang-keluar.store') }}" method="post">
 					@csrf
-					@method('put')
 					
 					<div class="form-group">
-						<label for="nama">Nama</label>
-						<input name="nama" value="{{ old('nama', $alat_angkut->nama) }}" type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukan nama">
-						@error('nama')
+						<label for="tgl_saldo">Tanggal Saldo Keluar</label>
+						<input name="tgl_saldo" value="{{ old('tgl_saldo') }}" type="date" class="form-control @error('tgl_saldo') is-invalid @enderror" id="tgl_saldo" placeholder="Masukan tgl_saldo">
+						@error('tgl_saldo')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+						@enderror
+					</div>
+					<div class="form-group">
+						<label for="keterangan">Keterangan</label>
+						<input name="keterangan" value="{{ old('keterangan') }}" type="text" class="form-control @error('keterangan') is-invalid @enderror" id="keterangan" placeholder="Masukan keterangan">
+						@error('keterangan')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+						@enderror
+					</div>
+					<div class="form-group">
+						<label for="saldo">Saldo</label>
+						<input name="saldo" value="{{ old('saldo') }}" type="number" class="form-control @error('saldo') is-invalid @enderror" id="saldo" placeholder="Masukan saldo">
+						@error('saldo')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>

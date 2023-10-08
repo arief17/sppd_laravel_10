@@ -35,18 +35,19 @@ class UangMasukController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'tgl_masuk' => 'required|date',
+            'tgl_saldo' => 'required|date',
             'keterangan' => 'required',
             'saldo' => 'required|integer',
         ]);
         
         $validatedData['anggaran_slug'] = now()->format('F-Y');
-        $validatedData['tgl_input'] = now();
         $validatedData['slug'] = SlugService::createSlug(UangMasuk::class, 'slug', $request->keterangan);
         $validatedData['author_id'] = auth()->user()->id;
         
         UangMasuk::create($validatedData);
-        return redirect()->route('uang-masuk.index')->with('success', 'Uang Masuk berhasil ditambahkan!');
+        $dataAnggaran = new DataAnggaranController();
+        $dataAnggaran->store($request);
+        return redirect()->route('data-anggaran.index')->with('success', 'Uang Masuk berhasil ditambahkan!');
     }
 
     /**
@@ -77,18 +78,19 @@ class UangMasukController extends Controller
     public function update(Request $request, UangMasuk $uangMasuk)
     {
         $validatedData = $request->validate([
-            'tgl_masuk' => 'required|date',
+            'tgl_saldo' => 'required|date',
             'keterangan' => 'required',
             'saldo' => 'required|integer',
         ]);
         
         $validatedData['anggaran_slug'] = now()->format('F-Y');
-        $validatedData['tgl_input'] = now();
         $validatedData['slug'] = SlugService::createSlug(UangMasuk::class, 'slug', $request->keterangan);
         $validatedData['author_id'] = auth()->user()->id;
         
         UangMasuk::where('id', $uangMasuk->id)->update($validatedData);
-        return redirect()->route('uang-masuk.index')->with('success', 'Uang Masuk berhasil diperbarui!');
+        $dataAnggaran = new DataAnggaranController();
+        $dataAnggaran->store($request);
+        return redirect()->route('data-anggaran.index')->with('success', 'Uang Masuk berhasil diperbarui!');
     }
 
     /**
@@ -97,6 +99,6 @@ class UangMasukController extends Controller
     public function destroy(UangMasuk $uangMasuk)
     {
         $uangMasuk->delete();
-        return redirect()->route('uang-masuk.index')->with('success', 'Uang Masuk berhasil dihapus!');
+        return redirect()->route('data-anggaran.index')->with('success', 'Uang Masuk berhasil dihapus!');
     }
 }

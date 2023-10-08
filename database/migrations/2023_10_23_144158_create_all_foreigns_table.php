@@ -92,12 +92,10 @@ return new class extends Migration
         });
         
         Schema::table('uang_masuks', function (Blueprint $table) {
-            $table->foreign('anggaran_slug')->references('slug')->on('data_anggarans');
             $table->foreign('author_id')->references('id')->on('users');
         });
         
         Schema::table('uang_keluars', function (Blueprint $table) {
-            $table->foreign('anggaran_slug')->references('slug')->on('data_anggarans');
             $table->foreign('author_id')->references('id')->on('users');
         });
     }

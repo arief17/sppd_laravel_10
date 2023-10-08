@@ -17,6 +17,8 @@ class DataAnggaranController extends Controller
         return view('dashboard.perdin.data-anggaran.index', [
             'title' => 'Daftar Data Anggaran',
             'data_anggarans' => DataAnggaran::all(),
+            'uang_masuks' => UangMasuk::all(),
+            'uang_keluars' => UangKeluar::all(),
         ]);
     }
 
@@ -25,9 +27,7 @@ class DataAnggaranController extends Controller
      */
     public function create()
     {
-        return view('dashboard.perdin.data-anggaran.create', [
-            'title' => 'Tambah Data Anggaran',
-        ]);
+        //
     }
 
     /**
@@ -43,24 +43,24 @@ class DataAnggaranController extends Controller
         $existingData = DataAnggaran::where('slug', $nowDate)->first();
     
         if ($existingData) {
-            $existingData->update(['saldo_awal' => $existingData->saldo_akhir]);
+            $existingData->update(['saldo_awal' => $existingData->saldo_awal]);
     
-            $uangMasuk = UangMasuk::where('slug', $nowDate)->sum('saldo');
-            $uangKeluar = UangKeluar::where('slug', $nowDate)->sum('saldo');
+            $uangMasuk = UangMasuk::where('anggaran_slug', $nowDate)->sum('saldo');
+            $uangKeluar = UangKeluar::where('anggaran_slug', $nowDate)->sum('saldo');
             $existingData->saldo_akhir = $existingData->saldo_awal + $uangMasuk - $uangKeluar;
             $existingData->save();
         } else {
             $lastMonth = DataAnggaran::where('created_at', now()->subMonth())->value('saldo_akhir');
-            $validatedData['saldo_awal'] = $lastMonth;
+            $validatedData['saldo_awal'] = $lastMonth ?? '0';
     
-            $uangMasuk = UangMasuk::where('slug', $nowDate)->sum('saldo');
-            $uangKeluar = UangKeluar::where('slug', $nowDate)->sum('saldo');
+            $uangMasuk = UangMasuk::where('anggaran_slug', $nowDate)->sum('saldo');
+            $uangKeluar = UangKeluar::where('anggaran_slug', $nowDate)->sum('saldo');
             $validatedData['saldo_akhir'] = $lastMonth + $uangMasuk - $uangKeluar;
     
             DataAnggaran::create($validatedData);
         }
     
-        return redirect()->route('data-anggaran.index')->with('success', 'Data Anggaran berhasil ditambahkan atau diperbarui!');
+        return;
     }
     
     /**
@@ -95,7 +95,6 @@ class DataAnggaranController extends Controller
      */
     public function destroy(DataAnggaran $dataAnggaran)
     {
-        $dataAnggaran->delete();
-        return redirect()->route('data-anggaran.index')->with('success', 'Data Anggaran berhasil dihapus!');
+        //
     }
 }

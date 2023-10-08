@@ -15,12 +15,12 @@ class DataAnggaran extends Model
 
     public function uang_masuks(): HasMany
     {
-        return $this->hasMany(UangMasuk::class, 'uang_masuk_id');
+        return $this->hasMany(UangMasuk::class, 'anggaran_slug', 'slug');
     }
 
     public function uang_keluars(): HasMany
     {
-        return $this->hasMany(UangKeluar::class, 'uang_keluar_id');
+        return $this->hasMany(UangKeluar::class, 'anggaran_slug', 'slug');
     }
 
     public function getRouteKeyName()

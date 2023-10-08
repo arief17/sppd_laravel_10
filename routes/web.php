@@ -3,6 +3,7 @@
 use App\Http\Controllers\AlatAngkutController;
 use App\Http\Controllers\BiayaPerdinController;
 use App\Http\Controllers\BidangController;
+use App\Http\Controllers\DataAnggaranController;
 use App\Http\Controllers\GolonganController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\JenisPerdinController;
@@ -16,6 +17,8 @@ use App\Http\Controllers\ProvinsiController;
 use App\Http\Controllers\SeksiController;
 use App\Http\Controllers\TandaTanganController;
 use App\Http\Controllers\UangHarianController;
+use App\Http\Controllers\UangKeluarController;
+use App\Http\Controllers\UangMasukController;
 use App\Http\Controllers\UangTransportController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -62,6 +65,12 @@ Route::middleware('can:isAdmin')->group(function(){
 	Route::resource('/dashboard/user', UserController::class)->except('create', 'store', 'destroy')->middleware('auth');
 	
 	// Route::get('/dashboard/user', [UserController::class, 'index'])->name('user.index')->middleware('auth');
+});
+
+Route::middleware('can:isPegawai')->group(function(){
+	Route::resource('/dashboard/data-anggaran', DataAnggaranController::class)->except('create', 'edit', 'update', 'destroy')->middleware('auth');
+	Route::resource('/dashboard/uang-masuk', UangMasukController::class)->except('index')->middleware('auth');
+	Route::resource('/dashboard/uang-keluar', UangKeluarController::class)->except('index')->middleware('auth');
 });
 
 Route::redirect('/dashboard', '/');

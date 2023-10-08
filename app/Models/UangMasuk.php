@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 class UangMasuk extends Model
 {
@@ -22,7 +23,12 @@ class UangMasuk extends Model
     
     public function data_anggaran(): BelongsTo
     {
-        return $this->belongsTo(DataAnggaran::class, 'uang_masuk_id');
+        return $this->belongsTo(DataAnggaran::class, 'anggaran_slug');
+    }
+
+    public function getTglAnggaranAttribute()
+    {
+        return Carbon::parse($this->tgl_saldo)->format('d F Y');
     }
     
     public function getRouteKeyName()

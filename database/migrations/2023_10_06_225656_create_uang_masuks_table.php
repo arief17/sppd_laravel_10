@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('uang_masuks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('slug')->unique();
-            $table->date('tgl_input');
-            $table->date('tgl_masuk');
+            $table->date('tgl_saldo');
             $table->string('keterangan');
             $table->string('saldo')->default('0');
             $table->string('anggaran_slug');

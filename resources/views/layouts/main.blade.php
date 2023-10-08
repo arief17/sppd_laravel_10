@@ -404,8 +404,8 @@
 												<li><a class="sub-side-menu__item" href="{{ route('golongan.index') }}">Sudah Bayar</a></li>
 											</ul>
 										</li>
-										<li><a class="slide-item" href="{{ route('bidang.index') }}">Data Anggaran </a></li>
-										<li><a class="slide-item" href="{{ route('bidang.index') }}">Arsip Laporan </a></li>
+										<li><a class="slide-item" href="{{ route('data-anggaran.index') }}">Data Anggaran </a></li>
+										<li><a class="slide-item" href="{{ route('data-anggaran.index') }}">Arsip Laporan </a></li>
 									</ul>
 								</li>
 							</ul>
