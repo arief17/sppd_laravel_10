@@ -9,7 +9,7 @@
 				<h4 class="card-title mb-1">{{ $title }}</h4>
 			</div>
 			<div class="card-body pt-0">
-				<form action="{{ route('pegawai.index') }}" method="post">
+				<form action="{{ route('pegawai.store') }}" method="post">
 					@csrf
 					
 					<div class="form-group">
@@ -31,25 +31,66 @@
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="ruang">Ruang</label>
-						<input name="ruang" value="{{ old('ruang') }}" type="text" class="form-control @error('ruang') is-invalid @enderror" id="ruang" placeholder="Masukan ruang">
-						@error('ruang')
+						<label for="email">Email</label>
+						<input name="email" value="{{ old('email') }}" type="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Masukan email">
+						@error('email')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="eselon_id" class="form-label">Eselon</label>
-						<select name="eselon_id" id="eselon_id" class="form-control form-select @error('eselon_id') is-invalid @enderror">
-							<option value="">Pilih Eselon</option>
-							@foreach ($golongans as $eselon)
-							<option value="{{ $eselon->id }}" @selected(old('eselon_id') == $eselon->id)>
-								{{ $eselon->nama }}
+						<label for="no_hp">Handphone</label>
+						<input name="no_hp" value="{{ old('no_hp') }}" type="number" class="form-control @error('no_hp') is-invalid @enderror" id="no_hp" placeholder="Masukan no_hp">
+						@error('no_hp')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+						@enderror
+					</div>
+					<div class="form-group">
+						<label for="seksi_id" class="form-label">Seksi</label>
+						<select name="seksi_id" id="seksi_id" class="form-control form-select @error('seksi_id') is-invalid @enderror">
+							<option value="">Pilih Seksi</option>
+							@foreach ($seksis as $seksi)
+							<option value="{{ $seksi->id }}" @selected(old('seksi_id') == $seksi->id)>
+								{{ $seksi->nama }}
 							</option>
 							@endforeach
 						</select>
-						@error('eselon_id')
+						@error('seksi_id')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+						@enderror
+					</div>
+					<div class="form-group">
+						<label for="ruang_id" class="form-label">Ruang</label>
+						<select name="ruang_id" id="ruang_id" class="form-control form-select @error('ruang_id') is-invalid @enderror">
+							<option value="">Pilih Ruang</option>
+							@foreach ($ruangs as $ruang)
+							<option value="{{ $ruang->id }}" @selected(old('ruang_id') == $ruang->id)>
+								{{ $ruang->nama }}
+							</option>
+							@endforeach
+						</select>
+						@error('ruang_id')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+						@enderror
+					</div>
+					<div class="form-group">
+						<label for="golongan_id" class="form-label">Golongan</label>
+						<select name="golongan_id" id="golongan_id" class="form-control form-select @error('golongan_id') is-invalid @enderror">
+							<option value="">Pilih Golongan</option>
+							@foreach ($golongans as $golongan)
+							<option value="{{ $golongan->id }}" @selected(old('golongan_id') == $golongan->id)>
+								{{ $golongan->nama }}
+							</option>
+							@endforeach
+						</select>
+						@error('golongan_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
@@ -83,68 +124,6 @@
 							</div>
 							@enderror
 						</div>
-					</div>
-
-					<hr>
-
-					<div class="form-group">
-						<label for="username">Username</label>
-						<input name="username" value="{{ old('username') }}" type="text" class="form-control @error('username') is-invalid @enderror" id="username" placeholder="Masukan username">
-						@error('username')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
-					<div class="form-group">
-						<label for="password">Password</label>
-						<input name="password" value="{{ old('password') }}" type="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Masukan password user...">
-						@error('password')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
-					<div class="form-group">
-						<label for="password_confirmation">Password konfirmasi</label>
-						<input name="password_confirmation" value="{{ old('password_confirmation') }}" type="password" class="form-control @error('password') is-invalid @enderror" id="password_confirmation" placeholder="Masukan password konfirmasi user...">
-						@error('password')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
-					<div class="form-group">
-						<label for="level_admin_id" class="form-label">Level Admin</label>
-						<select name="level_admin_id" id="level_admin_id" class="form-control form-select @error('level_admin_id') is-invalid @enderror">
-							<option value="">Pilih Level Admin</option>
-							@foreach ($level_admins as $level_admin)
-							<option value="{{ $level_admin->id }}" @selected(old('level_admin_id') == $level_admin->id)>
-								{{ $level_admin->nama }}
-							</option>
-							@endforeach
-						</select>
-						@error('level_admin_id')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
-					<div class="form-group">
-						<label for="seksi_id" class="form-label">Seksi</label>
-						<select name="seksi_id" id="seksi_id" class="form-control form-select @error('seksi_id') is-invalid @enderror">
-							<option value="">Pilih Seksi</option>
-							@foreach ($seksis as $seksi)
-							<option value="{{ $seksi->id }}" @selected(old('seksi_id') == $seksi->id)>
-								{{ $seksi->nama }}
-							</option>
-							@endforeach
-						</select>
-						@error('seksi_id')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
 					</div>
 					
 					<div class="form-group mb-0 mt-3 justify-content-end">

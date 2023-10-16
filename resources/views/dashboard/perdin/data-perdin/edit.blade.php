@@ -9,123 +9,89 @@
 				<h4 class="card-title mb-1">{{ $title }}</h4>
 			</div>
 			<div class="card-body pt-0">
-				<form action="{{ route('pegawai.show', $pegawai->slug) }}" method="post">
+				<form action="{{ route('data-perdin.show', $data_perdin->slug) }}" method="post">
 					@csrf
 					@method('put')
 					
 					<div class="form-group">
-						<label for="nama">Nama</label>
-						<input name="nama" value="{{ old('nama', $pegawai->nama) }}" type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukan nama">
-						@error('nama')
+						<label for="surat_dari">Surat Dari</label>
+						<input name="surat_dari" value="{{ old('surat_dari', $data_perdin->surat_dari) }}" type="text" class="form-control @error('surat_dari') is-invalid @enderror" id="surat_dari" placeholder="Masukan surat_dari">
+						@error('surat_dari')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="nip">NIP</label>
-						<input name="nip" value="{{ old('nip', $pegawai->nip) }}" type="number" class="form-control @error('nip') is-invalid @enderror" id="nip" placeholder="Masukan nip">
-						@error('nip')
+						<label for="tgl_surat">Tanggal Surat</label>
+						<input name="tgl_surat" value="{{ old('tgl_surat', $data_perdin->tgl_surat) }}" type="date" class="form-control @error('tgl_surat') is-invalid @enderror" id="tgl_surat" placeholder="Masukan tgl_surat">
+						@error('tgl_surat')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="email">Email</label>
-						<input name="email" value="{{ old('email', $pegawai->email) }}" type="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Masukan email">
-						@error('email')
+						<label for="perihal">Perihal</label>
+						<input name="perihal" value="{{ old('perihal', $data_perdin->perihal) }}" type="text" class="form-control @error('perihal') is-invalid @enderror" id="perihal" placeholder="Masukan perihal">
+						@error('perihal')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="no_hp">Handphone</label>
-						<input name="no_hp" value="{{ old('no_hp', $pegawai->no_hp) }}" type="number" class="form-control @error('no_hp') is-invalid @enderror" id="no_hp" placeholder="Masukan no_hp">
-						@error('no_hp')
+						<label for="tgl_berangkat">Tanggal Berangkat</label>
+						<input name="tgl_berangkat" value="{{ old('tgl_berangkat', $data_perdin->tgl_berangkat) }}" type="date" class="form-control @error('tgl_berangkat') is-invalid @enderror" id="tgl_berangkat" placeholder="Masukan tgl_berangkat">
+						@error('tgl_berangkat')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="seksi_id" class="form-label">Seksi</label>
-						<select name="seksi_id" id="seksi_id" class="form-control form-select @error('seksi_id') is-invalid @enderror">
-							<option value="">Pilih Seksi</option>
-							@foreach ($seksis as $seksi)
-							<option value="{{ $seksi->id }}" @selected(old('seksi_id', $pegawai->seksi_id) == $seksi->id)>
-								{{ $seksi->nama }}
+						<label for="lama">Lama</label>
+						<input name="lama" value="{{ old('lama', $data_perdin->lama) }}" type="number" class="form-control @error('lama') is-invalid @enderror" id="lama" placeholder="Masukan lama">
+						@error('lama')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+						@enderror
+					</div>
+					<div class="form-group">
+						<label for="lokasi_id" class="form-label">Lokasi</label>
+						<select name="lokasi_id" id="lokasi_id" class="form-control form-select @error('lokasi_id') is-invalid @enderror">
+							<option value="">Pilih Lokasi</option>
+							@foreach ($lokasis as $lokasi)
+							<option value="{{ $lokasi->id }}" @selected(old('lokasi_id', $data_perdin->lokasi_id) == $lokasi->id)>
+								{{ $lokasi->nama }}
 							</option>
 							@endforeach
 						</select>
-						@error('seksi_id')
+						@error('lokasi_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="ruang_id" class="form-label">Ruang</label>
-						<select name="ruang_id" id="ruang_id" class="form-control form-select @error('ruang_id') is-invalid @enderror">
-							<option value="">Pilih Ruang</option>
-							@foreach ($ruangs as $ruang)
-							<option value="{{ $ruang->id }}" @selected(old('ruang_id', $pegawai->ruang_id) == $ruang->id)>
-								{{ $ruang->nama }}
-							</option>
-							@endforeach
-						</select>
-						@error('ruang_id')
+						<label for="jumlah_pegawai">Jumlah Pegawai</label>
+						<input name="jumlah_pegawai" value="{{ old('jumlah_pegawai', $data_perdin->jumlah_pegawai) }}" type="number" class="form-control @error('jumlah_pegawai') is-invalid @enderror" id="jumlah_pegawai" placeholder="Masukan jumlah_pegawai">
+						@error('jumlah_pegawai')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="golongan_id" class="form-label">Golongan</label>
-						<select name="golongan_id" id="golongan_id" class="form-control form-select @error('golongan_id') is-invalid @enderror">
-							<option value="">Pilih Golongan</option>
-							@foreach ($golongans as $golongan)
-							<option value="{{ $golongan->id }}" @selected(old('golongan_id', $pegawai->golongan_id) == $golongan->id)>
-								{{ $golongan->nama }}
-							</option>
-							@endforeach
-						</select>
-						@error('golongan_id')
+						<label for="biaya">Biaya</label>
+						<input name="biaya" value="{{ old('biaya', $data_perdin->biaya) }}" type="number" class="form-control @error('biaya') is-invalid @enderror" id="biaya" placeholder="Masukan biaya">
+						@error('biaya')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
 						@enderror
 					</div>
-					<div class="form-group">
-						<label for="jabatan_id" class="form-label">Jabatan</label>
-						<select name="jabatan_id" id="jabatan_id" class="form-control form-select @error('jabatan_id') is-invalid @enderror">
-							<option value="">Pilih Jabatan</option>
-							@foreach ($jabatans as $jabatan)
-							<option value="{{ $jabatan->id }}" @selected(old('jabatan_id', $pegawai->jabatan_id) == $jabatan->id)>
-								{{ $jabatan->nama }}
-							</option>
-							@endforeach
-						</select>
-						@error('jabatan_id')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
-					<div class="form-group">
-						<div class="form-check">
-							<input class="form-check-input @error('pptk') is-invalid @enderror" type="checkbox" name="pptk" value="1" id="pptk" @checked(old('pptk', $pegawai->pptk))>
-							<label class="form-check-label" for="pptk">
-								PPTK
-							</label>
-							@error('pptk')
-							<div class="invalid-feedback">
-								{{ $message }}
-							</div>
-							@enderror
-						</div>
-					</div>					
 
 					<div class="form-group mb-0 mt-3 justify-content-end">
 						<button type="submit" class="btn btn-primary">Simpan</button>

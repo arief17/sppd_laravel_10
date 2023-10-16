@@ -9,14 +9,14 @@
 				<div class="d-flex justify-content-between">
 					<h4 class="card-title mg-b-0">{{ $title }}</h4>
 					<div>
-						<a class="btn btn-info btn-sm" href="{{ route('pegawai.edit', $pegawai->slug) }}">
+						<a class="btn btn-info btn-sm" href="{{ route('data-perdin.edit', $data_perdin->slug) }}">
 							<i class="fas fa-pencil-alt"></i>
 							Edit
 						</a>
-						<form action="{{ route('pegawai.destroy', $pegawai->slug) }}" method="post" class="d-inline">
+						<form action="{{ route('data-perdin.destroy', $data_perdin->slug) }}" method="post" class="d-inline">
 							@method('delete')
 							@csrf
-							<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $pegawai->nama }}">
+							<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $data_perdin->perihal }}">
 								<i class="fas fa-trash"></i>
 								Delete
 							</button>
@@ -28,32 +28,40 @@
 				<div class="table-responsive">
 					<table class="table mg-b-0 text-md-nowrap border-bottom">
 						<tr>
-							<th>Nama:</th>
-							<td style="width: 90%">{{ $pegawai->nama }}</td>
+							<th>Surat Dari:</th>
+							<td style="width: 90%">{{ $data_perdin->surat_dari }}</td>
 						</tr>
 						<tr>
-							<th>NIP:</th>
-							<td style="width: 90%">{{ $pegawai->nip }}</td>
+							<th>Tanggal Surat:</th>
+							<td style="width: 90%">{{ $data_perdin->tgl_surat }}</td>
 						</tr>
 						<tr>
-							<th>PPTK:</th>
-							<td style="width: 90%">{{ $pegawai->pptk ? 'Ya' : 'Tidak' }}</td>
+							<th>Perihal:</th>
+							<td style="width: 90%">{{ $data_perdin->perihal }}</td>
 						</tr>
 						<tr>
-							<th>Ruang:</th>
-							<td style="width: 90%">{{ $pegawai->ruang->nama }}</td>
+							<th>Pegawai:</th>
+							<td style="width: 90%">{{ $data_perdin->author->pegawai->nama }}</td>
 						</tr>
 						<tr>
-							<th>Golongan:</th>
-							<td style="width: 90%">{{ $pegawai->golongan }}</td>
+							<th>Tanggal Berangkat:</th>
+							<td style="width: 90%">{{ $data_perdin->tgl_berangkat }}</td>
 						</tr>
 						<tr>
-							<th>Jabatan:</th>
-							<td style="width: 90%">{{ $pegawai->jabatan }}</td>
+							<th>Lama:</th>
+							<td style="width: 90%">{{ $data_perdin->lama }}</td>
 						</tr>
 						<tr>
-							<th>Last Perdin:</th>
-							<td style="width: 90%">{{ $pegawai->last_perdin }}</td>
+							<th>Lokasi:</th>
+							<td style="width: 90%">{{ $data_perdin->lokasi->nama }}</td>
+						</tr>
+						<tr>
+							<th>Jumlah Pegawai</th>
+							<td style="width: 90%">{{ $data_perdin->jumlah_pegawai }}</td>
+						</tr>
+						<tr>
+							<th>Biaya</th>
+							<td style="width: 90%">{{ $data_perdin->biaya }}</td>
 						</tr>
 					</table>
 				</div>

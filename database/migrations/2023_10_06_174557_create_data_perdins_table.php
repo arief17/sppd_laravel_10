@@ -13,15 +13,27 @@ return new class extends Migration
     {
         Schema::create('data_perdins', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('slug')->unique();
             $table->string('surat_dari');
+            $table->string('nomor_surat');
             $table->date('tgl_surat');
-            $table->string('perihal');
-            $table->unsignedBigInteger('author_id');
-            $table->date('tgl_berangkat');
+            $table->text('perihal');
+            $table->string('no_spt');
+            $table->unsignedBigInteger('tanda_tangan_id');
+            $table->text('maksud');
             $table->integer('lama');
-            $table->string('lokasi');
-            $table->string('jumlah_pegawai');
+            $table->date('tgl_berangkat');
+            $table->date('tgl_kembali');
+            $table->unsignedBigInteger('alat_angkut_id');
+            $table->unsignedBigInteger('jenis_perdin_id');
+            $table->unsignedBigInteger('kedudukan_id');
+            $table->unsignedBigInteger('tujuan_id');
+            $table->text('lokasi');
+            $table->unsignedBigInteger('pegawai_diperintah_id');
             $table->string('biaya');
+            $table->string('jumlah_pegawai');
+            $table->text('keterangan');
+            $table->unsignedBigInteger('author_id');
             $table->timestamps();
             $table->softDeletes();
         });

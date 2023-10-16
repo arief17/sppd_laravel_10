@@ -21,6 +21,11 @@ class KotaKabupaten extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
+    public function provinsi(): BelongsTo
+    {
+        return $this->belongsTo(Provinsi::class, 'provinsi_id');
+    }
+
     public function biaya_perdins_dari(): HasMany
     {
         return $this->hasMany(BiayaPerdin::class, 'dari_id');
@@ -29,6 +34,16 @@ class KotaKabupaten extends Model
     public function biaya_perdins_ke(): HasMany
     {
         return $this->hasMany(BiayaPerdin::class, 'ke_id');
+    }
+
+    public function data_perdins_kedudukan(): HasMany
+    {
+        return $this->hasMany(DataPerdin::class, 'kedudukan_id');
+    }
+
+    public function data_perdins_tujuan(): HasMany
+    {
+        return $this->hasMany(DataPerdin::class, 'tujuan_id');
     }
 
     public function getRouteKeyName()

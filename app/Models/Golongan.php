@@ -23,7 +23,7 @@ class Golongan extends Model
 
     public function pegawais(): HasMany
     {
-        return $this->hasMany(Pegawai::class, 'eselon_id');
+        return $this->hasMany(Pegawai::class, 'golongan_id');
     }
 
     public function getRouteKeyName()

@@ -6,6 +6,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TandaTangan extends Model
@@ -28,6 +29,11 @@ class TandaTangan extends Model
     public function jabatan(): BelongsTo
     {
         return $this->belongsTo(Jabatan::class, 'jabatan_id');
+    }
+
+    public function data_perdins(): HasMany
+    {
+        return $this->hasMany(DataPerdin::class, 'tanda_tangan_id');
     }
 
     public function getRouteKeyName()

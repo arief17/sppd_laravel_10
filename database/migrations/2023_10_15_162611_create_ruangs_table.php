@@ -11,19 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pegawais', function (Blueprint $table) {
+        Schema::create('ruangs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama');
             $table->string('slug')->unique();
-            $table->string('nip')->unique();
-            $table->string('email')->unique();
-            $table->string('no_hp')->unique();
-            $table->unsignedBigInteger('seksi_id');
-            $table->unsignedBigInteger('golongan_id');
-            $table->unsignedBigInteger('ruang_id');
-            $table->unsignedBigInteger('jabatan_id');
-            $table->boolean('pptk');
-            $table->date('last_perdin')->nullable();
             $table->unsignedBigInteger('author_id');
             $table->timestamps();
             $table->softDeletes();
@@ -35,7 +26,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('pegawais', function (Blueprint $table) {
+        Schema::table('ruangs', function (Blueprint $table) {
             $table->dropSoftDeletes();
         });
     }

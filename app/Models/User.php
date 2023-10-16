@@ -54,11 +54,6 @@ class User extends Authenticatable
         return $this->hasMany(Pegawai::class, 'author_id');
     }
 
-    public function pegawai(): HasOne
-    {
-        return $this->hasOne(Pegawai::class, 'user_id');
-    }
-
     public function tanda_tangans(): HasMany
     {
         return $this->hasMany(TandaTangan::class, 'author_id');

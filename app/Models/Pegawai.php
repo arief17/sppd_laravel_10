@@ -14,21 +14,21 @@ class Pegawai extends Model
     use HasFactory, Sluggable, SoftDeletes;
 
     protected $guarded = ['id'];
-    protected $with = ['author', 'eselon', 'jabatan'];
+    protected $with = ['author', 'golongan', 'jabatan'];
 
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
     }
 
-    public function user(): BelongsTo
+    public function golongan(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(Golongan::class, 'golongan_id');
     }
 
-    public function eselon(): BelongsTo
+    public function ruang(): BelongsTo
     {
-        return $this->belongsTo(Golongan::class, 'eselon_id');
+        return $this->belongsTo(Ruang::class, 'ruang_id');
     }
 
     public function jabatan(): BelongsTo
@@ -54,6 +54,16 @@ class Pegawai extends Model
     public function tanda_tangans(): HasMany
     {
         return $this->hasMany(TandaTangan::class, 'pegawai_id');
+    }
+
+    public function data_perdins_diperintah(): HasMany
+    {
+        return $this->hasMany(DataPerdin::class, 'pegawai_diperintah_id');
+    }
+
+    public function data_perdin_mengikuti()
+    {
+        return $this->belongsToMany(DataPerdin::class, 'perdin_pegawai', 'pegawai_id', 'data_perdin_id');
     }
 
     public function getRouteKeyName()

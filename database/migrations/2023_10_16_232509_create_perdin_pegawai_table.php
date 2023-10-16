@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kota_kabupatens', function (Blueprint $table) {
+        Schema::create('perdin_pegawai', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama');
-            $table->string('slug')->unique();
-            $table->unsignedBigInteger('provinsi_id');
-            $table->unsignedBigInteger('author_id');
+            $table->unsignedBigInteger('data_perdin_id');
+            $table->foreign('data_perdin_id')->references('id')->on('data_perdins');
+            $table->unsignedBigInteger('pegawai_id');
+            $table->foreign('pegawai_id')->references('id')->on('pegawais');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -27,7 +27,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('kota_kabupatens', function (Blueprint $table) {
+        Schema::table('alat_angkuts', function (Blueprint $table) {
             $table->dropSoftDeletes();
         });
     }

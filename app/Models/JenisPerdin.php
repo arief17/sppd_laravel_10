@@ -26,6 +26,11 @@ class JenisPerdin extends Model
         return $this->hasMany(BiayaPerdin::class, 'area_id');
     }
 
+    public function data_perdins(): HasMany
+    {
+        return $this->hasMany(DataPerdin::class, 'jenis_perdin_id');
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';

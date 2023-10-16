@@ -55,9 +55,6 @@
 								<a class="open-toggle" href="javascript:void(0);"><i class="header-icon fe fe-align-left" ></i></a>
 								<a class="close-toggle" href="javascript:void(0);"><i class="header-icons fe fe-x"></i></a>
 							</div>
-							<div class="main-header-center ms-3 d-sm-none d-md-none d-lg-block">
-								<input class="form-control" placeholder="Search for anything..." type="search"> <button class="btn"><i class="fas fa-search d-none d-md-block"></i></button>
-							</div>
 						</div>
 						<div class="main-header-right">
 							<button class="navbar-toggler navresponsive-toggler d-lg-none ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,48 +63,6 @@
 							<div class="mb-0 navbar navbar-expand-lg navbar-nav-right responsive-navbar navbar-dark p-0">
 								<div class="collapse navbar-collapse" id="navbarSupportedContent-4">
 									<ul class="nav nav-item  navbar-nav-right ms-auto">
-										<li class="">
-											<div class="dropdown  nav-item">
-												<a href="javascript:void(0);" class="d-flex  nav-item nav-link country-flag1" data-bs-toggle="dropdown" aria-expanded="false">
-													<span class="avatar country-Flag me-0 align-self-center bg-transparent"><img src="/assets/img/flags/us_flag.jpg" alt="img"></span>
-													<div class="my-auto">
-														<strong class="me-2 ms-2 my-auto">English</strong>
-													</div>
-												</a>
-												<div class="dropdown-menu dropdown-menu-start  dropdown-menu-arrow" x-placement="bottom-end">
-													<a href="javascript:void(0);" class="dropdown-item d-flex ">
-														<span class="avatar  me-3 align-self-center bg-transparent"><img src="/assets/img/flags/french_flag.jpg" alt="img"></span>
-														<div class="d-flex">
-															<span class="mt-2">French</span>
-														</div>
-													</a>
-													<a href="javascript:void(0);" class="dropdown-item d-flex">
-														<span class="avatar  me-3 align-self-center bg-transparent"><img src="/assets/img/flags/germany_flag.jpg" alt="img"></span>
-														<div class="d-flex">
-															<span class="mt-2">Germany</span>
-														</div>
-													</a>
-													<a href="javascript:void(0);" class="dropdown-item d-flex">
-														<span class="avatar me-3 align-self-center bg-transparent"><img src="/assets/img/flags/italy_flag.jpg" alt="img"></span>
-														<div class="d-flex">
-															<span class="mt-2">Italy</span>
-														</div>
-													</a>
-													<a href="javascript:void(0);" class="dropdown-item d-flex">
-														<span class="avatar me-3 align-self-center bg-transparent"><img src="/assets/img/flags/russia_flag.jpg" alt="img"></span>
-														<div class="d-flex">
-															<span class="mt-2">Russia</span>
-														</div>
-													</a>
-													<a href="javascript:void(0);" class="dropdown-item d-flex">
-														<span class="avatar  me-3 align-self-center bg-transparent"><img src="/assets/img/flags/spain_flag.jpg" alt="img"></span>
-														<div class="d-flex">
-															<span class="mt-2">spain</span>
-														</div>
-													</a>
-												</div>
-											</div>
-										</li>
 										<li class="dropdown nav-item main-layout">
 											<a class="new nav-link theme-layout nav-link-bg layout-setting" >
 												<span class="dark-layout"><svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" width="24" height="24" viewBox="0 0 24 24"><path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z"/></svg></span>
@@ -300,11 +255,11 @@
 											<a class="new nav-link full-screen-link" href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-maximize"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg></a>
 										</li>
 										<li class="dropdown main-profile-menu nav nav-item nav-link">
-											<a class="profile-user d-flex" href=""><img alt="" src="/assets/img/faces/6.jpg"></a>
+											<a class="profile-user d-flex" href=""><img alt="" src="/assets/img/profile.jpg"></a>
 											<div class="dropdown-menu">
 												<div class="main-header-profile bg-primary p-3">
 													<div class="d-flex wd-100p">
-														<div class="main-img-user"><img alt="" src="/assets/img/faces/6.jpg" class=""></div>
+														<div class="main-img-user"><img alt="" src="/assets/img/profile.jpg" class=""></div>
 														<div class="ms-3 my-auto">
 															<h6>Petey Cruiser</h6><span>Premium Member</span>
 														</div>
@@ -337,11 +292,11 @@
 							<div class="app-sidebar__user clearfix">
 								<div class="dropdown user-pro-body">
 									<div class="">
-										<img alt="user-img" class="avatar avatar-xl brround" src="/assets/img/faces/6.jpg"><span class="avatar-status profile-status bg-green"></span>
+										<img alt="user-img" class="avatar avatar-xl brround" src="/assets/img/profile.jpg"><span class="avatar-status profile-status bg-green"></span>
 									</div>
 									<div class="user-info">
-										<h4 class="fw-semibold mt-3 mb-0">Petey Cruiser</h4>
-										<span class="mb-0 text-muted">Premium Member</span>
+										<h4 class="fw-semibold mt-3 mb-0">{{ auth()->user()->username }}</h4>
+										<span class="mb-0 text-muted">{{ auth()->user()->seksi->nama ?? 'Belum ditentukan' }}</span>
 									</div>
 								</div>
 							</div>
@@ -349,62 +304,69 @@
 							<ul class="side-menu">
 								<li class="side-item side-item-category">Main</li>
 								<li class="slide">
-									<a class="side-menu__item" href="{{ route('dashboard') }}"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24" ><path d="M0 0h24v24H0V0z" fill="none"/><path d="M5 5h4v6H5zm10 8h4v6h-4zM5 17h4v2H5zM15 5h4v2h-4z" opacity=".3"/><path d="M3 13h8V3H3v10zm2-8h4v6H5V5zm8 16h8V11h-8v10zm2-8h4v6h-4v-6zM13 3v6h8V3h-8zm6 4h-4V5h4v2zM3 21h8v-6H3v6zm2-4h4v2H5v-2z"/></svg><span class="side-menu__label">Index</span></a>
+									<a class="side-menu__item {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24" ><path d="M0 0h24v24H0V0z" fill="none"/><path d="M5 5h4v6H5zm10 8h4v6h-4zM5 17h4v2H5zM15 5h4v2h-4z" opacity=".3"/><path d="M3 13h8V3H3v10zm2-8h4v6H5V5zm8 16h8V11h-8v10zm2-8h4v6h-4v-6zM13 3v6h8V3h-8zm6 4h-4V5h4v2zM3 21h8v-6H3v6zm2-4h4v2H5v-2z"/></svg><span class="side-menu__label">Index</span></a>
 								</li>
+								
 								<li class="side-item side-item-category">General</li>
-
 								@can('isAdmin')
-								<li class="slide">
+								<li class="slide {{ request()->routeIs('bidang*', 'seksi*', 'kegiatan*', 'pegawai*', 'tanda-tangan*', 'alat-angkut*', 'jabatan*', 'ketentuan*', 'user*', 'golongan*', 'jenis-perdin*', 'provinsi*', 'kota-kabupaten*', 'uang-harian*', 'uang-transport*', 'biaya-perdin*') ? 'is-expanded' : '' }}">
 									<a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"  viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 4c-4.42 0-8 3.58-8 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.5 4c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zm-7 0c.83 0 1.5.67 1.5 1.5S9.33 11 8.5 11 7 10.33 7 9.5 7.67 8 8.5 8zm3.5 9.5c-2.33 0-4.32-1.45-5.12-3.5h1.67c.7 1.19 1.97 2 3.45 2s2.76-.81 3.45-2h1.67c-.8 2.05-2.79 3.5-5.12 3.5z" opacity=".3"/><circle cx="15.5" cy="9.5" r="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M12 16c-1.48 0-2.75-.81-3.45-2H6.88c.8 2.05 2.79 3.5 5.12 3.5s4.32-1.45 5.12-3.5h-1.67c-.69 1.19-1.97 2-3.45 2zm-.01-14C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>
 										<span class="side-menu__label">Master</span><i class="angle fe fe-chevron-down"></i>
 									</a>
 									<ul class="slide-menu">
 										<li class="side-menu__label1"><a href="javascript:void(0);">Icons</a></li>
-										<li><a class="slide-item" href="{{ route('bidang.index') }}">Bidang </a></li>
-										<li><a class="slide-item" href="{{ route('seksi.index') }}">Seksi </a></li>
-										<li><a class="slide-item" href="{{ route('kegiatan.index') }}">Kegiatan </a></li>
-										<li><a class="slide-item" href="{{ route('pegawai.index') }}">Pegawai </a></li>
-										<li><a class="slide-item" href="{{ route('tanda-tangan.index') }}">Tanda Tangan </a></li>
-										<li><a class="slide-item" href="{{ route('alat-angkut.index') }}">Alat Angkut </a></li>
-										<li><a class="slide-item" href="{{ route('jabatan.index') }}">Jabatan </a></li>
-										<li><a class="slide-item" href="{{ route('ketentuan.index') }}">Ketentuan </a></li>
-										<li><a class="slide-item" href="{{ route('user.index') }}">User </a></li>
-										<li class="sub-slide">
+										<li><a class="slide-item {{ request()->routeIs('bidang.index') ? 'active' : '' }}" href="{{ route('bidang.index') }}">Bidang </a></li>
+										<li><a class="slide-item {{ request()->routeIs('seksi.index') ? 'active' : '' }}" href="{{ route('seksi.index') }}">Seksi </a></li>
+										<li><a class="slide-item {{ request()->routeIs('kegiatan.index') ? 'active' : '' }}" href="{{ route('kegiatan.index') }}">Kegiatan </a></li>
+
+										<li class="sub-slide {{ request()->routeIs('golongan*', 'jenis-perdin*', 'provinsi*', 'kota-kabupaten*', 'uang-harian*', 'uang-transport*', 'biaya-perdin*') ? 'is-expanded' : '' }}">
 											<a class="slide-item" data-bs-toggle="sub-slide" href="javascript:void(0);">
 												<span class="sub-side-menu__label">Setting Biaya</span><i class="sub-angle fe fe-chevron-down"></i>
 											</a>
 											<ul class="sub-slide-menu">
-												<li><a class="sub-side-menu__item" href="{{ route('golongan.index') }}">Golongan</a></li>
-												<li><a class="sub-side-menu__item" href="{{ route('jenis-perdin.index') }}">Jenis Perdin</a></li>
-												<li><a class="sub-side-menu__item" href="{{ route('provinsi.index') }}">Provinsi</a></li>
-												<li><a class="sub-side-menu__item" href="{{ route('kota-kabupaten.index') }}">Kota/Kabupaten</a></li>
-												<li><a class="sub-side-menu__item" href="{{ route('uang-harian.index') }}">Uang Harian</a></li>
-												<li><a class="sub-side-menu__item" href="{{ route('uang-transport.index') }}">Uang Transport</a></li>
-												<li><a class="sub-side-menu__item" href="{{ route('biaya-perdin.index') }}">Biaya Perdin</a></li>
+												<li><a class="sub-side-menu__item {{ request()->routeIs('golongan.index') ? 'active' : '' }}" href="{{ route('golongan.index') }}">Golongan</a></li>
+												<li><a class="sub-side-menu__item {{ request()->routeIs('jenis-perdin.index') ? 'active' : '' }}" href="{{ route('jenis-perdin.index') }}">Jenis Perdin</a></li>
+												<li><a class="sub-side-menu__item {{ request()->routeIs('provinsi.index') ? 'active' : '' }}" href="{{ route('provinsi.index') }}">Provinsi</a></li>
+												<li><a class="sub-side-menu__item {{ request()->routeIs('kota-kabupaten.index') ? 'active' : '' }}" href="{{ route('kota-kabupaten.index') }}">Kota/Kabupaten</a></li>
+												<li><a class="sub-side-menu__item {{ request()->routeIs('uang-harian.index') ? 'active' : '' }}" href="{{ route('uang-harian.index') }}">Uang Harian</a></li>
+												<li><a class="sub-side-menu__item {{ request()->routeIs('uang-transport.index') ? 'active' : '' }}" href="{{ route('uang-transport.index') }}">Uang Transport</a></li>
+												<li><a class="sub-side-menu__item {{ request()->routeIs('biaya-perdin.index') ? 'active' : '' }}" href="{{ route('biaya-perdin.index') }}">Biaya Perdin</a></li>
 											</ul>
 										</li>
+										
+										<li><a class="slide-item {{ request()->routeIs('pegawai.index') ? 'active' : '' }}" href="{{ route('pegawai.index') }}">Pegawai </a></li>
+										<li><a class="slide-item {{ request()->routeIs('tanda-tangan.index') ? 'active' : '' }}" href="{{ route('tanda-tangan.index') }}">Tanda Tangan </a></li>
+										<li><a class="slide-item {{ request()->routeIs('alat-angkut.index') ? 'active' : '' }}" href="{{ route('alat-angkut.index') }}">Alat Angkut </a></li>
+										<li><a class="slide-item {{ request()->routeIs('jabatan.index') ? 'active' : '' }}" href="{{ route('jabatan.index') }}">Jabatan </a></li>
+										<li><a class="slide-item {{ request()->routeIs('ketentuan.index') ? 'active' : '' }}" href="{{ route('ketentuan.index') }}">Ketentuan </a></li>
+										<li><a class="slide-item {{ request()->routeIs('user.index') ? 'active' : '' }}" href="{{ route('user.index') }}">User </a></li>
 									</ul>
 								</li>
 								@endcan
-								<li class="slide">
+								<li class="slide {{ request()->routeIs('data-perdin*', 'data-anggaran*') ? 'is-expanded' : '' }}">
 									<a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"  viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 4c-4.42 0-8 3.58-8 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.5 4c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zm-7 0c.83 0 1.5.67 1.5 1.5S9.33 11 8.5 11 7 10.33 7 9.5 7.67 8 8.5 8zm3.5 9.5c-2.33 0-4.32-1.45-5.12-3.5h1.67c.7 1.19 1.97 2 3.45 2s2.76-.81 3.45-2h1.67c-.8 2.05-2.79 3.5-5.12 3.5z" opacity=".3"/><circle cx="15.5" cy="9.5" r="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M12 16c-1.48 0-2.75-.81-3.45-2H6.88c.8 2.05 2.79 3.5 5.12 3.5s4.32-1.45 5.12-3.5h-1.67c-.69 1.19-1.97 2-3.45 2zm-.01-14C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>
-										<span class="side-menu__label">Perdin</span><i class="angle fe fe-chevron-down"></i>
+										<span class="side-menu__label">Perdin</span>
+										<i class="angle fe fe-chevron-down"></i>
 									</a>
 									<ul class="slide-menu">
 										<li class="side-menu__label1"><a href="javascript:void(0);">Icons</a></li>
-										<li class="sub-slide">
+										@can('isPegawai')
+										<li><a class="slide-item {{ request()->routeIs('data-perdin.create') ? 'active' : '' }}" href="{{ route('data-perdin.create') }}">Input Perdin </a></li>
+										@endcan
+										<li class="sub-slide {{ request()->routeIs('data-perdin*') ? 'is-expanded' : '' }}">
 											<a class="slide-item" data-bs-toggle="sub-slide" href="javascript:void(0);">
-												<span class="sub-side-menu__label">Data Perdin</span><i class="sub-angle fe fe-chevron-down"></i>
+												<span class="sub-side-menu__label">Data Perdin</span>
+												<i class="sub-angle fe fe-chevron-down"></i>
 											</a>
 											<ul class="sub-slide-menu">
-												<li><a class="sub-side-menu__item" href="{{ route('golongan.index') }}">Baru</a></li>
-												<li><a class="sub-side-menu__item" href="{{ route('golongan.index') }}">Ditolak</a></li>
-												<li><a class="sub-side-menu__item" href="{{ route('golongan.index') }}">Belum Ada Laporan</a></li>
-												<li><a class="sub-side-menu__item" href="{{ route('golongan.index') }}">Belum Bayar</a></li>
-												<li><a class="sub-side-menu__item" href="{{ route('golongan.index') }}">Sudah Bayar</a></li>
+												<li><a class="sub-side-menu__item {{ request()->routeIs('data-perdin.indexBaru') ? 'active' : '' }}" href="{{ route('data-perdin.indexBaru') }}">Baru</a></li>
+												<li><a class="sub-side-menu__item {{ request()->routeIs('data-perdin.indexTolak') ? 'active' : '' }}" href="{{ route('data-perdin.indexTolak') }}">Ditolak</a></li>
+												<li><a class="sub-side-menu__item {{ request()->routeIs('data-perdin.indexNoLaporan') ? 'active' : '' }}" href="{{ route('data-perdin.indexNoLaporan') }}">Belum Ada Laporan</a></li>
+												<li><a class="sub-side-menu__item {{ request()->routeIs('data-perdin.indexBelumBayar') ? 'active' : '' }}" href="{{ route('data-perdin.indexBelumBayar') }}">Belum Bayar</a></li>
+												<li><a class="sub-side-menu__item {{ request()->routeIs('data-perdin.indexSudahBayar') ? 'active' : '' }}" href="{{ route('data-perdin.indexSudahBayar') }}">Sudah Bayar</a></li>
 											</ul>
 										</li>
-										<li><a class="slide-item" href="{{ route('data-anggaran.index') }}">Data Anggaran </a></li>
+										<li><a class="slide-item {{ request()->routeIs('data-anggaran.index') ? 'active' : '' }}" href="{{ route('data-anggaran.index') }}">Data Anggaran </a></li>
 										<li><a class="slide-item" href="{{ route('data-anggaran.index') }}">Arsip Laporan </a></li>
 									</ul>
 								</li>
@@ -450,7 +412,7 @@
 							<div class="action-header clearfix">
 								<div class="float-start hidden-xs d-flex ms-2">
 									<div class="img_cont me-3">
-										<img src="/assets/img/faces/6.jpg" class="rounded-circle user_img" alt="img">
+										<img src="/assets/img/profile.jpg" class="rounded-circle user_img" alt="img">
 									</div>
 									<div class="align-items-center mt-2">
 										<h4 class="text-white mb-0 fw-semibold">Daneil Scott</h4>
@@ -495,7 +457,7 @@
 								</div>
 								<div class="d-flex justify-content-start">
 									<div class="img_cont_msg">
-										<img src="/assets/img/faces/6.jpg" class="rounded-circle user_img_msg" alt="img">
+										<img src="/assets/img/profile.jpg" class="rounded-circle user_img_msg" alt="img">
 									</div>
 									<div class="msg_cotainer">
 										Hi, how are you Jenna Side?
@@ -513,7 +475,7 @@
 								</div>
 								<div class="d-flex justify-content-start ">
 									<div class="img_cont_msg">
-										<img src="/assets/img/faces/6.jpg" class="rounded-circle user_img_msg" alt="img">
+										<img src="/assets/img/profile.jpg" class="rounded-circle user_img_msg" alt="img">
 									</div>
 									<div class="msg_cotainer">
 										I am good too, thank you for your chat template
@@ -531,7 +493,7 @@
 								</div>
 								<div class="d-flex justify-content-start ">
 									<div class="img_cont_msg">
-										<img src="/assets/img/faces/6.jpg" class="rounded-circle user_img_msg" alt="img">
+										<img src="/assets/img/profile.jpg" class="rounded-circle user_img_msg" alt="img">
 									</div>
 									<div class="msg_cotainer">
 										Yo, Can you update Views?
@@ -549,7 +511,7 @@
 								</div>
 								<div class="d-flex justify-content-start ">
 									<div class="img_cont_msg">
-										<img src="/assets/img/faces/6.jpg" class="rounded-circle user_img_msg" alt="img">
+										<img src="/assets/img/profile.jpg" class="rounded-circle user_img_msg" alt="img">
 									</div>
 									<div class="msg_cotainer">
 										Yo, Can you update Views?
@@ -567,7 +529,7 @@
 								</div>
 								<div class="d-flex justify-content-start ">
 									<div class="img_cont_msg">
-										<img src="/assets/img/faces/6.jpg" class="rounded-circle user_img_msg" alt="img">
+										<img src="/assets/img/profile.jpg" class="rounded-circle user_img_msg" alt="img">
 									</div>
 									<div class="msg_cotainer">
 										Yo, Can you update Views?
@@ -585,7 +547,7 @@
 								</div>
 								<div class="d-flex justify-content-start">
 									<div class="img_cont_msg">
-										<img src="/assets/img/faces/6.jpg" class="rounded-circle user_img_msg" alt="img">
+										<img src="/assets/img/profile.jpg" class="rounded-circle user_img_msg" alt="img">
 									</div>
 									<div class="msg_cotainer">
 										Okay Bye, text you later..
@@ -611,72 +573,6 @@
 					</div>
 				</div>
 			</div>
-
-			<!--Video Modal -->
-			<div id="videomodal" class="modal fade">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content bg-dark border-0 text-white">
-						<div class="modal-body mx-auto text-center p-7">
-							<h5>Valex Video call</h5>
-							<img src="/assets/img/faces/6.jpg" class="rounded-circle user-img-circle h-8 w-8 mt-4 mb-3" alt="img">
-							<h4 class="mb-1 fw-semibold">Daneil Scott</h4>
-							<h6>Calling...</h6>
-							<div class="mt-5">
-								<div class="row">
-									<div class="col-4">
-										<a class="icon icon-shape rounded-circle mb-0 me-3" href="javascript:void(0);">
-											<i class="fas fa-video-slash"></i>
-										</a>
-									</div>
-									<div class="col-4">
-										<a class="icon icon-shape rounded-circle text-white mb-0 me-3" href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close">
-											<i class="fas fa-phone bg-danger text-white"></i>
-										</a>
-									</div>
-									<div class="col-4">
-										<a class="icon icon-shape rounded-circle mb-0 me-3" href="javascript:void(0);">
-											<i class="fas fa-microphone-slash"></i>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div><!-- modal-body -->
-					</div>
-				</div><!-- modal-dialog -->
-			</div><!-- modal -->
-
-			<!-- Audio Modal -->
-			<div id="audiomodal" class="modal fade">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content border-0">
-						<div class="modal-body mx-auto text-center p-7">
-							<h5>Valex Voice call</h5>
-							<img src="/assets/img/faces/6.jpg" class="rounded-circle user-img-circle h-8 w-8 mt-4 mb-3" alt="img">
-							<h4 class="mb-1  fw-semibold">Daneil Scott</h4>
-							<h6>Calling...</h6>
-							<div class="mt-5">
-								<div class="row">
-									<div class="col-4">
-										<a class="icon icon-shape rounded-circle mb-0 me-3" href="javascript:void(0);">
-											<i class="fas fa-volume-up bg-light text-dark"></i>
-										</a>
-									</div>
-									<div class="col-4">
-										<a class="icon icon-shape rounded-circle text-white mb-0 me-3" href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close">
-											<i class="fas fa-phone text-white bg-success"></i>
-										</a>
-									</div>
-									<div class="col-4">
-										<a class="icon icon-shape  rounded-circle mb-0 me-3" href="javascript:void(0);">
-											<i class="fas fa-microphone-slash bg-light text-dark"></i>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div><!-- modal-body -->
-					</div>
-				</div><!-- modal-dialog -->
-			</div><!-- modal -->
 
 			<!-- Footer opened -->
 			<div class="main-footer ht-45">

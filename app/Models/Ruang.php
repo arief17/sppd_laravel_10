@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Provinsi extends Model
+class Ruang extends Model
 {
     use HasFactory, Sluggable, SoftDeletes;
 
@@ -21,9 +21,9 @@ class Provinsi extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
-    public function kota_kabupatens(): HasMany
+    public function pegawais(): HasMany
     {
-        return $this->hasMany(KotaKabupaten::class, 'provinsi_id');
+        return $this->hasMany(Pegawai::class, 'ruang_id');
     }
 
     public function getRouteKeyName()

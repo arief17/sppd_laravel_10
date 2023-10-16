@@ -8,7 +8,7 @@
 			<div class="card-header">
 				<div class="d-flex align-items-center">
 					<h3 class="card-title">{{ $title }}</h3>
-					<a href="{{ route('pegawai.create') }}" class="btn btn-primary mg-l-auto">Tambah</a>
+					<a href="{{ route('data-perdin.create') }}" class="btn btn-primary mg-l-auto">Tambah</a>
 				</div>
 			</div>
 			<div class="card-body">
@@ -17,40 +17,43 @@
 						<thead>
 							<tr>
 								<th class="border-bottom-0" style="width: 1%">No</th>
-								<th class="border-bottom-0">Nama</th>
-								<th class="border-bottom-0">NIP</th>
-								<th class="border-bottom-0">PPTK</th>
-								<th class="border-bottom-0">Ruang</th>
-								<th class="border-bottom-0">Golongan</th>
-								<th class="border-bottom-0">Jabatan</th>
-								<th class="border-bottom-0">Last Perdin</th>
+								<th class="border-bottom-0">Surat Dari</th>
+								<th class="border-bottom-0">Perihal</th>
+								<th class="border-bottom-0">Pegawai</th>
+								<th class="border-bottom-0">Tanggal Berangkat</th>
+								<th class="border-bottom-0">Lama</th>
+								<th class="border-bottom-0">Lokasi</th>
+								<th class="border-bottom-0">Jumlah Pegawai</th>
+								<th class="border-bottom-0">Biaya</th>
 								<th class="border-bottom-0" style="width: 1%">Aksi</th>
 							</tr>
 						</thead>
 						<tbody>
-							@foreach ($pegawais as $pegawai)
+							@foreach ($data_perdins as $data_perdin)
 							<tr>
 								<td>{{ $loop->iteration }}</td>
-								<td>{{ $pegawai->nama }}</td>
-								<td>{{ $pegawai->nip }}</td>
-								<td>{{ $pegawai->pptk ? 'Ya' : 'Tidak' }}</td>
-								<td>{{ $pegawai->ruang->nama }}</td>
-								<td>{{ $pegawai->golongan->nama }}</td>
-								<td>{{ $pegawai->jabatan->nama }}</td>
-								<td>{{ $pegawai->last_perdin }}</td>
+								<td>{{ $data_perdin->surat_dari }}</td>
+								<td>{{ $data_perdin->tgl_surat }}</td>
+								<td>{{ $data_perdin->perihal }}</td>
+								<td>{{ $data_perdin->author->pegawai->nama }}</td>
+								<td>{{ $data_perdin->tgl_berangkat }}</td>
+								<td>{{ $data_perdin->lama }}</td>
+								<td>{{ $data_perdin->lokasi->nama }}</td>
+								<td>{{ $data_perdin->jumlah_pegawai }}</td>
+								<td>{{ $data_perdin->biaya }}</td>
 								<td>
-									<a class="btn btn-primary btn-sm" href="{{ route('pegawai.show', $pegawai->slug) }}">
+									<a class="btn btn-primary btn-sm" href="{{ route('data-perdin.show', $data_perdin->slug) }}">
 										<i class="fas fa-folder"></i>
 										View
 									</a>
-									<a class="btn btn-info btn-sm" href="{{ route('pegawai.edit', $pegawai->slug) }}">
+									<a class="btn btn-info btn-sm" href="{{ route('data-perdin.edit', $data_perdin->slug) }}">
 										<i class="fas fa-pencil-alt"></i>
 										Edit
 									</a>
-									<form action="{{ route('pegawai.destroy', $pegawai->slug) }}" method="post" class="d-inline">
+									<form action="{{ route('data-perdin.destroy', $data_perdin->slug) }}" method="post" class="d-inline">
 										@method('delete')
 										@csrf
-										<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $pegawai->nama }}">
+										<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $data_perdin->perihal }}">
 											<i class="fas fa-trash"></i>
 											Delete
 										</button>

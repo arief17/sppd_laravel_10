@@ -4,6 +4,7 @@ use App\Http\Controllers\AlatAngkutController;
 use App\Http\Controllers\BiayaPerdinController;
 use App\Http\Controllers\BidangController;
 use App\Http\Controllers\DataAnggaranController;
+use App\Http\Controllers\DataPerdinController;
 use App\Http\Controllers\GolonganController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\JenisPerdinController;
@@ -68,6 +69,15 @@ Route::middleware('can:isAdmin')->group(function(){
 });
 
 Route::middleware('can:isPegawai')->group(function(){
+	Route::controller(DataPerdinController::class)->group(function(){
+		Route::get('/dashboard/data-perdin/baru', 'indexBaru')->name('data-perdin.indexBaru')->middleware('auth');
+		Route::get('/dashboard/data-perdin/ditolak', 'indexTolak')->name('data-perdin.indexTolak')->middleware('auth');
+		Route::get('/dashboard/data-perdin/belum-ada-laporan', 'indexNoLaporan')->name('data-perdin.indexNoLaporan')->middleware('auth');
+		Route::get('/dashboard/data-perdin/belum-bayar', 'indexBelumBayar')->name('data-perdin.indexBelumBayar')->middleware('auth');
+		Route::get('/dashboard/data-perdin/sudah-bayar', 'indexSudahBayar')->name('data-perdin.indexSudahBayar')->middleware('auth');
+	});	
+	Route::resource('/dashboard/data-perdin', DataPerdinController::class)->except('index')->middleware('auth');
+
 	Route::resource('/dashboard/data-anggaran', DataAnggaranController::class)->except('create', 'edit', 'update', 'destroy')->middleware('auth');
 	Route::resource('/dashboard/uang-masuk', UangMasukController::class)->except('index')->middleware('auth');
 	Route::resource('/dashboard/uang-keluar', UangKeluarController::class)->except('index')->middleware('auth');

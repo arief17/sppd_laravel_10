@@ -18,7 +18,6 @@ return new class extends Migration
             $table->unsignedBigInteger('level_admin_id');
             $table->unsignedBigInteger('seksi_id')->nullable();
             $table->dateTime('last_login')->nullable();
-            $table->string('photo')->default('not found');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
