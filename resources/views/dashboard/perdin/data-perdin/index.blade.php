@@ -17,48 +17,59 @@
 						<thead>
 							<tr>
 								<th class="border-bottom-0" style="width: 1%">No</th>
+								<th class="border-bottom-0" style="width: 1%">Aksi</th>
 								<th class="border-bottom-0">Surat Dari</th>
+								<th class="border-bottom-0">Tanggal Surat</th>
 								<th class="border-bottom-0">Perihal</th>
-								<th class="border-bottom-0">Pegawai</th>
+								<th class="border-bottom-0">Petugas</th>
 								<th class="border-bottom-0">Tanggal Berangkat</th>
 								<th class="border-bottom-0">Lama</th>
 								<th class="border-bottom-0">Lokasi</th>
 								<th class="border-bottom-0">Jumlah Pegawai</th>
 								<th class="border-bottom-0">Biaya</th>
-								<th class="border-bottom-0" style="width: 1%">Aksi</th>
+								<th class="border-bottom-0">User</th>
 							</tr>
 						</thead>
 						<tbody>
 							@foreach ($data_perdins as $data_perdin)
 							<tr>
 								<td>{{ $loop->iteration }}</td>
+								<td>
+									<div class="btn-group" role="group">
+										<a class="btn btn-danger btn-sm" href="#">Approve</a>
+										<a class="btn btn-danger btn-sm" href="#">SPT</a>
+										<a class="btn btn-danger btn-sm" href="#">Visum 1</a>
+										<a class="btn btn-danger btn-sm" href="#">Visum 2</a>
+										<a class="btn btn-danger btn-sm" href="#">Lap</a>
+										<a class="btn btn-danger btn-sm" href="#">Kwitansi</a>
+									</div>
+
+									<div class="btn-group" role="group">
+										<a class="btn btn-primary btn-sm" href="{{ route('data-perdin.show', $data_perdin->slug) }}">
+											<i class="fas fa-folder"></i>
+										</a>
+										<a class="btn btn-info btn-sm" href="{{ route('data-perdin.edit', $data_perdin->slug) }}">
+											<i class="fas fa-pencil-alt"></i>
+										</a>
+										<form action="{{ route('data-perdin.destroy', $data_perdin->slug) }}" method="post" class="d-inline">
+											@method('delete')
+											@csrf
+											<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $data_perdin->perihal }}">
+												<i class="fas fa-trash"></i>
+											</button>
+										</form>
+									</div>
+								</td>
 								<td>{{ $data_perdin->surat_dari }}</td>
 								<td>{{ $data_perdin->tgl_surat }}</td>
 								<td>{{ $data_perdin->perihal }}</td>
-								<td>{{ $data_perdin->author->pegawai->nama }}</td>
+								<td>{{ $data_perdin->pegawai_diperintah->nama }}</td>
 								<td>{{ $data_perdin->tgl_berangkat }}</td>
 								<td>{{ $data_perdin->lama }}</td>
-								<td>{{ $data_perdin->lokasi->nama }}</td>
+								<td>{{ $data_perdin->lokasi }}</td>
 								<td>{{ $data_perdin->jumlah_pegawai }}</td>
 								<td>{{ $data_perdin->biaya }}</td>
-								<td>
-									<a class="btn btn-primary btn-sm" href="{{ route('data-perdin.show', $data_perdin->slug) }}">
-										<i class="fas fa-folder"></i>
-										View
-									</a>
-									<a class="btn btn-info btn-sm" href="{{ route('data-perdin.edit', $data_perdin->slug) }}">
-										<i class="fas fa-pencil-alt"></i>
-										Edit
-									</a>
-									<form action="{{ route('data-perdin.destroy', $data_perdin->slug) }}" method="post" class="d-inline">
-										@method('delete')
-										@csrf
-										<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $data_perdin->perihal }}">
-											<i class="fas fa-trash"></i>
-											Delete
-										</button>
-									</form>
-								</td>
+								<td>{{ $data_perdin->author->username }}</td>
 							</tr>
 							@endforeach
 						</tbody>
@@ -84,24 +95,24 @@
 
 @if(session()->has('success'))
 <script>
-    $(document).ready(function() {
-        var Toast = Swal.mixin({
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 5000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        });
-        
-        Toast.fire({
-            icon: 'success',
-            title: '{{ session('success') }}'
-        });
-    });
+	$(document).ready(function() {
+		var Toast = Swal.mixin({
+			toast: true,
+			position: 'top',
+			showConfirmButton: false,
+			timer: 5000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		});
+		
+		Toast.fire({
+			icon: 'success',
+			title: '{{ session('success') }}'
+		});
+	});
 </script>
 @endif
 

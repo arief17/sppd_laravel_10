@@ -233,12 +233,14 @@
 					
 					<div class="form-group">
 						<label for="pegawai_mengikuti_id" class="form-label">Pegawai Yang Mengikuti</label>
-						<select name="pegawai_mengikuti_id" id="pegawai_mengikuti_id" class="form-control form-select @error('pegawai_mengikuti_id') is-invalid @enderror">
+						<select name="pegawai" id="pegawai_mengikuti_id" class="form-control form-select @error('pegawai_mengikuti_id') is-invalid @enderror">
 							<option value="">Pilih Pegawai Yang Mengikuti</option>
 							@foreach ($pegawais as $pegawai)
 							<option value="{{ $pegawai->id }}">{{ $pegawai->nama }}</option>
 							@endforeach
 						</select>
+						<input type="hidden" name="pegawai_mengikuti_id" id="selected_pegawais">
+
 						@error('pegawai_mengikuti_id')
 						<div class="invalid-feedback">
 							{{ $message }}
@@ -253,12 +255,12 @@
 								<tr>
 									<th style="width: 1%">No</th>
 									<th>Nama</th>
-									<th>NIP</th>
+									{{-- <th>NIP</th>
 									<th>PPTK</th>
 									<th>Ruang</th>
 									<th>Golongan</th>
 									<th>Jabatan</th>
-									<th>Last Perdin</th>
+									<th>Last Perdin</th> --}}
 									<th style="width: 1%">Aksi</th>
 								</tr>
 							</thead>
@@ -266,7 +268,7 @@
 						</table>
 					</div>
 					<hr>
-
+					
 					<div class="form-group">
 						<label for="keterangan">Keterangan</label>
 						<textarea name="keterangan" class="form-control @error('keterangan') is-invalid @enderror" id="keterangan" placeholder="Masukan keterangan" rows="3">{{ old('keterangan') }}</textarea>
@@ -360,7 +362,6 @@
 <script src="/assets/js/themecolor.js"></script>
 
 <script>
-	// Fungsi untuk menghitung tanggal kembali
 	function hitungTanggalKembali() {
 		var tanggalBerangkat = new Date(document.getElementById('tgl_berangkat').value);
 		var lama = parseInt(document.getElementById('lama').value);
@@ -380,69 +381,55 @@
 </script>
 
 <script>
-	$(document).ready(function () {
-		// Daftar pegawai yang telah dipilih
-		const selectedPegawai = [];
+	let selectedPegawai = [];
+	
+	function addPegawaiToSelected() {
+		const pegawaiSelect = document.getElementById('pegawai_mengikuti_id');
+		const selectedOption = pegawaiSelect.options[pegawaiSelect.selectedIndex];
+		const pegawaiId = selectedOption.value;
+		const pegawaiNama = selectedOption.text;
 		
-		// Fungsi untuk menambahkan pegawai ke daftar
-		function tambahPegawai(pegawai) {
-			selectedPegawai.push(pegawai);
-			// Tambahkan baris baru ke tabel
-			$('#pegawai-list').append(`
-			<tr>
-				<td>${selectedPegawai.length}</td>
-				<td>${pegawai.nama}</td>
-				<td>${pegawai.nip}</td>
-				<td>${pegawai.pptk ? 'Ya' : 'Tidak'}</td>
-				<td>${pegawai.ruang}</td>
-				<td>${pegawai.golongan.nama}</td>
-				<td>${pegawai.jabatan.nama}</td>
-				<td>${pegawai.last_perdin}</td>
-				<td>
-					<button type="button" class="btn btn-danger btn-sm btn-hapus-pegawai">Hapus</button>
-				</td>
-			</tr>
-			`);
+		if (!selectedPegawai.find(pegawai => pegawai.id === pegawaiId)) {
+			selectedPegawai.push({ id: pegawaiId, nama: pegawaiNama });
+			updatePegawaiList();
+			updateSelectedPegawaiInput();
+
+			pegawaiSelect.selectedIndex = 0;
+		} else {
+			pegawaiSelect.selectedIndex = 0;
 		}
+	}
+	
+	function removePegawaiFromSelected(pegawaiId) {
+		selectedPegawai = selectedPegawai.filter(pegawai => pegawai.id !== pegawaiId);
+		updatePegawaiList();
+		updateSelectedPegawaiInput();
+	}
+
+	function updateSelectedPegawaiInput() {
+		const selectedPegawaiInput = document.getElementById('selected_pegawais');
+		selectedPegawaiInput.value = selectedPegawai.map(pegawai => pegawai.id).join(',');
+	}
+	
+	function updatePegawaiList() {
+		const pegawaiList = document.getElementById('pegawai-list');
+		pegawaiList.innerHTML = '';
 		
-		// Fungsi untuk menghapus pegawai dari daftar
-		function hapusPegawai(index) {
-			selectedPegawai.splice(index, 1);
-			refreshNomor();
-		}
-		
-		// Fungsi untuk memperbarui nomor urut pada tabel
-		function refreshNomor() {
-			$('#pegawai-list tr').each(function (index, row) {
-				$(row).find('td:first').text(index + 1);
-			});
-		}
-		
-		// Tambahkan event click pada tombol "Hapus" di dalam tabel
-		$('#pegawai-list').on('click', '.btn-hapus-pegawai', function () {
-			const index = $(this).closest('tr').index();
-			hapusPegawai(index);
-			$(this).closest('tr').remove();
+		selectedPegawai.forEach((pegawai, index) => {
+			const row = document.createElement('tr');
+			row.innerHTML = `
+			<td>${index + 1}</td>
+			<td>${pegawai.nama}</td>
+			<td>
+				<button type="button" class="btn btn-danger btn-sm btn-hapus-pegawai"
+				onclick="removePegawaiFromSelected('${pegawai.id}')">Hapus</button>
+			</td>
+			`;
+			pegawaiList.appendChild(row);
 		});
-		
-		// Tambahkan event change pada dropdown pemilihan pegawai
-		$('#pegawai_mengikuti_id').on('change', function () {
-			const selectedValue = $(this).val();
-			const selectedPegawaiData = {!! $pegawais->toJson() !!}.find(pegawai => pegawai.id == selectedValue);
-			
-			if (selectedPegawaiData) {
-				// Periksa apakah pegawai sudah ada di daftar
-				const isAlreadyAdded = selectedPegawai.some(pegawai => pegawai.id == selectedPegawaiData.id);
-				if (!isAlreadyAdded) {
-					tambahPegawai(selectedPegawaiData);
-					refreshNomor();
-				}
-			}
-			
-			// Reset nilai dropdown pemilihan pegawai
-			$(this).val('');
-		});
-	});
+	}
+	
+	document.getElementById('pegawai_mengikuti_id').addEventListener('change', addPegawaiToSelected);
 </script>
 
 <!-- custom js -->

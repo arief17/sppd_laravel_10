@@ -90,17 +90,19 @@ class DataPerdinController extends Controller
             'lokasi' => 'required',
             'pegawai_diperintah_id' => 'required',
             'biaya' => 'required',
-            'pegawai_mengikuti_id' => 'required',
-            'jumlah_pegawai' => 'required',
             'keterangan' => 'required',
+            'pegawai_mengikuti_id' => 'required',
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(DataPerdin::class, 'slug', $request->perihal);
         $validatedData['author_id'] = auth()->user()->id;
-        
-        dd($validatedData);
 
-        DataPerdin::create($validatedData);
+        $selectedPegawaiIds = explode(',', $request->pegawai_mengikuti_id);
+        $validatedData['jumlah_pegawai'] = count($selectedPegawaiIds);
+
+        $perdin = DataPerdin::create($validatedData);
+        $perdin->pegawai_mengikuti()->attach($selectedPegawaiIds);
+
         return redirect()->route('data-perdin.indexBaru')->with('success', 'Data Perdin berhasil ditambahkan!');
     }
 
