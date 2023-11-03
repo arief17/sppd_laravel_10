@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tanda_tangans', function (Blueprint $table) {
+        Schema::create('status_perdins', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('slug')->unique();
-            $table->unsignedBigInteger('pegawai_id');
-            $table->boolean('status');
-            $table->unsignedBigInteger('author_id');
+            $table->boolean('approve')->nullable();
+            $table->string('alasan_tolak')->nullable();
+            $table->boolean('spt')->nullable();
+            $table->boolean('visum1')->nullable();
+            $table->boolean('visum2')->nullable();
+            $table->boolean('lap')->nullable();
+            $table->boolean('kwitansi')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -27,7 +30,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('tanda_tangans', function (Blueprint $table) {
+        Schema::table('alat_angkuts', function (Blueprint $table) {
             $table->dropSoftDeletes();
         });
     }

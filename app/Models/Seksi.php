@@ -31,6 +31,11 @@ class Seksi extends Model
         return $this->hasMany(User::class, 'seksi_id');
     }
 
+    public function pegawais(): HasMany
+    {
+        return $this->hasMany(Pegawai::class, 'seksi_id');
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';

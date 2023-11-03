@@ -14,7 +14,7 @@ class KotaKabupaten extends Model
     use HasFactory, Sluggable, SoftDeletes;
 
     protected $guarded = ['id'];
-    protected $with = ['author'];
+    protected $with = ['author', 'provinsi'];
 
     public function author(): BelongsTo
     {

@@ -30,22 +30,6 @@
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="jabatan_id" class="form-label">Jabatan</label>
-						<select name="jabatan_id" id="jabatan_id" class="form-control form-select @error('jabatan_id') is-invalid @enderror">
-							<option value="">Pilih Jabatan</option>
-							@foreach ($jabatans as $jabatan)
-							<option value="{{ $jabatan->id }}" @selected(old('jabatan_id', $tanda_tangan->jabatan_id) == $jabatan->id)>
-								{{ $jabatan->nama }}
-							</option>
-							@endforeach
-						</select>
-						@error('jabatan_id')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
-					<div class="form-group">
 						<div class="form-check">
 							<input class="form-check-input @error('status') is-invalid @enderror" type="checkbox" name="status" value="1" id="status" @checked(old('status', $tanda_tangan->status))>
 							<label class="form-check-label" for="status">

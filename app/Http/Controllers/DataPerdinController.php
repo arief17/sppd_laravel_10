@@ -7,6 +7,7 @@ use App\Models\DataPerdin;
 use App\Models\JenisPerdin;
 use App\Models\KotaKabupaten;
 use App\Models\Pegawai;
+use App\Models\StatusPerdin;
 use App\Models\TandaTangan;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
@@ -100,6 +101,9 @@ class DataPerdinController extends Controller
         $selectedPegawaiIds = explode(',', $request->pegawai_mengikuti_id);
         $validatedData['jumlah_pegawai'] = count($selectedPegawaiIds);
 
+        $status = StatusPerdin::create();
+        $validatedData['status_id'] = $status->id;
+        
         $perdin = DataPerdin::create($validatedData);
         $perdin->pegawai_mengikuti()->attach($selectedPegawaiIds);
 

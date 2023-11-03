@@ -14,7 +14,7 @@ class TandaTangan extends Model
     use HasFactory, Sluggable, SoftDeletes;
 
     protected $guarded = ['id'];
-    protected $with = ['author', 'pegawai', 'jabatan'];
+    protected $with = ['author', 'pegawai'];
 
     public function author(): BelongsTo
     {
@@ -24,11 +24,6 @@ class TandaTangan extends Model
     public function pegawai(): BelongsTo
     {
         return $this->belongsTo(Pegawai::class, 'pegawai_id');
-    }
-
-    public function jabatan(): BelongsTo
-    {
-        return $this->belongsTo(Jabatan::class, 'jabatan_id');
     }
 
     public function data_perdins(): HasMany
@@ -45,7 +40,7 @@ class TandaTangan extends Model
     {
         return [
             'slug' => [
-                'source' => ['pegawai.nama', 'jabatan.nama']
+                'source' => ['pegawai.nama', 'pegawai.jabatan.nama']
             ]
         ];
     }

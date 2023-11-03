@@ -28,7 +28,7 @@
 							<tr>
 								<td>{{ $loop->iteration }}</td>
 								<td>{{ $tanda_tangan->pegawai->nama }}</td>
-								<td>{{ $tanda_tangan->jabatan->nama }}</td>
+								<td>{{ $tanda_tangan->pegawai->jabatan->nama }}</td>
 								<td>{{ $tanda_tangan->status ? 'Aktif' : 'Tidak Aktif' }}</td>
 								<td>
 									<a class="btn btn-primary btn-sm" href="{{ route('tanda-tangan.show', $tanda_tangan->slug) }}">

@@ -26,11 +26,6 @@ class Jabatan extends Model
         return $this->hasMany(Pegawai::class, 'jabatan_id');
     }
 
-    public function tanda_tangans(): HasMany
-    {
-        return $this->hasMany(TandaTangan::class, 'jabatan_id');
-    }
-
     public function getRouteKeyName()
     {
         return 'slug';

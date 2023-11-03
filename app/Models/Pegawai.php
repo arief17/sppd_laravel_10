@@ -14,11 +14,16 @@ class Pegawai extends Model
     use HasFactory, Sluggable, SoftDeletes;
 
     protected $guarded = ['id'];
-    protected $with = ['author', 'golongan', 'jabatan'];
+    protected $with = ['author', 'seksi', 'golongan', 'jabatan'];
 
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
+    }
+
+    public function seksi(): BelongsTo
+    {
+        return $this->belongsTo(Seksi::class, 'seksi_id');
     }
 
     public function golongan(): BelongsTo

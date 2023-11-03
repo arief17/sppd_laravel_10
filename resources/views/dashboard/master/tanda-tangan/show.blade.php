@@ -33,7 +33,7 @@
 						</tr>
 						<tr>
 							<th>Jabatan</th>
-							<td style="width: 90%">{{ $tanda_tangan->jabatan->nama }}</td>
+							<td style="width: 90%">{{ $tanda_tangan->pegawai->jabatan->nama }}</td>
 						</tr>
 						<tr>
 							<th>Status</th>

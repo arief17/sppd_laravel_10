@@ -9,19 +9,10 @@
 				<h4 class="card-title mb-1">{{ $title }}</h4>
 			</div>
 			<div class="card-body pt-0">
-				<form action="{{ route('user.show', $user->slug) }}" method="post">
+				<form action="{{ route('user.show', $user->username) }}" method="post">
 					@csrf
 					@method('put')
 					
-					<div class="form-group">
-						<label for="nama">Nama</label>
-						<input name="nama" value="{{ old('nama', $user->nama) }}" type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukan nama">
-						@error('nama')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
 					<div class="form-group">
 						<label for="username">Username</label>
 						<input name="username" value="{{ old('username', $user->username) }}" type="text" class="form-control @error('username') is-invalid @enderror" id="username" placeholder="Masukan username">

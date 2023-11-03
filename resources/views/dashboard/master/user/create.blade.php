@@ -13,15 +13,6 @@
 					@csrf
 					
 					<div class="form-group">
-						<label for="nama">Nama</label>
-						<input name="nama" value="{{ old('nama') }}" type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukan nama">
-						@error('nama')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
-					<div class="form-group">
 						<label for="username">Username</label>
 						<input name="username" value="{{ old('username') }}" type="text" class="form-control @error('username') is-invalid @enderror" id="username" placeholder="Masukan username">
 						@error('username')

@@ -385,14 +385,12 @@ class DatabaseSeeder extends Seeder
         TandaTangan::create([
             'slug' => 'tanda-tangan-1',
             'pegawai_id' => 1,
-            'jabatan_id' => 1,
             'status' => 1,
             'author_id' => 1,
         ]);
         TandaTangan::create([
             'slug' => 'tanda-tangan-2',
             'pegawai_id' => 2,
-            'jabatan_id' => 2,
             'status' => 2,
             'author_id' => 2,
         ]);

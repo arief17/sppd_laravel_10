@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bidang;
 use App\Models\LevelAdmin;
 use App\Models\Seksi;
 use App\Models\User;
-use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
+use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
@@ -42,7 +40,6 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nama' => 'required|min:3|max:100',
             'username' => 'required|alpha_dash|min:3|max:100|unique:users',
             'password' => ['required', 'confirmed', Password::min(5)->letters()->numbers()],
             'level_admin_id' => 'required',
@@ -84,16 +81,28 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $validatedData = $request->validate([
-            'nama' => 'required|min:3|max:100',
-            'username' => 'required|alpha_dash|min:3|max:100|unique:users',
-            'password' => ['required', 'confirmed', Password::min(5)->letters()->numbers()],
+        if(auth()->user()->username === $request->username) {
+            return redirect()->route('user.index')->with('success', 'Tidak dapat memperbarui data milik pribadi');
+        }
+
+        $rules = [
+            'password' => ['nullable', 'confirmed', Password::min(5)->letters()->numbers()],
             'level_admin_id' => 'required',
             'seksi_id' => 'required',
-        ]);
+        ];
 
-        $validatedData['password'] = Hash::make($request->password);
-        
+        if ($request->username != $user->username) {
+            $rules['username'] = 'alpha_dash|min:3|max:100|unique:users';
+        }
+
+        $validatedData = $request->validate($rules);
+
+        if ($request->password) {
+            $validatedData['password'] = Hash::make($request->password);
+        } else {
+            unset($validatedData['password']);
+        }
+
         User::where('id', $user->id)->update($validatedData);
         return redirect()->route('user.index')->with('success', 'User berhasil diperbarui!');
     }

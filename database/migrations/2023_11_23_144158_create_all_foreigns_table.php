@@ -32,7 +32,6 @@ return new class extends Migration
 
         Schema::table('tanda_tangans', function (Blueprint $table) {
             $table->foreign('pegawai_id')->references('id')->on('pegawais');
-            $table->foreign('jabatan_id')->references('id')->on('jabatans');
             $table->foreign('author_id')->references('id')->on('users');
         });
 
@@ -98,6 +97,7 @@ return new class extends Migration
             $table->foreign('kedudukan_id')->references('id')->on('kota_kabupatens');
             $table->foreign('tujuan_id')->references('id')->on('kota_kabupatens');
             $table->foreign('pegawai_diperintah_id')->references('id')->on('pegawais');
+            $table->foreign('status_id')->references('id')->on('status_perdins');
             $table->foreign('author_id')->references('id')->on('users');
         });
 

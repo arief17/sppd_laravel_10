@@ -36,14 +36,22 @@
 								<td>{{ $loop->iteration }}</td>
 								<td>
 									<div class="btn-group" role="group">
-										<a class="btn btn-danger btn-sm" href="#">Approve</a>
-										<a class="btn btn-danger btn-sm" href="#">SPT</a>
-										<a class="btn btn-danger btn-sm" href="#">Visum 1</a>
-										<a class="btn btn-danger btn-sm" href="#">Visum 2</a>
-										<a class="btn btn-danger btn-sm" href="#">Lap</a>
-										<a class="btn btn-danger btn-sm" href="#">Kwitansi</a>
-									</div>
+										<a class="modal-effect btn {{ $data_perdin->status->approve ? 'btn-success' : 'btn-danger' }} btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#approve-{{ $data_perdin->status_id }}">Approve</a>
 
+										@if ($data_perdin->status->approve)
+										<a class="modal-effect btn btn-success btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#spt-{{ $data_perdin->status_id }}">SPT</a>
+										<a class="modal-effect btn btn-success btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#visum1-{{ $data_perdin->status_id }}">Visum 1</a>
+										<a class="modal-effect btn btn-success btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#visum2-{{ $data_perdin->status_id }}">Visum 2</a>
+										@else
+										<button class="btn btn-danger btn-sm" id='spt-not'>SPT</button>
+										<button class="btn btn-danger btn-sm" id='spt-not'>Visum 1</button>
+										<button class="btn btn-danger btn-sm" id='spt-not'>Visum 2</button>
+										@endif
+
+										<a class="modal-effect btn {{ $data_perdin->status->lap ? 'btn-success' : 'btn-danger' }} btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#lap-{{ $data_perdin->status_id }}">Lap</a>
+										<a class="modal-effect btn {{ $data_perdin->status->kwitansi ? 'btn-success' : 'btn-danger' }} btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#kwitansi-{{ $data_perdin->status_id }}">Kwitansi</a>
+									</div>
+									
 									<div class="btn-group" role="group">
 										<a class="btn btn-primary btn-sm" href="{{ route('data-perdin.show', $data_perdin->slug) }}">
 											<i class="fas fa-folder"></i>
@@ -70,6 +78,13 @@
 								<td>{{ $data_perdin->jumlah_pegawai }}</td>
 								<td>{{ $data_perdin->biaya }}</td>
 								<td>{{ $data_perdin->author->username }}</td>
+								
+								@include('dashboard.perdin.status-perdin.approve')
+								@include('dashboard.perdin.status-perdin.spt')
+								@include('dashboard.perdin.status-perdin.visum1')
+								@include('dashboard.perdin.status-perdin.visum2')
+								@include('dashboard.perdin.status-perdin.lap')
+								@include('dashboard.perdin.status-perdin.kwitansi')
 							</tr>
 							@endforeach
 						</tbody>
@@ -138,6 +153,19 @@
 			});
 		});
 	});
+	$(document).ready(function() {
+		$('#spt-not').click(function(e) {
+			e.preventDefault();
+			var title = $(this).data('title');
+			
+			Swal.fire({
+				title: 'Belum Approve',
+				icon: 'warning',
+				confirmButtonColor: '#3085d6',
+				confirmButtonText: 'Ok',
+			});
+		});
+	});
 </script>
 
 <!-- Bootstrap Bundle js -->
@@ -181,6 +209,10 @@
 <!-- Right-sidebar js -->
 <script src="/assets/plugins/sidebar/sidebar.js"></script>
 <script src="/assets/plugins/sidebar/sidebar-custom.js"></script>
+
+<!-- Internal Modal js-->
+<script src="/assets/js/modal.js"></script>
+
 
 <!-- Sticky js -->
 <script src="/assets/js/sticky.js"></script>

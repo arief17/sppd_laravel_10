@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Jabatan;
 use App\Models\Pegawai;
 use App\Models\TandaTangan;
 use Cviebrock\EloquentSluggable\Services\SlugService;
@@ -29,7 +28,6 @@ class TandaTanganController extends Controller
         return view('dashboard.master.tanda-tangan.create', [
             'title' => 'Tambah Tanda Tangan',
             'pegawais' => Pegawai::all(),
-            'jabatans' => Jabatan::all(),
         ]);
     }
 
@@ -40,7 +38,6 @@ class TandaTanganController extends Controller
     {
         $validatedData = $request->validate([
             'pegawai_id' => 'required',
-            'jabatan_id' => 'required',
             'status' => ''
         ]);
 
@@ -49,9 +46,8 @@ class TandaTanganController extends Controller
         }
 
         $pegawai = Pegawai::where('id', $request->pegawai_id)->get('nama');
-        $jabatan = Pegawai::where('id', $request->jabatan_id)->get('nama');
         
-        $validatedData['slug'] = SlugService::createSlug(TandaTangan::class, 'slug', "$pegawai $jabatan");
+        $validatedData['slug'] = SlugService::createSlug(TandaTangan::class, 'slug', $pegawai + " " + $pegawai->jabatan->nama);
         $validatedData['author_id'] = auth()->user()->id;
         
         TandaTangan::create($validatedData);
@@ -78,7 +74,6 @@ class TandaTanganController extends Controller
             'title' => 'Perbarui Tanda Tangan',
             'tanda_tangan' => $tandaTangan,
             'pegawais' => Pegawai::all(),
-            'jabatans' => Jabatan::all(),
         ]);
     }
 
@@ -89,7 +84,6 @@ class TandaTanganController extends Controller
     {
         $validatedData = $request->validate([
             'pegawai_id' => 'required',
-            'jabatan_id' => 'required',
             'status' => ''
         ]);
 
@@ -98,9 +92,8 @@ class TandaTanganController extends Controller
         }
         
         $pegawai = Pegawai::where('id', $request->pegawai_id)->get('nama');
-        $jabatan = Pegawai::where('id', $request->jabatan_id)->get('nama');
         
-        $validatedData['slug'] = SlugService::createSlug(TandaTangan::class, 'slug', "$pegawai $jabatan");
+        $validatedData['slug'] = SlugService::createSlug(TandaTangan::class, 'slug', $pegawai + " " + $pegawai->jabatan->nama);
         $validatedData['author_id'] = auth()->user()->id;
         
         TandaTangan::where('id', $tandaTangan->id)->update($validatedData);

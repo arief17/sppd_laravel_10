@@ -9,11 +9,11 @@
 				<div class="d-flex justify-content-between">
 					<h4 class="card-title mg-b-0">{{ $title }}</h4>
 					<div>
-						<a class="btn btn-info btn-sm" href="{{ route('user.edit', $user->slug) }}">
+						<a class="btn btn-info btn-sm" href="{{ route('user.edit', $user->username) }}">
 							<i class="fas fa-pencil-alt"></i>
 							Edit
 						</a>
-						<form action="{{ route('user.destroy', $user->slug) }}" method="post" class="d-inline">
+						<form action="{{ route('user.destroy', $user->username) }}" method="post" class="d-inline">
 							@method('delete')
 							@csrf
 							<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $user->nama }}">
