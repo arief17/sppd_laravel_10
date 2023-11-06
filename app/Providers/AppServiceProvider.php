@@ -25,10 +25,14 @@ class AppServiceProvider extends ServiceProvider
             return $user->level_admin->slug === 'admin';
         });
         Gate::define('isOperator', function(User $user){
-            return $user->level_admin->slug === 'operator' || $user->level_admin->slug === 'admin';
+            return $user->level_admin->slug === 'operator';
         });
         Gate::define('isPegawai', function(User $user){
-            return $user->level_admin->slug === 'pegawai' || $user->level_admin->slug === 'operator' || $user->level_admin->slug === 'admin';
+            return $user->level_admin->slug === 'pegawai';
+        });
+
+        Gate::define('isAdminOrOperator', function(User $user){
+            return $user->level_admin->slug === 'admin' || $user->level_admin->slug === 'operator';
         });
     }
 }

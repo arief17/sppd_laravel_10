@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataPerdin;
+use App\Models\LaporanPerdin;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
@@ -40,6 +41,18 @@ class PerdinPdfController extends Controller
 
         $pdf = Pdf::loadView('dashboard.perdin.pdf-perdin.visum2', [
             'data_perdin' => $data_perdin,
+        ]);
+
+        return $pdf->stream();
+    }
+    public function lap($id)
+    {
+        setlocale(LC_ALL, 'IND');
+
+        $laporan_perdin = LaporanPerdin::find($id);
+
+        $pdf = Pdf::loadView('dashboard.perdin.pdf-perdin.lap', [
+            'laporan_perdin' => $laporan_perdin,
         ]);
 
         return $pdf->stream();

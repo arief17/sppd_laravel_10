@@ -426,5 +426,12 @@ class DatabaseSeeder extends Seeder
             'pelaksana_administrasi_id' => 2,
             'author_id' => 2,
         ]);
+
+        User::where('id', 1)->update([
+            'seksi_id' => 1
+        ]);
+        User::where('id', 2)->update([
+            'seksi_id' => 2
+        ]);
     }
 }

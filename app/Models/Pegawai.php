@@ -14,7 +14,7 @@ class Pegawai extends Model
     use HasFactory, Sluggable, SoftDeletes;
 
     protected $guarded = ['id'];
-    protected $with = ['author', 'seksi', 'golongan', 'jabatan'];
+    protected $with = ['author', 'seksi', 'golongan', 'jabatan', 'ruang'];
 
     public function author(): BelongsTo
     {

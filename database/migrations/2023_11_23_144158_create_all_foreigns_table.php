@@ -27,6 +27,7 @@ return new class extends Migration
         Schema::table('pegawais', function (Blueprint $table) {
             $table->foreign('jabatan_id')->references('id')->on('jabatans');
             $table->foreign('golongan_id')->references('id')->on('golongans');
+            $table->foreign('ruang_id')->references('id')->on('ruangs');
             $table->foreign('author_id')->references('id')->on('users');
         });
 
@@ -98,6 +99,7 @@ return new class extends Migration
             $table->foreign('tujuan_id')->references('id')->on('kota_kabupatens');
             $table->foreign('pegawai_diperintah_id')->references('id')->on('pegawais');
             $table->foreign('status_id')->references('id')->on('status_perdins');
+            $table->foreign('laporan_perdin_id')->references('id')->on('laporan_perdins');
             $table->foreign('author_id')->references('id')->on('users');
         });
 

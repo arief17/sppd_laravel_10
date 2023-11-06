@@ -8,7 +8,9 @@
 			<div class="card-header">
 				<div class="d-flex align-items-center">
 					<h3 class="card-title">{{ $title }}</h3>
+					@can('isOperator')
 					<a href="{{ route('data-perdin.create') }}" class="btn btn-primary mg-l-auto">Tambah</a>
+					@endcan
 				</div>
 			</div>
 			<div class="card-body">
@@ -36,20 +38,25 @@
 								<td>{{ $loop->iteration }}</td>
 								<td>
 									<div class="btn-group" role="group">
+										@can('isAdmin')
 										<a class="modal-effect btn {{ $data_perdin->status->approve ? 'btn-success' : 'btn-danger' }} btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#approve-{{ $data_perdin->status_id }}">Approve</a>
-
+										@else
+										<button class="not-admin btn {{ $data_perdin->status->approve ? 'btn-success' : 'btn-danger' }} btn-sm">Approve</button>
+										@endcan
+										
 										@if ($data_perdin->status->approve)
 										<a class="modal-effect btn btn-success btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#spt-{{ $data_perdin->status_id }}">SPT</a>
 										<a class="modal-effect btn btn-success btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#visum1-{{ $data_perdin->status_id }}">Visum 1</a>
 										<a class="modal-effect btn btn-success btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#visum2-{{ $data_perdin->status_id }}">Visum 2</a>
-										@else
-										<button class="btn btn-danger btn-sm" id='spt-not'>SPT</button>
-										<button class="btn btn-danger btn-sm" id='spt-not'>Visum 1</button>
-										<button class="btn btn-danger btn-sm" id='spt-not'>Visum 2</button>
-										@endif
-
-										<a class="modal-effect btn {{ $data_perdin->status->lap ? 'btn-success' : 'btn-danger' }} btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#lap-{{ $data_perdin->status_id }}">Lap</a>
+										<a class="modal-effect btn {{ $data_perdin->status->lap ? 'btn-success' : 'btn-danger' }} btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#lap-{{ $data_perdin->laporan_perdin_id }}">Lap</a>
 										<a class="modal-effect btn {{ $data_perdin->status->kwitansi ? 'btn-success' : 'btn-danger' }} btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#kwitansi-{{ $data_perdin->status_id }}">Kwitansi</a>
+										@else
+										<button class="not-approve btn btn-danger btn-sm">SPT</button>
+										<button class="not-approve btn btn-danger btn-sm">Visum 1</button>
+										<button class="not-approve btn btn-danger btn-sm">Visum 2</button>
+										<button class="not-approve btn btn-danger btn-sm">Lap</button>
+										<button class="not-approve btn btn-danger btn-sm">Kwitansi</button>
+										@endif
 									</div>
 									
 									<div class="btn-group" role="group">
@@ -152,12 +159,8 @@
 				}
 			});
 		});
-	});
-	$(document).ready(function() {
-		$('#spt-not').click(function(e) {
-			e.preventDefault();
-			var title = $(this).data('title');
-			
+		
+		$('.not-approve').click(function(e) {
 			Swal.fire({
 				title: 'Belum Approve',
 				icon: 'warning',
@@ -165,8 +168,20 @@
 				confirmButtonText: 'Ok',
 			});
 		});
+		$('.not-admin').click(function(e) {
+			Swal.fire({
+				title: 'Hanya admin yang bisa approve',
+				icon: 'warning',
+				confirmButtonColor: '#3085d6',
+				confirmButtonText: 'Ok',
+			});
+		});
+		
 	});
 </script>
+
+<!-- JQuery min js -->
+<script src="/assets/plugins/jquery/jquery.min.js"></script>
 
 <!-- Bootstrap Bundle js -->
 <script src="/assets/plugins/bootstrap/js/popper.min.js"></script>
@@ -212,7 +227,6 @@
 
 <!-- Internal Modal js-->
 <script src="/assets/js/modal.js"></script>
-
 
 <!-- Sticky js -->
 <script src="/assets/js/sticky.js"></script>

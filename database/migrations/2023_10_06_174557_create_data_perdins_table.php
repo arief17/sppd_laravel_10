@@ -33,8 +33,9 @@ return new class extends Migration
             $table->string('biaya');
             $table->string('jumlah_pegawai');
             $table->text('keterangan');
-            $table->unsignedBigInteger('author_id');
             $table->unsignedBigInteger('status_id');
+            $table->unsignedBigInteger('laporan_perdin_id');
+            $table->unsignedBigInteger('author_id');
             $table->timestamps();
             $table->softDeletes();
         });

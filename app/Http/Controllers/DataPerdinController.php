@@ -6,6 +6,7 @@ use App\Models\AlatAngkut;
 use App\Models\DataPerdin;
 use App\Models\JenisPerdin;
 use App\Models\KotaKabupaten;
+use App\Models\LaporanPerdin;
 use App\Models\Pegawai;
 use App\Models\StatusPerdin;
 use App\Models\TandaTangan;
@@ -15,47 +16,21 @@ use Illuminate\Http\Request;
 class DataPerdinController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function indexBaru()
+    * Display a listing of the resource.
+    */
+    public function index($status = null)
     {
+        $data_perdins = DataPerdin::filterByStatus($status);
+        
         return view('dashboard.perdin.data-perdin.index', [
             'title' => 'Daftar Data Perdin',
-            'data_perdins' => DataPerdin::orderBy('created_at', 'desc')->get()
+            'data_perdins' => $data_perdins,
         ]);
     }
-    public function indexTolak()
-    {
-        return view('dashboard.perdin.data-perdin.index', [
-            'title' => 'Daftar Data Perdin',
-            'data_perdins' => DataPerdin::all(),
-        ]);
-    }
-    public function indexNoLaporan()
-    {
-        return view('dashboard.perdin.data-perdin.index', [
-            'title' => 'Daftar Data Perdin',
-            'data_perdins' => DataPerdin::all(),
-        ]);
-    }
-    public function indexBelumBayar()
-    {
-        return view('dashboard.perdin.data-perdin.index', [
-            'title' => 'Daftar Data Perdin',
-            'data_perdins' => DataPerdin::all(),
-        ]);
-    }
-    public function indexSudahBayar()
-    {
-        return view('dashboard.perdin.data-perdin.index', [
-            'title' => 'Daftar Data Perdin',
-            'data_perdins' => DataPerdin::all(),
-        ]);
-    }
-
+    
     /**
-     * Show the form for creating a new resource.
-     */
+    * Show the form for creating a new resource.
+    */
     public function create()
     {
         return view('dashboard.perdin.data-perdin.create', [
@@ -67,10 +42,10 @@ class DataPerdinController extends Controller
             'pegawais' => Pegawai::all(),
         ]);
     }
-
+    
     /**
-     * Store a newly created resource in storage.
-     */
+    * Store a newly created resource in storage.
+    */
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -97,22 +72,24 @@ class DataPerdinController extends Controller
         
         $validatedData['slug'] = SlugService::createSlug(DataPerdin::class, 'slug', $request->perihal);
         $validatedData['author_id'] = auth()->user()->id;
-
+        
         $selectedPegawaiIds = explode(',', $request->pegawai_mengikuti_id);
         $validatedData['jumlah_pegawai'] = count($selectedPegawaiIds);
-
+        
         $status = StatusPerdin::create();
         $validatedData['status_id'] = $status->id;
+        $laporan_perdin = LaporanPerdin::create();
+        $validatedData['laporan_perdin_id'] = $laporan_perdin->id;
         
         $perdin = DataPerdin::create($validatedData);
         $perdin->pegawai_mengikuti()->attach($selectedPegawaiIds);
-
+        
         return redirect()->route('data-perdin.indexBaru')->with('success', 'Data Perdin berhasil ditambahkan!');
     }
-
+    
     /**
-     * Display the specified resource.
-     */
+    * Display the specified resource.
+    */
     public function show(DataPerdin $dataPerdin)
     {
         return view('dashboard.perdin.data-perdin.show', [
@@ -120,10 +97,10 @@ class DataPerdinController extends Controller
             'data_perdin' => $dataPerdin,
         ]);
     }
-
+    
     /**
-     * Show the form for editing the specified resource.
-     */
+    * Show the form for editing the specified resource.
+    */
     public function edit(DataPerdin $dataPerdin)
     {
         return view('dashboard.perdin.data-perdin.edit', [
@@ -136,10 +113,10 @@ class DataPerdinController extends Controller
             'pegawais' => Pegawai::all(),
         ]);
     }
-
+    
     /**
-     * Update the specified resource in storage.
-     */
+    * Update the specified resource in storage.
+    */
     public function update(Request $request, DataPerdin $dataPerdin)
     {
         $validatedData = $request->validate([
@@ -167,15 +144,15 @@ class DataPerdinController extends Controller
         
         $validatedData['slug'] = SlugService::createSlug(DataPerdin::class, 'slug', $request->perihal);
         $validatedData['author_id'] = auth()->user()->id;
-
+        
         
         DataPerdin::where('id', $dataPerdin->id)->update($validatedData);
         return redirect()->route('data-perdin.index')->with('success', 'Data Perdin berhasil diperbarui!');
     }
-
+    
     /**
-     * Remove the specified resource from storage.
-     */
+    * Remove the specified resource from storage.
+    */
     public function destroy(DataPerdin $dataPerdin)
     {
         $dataPerdin->delete();

@@ -15,9 +15,6 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->boolean('approve')->nullable();
             $table->string('alasan_tolak')->nullable();
-            $table->boolean('spt')->nullable();
-            $table->boolean('visum1')->nullable();
-            $table->boolean('visum2')->nullable();
             $table->boolean('lap')->nullable();
             $table->boolean('kwitansi')->nullable();
             $table->timestamps();
@@ -30,7 +27,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('alat_angkuts', function (Blueprint $table) {
+        Schema::table('status_perdins', function (Blueprint $table) {
             $table->dropSoftDeletes();
         });
     }

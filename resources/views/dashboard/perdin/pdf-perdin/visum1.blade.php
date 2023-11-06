@@ -14,7 +14,7 @@
 </head>
 <body style="font-family: Times, serif; margin: 30px;">
 	<div style="float: left;">
-		<img src="logo.png" width="80">
+		<img src="{{ public_path('/assets/img/logo-banten.png') }}" width="80">
 	</div>
 	<div style="text-align: center;">
 		<h2>
@@ -62,8 +62,8 @@
 			<table class="gap-t" style="width: 100%; border-collapse: collapse; border: 1px solid black;">
 				<tr>
 					<td style="text-align: center;">1</td>
-					<td>Pejabat yang memberi perintah 1</td>
-					<td colspan="2">{{ $data_perdin->author->jabatan->nama }}</td>
+					<td>Pejabat yang memberi perintah</td>
+					<td colspan="2">{{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}</td>
 				</tr>
 				<tr>
 					<td style="text-align: center;">2</td>
@@ -84,7 +84,7 @@
 					</td>
 					<td colspan="2">
 						<ol style="list-style-type: lower-alpha; padding-left: 20px;">
-							<li>{{ $data_perdin->pegawai_diperintah->nip }}</li>
+							<li>{{ $data_perdin->pegawai_diperintah->ruang->nama }}</li>
 							<li>{{ $data_perdin->pegawai_diperintah->jabatan->nama }}</li>
 							<li>{{ $data_perdin->biaya }}</li>
 						</ol>
@@ -127,42 +127,24 @@
 					<td colspan="2">
 						<ol style="list-style-type: lower-alpha; padding-left: 20px;">
 							<li>{{ $data_perdin->lama }}</li>
-							<li>{{ $data_perdin->tgl_berangkat }}</li>
-							<li>{{ $data_perdin->tgl_kembali }}</li>
+							<li>{{ Carbon\Carbon::parse($data_perdin->tgl_berangkat)->formatLocalized('%d %B %Y') }}</li>
+							<li>{{ Carbon\Carbon::parse($data_perdin->tgl_kembali)->formatLocalized('%d %B %Y') }}</li>
 						</ol>
 					</td>
 				</tr>
 				<tr>
-					<td rowspan="6" style="text-align: center;">8</td>
+					<td rowspan="{{ $data_perdin->pegawai_mengikuti->count() + 1 }}" style="text-align: center;">8</td>
 					<td style="text-align: center;">Pengikut/Nama</td>
 					<td style="text-align: center;">NIP</td>
 					<td style="text-align: center;">Keterangan</td>
 				</tr>
+				@foreach ($data_perdin->pegawai_mengikuti as $pengikut)
 				<tr>
-					<td>.</td>
-					<td></td>
-					<td></td>
+					<td>{{ $pengikut->nama }}</td>
+					<td>{{ $pengikut->nip }}</td>
+					<td>{{ $pengikut->Keterangan }}</td>
 				</tr>
-				<tr>
-					<td>.</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>.</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>.</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>.</td>
-					<td></td>
-					<td></td>
-				</tr>
+				@endforeach
 
 				<tr>
 					<td style="text-align: center;">9</td>
@@ -183,7 +165,7 @@
 				<tr>
 					<td style="text-align: center;">10</td>
 					<td>Keterangan Lain-lain</td>
-					<td colspan="2"></td>
+					<td colspan="2">{{ $data_perdin->keterangan }}</td>
 				</tr>
 			</table>
 		</div>
@@ -195,16 +177,16 @@
 			</tr>
 			<tr>
 				<td>Tanggal</td>
-				<td>: 28 Maret 2023</td>
+				<td>: {{ now()->formatLocalized('%d %B %Y') }}</td>
 			</tr>
 		</table>
 
 		<div style="float: right;">
 			<div style="text-align: center;">
-				<p style="margin: 10px 0 50px 0;">Kepala Dinas</p>
+				<p style="margin: 10px 0 50px 0;">{{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}</p>
 				
-				<p style="text-decoration: underline; font-weight: bold;">Arlan Marzan, ST, MT</p>
-				<p>NIP.19791014 200212 1 004</p>
+				<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
+				<p>NIP.{{ $data_perdin->tanda_tangan->pegawai->nip }}</p>
 			</div>
 		</div>
 	</div>

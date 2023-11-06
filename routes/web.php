@@ -11,6 +11,7 @@ use App\Http\Controllers\JenisPerdinController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\KetentuanController;
 use App\Http\Controllers\KotaKabupatenController;
+use App\Http\Controllers\LaporanPerdinController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PegawaiController;
@@ -67,33 +68,33 @@ Route::middleware('can:isAdmin')->group(function(){
 	Route::resource('/dashboard/uang-transport', UangTransportController::class)->middleware('auth');
 	Route::resource('/dashboard/user', UserController::class)->middleware('auth');
 	
-	// Route::get('/dashboard/user', [UserController::class, 'index'])->name('user.index')->middleware('auth');
-});
-
-Route::middleware('can:isPegawai')->group(function(){
-	Route::controller(DataPerdinController::class)->group(function(){
-		Route::get('/dashboard/data-perdin/status/baru', 'indexBaru')->name('data-perdin.indexBaru')->middleware('auth');
-		Route::get('/dashboard/data-perdin/status/ditolak', 'indexTolak')->name('data-perdin.indexTolak')->middleware('auth');
-		Route::get('/dashboard/data-perdin/status/belum-ada-laporan', 'indexNoLaporan')->name('data-perdin.indexNoLaporan')->middleware('auth');
-		Route::get('/dashboard/data-perdin/status/belum-bayar', 'indexBelumBayar')->name('data-perdin.indexBelumBayar')->middleware('auth');
-		Route::get('/dashboard/data-perdin/status/sudah-bayar', 'indexSudahBayar')->name('data-perdin.indexSudahBayar')->middleware('auth');
-	});	
-	Route::resource('/dashboard/data-perdin', DataPerdinController::class)->except('index')->middleware('auth');
-	
 	Route::controller(StatusPerdinController::class)->group(function(){
 		Route::put('/dashboard/status-perdin/approve/{id}', 'approve')->name('status-perdin.approve')->middleware('auth');
 		Route::put('/dashboard/status-perdin/tolak/{id}', 'tolak')->name('status-perdin.tolak')->middleware('auth');
 	});
+});
 
+Route::middleware('can:isAdminOrOperator')->group(function(){
+	Route::controller(DataPerdinController::class)->group(function(){
+		Route::get('/dashboard/data-perdin/status/{status}', 'index')->name('data-perdin.index')->middleware('auth');
+	});	
+	
+	
 	Route::controller(PerdinPdfController::class)->group(function(){
 		Route::get('/dashboard/status-perdin/spt/pdf/{status_id}', 'spt')->name('spt-pdf')->middleware('auth');
 		Route::get('/dashboard/status-perdin/visum1/pdf/{status_id}', 'visum1')->name('visum1-pdf')->middleware('auth');
 		Route::get('/dashboard/status-perdin/visum2/pdf/{status_id}', 'visum2')->name('visum2-pdf')->middleware('auth');
+		Route::get('/dashboard/status-perdin/lap/pdf/{id}', 'lap')->name('lap-pdf')->middleware('auth');
 	});
 
 	Route::resource('/dashboard/data-anggaran', DataAnggaranController::class)->except('create', 'edit', 'update', 'destroy')->middleware('auth');
 	Route::resource('/dashboard/uang-masuk', UangMasukController::class)->except('index')->middleware('auth');
 	Route::resource('/dashboard/uang-keluar', UangKeluarController::class)->except('index')->middleware('auth');
+	Route::resource('/dashboard/laporan-perdin', LaporanPerdinController::class)->middleware('auth');
+});
+
+Route::middleware('can:isOperator')->group(function(){
+	Route::resource('/dashboard/data-perdin', DataPerdinController::class)->except('index')->middleware('auth');
 });
 
 Route::redirect('/dashboard', '/');

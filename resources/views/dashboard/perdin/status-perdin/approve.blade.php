@@ -10,7 +10,7 @@
 					<form action="{{ route('status-perdin.tolak', $data_perdin->status_id) }}" method="post" class="d-inline">
 						@method('put')
 						@csrf
-	
+						
 						<div class="row">
 							<div class="col-2">
 								<button class="btn btn-danger px-5">
@@ -24,12 +24,12 @@
 						</div>
 					</form>
 				</div>
-
+				
 				<div class="py-2">
 					<form action="{{ route('status-perdin.approve', $data_perdin->status_id) }}" method="post" class="d-inline">
 						@method('put')
 						@csrf
-	
+						
 						<button class="btn btn-success px-5">
 							<i class="fa fa-times"></i>
 							Setuju

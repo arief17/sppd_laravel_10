@@ -20,25 +20,25 @@
 					<tr>
 						<td rowspan="4" style="vertical-align: top; width: 1%;">I.</td>
 						<td style="white-space: nowrap; width: 1%; padding-right: 20px;">Berangkat dari</td>
-						<td>: Kota Serang</td>
+						<td>: {{ $data_perdin->kedudukan->nama }}</td>
 					</tr>
 					<tr>
 						<td colspan="2">(Tempat Kedudukan)</td>
 					</tr>
 					<tr>
 						<td style="white-space: nowrap; width: 1%; padding-right: 20px;">Ke</td>
-						<td>: Kota Tanggerang</td>
+						<td>: {{ $data_perdin->tujuan->nama }}</td>
 					</tr>
 					<tr>
 						<td style="white-space: nowrap; width: 1%; padding-right: 20px;">Pada Tanggal</td>
-						<td>: 14 Maret 2023</td>
+						<td>: {{ Carbon\Carbon::parse($data_perdin->tgl_berangkat)->formatLocalized('%d %B %Y') }}</td>
 					</tr>
 				</table>
 				<div style="text-align: center;">
-					<p style="margin: 10px 0 60px 0;">Kepala Dinas</p>
+					<p style="margin: 10px 0 60px 0;">{{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}</p>
 					
-					<p style="text-decoration: underline; font-weight: bold;">Arlan Marzan, ST, MT</p>
-					<p>NIP.19791014 200212 1 004</p>
+					<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
+					<p>NIP.{{ $data_perdin->tanda_tangan->pegawai->nip }}</p>
 				</div>
 			</td>
 		</tr>
@@ -48,11 +48,11 @@
 					<tr>
 						<td rowspan="4" style="vertical-align: top; width: 1%;">II.</td>
 						<td style="white-space: nowrap; width: 1%; padding-right: 20px;">Tiba di</td>
-						<td>: Kota Tangerang</td>
+						<td>: {{ $data_perdin->tujuan->nama }}</td>
 					</tr>
 					<tr>
 						<td style="white-space: nowrap; width: 1%; padding-right: 20px;">Pada Tanggal</td>
-						<td>: 14 Maret 2023</td>
+						<td>: {{ Carbon\Carbon::parse($data_perdin->tgl_berangkat)->formatLocalized('%d %B %Y') }}</td>
 					</tr>
 					<tr>
 						<td colspan="2">Kepala</td>
@@ -72,15 +72,15 @@
 					<tr>
 						<td rowspan="5" style="vertical-align: top; width: 1%; padding: 5px;"></td>
 						<td style="white-space: nowrap; width: 1%; padding-right: 20px;">Berangkat dari</td>
-						<td>: Kota Tangerang</td>
+						<td>: {{ $data_perdin->tujuan->nama }}</td>
 					</tr>
 					<tr>
 						<td style="white-space: nowrap; width: 1%; padding-right: 20px;">Ke</td>
-						<td>: Kota Serang</td>
+						<td>: {{ $data_perdin->kedudukan->nama }}</td>
 					</tr>
 					<tr>
 						<td style="white-space: nowrap; width: 1%; padding-right: 20px;">Pada Tanggal</td>
-						<td>: 14 Maret 2023</td>
+						<td>: {{ Carbon\Carbon::parse($data_perdin->tgl_kembali)->formatLocalized('%d %B %Y') }}</td>
 					</tr>
 					<tr>
 						<td colspan="2">Kepala</td>
@@ -268,27 +268,27 @@
 					<tr>
 						<td rowspan="4" style="vertical-align: top; width: 1%;">VI.</td>
 						<td style="white-space: nowrap; width: 1%; padding-right: 20px;">Tiba di</td>
-						<td>: Kota Serang</td>
+						<td>: {{ $data_perdin->kedudukan->nama }}</td>
 					</tr>
 					<tr>
 						<td style="white-space: nowrap; width: 1%; padding-right: 20px;">Pada Tanggal</td>
-						<td>: 14 Maret 2023 </td>
+						<td>: {{ Carbon\Carbon::parse($data_perdin->tgl_kembali)->formatLocalized('%d %B %Y') }}</td>
 					</tr>
 				</table>
 				<div style="text-align: center;">
-					<p style="margin: 10px 0 60px 0;">Kepala Dinas</p>
+					<p style="margin: 10px 0 60px 0;">{{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}</p>
 					
-					<p style="text-decoration: underline; font-weight: bold;">Arlan Marzan, ST, MT</p>
-					<p>NIP.19791014 200212 1 004</p>
+					<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
+					<p>NIP.{{ $data_perdin->tanda_tangan->pegawai->nip }}</p>
 				</div>
 			</td>
 			<td style="border: 1px solid black; width: 50%;">
 				<p style="padding-left: 20px;">Telah diperiksa dengan keterangan bahwa perjalan tersebut atas perintahnya dan semata mata untuk kepentingan jabatan dalam waktu sesingkat-singkatnya</p>
 				<div style="text-align: center;">
-					<p style="margin: 10px 0 60px 0;">Kepala Dinas</p>
+					<p style="margin: 10px 0 60px 0;">{{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}</p>
 					
-					<p style="text-decoration: underline; font-weight: bold;">Arlan Marzan, ST, MT</p>
-					<p>NIP.19791014 200212 1 004</p>
+					<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
+					<p>NIP.{{ $data_perdin->tanda_tangan->pegawai->nip }}</p>
 				</div>
 			</td>
 		</tr>

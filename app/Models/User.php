@@ -21,7 +21,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $guarded = ['id'];
-    protected $with = ['level_admin', 'seksi'];
+    protected $with = ['level_admin'];
 
     public function level_admin(): BelongsTo
     {
