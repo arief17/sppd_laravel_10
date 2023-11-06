@@ -84,7 +84,7 @@ class DataPerdinController extends Controller
         $perdin = DataPerdin::create($validatedData);
         $perdin->pegawai_mengikuti()->attach($selectedPegawaiIds);
         
-        return redirect()->route('data-perdin.indexBaru')->with('success', 'Data Perdin berhasil ditambahkan!');
+        return redirect()->route('data-perdin.index', 'baru')->with('success', 'Data Perdin berhasil ditambahkan!');
     }
     
     /**
@@ -137,17 +137,20 @@ class DataPerdinController extends Controller
             'lokasi' => 'required',
             'pegawai_diperintah_id' => 'required',
             'biaya' => 'required',
-            'pegawai_mengikuti_id' => 'required',
-            'jumlah_pegawai' => 'required',
             'keterangan' => 'required',
+            'pegawai_mengikuti_id' => 'required',
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(DataPerdin::class, 'slug', $request->perihal);
         $validatedData['author_id'] = auth()->user()->id;
         
+        $selectedPegawaiIds = explode(',', $request->pegawai_mengikuti_id);
+        $validatedData['jumlah_pegawai'] = count($selectedPegawaiIds);
         
-        DataPerdin::where('id', $dataPerdin->id)->update($validatedData);
-        return redirect()->route('data-perdin.index')->with('success', 'Data Perdin berhasil diperbarui!');
+        $dataPerdin->update($validatedData);
+        $dataPerdin->pegawai_mengikuti()->sync($selectedPegawaiIds);
+
+        return redirect()->route('data-perdin.index', 'baru')->with('success', 'Data Perdin berhasil diperbarui!');
     }
     
     /**
