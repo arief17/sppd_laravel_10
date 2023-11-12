@@ -9,14 +9,14 @@
 				<div class="d-flex justify-content-between">
 					<h4 class="card-title mg-b-0">{{ $title }}</h4>
 					<div>
-						<a class="btn btn-info btn-sm" href="{{ route('jabatan.edit', $jabatan->slug) }}">
+						<a class="btn btn-info btn-sm" href="{{ route('pangkat.edit', $pangkat->slug) }}">
 							<i class="fas fa-pencil-alt"></i>
 							Edit
 						</a>
-						<form action="{{ route('jabatan.destroy', $jabatan->slug) }}" method="post" class="d-inline">
+						<form action="{{ route('pangkat.destroy', $pangkat->slug) }}" method="post" class="d-inline">
 							@method('delete')
 							@csrf
-							<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $jabatan->nama }}">
+							<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $pangkat->nama }}">
 								<i class="fas fa-trash"></i>
 								Delete
 							</button>
@@ -29,7 +29,7 @@
 					<table class="table mg-b-0 text-md-nowrap border-bottom">
 						<tr>
 							<th>Nama:</th>
-							<td style="width: 90%">{{ $jabatan->nama }}</td>
+							<td style="width: 90%">{{ $pangkat->nama }}</td>
 						</tr>
 					</table>
 				</div>

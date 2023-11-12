@@ -9,12 +9,13 @@
 				<h4 class="card-title mb-1">{{ $title }}</h4>
 			</div>
 			<div class="card-body pt-0">
-				<form action="{{ route('jabatan.index') }}" method="post">
+				<form action="{{ route('pangkat.show', $pangkat->slug) }}" method="post">
 					@csrf
+					@method('put')
 					
 					<div class="form-group">
 						<label for="nama">Nama</label>
-						<input name="nama" value="{{ old('nama') }}" type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukan nama">
+						<input name="nama" value="{{ old('nama', $pangkat->nama) }}" type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukan nama">
 						@error('nama')
 						<div class="invalid-feedback">
 							{{ $message }}

@@ -28,8 +28,12 @@
 				<div class="table-responsive">
 					<table class="table mg-b-0 text-md-nowrap border-bottom">
 						<tr>
-							<th>Keterangan:</th>
-							<td style="width: 90%">{{ $uang_transport->keterangan }}</td>
+							<th>Wilayah:</th>
+							<td style="width: 90%">{{ $uang_transport->wilayah }}</td>
+						</tr>
+						<tr>
+							<th>Alat Angkut:</th>
+							<td style="width: 90%">{{ $uang_transport->alat_angkut }}</td>
 						</tr>
 						<tr>
 							<th>Eselon I:</th>

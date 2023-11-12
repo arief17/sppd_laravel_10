@@ -7,7 +7,11 @@
 		}
 		
 		.gap-t td {
-			padding: 1px;
+			padding: 0.5px;
+		}
+
+		p, td {
+			font-size: 15px;
 		}
 	</style>
 </head>
@@ -35,7 +39,7 @@
 					</tr>
 				</table>
 				<div style="text-align: center;">
-					<p style="margin: 10px 0 60px 0;">{{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}</p>
+					<p style="margin: 10px 0 50px 0;">{{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}</p>
 					
 					<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
 					<p>NIP.{{ $data_perdin->tanda_tangan->pegawai->nip }}</p>
@@ -59,7 +63,7 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<p style="padding-top: 60px;">
+							<p style="padding-top: 50px;">
 								(................................................) <br>
 								NIP.
 							</p>
@@ -87,7 +91,7 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<p style="padding-top: 60px;">
+							<p style="padding-top: 50px;">
 								(................................................) <br>
 								NIP.
 							</p>
@@ -114,7 +118,7 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<p style="padding-top: 60px;">
+							<p style="padding-top: 50px;">
 								(................................................) <br>
 								NIP.
 							</p>
@@ -142,7 +146,7 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<p style="padding-top: 60px;">
+							<p style="padding-top: 50px;">
 								(................................................) <br>
 								NIP.
 							</p>
@@ -169,7 +173,7 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<p style="padding-top: 60px;">
+							<p style="padding-top: 50px;">
 								(................................................) <br>
 								NIP.
 							</p>
@@ -197,7 +201,7 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<p style="padding-top: 60px;">
+							<p style="padding-top: 50px;">
 								(................................................) <br>
 								NIP.
 							</p>
@@ -224,7 +228,7 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<p style="padding-top: 60px;">
+							<p style="padding-top: 50px;">
 								(................................................) <br>
 								NIP.
 							</p>
@@ -252,7 +256,7 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<p style="padding-top: 60px;">
+							<p style="padding-top: 50px;">
 								(................................................) <br>
 								NIP.
 							</p>
@@ -276,7 +280,7 @@
 					</tr>
 				</table>
 				<div style="text-align: center;">
-					<p style="margin: 10px 0 60px 0;">{{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}</p>
+					<p style="margin: 10px 0 50px 0;">{{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}</p>
 					
 					<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
 					<p>NIP.{{ $data_perdin->tanda_tangan->pegawai->nip }}</p>
@@ -285,7 +289,7 @@
 			<td style="border: 1px solid black; width: 50%;">
 				<p style="padding-left: 20px;">Telah diperiksa dengan keterangan bahwa perjalan tersebut atas perintahnya dan semata mata untuk kepentingan jabatan dalam waktu sesingkat-singkatnya</p>
 				<div style="text-align: center;">
-					<p style="margin: 10px 0 60px 0;">{{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}</p>
+					<p style="margin: 10px 0 50px 0;">{{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}</p>
 					
 					<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
 					<p>NIP.{{ $data_perdin->tanda_tangan->pegawai->nip }}</p>

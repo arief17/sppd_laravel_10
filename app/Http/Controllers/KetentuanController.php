@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kegiatan;
 use App\Models\Ketentuan;
-use App\Models\Pegawai;
-use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 
 class KetentuanController extends Controller
@@ -26,11 +23,7 @@ class KetentuanController extends Controller
      */
     public function create()
     {
-        return view('dashboard.master.ketentuan.create', [
-            'title' => 'Tambah Ketentuan',
-            'kegiatans' => Kegiatan::all(),
-            'pegawais' => Pegawai::all(),
-        ]);
+        //
     }
 
     /**
@@ -38,24 +31,7 @@ class KetentuanController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'kegiatan_id' => 'required',
-            'kode_rek_dalam_daerah' => 'required|integer',
-            'kode_rek_luar_daerah' => 'required|integer',
-            'pptk_id' => 'required',
-            'bendahara_id' => 'required',
-            'pelaksana_administrasi_id' => 'required',
-        ]);
-
-        $pptk = Pegawai::where('id', $request->pptk_id)->get('nama');
-        $bendahara = Pegawai::where('id', $request->bendahara_id)->get('nama');
-        $pelaksana_administrasi = Pegawai::where('id', $request->pelaksana_administrasi_id)->get('nama');
-        
-        $validatedData['slug'] = SlugService::createSlug(Ketentuan::class, 'slug', "$pptk $bendahara $pelaksana_administrasi");
-        $validatedData['author_id'] = auth()->user()->id;
-        
-        Ketentuan::create($validatedData);
-        return redirect()->route('ketentuan.index')->with('success', 'Ketentuan berhasil ditambahkan!');
+        //
     }
 
     /**
@@ -77,8 +53,6 @@ class KetentuanController extends Controller
         return view('dashboard.master.ketentuan.edit', [
             'title' => 'Perbarui Ketentuan',
             'ketentuan' => $ketentuan,
-            'kegiatans' => Kegiatan::all(),
-            'pegawais' => Pegawai::all(),
         ]);
     }
 
@@ -88,19 +62,9 @@ class KetentuanController extends Controller
     public function update(Request $request, Ketentuan $ketentuan)
     {
         $validatedData = $request->validate([
-            'kegiatan_id' => 'required',
-            'kode_rek_dalam_daerah' => 'required|integer',
-            'kode_rek_luar_daerah' => 'required|integer',
-            'pptk_id' => 'required',
-            'bendahara_id' => 'required',
-            'pelaksana_administrasi_id' => 'required',
+            'max_perdin' => 'required|numeric',
         ]);
-        
-        $pptk = Pegawai::where('id', $request->pptk_id)->get('nama');
-        $bendahara = Pegawai::where('id', $request->bendahara_id)->get('nama');
-        $pelaksana_administrasi = Pegawai::where('id', $request->pelaksana_administrasi_id)->get('nama');
-        
-        $validatedData['slug'] = SlugService::createSlug(Ketentuan::class, 'slug', "$pptk $bendahara $pelaksana_administrasi");
+
         $validatedData['author_id'] = auth()->user()->id;
         
         Ketentuan::where('id', $ketentuan->id)->update($validatedData);

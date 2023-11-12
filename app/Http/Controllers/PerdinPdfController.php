@@ -19,6 +19,8 @@ class PerdinPdfController extends Controller
             'data_perdin' => $data_perdin,
         ]);
 
+        $pdf->setPaper(array(0,0,609.4488,935.433), 'portrait');
+
         return $pdf->stream();
     }
     public function visum1($status_id)
@@ -30,6 +32,8 @@ class PerdinPdfController extends Controller
         $pdf = Pdf::loadView('dashboard.perdin.pdf-perdin.visum1', [
             'data_perdin' => $data_perdin,
         ]);
+
+        $pdf->setPaper(array(0,0,609.4488,935.433), 'portrait');
 
         return $pdf->stream();
     }
@@ -43,6 +47,8 @@ class PerdinPdfController extends Controller
             'data_perdin' => $data_perdin,
         ]);
 
+        $pdf->setPaper(array(0,0,609.4488,935.433), 'portrait');
+
         return $pdf->stream();
     }
     public function lap($id)
@@ -54,6 +60,8 @@ class PerdinPdfController extends Controller
         $pdf = Pdf::loadView('dashboard.perdin.pdf-perdin.lap', [
             'laporan_perdin' => $laporan_perdin,
         ]);
+
+        $pdf->setPaper(array(0,0,609.4488,935.433), 'portrait');
 
         return $pdf->stream();
     }

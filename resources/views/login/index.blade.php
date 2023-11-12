@@ -15,7 +15,7 @@
 	<title>SPPD | {{ $title }}</title>
 	
 	<!-- Favicon -->
-	<link rel="icon" href="/assets/img/brand/favicon.png" type="image/x-icon" />
+	<link rel="icon" href="/assets/img/logo-banten.png" type="image/x-icon" />
 	
 	<!-- Icons css -->
 	<link href="/assets/css/icons.css" rel="stylesheet">
@@ -62,30 +62,31 @@
 							<div class="row">
 								<div class="col-md-10 col-lg-10 col-xl-9 mx-auto">
 									<div class="card-sigin">
-										<div class="card-sigin">
-											<div class="main-signup-header">
-												<h2>Selamat Datang!</h2>
-												<h5 class="fw-semibold mb-4">Silahkan masuk untuk melanjutkan.</h5>
-												<form action="{{ route('login') }}" method="post">
-													@csrf
-													
-													<div class="form-group">
-														<label>Username</label> 
-														<input name="username" class="form-control" placeholder="Masukan Username" type="text">
-													</div>
-													<div class="form-group">
-														<label>Password</label>
-														<input name="password" class="form-control" placeholder="Masukan Password" type="password">
-													</div>
-													<button class="btn btn-main-primary btn-block">
-														Masuk
-													</button>
-													
-												</form>
-												<div class="main-signin-footer mt-4">
-													<p><a href="">Lupa kata sandi?</a></p>
+										<div class="mb-5 d-flex">
+											<a href="index.html">
+												<img src="/assets/img/logo-banten.png" class="sign-favicon-a" width="80" alt="logo">
+												<img src="/assets/img/logo-banten.png" class="sign-favicon-b" width="80" alt="logo">
+											</a>
+										</div>
+										<div class="main-signup-header">
+											<h2>Selamat Datang!</h2>
+											<h5 class="fw-semibold mb-4">Silahkan masuk untuk melanjutkan.</h5>
+											<form action="{{ route('login') }}" method="post">
+												@csrf
+												
+												<div class="form-group">
+													<label>Username</label> 
+													<input name="username" class="form-control" placeholder="Masukan Username" type="text">
 												</div>
-											</div>
+												<div class="form-group">
+													<label>Password</label>
+													<input name="password" class="form-control" placeholder="Masukan Password" type="password">
+												</div>
+												<button class="btn btn-main-primary btn-block">
+													Masuk
+												</button>
+												
+											</form>
 										</div>
 									</div>
 								</div>
@@ -126,27 +127,27 @@
 	<script src="/assets/js/custom.js"></script>
 	
 	<script src="/assets/plugins/sweet-alert/sweetalert2.all.min.js"></script>
-
+	
 	@if(session()->has('loginError'))
 	<script>
-    $(document).ready(function() {
-        var Toast = Swal.mixin({
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 5000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        });
-        
-        Toast.fire({
-            icon: 'error',
-            title: '{{ session('loginError') }}'
-        });
-    });
+		$(document).ready(function() {
+			var Toast = Swal.mixin({
+				toast: true,
+				position: 'top',
+				showConfirmButton: false,
+				timer: 5000,
+				timerProgressBar: true,
+				didOpen: (toast) => {
+					toast.addEventListener('mouseenter', Swal.stopTimer)
+					toast.addEventListener('mouseleave', Swal.resumeTimer)
+				}
+			});
+			
+			Toast.fire({
+				icon: 'error',
+				title: '{{ session('loginError') }}'
+			});
+		});
 	</script>
 	@endif
 	

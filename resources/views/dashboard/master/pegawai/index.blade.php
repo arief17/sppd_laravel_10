@@ -20,7 +20,7 @@
 								<th class="border-bottom-0">Nama</th>
 								<th class="border-bottom-0">NIP</th>
 								<th class="border-bottom-0">PPTK</th>
-								<th class="border-bottom-0">Ruang</th>
+								<th class="border-bottom-0">Pangkat</th>
 								<th class="border-bottom-0">Golongan</th>
 								<th class="border-bottom-0">Jabatan</th>
 								<th class="border-bottom-0">Last Perdin</th>
@@ -34,7 +34,7 @@
 								<td>{{ $pegawai->nama }}</td>
 								<td>{{ $pegawai->nip }}</td>
 								<td>{{ $pegawai->pptk ? 'Ya' : 'Tidak' }}</td>
-								<td>{{ $pegawai->ruang->nama }}</td>
+								<td>{{ $pegawai->pangkat->nama }}</td>
 								<td>{{ $pegawai->golongan->nama }}</td>
 								<td>{{ $pegawai->jabatan->nama }}</td>
 								<td>{{ $pegawai->last_perdin }}</td>

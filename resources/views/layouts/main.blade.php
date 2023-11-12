@@ -335,6 +335,7 @@
 										</li>
 										
 										<li><a class="slide-item {{ request()->routeIs('pegawai.index') ? 'active' : '' }}" href="{{ route('pegawai.index') }}">Pegawai </a></li>
+										<li><a class="slide-item {{ request()->routeIs('pangkat.index') ? 'active' : '' }}" href="{{ route('pangkat.index') }}">Pangkat </a></li>
 										<li><a class="slide-item {{ request()->routeIs('tanda-tangan.index') ? 'active' : '' }}" href="{{ route('tanda-tangan.index') }}">Tanda Tangan </a></li>
 										<li><a class="slide-item {{ request()->routeIs('alat-angkut.index') ? 'active' : '' }}" href="{{ route('alat-angkut.index') }}">Alat Angkut </a></li>
 										<li><a class="slide-item {{ request()->routeIs('jabatan.index') ? 'active' : '' }}" href="{{ route('jabatan.index') }}">Jabatan </a></li>

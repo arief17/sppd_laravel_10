@@ -22,15 +22,6 @@
 						</div>
 						@enderror
 					</div>
-					<div class="form-group">
-						<label for="jabatan_singkat">Jabatan Singkat</label>
-						<input name="jabatan_singkat" value="{{ old('jabatan_singkat', $jabatan->jabatan_singkat) }}" type="text" class="form-control @error('jabatan_singkat') is-invalid @enderror" id="jabatan_singkat" placeholder="Masukan jabatan_singkat">
-						@error('jabatan_singkat')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
 					
 					<div class="form-group mb-0 mt-3 justify-content-end">
 						<button type="submit" class="btn btn-primary">Simpan</button>

@@ -15,7 +15,7 @@ use App\Models\KotaKabupaten;
 use App\Models\LevelAdmin;
 use App\Models\Pegawai;
 use App\Models\Provinsi;
-use App\Models\Ruang;
+use App\Models\Pangkat;
 use App\Models\Seksi;
 use App\Models\TandaTangan;
 use App\Models\UangHarian;
@@ -39,8 +39,8 @@ class DatabaseSeeder extends Seeder
             'slug' => 'operator',
         ]);
         LevelAdmin::create([
-            'nama' => 'Pegawai',
-            'slug' => 'pegawai',
+            'nama' => 'Approval',
+            'slug' => 'approval',
         ]);
 
         User::create([
@@ -68,8 +68,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Seksi::create([
-            'nama' => 'Koordinasi dan Sinkronisasi Perencanaan Tata Ruang',
-            'slug' => 'koordinasi-dan-sinkronisasi-perencanaan-tata-ruang',
+            'nama' => 'Koordinasi dan Sinkronisasi Perencanaan Tata Pangkat',
+            'slug' => 'koordinasi-dan-sinkronisasi-perencanaan-tata-pangkat',
             'bidang_id' => 1,
             'author_id' => 1,
         ]);
@@ -168,53 +168,7 @@ class DatabaseSeeder extends Seeder
             'golongan_i' => '150000',
             'author_id' => 1,
         ]);
-
-        UangTransport::create([
-            'keterangan' => 'Kategori I',
-            'slug' => 'kategori-i',
-            'eselon_i' => '550000',
-            'eselon_ii' => '520000',
-            'eselon_iii' => '490000',
-            'eselon_iv' => '450000',
-            'golongan_iv' => '400000',
-            'golongan_iii' => '400000',
-            'golongan_ii' => '400000',
-            'golongan_i' => '400000',
-            'author_id' => 1,
-        ]);
-        UangTransport::create([
-            'keterangan' => 'Kategori II',
-            'slug' => 'kategori-ii',
-            'eselon_i' => '490000',
-            'eselon_ii' => '460000',
-            'eselon_iii' => '430000',
-            'eselon_iv' => '390000',
-            'golongan_iv' => '350000',
-            'golongan_iii' => '350,000',
-            'golongan_ii' => '350,000',
-            'golongan_i' => '350,000',
-            'author_id' => 1,
-        ]);
-
-        BiayaPerdin::create([
-            'slug' => 'biaya-perdin-1',
-            'area_id' => 1,
-            'dari_id' => 1,
-            'ke_id' => 1,
-            'transport_id' => 1,
-            'harian_id' => 1,
-            'author_id' => 1,
-        ]);
-        BiayaPerdin::create([
-            'slug' => 'biaya-perdin-2',
-            'area_id' => 2,
-            'dari_id' => 2,
-            'ke_id' => 2,
-            'transport_id' => 2,
-            'harian_id' => 2,
-            'author_id' => 2,
-        ]);
-
+        
         Golongan::create([
             'nama' => 'Eselon I',
             'slug' => 'eselon-i',
@@ -256,87 +210,87 @@ class DatabaseSeeder extends Seeder
             'author_id' => 1,
         ]);
 
-        Ruang::create([
+        Pangkat::create([
             'nama' => 'I - A - Juru Muda',
             'slug' => 'i-a-juru-muda',
             'author_id' => 1,
         ]);
-        Ruang::create([
+        Pangkat::create([
             'nama' => 'I - B - Juru Muda Tk. I',
             'slug' => 'i-b-juru-muda-tk.-i',
             'author_id' => 1,
         ]);
-        Ruang::create([
+        Pangkat::create([
             'nama' => 'I - C - Juru',
             'slug' => 'i-c-juru',
             'author_id' => 1,
         ]);
-        Ruang::create([
+        Pangkat::create([
             'nama' => 'I - D - Juru Tk. I',
             'slug' => 'i-d-juru-tk.-i',
             'author_id' => 1,
         ]);
-        Ruang::create([
+        Pangkat::create([
             'nama' => 'II - A - Pengatur Muda',
             'slug' => 'ii-a-pengatur-muda',
             'author_id' => 1,
         ]);
-        Ruang::create([
+        Pangkat::create([
             'nama' => 'II - B - Pengatur Muda Tk. I',
             'slug' => 'ii-b-pengatur-muda-tk.-i',
             'author_id' => 1,
         ]);
-        Ruang::create([
+        Pangkat::create([
             'nama' => 'II - C - Pengatur',
             'slug' => 'ii-c-pengatur',
             'author_id' => 1,
         ]);
-        Ruang::create([
+        Pangkat::create([
             'nama' => 'II - D - Pengatur Tk. I',
             'slug' => 'ii-d-pengatur-tk.-i',
             'author_id' => 1,
         ]);
-        Ruang::create([
+        Pangkat::create([
             'nama' => 'III - A - Penata Muda',
             'slug' => 'iii-a-penata-muda',
             'author_id' => 1,
         ]);
-        Ruang::create([
+        Pangkat::create([
             'nama' => 'III - B - Penata Muda Tk. I',
             'slug' => 'iii-b-penata-muda-tk.-i',
             'author_id' => 1,
         ]);
-        Ruang::create([
+        Pangkat::create([
             'nama' => 'III - C - Penata',
             'slug' => 'iii-c-penata',
             'author_id' => 1,
         ]);
-        Ruang::create([
+        Pangkat::create([
             'nama' => 'III - D - Penata Tk. I',
             'slug' => 'iii-d-penata-tk.-i',
             'author_id' => 1,
         ]);
-        Ruang::create([
+        Pangkat::create([
             'nama' => 'IV - A - Pembina',
             'slug' => 'iv-a-pembina',
             'author_id' => 1,
         ]);
-        Ruang::create([
+        Pangkat::create([
             'nama' => 'IV - B - Pembina Tk. I',
             'slug' => 'iv-b-pembina-tk.-i',
             'author_id' => 1,
         ]);
-        Ruang::create([
+        Pangkat::create([
             'nama' => 'IV - C - Pembina Utama Muda',
             'slug' => 'iv-c-pembina-utama-muda',
             'author_id' => 1,
         ]);
-        Ruang::create([
+        Pangkat::create([
             'nama' => 'IV - D - Pembina Utama Madya',
             'slug' => 'iv-d-pembina-utama-madya',
             'author_id' => 1,
         ]);
-        Ruang::create([
+        Pangkat::create([
             'nama' => 'IV - E - Pembina Utama',
             'slug' => 'iv-e-pembina-utama',
             'author_id' => 1,
@@ -345,13 +299,18 @@ class DatabaseSeeder extends Seeder
         Jabatan::create([
             'nama' => 'KEPALA BIDANG',
             'slug' => 'kepala-bidang',
-            'jabatan_singkat' => 'KABID',
             'author_id' => 1,
         ]);
         Jabatan::create([
             'nama' => 'KEPALA DINAS PUPR',
             'slug' => 'kepala-dinas-pupr',
-            'jabatan_singkat' => 'KADIS',
+            'author_id' => 1,
+        ]);
+
+        Ketentuan::create([
+            'author_id' => 1,
+        ]);
+        Ketentuan::create([
             'author_id' => 1,
         ]);
 
@@ -363,9 +322,10 @@ class DatabaseSeeder extends Seeder
             'no_hp' => '083812233445',
             'seksi_id' => 1,
             'golongan_id' => 1,
-            'ruang_id' => 1,
+            'pangkat_id' => 1,
             'jabatan_id' => 1,
             'pptk' => 0,
+            'ketentuan_id' => 1,
             'author_id' => 1,
         ]);
         Pegawai::create([
@@ -376,9 +336,10 @@ class DatabaseSeeder extends Seeder
             'no_hp' => '0838122334455',
             'seksi_id' => 2,
             'golongan_id' => 2,
-            'ruang_id' => 2,
+            'pangkat_id' => 2,
             'jabatan_id' => 2,
             'pptk' => 1,
+            'ketentuan_id' => 2,
             'author_id' => 1,
         ]);
 
@@ -406,24 +367,51 @@ class DatabaseSeeder extends Seeder
             'author_id' => 1,
         ]);
 
-        Ketentuan::create([
-            'slug' => 'ketentuan-1',
-            'kegiatan_id' => 1,
-            'kode_rek_dalam_daerah' => 1,
-            'kode_rek_luar_daerah' => 1,
-            'pptk_id' => 1,
-            'bendahara_id' => 1,
-            'pelaksana_administrasi_id' => 1,
+        UangTransport::create([
+            'wilayah_id' => 1,
+            'alat_angkut_id' => 1,
+            'slug' => 'uang-transport-1',
+            'eselon_i' => '550000',
+            'eselon_ii' => '520000',
+            'eselon_iii' => '490000',
+            'eselon_iv' => '450000',
+            'golongan_iv' => '400000',
+            'golongan_iii' => '400000',
+            'golongan_ii' => '400000',
+            'golongan_i' => '400000',
             'author_id' => 1,
         ]);
-        Ketentuan::create([
-            'slug' => 'ketentuan-2',
-            'kegiatan_id' => 2,
-            'kode_rek_dalam_daerah' => 2,
-            'kode_rek_luar_daerah' => 2,
-            'pptk_id' => 2,
-            'bendahara_id' => 2,
-            'pelaksana_administrasi_id' => 2,
+        UangTransport::create([
+            'wilayah_id' => 2,
+            'alat_angkut_id' => 2,
+            'slug' => 'uang-transport-2',
+            'eselon_i' => '490000',
+            'eselon_ii' => '460000',
+            'eselon_iii' => '430000',
+            'eselon_iv' => '390000',
+            'golongan_iv' => '350000',
+            'golongan_iii' => '350,000',
+            'golongan_ii' => '350,000',
+            'golongan_i' => '350,000',
+            'author_id' => 1,
+        ]);
+
+        BiayaPerdin::create([
+            'slug' => 'biaya-perdin-1',
+            'area_id' => 1,
+            'dari_id' => 1,
+            'ke_id' => 1,
+            'transport_id' => 1,
+            'harian_id' => 1,
+            'author_id' => 1,
+        ]);
+        BiayaPerdin::create([
+            'slug' => 'biaya-perdin-2',
+            'area_id' => 2,
+            'dari_id' => 2,
+            'ke_id' => 2,
+            'transport_id' => 2,
+            'harian_id' => 2,
             'author_id' => 2,
         ]);
 

@@ -8,7 +8,7 @@
 			<div class="card-header">
 				<div class="d-flex align-items-center">
 					<h3 class="card-title">{{ $title }}</h3>
-					<a href="{{ route('jabatan.create') }}" class="btn btn-primary mg-l-auto">Tambah</a>
+					<a href="{{ route('pangkat.create') }}" class="btn btn-primary mg-l-auto">Tambah</a>
 				</div>
 			</div>
 			<div class="card-body">
@@ -22,23 +22,23 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach ($jabatans as $jabatan)
+							@foreach ($pangkats as $pangkat)
 							<tr>
 								<td>{{ $loop->iteration }}</td>
-								<td>{{ $jabatan->nama }}</td>
+								<td>{{ $pangkat->nama }}</td>
 								<td>
-									<a class="btn btn-primary btn-sm" href="{{ route('jabatan.show', $jabatan->slug) }}">
+									<a class="btn btn-primary btn-sm" href="{{ route('pangkat.show', $pangkat->slug) }}">
 										<i class="fas fa-folder"></i>
 										View
 									</a>
-									<a class="btn btn-info btn-sm" href="{{ route('jabatan.edit', $jabatan->slug) }}">
+									<a class="btn btn-info btn-sm" href="{{ route('pangkat.edit', $pangkat->slug) }}">
 										<i class="fas fa-pencil-alt"></i>
 										Edit
 									</a>
-									<form action="{{ route('jabatan.destroy', $jabatan->slug) }}" method="post" class="d-inline">
+									<form action="{{ route('pangkat.destroy', $pangkat->slug) }}" method="post" class="d-inline">
 										@method('delete')
 										@csrf
-										<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $jabatan->nama }}">
+										<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $pangkat->nama }}">
 											<i class="fas fa-trash"></i>
 											Delete
 										</button>

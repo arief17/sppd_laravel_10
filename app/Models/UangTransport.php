@@ -14,11 +14,21 @@ class UangTransport extends Model
     use HasFactory, Sluggable, SoftDeletes;
 
     protected $guarded = ['id'];
-    protected $with = ['author'];
+    protected $with = ['author', 'wilayah', 'alat_angkut'];
 
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
+    }
+
+    public function wilayah(): BelongsTo
+    {
+        return $this->belongsTo(KotaKabupaten::class, 'wilayah_id');
+    }
+
+    public function alat_angkut(): BelongsTo
+    {
+        return $this->belongsTo(AlatAngkut::class, 'alat_angkut_id');
     }
 
     public function biaya_perdins(): HasMany
@@ -35,7 +45,7 @@ class UangTransport extends Model
     {
         return [
             'slug' => [
-                'source' => 'keterangan'
+                'source' => ['wilayah.nama', 'alat_angkut.nama']
             ]
         ];
     }

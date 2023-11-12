@@ -14,6 +14,7 @@ use App\Http\Controllers\KotaKabupatenController;
 use App\Http\Controllers\LaporanPerdinController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PangkatController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PerdinPdfController;
 use App\Http\Controllers\ProvinsiController;
@@ -58,8 +59,9 @@ Route::middleware('can:isAdmin')->group(function(){
 	Route::resource('/dashboard/jabatan', JabatanController::class)->middleware('auth');
 	Route::resource('/dashboard/jenis-perdin', JenisPerdinController::class)->middleware('auth');
 	Route::resource('/dashboard/kegiatan', KegiatanController::class)->middleware('auth');
-	Route::resource('/dashboard/ketentuan', KetentuanController::class)->middleware('auth');
+	Route::resource('/dashboard/ketentuan', KetentuanController::class)->except('create', 'store')->middleware('auth');
 	Route::resource('/dashboard/kota-kabupaten', KotaKabupatenController::class)->middleware('auth');
+	Route::resource('/dashboard/pangkat', PangkatController::class)->middleware('auth');
 	Route::resource('/dashboard/pegawai', PegawaiController::class)->middleware('auth');
 	Route::resource('/dashboard/provinsi', ProvinsiController::class)->middleware('auth');
 	Route::resource('/dashboard/seksi', SeksiController::class)->middleware('auth');
@@ -67,14 +69,17 @@ Route::middleware('can:isAdmin')->group(function(){
 	Route::resource('/dashboard/uang-harian', UangHarianController::class)->middleware('auth');
 	Route::resource('/dashboard/uang-transport', UangTransportController::class)->middleware('auth');
 	Route::resource('/dashboard/user', UserController::class)->middleware('auth');
-	
+});
+
+Route::middleware('can:isApproval')->group(function(){
 	Route::controller(StatusPerdinController::class)->group(function(){
 		Route::put('/dashboard/status-perdin/approve/{id}', 'approve')->name('status-perdin.approve')->middleware('auth');
 		Route::put('/dashboard/status-perdin/tolak/{id}', 'tolak')->name('status-perdin.tolak')->middleware('auth');
 	});
 });
 
-Route::middleware('can:isAdminOrOperator')->group(function(){
+
+Route::middleware('can:isOperator')->group(function(){
 	Route::controller(DataPerdinController::class)->group(function(){
 		Route::get('/dashboard/data-perdin/status/{status}', 'index')->name('data-perdin.index')->middleware('auth');
 	});	

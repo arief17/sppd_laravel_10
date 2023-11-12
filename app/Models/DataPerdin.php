@@ -33,6 +33,25 @@ class DataPerdin extends Model
         })->get();
     }
     
+    public static function getTotalByStatus($statusArray = null, $isCurrentMonth = false)
+    {
+        $query = self::query();
+        
+        if ($statusArray) {
+            $query->whereHas('status', function ($query) use ($statusArray) {
+                foreach ($statusArray as $field => $value) {
+                    $query->where($field, $value);
+                }
+            });
+        }
+        
+        if ($isCurrentMonth) {
+            $query->whereMonth('created_at', '=', now()->month);
+        }
+        
+        return $query->count();
+    }
+    
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');

@@ -36,7 +36,6 @@ class JabatanController extends Controller
     {
         $validatedData = $request->validate([
             'nama' => 'required|min:3|max:100',
-            'jabatan_singkat' => 'required|min:3|max:100',
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(Jabatan::class, 'slug', $request->nama);
@@ -75,7 +74,6 @@ class JabatanController extends Controller
     {
         $validatedData = $request->validate([
             'nama' => 'required|min:3|max:100',
-            'jabatan_singkat' => 'required|min:3|max:100',
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(Jabatan::class, 'slug', $request->nama);

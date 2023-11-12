@@ -65,16 +65,16 @@
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="ruang_id" class="form-label">Ruang</label>
-						<select name="ruang_id" id="ruang_id" class="form-control form-select @error('ruang_id') is-invalid @enderror">
-							<option value="">Pilih Ruang</option>
-							@foreach ($ruangs as $ruang)
-							<option value="{{ $ruang->id }}" @selected(old('ruang_id') == $ruang->id)>
-								{{ $ruang->nama }}
+						<label for="pangkat_id" class="form-label">Pangkat</label>
+						<select name="pangkat_id" id="pangkat_id" class="form-control form-select @error('pangkat_id') is-invalid @enderror">
+							<option value="">Pilih Pangkat</option>
+							@foreach ($pangkats as $pangkat)
+							<option value="{{ $pangkat->id }}" @selected(old('pangkat_id') == $pangkat->id)>
+								{{ $pangkat->nama }}
 							</option>
 							@endforeach
 						</select>
-						@error('ruang_id')
+						@error('pangkat_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>

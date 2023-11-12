@@ -20,10 +20,11 @@ return new class extends Migration
             $table->string('no_hp')->unique();
             $table->unsignedBigInteger('seksi_id');
             $table->unsignedBigInteger('golongan_id');
-            $table->unsignedBigInteger('ruang_id');
+            $table->unsignedBigInteger('pangkat_id');
             $table->unsignedBigInteger('jabatan_id');
             $table->boolean('pptk');
             $table->date('last_perdin')->nullable();
+            $table->unsignedBigInteger('ketentuan_id');
             $table->unsignedBigInteger('author_id');
             $table->timestamps();
             $table->softDeletes();

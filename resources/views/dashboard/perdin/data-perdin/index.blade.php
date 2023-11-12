@@ -38,10 +38,10 @@
 								<td>{{ $loop->iteration }}</td>
 								<td>
 									<div class="btn-group" role="group">
-										@can('isAdmin')
+										@can('isApproval')
 										<a class="modal-effect btn {{ $data_perdin->status->approve ? 'btn-success' : 'btn-danger' }} btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#approve-{{ $data_perdin->status_id }}">Approve</a>
 										@else
-										<button class="not-admin btn {{ $data_perdin->status->approve ? 'btn-success' : 'btn-danger' }} btn-sm">Approve</button>
+										<button class="not-approval btn {{ $data_perdin->status->approve ? 'btn-success' : 'btn-danger' }} btn-sm">Approve</button>
 										@endcan
 										
 										@if ($data_perdin->status->approve)
@@ -168,9 +168,9 @@
 				confirmButtonText: 'Ok',
 			});
 		});
-		$('.not-admin').click(function(e) {
+		$('.not-approval').click(function(e) {
 			Swal.fire({
-				title: 'Hanya admin yang bisa approve',
+				title: 'Hanya Approval yang bisa approve',
 				icon: 'warning',
 				confirmButtonColor: '#3085d6',
 				confirmButtonText: 'Ok',

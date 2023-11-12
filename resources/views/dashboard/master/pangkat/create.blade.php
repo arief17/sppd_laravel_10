@@ -9,7 +9,7 @@
 				<h4 class="card-title mb-1">{{ $title }}</h4>
 			</div>
 			<div class="card-body pt-0">
-				<form action="{{ route('jabatan.index') }}" method="post">
+				<form action="{{ route('pangkat.index') }}" method="post">
 					@csrf
 					
 					<div class="form-group">

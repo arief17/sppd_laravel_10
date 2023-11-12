@@ -10,6 +10,10 @@
 			padding: 5px;
 			vertical-align: top;
 		}
+
+		p, td {
+			font-size: 15px;
+		}
 	</style>
 </head>
 <body style="font-family: Times, serif; margin: 30px;">
@@ -68,11 +72,7 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<ul style="padding-left: 20px;">
-						<li>{{ $laporan_perdin->maksud1 }}</li>
-						<li>{{ $laporan_perdin->maksud2 }}</li>
-						<li>{{ $laporan_perdin->maksud3 }}</li>
-					</ul>
+						{!! nl2br($laporan_perdin->maksud) !!}
 				</td>
 			</tr>
 			<tr>
@@ -82,9 +82,7 @@
 			<tr>
 				<td colspan="3">
 					<ul style="padding-left: 20px;">
-						<li>{{ $laporan_perdin->kegiatan1 }}</li>
-						<li>{{ $laporan_perdin->kegiatan2 }}</li>
-						<li>{{ $laporan_perdin->kegiatan3 }}</li>
+						{!! nl2br($laporan_perdin->kegiatan) !!}
 					</ul>
 				</td>
 			</tr>
@@ -95,9 +93,7 @@
 			<tr>
 				<td colspan="3">
 					<ul style="padding-left: 20px;">
-						<li>{{ $laporan_perdin->hasil1 }}</li>
-						<li>{{ $laporan_perdin->hasil2 }}</li>
-						<li>{{ $laporan_perdin->hasil3 }}</li>
+						{!! nl2br($laporan_perdin->hasil) !!}
 					</ul>
 				</td>
 			</tr>
@@ -108,9 +104,7 @@
 			<tr>
 				<td colspan="3">
 					<ul style="padding-left: 20px;">
-						<li>{{ $laporan_perdin->kesimpulan1 }}</li>
-						<li>{{ $laporan_perdin->kesimpulan2 }}</li>
-						<li>{{ $laporan_perdin->kesimpulan3 }}</li>
+						{!! nl2br($laporan_perdin->kesimpulan) !!}
 					</ul>
 				</td>
 			</tr>

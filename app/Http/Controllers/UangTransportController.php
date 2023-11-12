@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AlatAngkut;
+use App\Models\KotaKabupaten;
 use App\Models\UangTransport;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
@@ -26,6 +28,8 @@ class UangTransportController extends Controller
     {
         return view('dashboard.master.uang-transport.create', [
             'title' => 'Tambah Uang Transport',
+            'wilayahs' => KotaKabupaten::all(),
+            'alat_angkuts' => AlatAngkut::all(),
         ]);
     }
 
@@ -35,18 +39,22 @@ class UangTransportController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'keterangan' => 'required',
-            'eselon_i' => 'required|integer',
-            'eselon_ii' => 'required|integer',
-            'eselon_iii' => 'required|integer',
-            'eselon_iv' => 'required|integer',
-            'golongan_iv' => 'required|integer',
-            'golongan_iii' => 'required|integer',
-            'golongan_ii' => 'required|integer',
-            'golongan_i' => 'required|integer',
+            'wilayah_id' => 'required',
+            'alat_angkut_id' => 'required',
+            'eselon_i' => 'required|numeric',
+            'eselon_ii' => 'required|numeric',
+            'eselon_iii' => 'required|numeric',
+            'eselon_iv' => 'required|numeric',
+            'golongan_iv' => 'required|numeric',
+            'golongan_iii' => 'required|numeric',
+            'golongan_ii' => 'required|numeric',
+            'golongan_i' => 'required|numeric',
         ]);
         
-        $validatedData['slug'] = SlugService::createSlug(UangTransport::class, 'slug', $request->keterangan);
+        $wilayah = KotaKabupaten::where('id', $request->wilayah_id)->get('nama');
+        $alat_angkut = AlatAngkut::where('id', $request->alat_angkut_id)->get('nama');
+
+        $validatedData['slug'] = SlugService::createSlug(UangTransport::class, 'slug', "$wilayah $alat_angkut");
         $validatedData['author_id'] = auth()->user()->id;
         
         UangTransport::create($validatedData);
@@ -72,6 +80,8 @@ class UangTransportController extends Controller
         return view('dashboard.master.uang-transport.edit', [
             'title' => 'Perbarui Uang Transport',
             'uang_transport' => $uangTransport,
+            'wilayahs' => KotaKabupaten::all(),
+            'alat_angkuts' => AlatAngkut::all(),
         ]);
     }
 
@@ -81,18 +91,22 @@ class UangTransportController extends Controller
     public function update(Request $request, UangTransport $uangTransport)
     {
         $validatedData = $request->validate([
-            'keterangan' => 'required',
-            'eselon_i' => 'required|integer',
-            'eselon_ii' => 'required|integer',
-            'eselon_iii' => 'required|integer',
-            'eselon_iv' => 'required|integer',
-            'golongan_iv' => 'required|integer',
-            'golongan_iii' => 'required|integer',
-            'golongan_ii' => 'required|integer',
-            'golongan_i' => 'required|integer',
+            'wilayah_id' => 'required',
+            'alat_angkut_id' => 'required',
+            'eselon_i' => 'required|numeric',
+            'eselon_ii' => 'required|numeric',
+            'eselon_iii' => 'required|numeric',
+            'eselon_iv' => 'required|numeric',
+            'golongan_iv' => 'required|numeric',
+            'golongan_iii' => 'required|numeric',
+            'golongan_ii' => 'required|numeric',
+            'golongan_i' => 'required|numeric',
         ]);
         
-        $validatedData['slug'] = SlugService::createSlug(UangTransport::class, 'slug', $request->keterangan);
+        $wilayah = KotaKabupaten::where('id', $request->wilayah_id)->get('nama');
+        $alat_angkut = AlatAngkut::where('id', $request->alat_angkut_id)->get('nama');
+
+        $validatedData['slug'] = SlugService::createSlug(UangTransport::class, 'slug', "$wilayah $alat_angkut");
         $validatedData['author_id'] = auth()->user()->id;
         
         UangTransport::where('id', $uangTransport->id)->update($validatedData);

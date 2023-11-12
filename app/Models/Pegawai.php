@@ -14,7 +14,7 @@ class Pegawai extends Model
     use HasFactory, Sluggable, SoftDeletes;
 
     protected $guarded = ['id'];
-    protected $with = ['author', 'seksi', 'golongan', 'jabatan', 'ruang'];
+    protected $with = ['author', 'seksi', 'golongan', 'jabatan', 'pangkat'];
 
     public function author(): BelongsTo
     {
@@ -31,14 +31,19 @@ class Pegawai extends Model
         return $this->belongsTo(Golongan::class, 'golongan_id');
     }
 
-    public function ruang(): BelongsTo
+    public function pangkat(): BelongsTo
     {
-        return $this->belongsTo(Ruang::class, 'ruang_id');
+        return $this->belongsTo(Pangkat::class, 'pangkat_id');
     }
 
     public function jabatan(): BelongsTo
     {
         return $this->belongsTo(Jabatan::class, 'jabatan_id');
+    }
+
+    public function ketentuan(): BelongsTo
+    {
+        return $this->belongsTo(Ketentuan::class, 'ketentuan_id');
     }
 
     public function ketentuan_pptks(): HasMany

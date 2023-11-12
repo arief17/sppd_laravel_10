@@ -40,8 +40,8 @@
 							<td style="width: 90%">{{ $pegawai->pptk ? 'Ya' : 'Tidak' }}</td>
 						</tr>
 						<tr>
-							<th>Ruang:</th>
-							<td style="width: 90%">{{ $pegawai->ruang->nama }}</td>
+							<th>Pangkat:</th>
+							<td style="width: 90%">{{ $pegawai->pangkat->nama }}</td>
 						</tr>
 						<tr>
 							<th>Golongan:</th>

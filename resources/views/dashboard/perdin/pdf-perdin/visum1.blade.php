@@ -10,6 +10,10 @@
 			padding: 5px;
 			border: 1px solid black;
 		}
+
+		p, td {
+			font-size: 15px;
+		}
 	</style>
 </head>
 <body style="font-family: Times, serif; margin: 30px;">
@@ -84,7 +88,7 @@
 					</td>
 					<td colspan="2">
 						<ol style="list-style-type: lower-alpha; padding-left: 20px;">
-							<li>{{ $data_perdin->pegawai_diperintah->ruang->nama }}</li>
+							<li>{{ $data_perdin->pegawai_diperintah->pangkat->nama }}</li>
 							<li>{{ $data_perdin->pegawai_diperintah->jabatan->nama }}</li>
 							<li>{{ $data_perdin->biaya }}</li>
 						</ol>

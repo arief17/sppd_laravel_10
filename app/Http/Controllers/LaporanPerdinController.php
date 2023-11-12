@@ -61,18 +61,12 @@ class LaporanPerdinController extends Controller
     public function update(Request $request, LaporanPerdin $laporanPerdin)
     {
         $validatedData = $request->validate([
-            'maksud1' => 'required',
-            'maksud2' => 'required',
-            'maksud3' => 'required',
-            'kegiatan1' => 'required',
-            'kegiatan2' => 'required',
-            'kegiatan3' => 'required',
-            'hasil1' => 'required',
-            'hasil2' => 'required',
-            'hasil3' => 'required',
-            'kesimpulan1' => 'required',
-            'kesimpulan2' => 'required',
-            'kesimpulan3' => 'required',
+            'tgl_laporan' => 'required|date',
+            'nomor_surat' => 'required|numeric',
+            'maksud' => 'required',
+            'kegiatan' => 'required',
+            'hasil' => 'required',
+            'kesimpulan' => 'required',
             'file_laporan' => 'mimes:pdf|file|max:10000',
         ]);
 

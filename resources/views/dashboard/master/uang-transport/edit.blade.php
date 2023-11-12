@@ -14,9 +14,32 @@
 					@method('put')
 					
 					<div class="form-group">
-						<label for="keterangan">Keterangan</label>
-						<input name="keterangan" value="{{ old('keterangan', $uang_transport->keterangan) }}" type="text" class="form-control @error('keterangan') is-invalid @enderror" id="keterangan" placeholder="Masukan keterangan">
-						@error('keterangan')
+						<label for="wilayah_id" class="form-label">Wilayah</label>
+						<select name="wilayah_id" id="wilayah_id" class="form-control form-select @error('wilayah_id') is-invalid @enderror">
+							<option value="">Pilih Wilayah</option>
+							@foreach ($wilayahs as $wilayah)
+							<option value="{{ $wilayah->id }}" @selected(old('wilayah_id', $uang_transport->wilayah_id) == $wilayah->id)>
+								{{ $wilayah->nama }}
+							</option>
+							@endforeach
+						</select>
+						@error('wilayah_id')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+						@enderror
+					</div>
+					<div class="form-group">
+						<label for="alat_angkut_id" class="form-label">Alat Angkut</label>
+						<select name="alat_angkut_id" id="alat_angkut_id" class="form-control form-select @error('alat_angkut_id') is-invalid @enderror">
+							<option value="">Pilih Alat Angkut</option>
+							@foreach ($alat_angkuts as $alat_angkut)
+							<option value="{{ $alat_angkut->id }}" @selected(old('alat_angkut_id', $uang_transport->alat_angkut_id) == $alat_angkut->id)>
+								{{ $alat_angkut->nama }}
+							</option>
+							@endforeach
+						</select>
+						@error('alat_angkut_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>

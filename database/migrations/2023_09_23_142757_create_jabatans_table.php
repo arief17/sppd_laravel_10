@@ -15,7 +15,6 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('nama');
             $table->string('slug')->unique();
-            $table->string('jabatan_singkat');
             $table->unsignedBigInteger('author_id');
             $table->timestamps();
             $table->softDeletes();

@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Golongan;
 use App\Models\Jabatan;
+use App\Models\Ketentuan;
 use App\Models\Pegawai;
-use App\Models\Ruang;
+use App\Models\Pangkat;
 use App\Models\Seksi;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
@@ -31,7 +32,7 @@ class PegawaiController extends Controller
         return view('dashboard.master.pegawai.create', [
             'title' => 'Tambah Pegawai',
             'seksis' => Seksi::all(),
-            'ruangs' => Ruang::all(),
+            'pangkats' => Pangkat::all(),
             'jabatans' => Jabatan::all(),
             'golongans' => Golongan::all(),
         ]);
@@ -49,7 +50,7 @@ class PegawaiController extends Controller
             'no_hp' => 'required|numeric|unique:pegawais',
             'seksi_id' => 'required',
             'golongan_id' => 'required',
-            'ruang_id' => 'required',
+            'pangkat_id' => 'required',
             'jabatan_id' => 'required',
             'pptk' => 'boolean',
         ]);
@@ -60,6 +61,9 @@ class PegawaiController extends Controller
 
         $validatedData['slug'] = SlugService::createSlug(Pegawai::class, 'slug', $request->nama);
         $validatedData['author_id'] = auth()->user()->id;
+
+        $ketentuan = Ketentuan::create(['author_id' => auth()->user()->id]);
+        $validatedData['ketentuan_id'] = $ketentuan->id;
 
         Pegawai::create($validatedData);
         return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil diperbarui!');
@@ -85,7 +89,7 @@ class PegawaiController extends Controller
             'title' => 'Perbarui Pegawai',
             'pegawai' => $pegawai,
             'seksis' => Seksi::all(),
-            'ruangs' => Ruang::all(),
+            'pangkats' => Pangkat::all(),
             'jabatans' => Jabatan::all(),
             'golongans' => Golongan::all(),
         ]);
@@ -100,7 +104,7 @@ class PegawaiController extends Controller
             'nama' => 'required|min:3|max:100',
             'seksi_id' => 'required',
             'golongan_id' => 'required',
-            'ruang_id' => 'required',
+            'pangkat_id' => 'required',
             'jabatan_id' => 'required',
             'pptk' => '',
         ];

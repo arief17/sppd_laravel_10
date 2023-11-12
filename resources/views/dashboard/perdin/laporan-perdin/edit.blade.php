@@ -14,24 +14,34 @@
 					<tr>
 						<td class="align-middle">Tanggal Laporan</td>
 						<td>
-							{{ now()->formatLocalized('%d %B %Y') }}
+							<input name="tgl_laporan" value="{{ old('tgl_laporan', $laporan_perdin->tgl_laporan) }}" type="date" class="form-control @error('tgl_laporan') is-invalid @enderror" id="tgl_laporan" placeholder="Masukan tgl_laporan">
+							@error('tgl_laporan')
+							<div class="invalid-feedback">
+								{{ $message }}
+							</div>
+							@enderror
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2">
-							Sehubungan adanya Surat Dari Seksi Administrasi mengenai Pengantaran PKL Nomor 901390 pada tanggal 14 Oktober 2023 maka kami akan melaksanakan perjalanan dinas untuk mengidentifikasi masalah tersebut.															</td>
+							Sehubungan adanya Surat Dari {{ $laporan_perdin->data_perdin->surat_dari }} mengenai {{ $laporan_perdin->data_perdin->perihal }} Nomor {{ $laporan_perdin->data_perdin->nomor_surat }} pada {{ Carbon\Carbon::parse($laporan_perdin->data_perdin->tgl_surat)->formatLocalized('%d %B %Y') }} maka kami akan melaksanakan perjalanan dinas untuk mengidentifikasi masalah tersebut.															</td>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2" class="fw-bold">A. Dasar Hukum Perjalanan Dinas</td>
 					</tr>
 					<tr>
-						<td colspan="2">Surat Perintah Tugas dari Atas Nama Kepala Dinas Pekerjaan Umum dan Penataan Ruang.</td>
+						<td colspan="2">Surat Perintah Tugas dari Atas Nama {{ $laporan_perdin->data_perdin->tanda_tangan->pegawai->seksi->nama }}</td>
 					</tr>
 					<tr>
 						<td class="align-middle">Nomor</td>
 						<td>
-							{{ $laporan_perdin->data_perdin->nomor_surat }}
+							<input name="nomor_surat" value="{{ old('nomor_surat', $laporan_perdin->nomor_surat) }}" type="text" class="form-control @error('nomor_surat') is-invalid @enderror" id="nomor_surat" placeholder="Masukan nomor_surat">
+							@error('nomor_surat')
+							<div class="invalid-feedback">
+								{{ $message }}
+							</div>
+							@enderror
 						</td>
 					</tr>
 					<tr>
@@ -51,28 +61,8 @@
 					</tr>
 					<tr>
 						<td>
-							<textarea name="maksud1" class="form-control @error('maksud1') is-invalid @enderror" placeholder="Masukan Maksud" rows="3">{{ old('maksud1', $laporan_perdin->maksud1) }}</textarea>
-							@error('maksud1')
-							<div class="invalid-feedback">
-								{{ $message }}
-							</div>
-							@enderror
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<textarea name="maksud2" class="form-control @error('maksud2') is-invalid @enderror" placeholder="Masukan Maksud" rows="3">{{ old('maksud2', $laporan_perdin->maksud2) }}</textarea>
-							@error('maksud2')
-							<div class="invalid-feedback">
-								{{ $message }}
-							</div>
-							@enderror
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<textarea name="maksud3" class="form-control @error('maksud3') is-invalid @enderror" placeholder="Masukan Maksud" rows="3">{{ old('maksud3', $laporan_perdin->maksud3) }}</textarea>
-							@error('maksud3')
+							<textarea name="maksud" class="form-control @error('maksud') is-invalid @enderror" placeholder="Masukan Maksud" rows="3">{{ old('maksud', $laporan_perdin->maksud) }}</textarea>
+							@error('maksud')
 							<div class="invalid-feedback">
 								{{ $message }}
 							</div>
@@ -92,28 +82,8 @@
 					</tr>
 					<tr>
 						<td>
-							<textarea name="kegiatan1" class="form-control @error('kegiatan1') is-invalid @enderror" placeholder="Masukan Maksud" rows="3">{{ old('kegiatan1', $laporan_perdin->kegiatan1) }}</textarea>
-							@error('kegiatan1')
-							<div class="invalid-feedback">
-								{{ $message }}
-							</div>
-							@enderror
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<textarea name="kegiatan2" class="form-control @error('kegiatan2') is-invalid @enderror" placeholder="Masukan Maksud" rows="3">{{ old('kegiatan2', $laporan_perdin->kegiatan2) }}</textarea>
-							@error('kegiatan2')
-							<div class="invalid-feedback">
-								{{ $message }}
-							</div>
-							@enderror
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<textarea name="kegiatan3" class="form-control @error('kegiatan3') is-invalid @enderror" placeholder="Masukan Maksud" rows="3">{{ old('kegiatan3', $laporan_perdin->kegiatan3) }}</textarea>
-							@error('kegiatan3')
+							<textarea name="kegiatan" class="form-control @error('kegiatan') is-invalid @enderror" placeholder="Masukan Maksud" rows="3">{{ old('kegiatan', $laporan_perdin->kegiatan) }}</textarea>
+							@error('kegiatan')
 							<div class="invalid-feedback">
 								{{ $message }}
 							</div>
@@ -133,28 +103,8 @@
 					</tr>
 					<tr>
 						<td>
-							<textarea name="hasil1" class="form-control @error('hasil1') is-invalid @enderror" placeholder="Masukan Maksud" rows="3">{{ old('hasil1', $laporan_perdin->hasil1) }}</textarea>
-							@error('hasil1')
-							<div class="invalid-feedback">
-								{{ $message }}
-							</div>
-							@enderror
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<textarea name="hasil2" class="form-control @error('hasil2') is-invalid @enderror" placeholder="Masukan Maksud" rows="3">{{ old('hasil2', $laporan_perdin->hasil2) }}</textarea>
-							@error('hasil2')
-							<div class="invalid-feedback">
-								{{ $message }}
-							</div>
-							@enderror
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<textarea name="hasil3" class="form-control @error('hasil3') is-invalid @enderror" placeholder="Masukan Maksud" rows="3">{{ old('hasil3', $laporan_perdin->hasil3) }}</textarea>
-							@error('hasil3')
+							<textarea name="hasil" class="form-control @error('hasil') is-invalid @enderror" placeholder="Masukan Maksud" rows="3">{{ old('hasil', $laporan_perdin->hasil) }}</textarea>
+							@error('hasil')
 							<div class="invalid-feedback">
 								{{ $message }}
 							</div>
@@ -174,28 +124,8 @@
 					</tr>
 					<tr>
 						<td>
-							<textarea name="kesimpulan1" class="form-control @error('kesimpulan1') is-invalid @enderror" placeholder="Masukan Maksud" rows="3">{{ old('kesimpulan1', $laporan_perdin->kesimpulan1) }}</textarea>
-							@error('kesimpulan1')
-							<div class="invalid-feedback">
-								{{ $message }}
-							</div>
-							@enderror
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<textarea name="kesimpulan2" class="form-control @error('kesimpulan2') is-invalid @enderror" placeholder="Masukan Maksud" rows="3">{{ old('kesimpulan2', $laporan_perdin->kesimpulan2) }}</textarea>
-							@error('kesimpulan2')
-							<div class="invalid-feedback">
-								{{ $message }}
-							</div>
-							@enderror
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<textarea name="kesimpulan3" class="form-control @error('kesimpulan3') is-invalid @enderror" placeholder="Masukan Maksud" rows="3">{{ old('kesimpulan3', $laporan_perdin->kesimpulan3) }}</textarea>
-							@error('kesimpulan3')
+							<textarea name="kesimpulan" class="form-control @error('kesimpulan') is-invalid @enderror" placeholder="Masukan Maksud" rows="3">{{ old('kesimpulan', $laporan_perdin->kesimpulan) }}</textarea>
+							@error('kesimpulan')
 							<div class="invalid-feedback">
 								{{ $message }}
 							</div>

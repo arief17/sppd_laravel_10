@@ -9,11 +9,11 @@
 				<div class="d-flex justify-content-between">
 					<h4 class="card-title mg-b-0">{{ $title }}</h4>
 					<div>
-						<a class="btn btn-info btn-sm" href="{{ route('ketentuan.edit', $ketentuan->slug) }}">
+						<a class="btn btn-info btn-sm" href="{{ route('ketentuan.edit', $ketentuan->id) }}">
 							<i class="fas fa-pencil-alt"></i>
 							Edit
 						</a>
-						<form action="{{ route('ketentuan.destroy', $ketentuan->slug) }}" method="post" class="d-inline">
+						<form action="{{ route('ketentuan.destroy', $ketentuan->id) }}" method="post" class="d-inline">
 							@method('delete')
 							@csrf
 							<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $ketentuan->nama }}">
@@ -28,28 +28,16 @@
 				<div class="table-responsive">
 					<table class="table mg-b-0 text-md-nowrap border-bottom">
 						<tr>
-							<th>Kegiatan:</th>
-							<td style="width: 90%">{{ $ketentuan->kegiatan->nama }}</td>
+							<th>Nama:</th>
+							<td style="width: 90%">{{ $ketentuan->pegawai->nama }}</td>
 						</tr>
 						<tr>
-							<th>Kode Rek Dalam Daerah:</th>
-							<td style="width: 90%">{{ $ketentuan->kode_rek_dalam_daerah }}</td>
+							<th>Jumlah Perdin:</th>
+							<td style="width: 90%">{{ $ketentuan->jumlah_perdin }}</td>
 						</tr>
 						<tr>
-							<th>Kode Rek Luar Daerah:</th>
-							<td style="width: 90%">{{ $ketentuan->kode_rek_luar_daerah }}</td>
-						</tr>
-						<tr>
-							<th>PPTK:</th>
-							<td style="width: 90%">{{ $ketentuan->pptk->nama }}</td>
-						</tr>
-						<tr>
-							<th>Bendahara:</th>
-							<td style="width: 90%">{{ $ketentuan->bendahara->nama }}</td>
-						</tr>
-						<tr>
-							<th>Pelaksana Administrasi:</th>
-							<td style="width: 90%">{{ $ketentuan->pelaksana_administrasi->nama }}</td>
+							<th>Maksimal Perdin:</th>
+							<td style="width: 90%">{{ $ketentuan->max_perdin }}</td>
 						</tr>
 					</table>
 				</div>

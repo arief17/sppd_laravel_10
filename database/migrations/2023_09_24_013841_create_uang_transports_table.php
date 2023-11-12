@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('uang_transports', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('keterangan');
             $table->string('slug')->unique();
             $table->string('eselon_i');
             $table->string('eselon_ii');
@@ -23,6 +22,8 @@ return new class extends Migration
             $table->string('golongan_iii');
             $table->string('golongan_ii');
             $table->string('golongan_i');
+            $table->unsignedBigInteger('wilayah_id');
+            $table->unsignedBigInteger('alat_angkut_id');
             $table->unsignedBigInteger('author_id');
             $table->timestamps();
             $table->softDeletes();

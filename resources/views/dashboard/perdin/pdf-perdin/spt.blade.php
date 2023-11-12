@@ -10,6 +10,10 @@
 			padding: 5px;
 			vertical-align: top;
 		}
+
+		p, td {
+			font-size: 15px;
+		}
 	</style>
 </head>
 <body style="font-family: Times, serif; margin: 30px;">
@@ -59,7 +63,7 @@
 				</tr>
 				<tr>
 					<td>Pangkat/Gol Ruang</td>
-					<td>: {{ $data_perdin->pegawai_diperintah->ruang->nama }}</td>
+					<td>: {{ $data_perdin->pegawai_diperintah->pangkat->nama }}</td>
 				</tr>
 				<tr>
 					<td>Jabatan</td>

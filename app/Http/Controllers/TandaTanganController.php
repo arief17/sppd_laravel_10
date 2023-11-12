@@ -45,9 +45,9 @@ class TandaTanganController extends Controller
             $validatedData['status'] = 0;
         }
 
-        $pegawai = Pegawai::where('id', $request->pegawai_id)->get('nama');
+        $pegawai = Pegawai::where('id', $request->pegawai_id)->first();
         
-        $validatedData['slug'] = SlugService::createSlug(TandaTangan::class, 'slug', $pegawai + " " + $pegawai->jabatan->nama);
+        $validatedData['slug'] = SlugService::createSlug(TandaTangan::class, 'slug', $pegawai->nama . " " . $pegawai->jabatan->nama);
         $validatedData['author_id'] = auth()->user()->id;
         
         TandaTangan::create($validatedData);

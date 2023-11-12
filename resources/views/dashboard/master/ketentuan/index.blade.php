@@ -8,7 +8,6 @@
 			<div class="card-header">
 				<div class="d-flex align-items-center">
 					<h3 class="card-title">{{ $title }}</h3>
-					<a href="{{ route('ketentuan.create') }}" class="btn btn-primary mg-l-auto">Tambah</a>
 				</div>
 			</div>
 			<div class="card-body">
@@ -17,12 +16,9 @@
 						<thead>
 							<tr>
 								<th class="border-bottom-0" style="width: 1%">No</th>
-								<th class="border-bottom-0">Kegiatan</th>
-								<th class="border-bottom-0">Kode Rek Dalam Daerah</th>
-								<th class="border-bottom-0">Kode Rek Luar Daerah</th>
-								<th class="border-bottom-0">PPTK</th>
-								<th class="border-bottom-0">Bendahara</th>
-								<th class="border-bottom-0">Pelaksana Administrasi</th>
+								<th class="border-bottom-0">Nama</th>
+								<th class="border-bottom-0">Jumlah Perdin</th>
+								<th class="border-bottom-0">Maksimal Perdin</th>
 								<th class="border-bottom-0" style="width: 1%">Aksi</th>
 							</tr>
 						</thead>
@@ -30,25 +26,22 @@
 							@foreach ($ketentuans as $ketentuan)
 							<tr>
 								<td>{{ $loop->iteration }}</td>
-								<td>{{ $ketentuan->kegiatan->nama }}</td>
-								<td>{{ $ketentuan->kode_rek_dalam_daerah }}</td>
-								<td>{{ $ketentuan->kode_rek_luar_daerah }}</td>
-								<td>{{ $ketentuan->pptk->nama }}</td>
-								<td>{{ $ketentuan->bendahara->nama }}</td>
-								<td>{{ $ketentuan->pelaksana_administrasi->nama }}</td>
+								<td>{{ $ketentuan->pegawai->nama }}</td>
+								<td>{{ $ketentuan->jumlah_perdin }}</td>
+								<td>{{ $ketentuan->max_perdin }}</td>
 								<td>
-									<a class="btn btn-primary btn-sm" href="{{ route('ketentuan.show', $ketentuan->slug) }}">
+									<a class="btn btn-primary btn-sm" href="{{ route('ketentuan.show', $ketentuan->id) }}">
 										<i class="fas fa-folder"></i>
 										View
 									</a>
-									<a class="btn btn-info btn-sm" href="{{ route('ketentuan.edit', $ketentuan->slug) }}">
+									<a class="btn btn-info btn-sm" href="{{ route('ketentuan.edit', $ketentuan->id) }}">
 										<i class="fas fa-pencil-alt"></i>
 										Edit
 									</a>
-									<form action="{{ route('ketentuan.destroy', $ketentuan->slug) }}" method="post" class="d-inline">
+									<form action="{{ route('ketentuan.destroy', $ketentuan->id) }}" method="post" class="d-inline">
 										@method('delete')
 										@csrf
-										<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $ketentuan->slug }}">
+										<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $ketentuan->id }}">
 											<i class="fas fa-trash"></i>
 											Delete
 										</button>

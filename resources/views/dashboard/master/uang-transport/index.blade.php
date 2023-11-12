@@ -17,7 +17,8 @@
 						<thead>
 							<tr>
 								<th class="border-bottom-0" style="width: 1%">No</th>
-								<th class="border-bottom-0">Keterangan</th>
+								<th class="border-bottom-0">Wilayah</th>
+								<th class="border-bottom-0">Alat Angkut</th>
 								<th class="border-bottom-0">Eselon I</th>
 								<th class="border-bottom-0">Eselon II</th>
 								<th class="border-bottom-0">Eselon III</th>
@@ -33,7 +34,8 @@
 							@foreach ($uang_transports as $uang_transport)
 							<tr>
 								<td>{{ $loop->iteration }}</td>
-								<td>{{ $uang_transport->keterangan }}</td>
+								<td>{{ $uang_transport->wilayah->nama }}</td>
+								<td>{{ $uang_transport->alat_angkut->nama }}</td>
 								<td>{{ $uang_transport->eselon_i }}</td>
 								<td>{{ $uang_transport->eselon_ii }}</td>
 								<td>{{ $uang_transport->eselon_iii }}</td>
