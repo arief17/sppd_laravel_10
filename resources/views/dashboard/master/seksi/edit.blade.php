@@ -5,8 +5,11 @@
 <div class="row row-sm">
 	<div class="col-lg-6 col-xl-6 col-md-12 col-sm-12">
 		<div class="card box-shadow-0 ">
-			<div class="card-header">
+			<div class="card-header d-flex justify-content-between">
 				<h4 class="card-title mb-1">{{ $title }}</h4>
+				<a class="btn btn-secondary btn-sm" href="{{ route('seksi.index') }}">
+					<i class="fa fa-reply"></i>
+				</a>
 			</div>
 			<div class="card-body pt-0">
 				<form action="{{ route('seksi.show', $seksi->slug) }}" method="post">

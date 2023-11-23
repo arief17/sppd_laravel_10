@@ -5,42 +5,49 @@
 <div class="row row-sm">
 	<div class="col-md-6">
 		<div class="card">
-			<div class="card-header pb-0">
-				<div class="d-flex justify-content-between">
-					<h4 class="card-title mg-b-0">{{ $title }}</h4>
-					<div>
-						<a class="btn btn-info btn-sm" href="{{ route('tanda-tangan.edit', $tanda_tangan->slug) }}">
-							<i class="fas fa-pencil-alt"></i>
-							Edit
-						</a>
-						<form action="{{ route('tanda-tangan.destroy', $tanda_tangan->slug) }}" method="post" class="d-inline">
-							@method('delete')
-							@csrf
-							<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $tanda_tangan->nama }}">
-								<i class="fas fa-trash"></i>
-								Delete
-							</button>
-						</form>
-					</div>
-				</div>
+			<div class="card-header d-flex justify-content-between">
+				<h4 class="card-title mb-1">{{ $title }}</h4>
+				<a class="btn btn-secondary btn-sm" href="{{ route('tanda-tangan.index') }}">
+					<i class="fa fa-reply"></i>
+				</a>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
 					<table class="table mg-b-0 text-md-nowrap border-bottom">
 						<tr>
-							<th>Nama:</th>
-							<td style="width: 90%">{{ $tanda_tangan->pegawai->nama }}</td>
+							<th style="white-space: nowrap; width: 1%;">Nama: </th>
+							<td>{{ $tanda_tangan->pegawai->nama }}</td>
 						</tr>
 						<tr>
-							<th>Jabatan</th>
-							<td style="width: 90%">{{ $tanda_tangan->pegawai->jabatan->nama }}</td>
+							<th style="white-space: nowrap; width: 1%;">Jabatan: </th>
+							<td>{{ $tanda_tangan->pegawai->jabatan->nama }}</td>
 						</tr>
 						<tr>
-							<th>Status</th>
-							<td style="width: 90%">{{ $tanda_tangan->status ? 'Aktif' : 'Tidak Aktif' }}</td>
+							<th style="white-space: nowrap; width: 1%;">Status: </th>
+							<td>{{ $tanda_tangan->status ? 'Aktif' : 'Tidak Aktif' }}</td>
+						</tr>
+						<tr>
+							<th style="white-space: nowrap; width: 1%;">Tanda Tangan: </th>
+							<td>
+								<img class="img-fluid" style="max-width: 100px;" src="{{ asset('storage/' . $tanda_tangan->file_ttd) }}" alt="{{ $tanda_tangan->nama }}">
+							</td>
 						</tr>
 					</table>
 				</div>
+			</div>
+			<div class="card-footer">
+				<a class="btn btn-info me-2" href="{{ route('tanda-tangan.edit', $tanda_tangan->slug) }}">
+					<i class="fas fa-pencil-alt"></i>
+					Edit
+				</a>
+				<form action="{{ route('tanda-tangan.destroy', $tanda_tangan->slug) }}" method="post" class="d-inline">
+					@method('delete')
+					@csrf
+					<button class="btn btn-danger" id='deleteData' data-title="{{ $tanda_tangan->nama }}">
+						<i class="fas fa-trash"></i>
+						Delete
+					</button>
+				</form>
 			</div>
 		</div>
 	</div>

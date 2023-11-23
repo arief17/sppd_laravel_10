@@ -39,8 +39,9 @@
 					</tr>
 				</table>
 				<div style="text-align: center;">
-					<p style="margin: 10px 0 50px 0;">{{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}</p>
+					<p style="margin-top: 10px;">{{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}</p>
 					
+					<img src="{{ public_path('/storage' .'/'. $data_perdin->tanda_tangan->file_ttd) }}" alt="{{ $data_perdin->tanda_tangan->nama }}" width="50">
 					<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
 					<p>NIP.{{ $data_perdin->tanda_tangan->pegawai->nip }}</p>
 				</div>
@@ -280,8 +281,9 @@
 					</tr>
 				</table>
 				<div style="text-align: center;">
-					<p style="margin: 10px 0 50px 0;">{{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}</p>
+					<p style="margin-top: 10px;">{{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}</p>
 					
+					<img src="{{ public_path('/storage' .'/'. $data_perdin->tanda_tangan->file_ttd) }}" alt="{{ $data_perdin->tanda_tangan->nama }}" width="50">
 					<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
 					<p>NIP.{{ $data_perdin->tanda_tangan->pegawai->nip }}</p>
 				</div>
@@ -289,8 +291,9 @@
 			<td style="border: 1px solid black; width: 50%;">
 				<p style="padding-left: 20px;">Telah diperiksa dengan keterangan bahwa perjalan tersebut atas perintahnya dan semata mata untuk kepentingan jabatan dalam waktu sesingkat-singkatnya</p>
 				<div style="text-align: center;">
-					<p style="margin: 10px 0 50px 0;">{{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}</p>
+					<p style="margin-top: 10px;">{{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}</p>
 					
+					<img src="{{ public_path('/storage' .'/'. $data_perdin->tanda_tangan->file_ttd) }}" alt="{{ $data_perdin->tanda_tangan->nama }}" width="50">
 					<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
 					<p>NIP.{{ $data_perdin->tanda_tangan->pegawai->nip }}</p>
 				</div>

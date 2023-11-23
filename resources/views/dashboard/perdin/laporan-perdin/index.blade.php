@@ -38,21 +38,8 @@
 										<i class="fas fa-folder"></i>
 										View
 									</a>
-									<a class="modal-effect btn btn-info btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#lap-{{ $laporan_perdin->id }}">
-										<i class="fas fa-pencil-alt"></i>
-										Edit
-									</a>
-									<form action="{{ route('laporan-perdin.destroy', $laporan_perdin->id) }}" method="post" class="d-inline">
-										@method('delete')
-										@csrf
-										<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $laporan_perdin->nama }}">
-											<i class="fas fa-trash"></i>
-											Delete
-										</button>
-									</form>
 								</td>
 								@include('dashboard.perdin.status-perdin.lap_cetak')
-								@include('dashboard.perdin.status-perdin.lap')
 							</tr>
 							@endforeach
 						</tbody>

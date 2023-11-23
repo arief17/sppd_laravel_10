@@ -8,7 +8,7 @@ use App\Models\BiayaPerdin;
 use App\Models\Bidang;
 use App\Models\Golongan;
 use App\Models\Jabatan;
-use App\Models\JenisPerdin;
+use App\Models\Area;
 use App\Models\Kegiatan;
 use App\Models\Ketentuan;
 use App\Models\KotaKabupaten;
@@ -83,49 +83,43 @@ class DatabaseSeeder extends Seeder
         Kegiatan::create([
             'nama' => 'Koordinasi dan Konsultasi ke Dalam dan Keluar Daerah pada UPTD Pengelolaan Daerah Aliran Sungai Cidurian-Cisadane',
             'slug' => 'koordinasi-dan-konsultasi-ke-dalam-dan-keluar-daerah-pada-uptd-pengelolaan-daerah-aliran-sungai-cidurian-cisadane',
+            'seksi_id' => 1,
             'author_id' => 1,
         ]);
         Kegiatan::create([
             'nama' => 'Koordinasi dan Konsultasi ke Dalam dan Keluar Daerah pada UPTD Pengelolaan Jalan Dan Jembatan Tangerang',
             'slug' => 'koordinasi-dan-konsultasi-ke-dalam-dan-keluar-daerah-pada-uptd-pengelolaan-jalan-dan-jembatan-tangerang',
+            'seksi_id' => 2,
             'author_id' => 1,
         ]);
 
-        JenisPerdin::create([
+        Area::create([
             'nama' => 'Dalam Daerah',
             'slug' => 'dalam-daerah',
             'author_id' => 1,
         ]);
-        JenisPerdin::create([
-            'nama' => 'Luar Daerah (DKI dan JABAR)',
-            'slug' => 'luar-daerah-(dki-dan-jabar)',
-            'author_id' => 1,
-        ]);
-        JenisPerdin::create([
-            'nama' => 'Luar Daerah (Selain DKI dan JABAR)',
-            'slug' => 'luar-daerah-(selain-dki-dan-jabar)',
+        Area::create([
+            'nama' => 'Luar Daerah',
+            'slug' => 'luar-daerah',
             'author_id' => 1,
         ]);
 
         Provinsi::create([
-            'nama' => 'ACEH',
-            'slug' => 'aceh',
+            'nama' => 'Banten',
+            'slug' => 'banten',
+            'area_id' => 1,
             'author_id' => 1,
         ]);
         Provinsi::create([
             'nama' => 'BALI',
             'slug' => 'bali',
-            'author_id' => 1,
-        ]);
-        Provinsi::create([
-            'nama' => 'BANGKA BELITUNG',
-            'slug' => 'bangka-belitung',
+            'area_id' => 2,
             'author_id' => 1,
         ]);
 
         KotaKabupaten::create([
-            'nama' => 'Ambon',
-            'slug' => 'ambon',
+            'nama' => 'Serang',
+            'slug' => 'serang',
             'provinsi_id' => 1,
             'author_id' => 1,
         ]);
@@ -133,12 +127,6 @@ class DatabaseSeeder extends Seeder
             'nama' => 'Balikpapan',
             'slug' => 'balikpapan',
             'provinsi_id' => 2,
-            'author_id' => 1,
-        ]);
-        KotaKabupaten::create([
-            'nama' => 'Banda Aceh',
-            'slug' => 'banda-aceh',
-            'provinsi_id' => 3,
             'author_id' => 1,
         ]);
 
@@ -345,15 +333,10 @@ class DatabaseSeeder extends Seeder
 
         TandaTangan::create([
             'slug' => 'tanda-tangan-1',
-            'pegawai_id' => 1,
-            'status' => 1,
-            'author_id' => 1,
-        ]);
-        TandaTangan::create([
-            'slug' => 'tanda-tangan-2',
             'pegawai_id' => 2,
-            'status' => 2,
-            'author_id' => 2,
+            'status' => 1,
+            'file_ttd' => 'kosong',
+            'author_id' => 1,
         ]);
 
         AlatAngkut::create([

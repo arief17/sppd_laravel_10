@@ -128,7 +128,10 @@
 			@foreach ($laporan_perdin->data_perdin->pegawai_mengikuti as $pegawai)
 			<tr>
 				<td style="width: 1%;">{{ $loop->iteration }}.</td>
-				<td>{{ $pegawai->nama }} <br> NIP.{{ $pegawai->nip }}</td>
+				<td>
+					{{ $pegawai->nama }} <br> 
+					NIP.{{ $pegawai->nip }}
+				</td>
 				<td style="vertical-align: bottom;">{{ $loop->iteration }}........................................</td>
 			</tr>
 			@endforeach

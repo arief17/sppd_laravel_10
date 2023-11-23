@@ -5,8 +5,11 @@
 <div class="row row-sm">
 	<div class="col-lg-6 col-xl-6 col-md-12 col-sm-12">
 		<div class="card box-shadow-0 ">
-			<div class="card-header">
+			<div class="card-header d-flex justify-content-between">
 				<h4 class="card-title mb-1">{{ $title }}</h4>
+				<a class="btn btn-secondary btn-sm" href="{{ route('biaya-perdin.index') }}">
+					<i class="fa fa-reply"></i>
+				</a>
 			</div>
 			<div class="card-body pt-0">
 				<form action="{{ route('biaya-perdin.index') }}" method="post">
@@ -16,7 +19,7 @@
 						<label for="area_id" class="form-label">Area</label>
 						<select name="area_id" id="area_id" class="form-control form-select @error('area_id') is-invalid @enderror">
 							<option value="">Pilih Area</option>
-							@foreach ($jenis_perdins as $area)
+							@foreach ($areas as $area)
 							<option value="{{ $area->id }}" @selected(old('area_id') == $area->id)>
 								{{ $area->nama }}
 							</option>

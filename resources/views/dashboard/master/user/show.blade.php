@@ -5,58 +5,59 @@
 <div class="row row-sm">
 	<div class="col-md-6">
 		<div class="card">
-			<div class="card-header pb-0">
-				<div class="d-flex justify-content-between">
-					<h4 class="card-title mg-b-0">{{ $title }}</h4>
-					<div>
-						<a class="btn btn-info btn-sm" href="{{ route('user.edit', $user->username) }}">
-							<i class="fas fa-pencil-alt"></i>
-							Edit
-						</a>
-						<form action="{{ route('user.destroy', $user->username) }}" method="post" class="d-inline">
-							@method('delete')
-							@csrf
-							<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $user->nama }}">
-								<i class="fas fa-trash"></i>
-								Delete
-							</button>
-						</form>
-					</div>
-				</div>
+			<div class="card-header d-flex justify-content-between">
+				<h4 class="card-title mb-1">{{ $title }}</h4>
+				<a class="btn btn-secondary btn-sm" href="{{ route('user.index') }}">
+					<i class="fa fa-reply"></i>
+				</a>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
 					<table class="table mg-b-0 text-md-nowrap border-bottom">
 						<tr>
-							<th>Nama:</th>
-							<td style="width: 90%">{{ $user->nama }}</td>
+							<th style="white-space: nowrap; width: 1%;">Nama:</th>
+							<td>{{ $user->nama }}</td>
 						</tr>
 						<tr>
-							<th>Username:</th>
-							<td style="width: 90%">{{ $user->username }}</td>
+							<th style="white-space: nowrap; width: 1%;">Username:</th>
+							<td>{{ $user->username }}</td>
 						</tr>
 						<tr>
-							<th>Email:</th>
-							<td style="width: 90%">{{ $user->email }}</td>
+							<th style="white-space: nowrap; width: 1%;">Email:</th>
+							<td>{{ $user->email }}</td>
 						</tr>
 						<tr>
-							<th>Level Admin:</th>
-							<td style="width: 90%">{{ $user->level_admin }}</td>
+							<th style="white-space: nowrap; width: 1%;">Level Admin:</th>
+							<td>{{ $user->level_admin }}</td>
 						</tr>
 						<tr>
-							<th>Seksi:</th>
-							<td style="width: 90%">{{ $user->seksi }}</td>
+							<th style="white-space: nowrap; width: 1%;">Seksi:</th>
+							<td>{{ $user->seksi }}</td>
 						</tr>
 						<tr>
-							<th>Bidang:</th>
-							<td style="width: 90%">{{ $user->bidang }}</td>
+							<th style="white-space: nowrap; width: 1%;">Bidang:</th>
+							<td>{{ $user->bidang }}</td>
 						</tr>
 						<tr>
-							<th>Last Login:</th>
-							<td style="width: 90%">{{ $user->last_login }}</td>
+							<th style="white-space: nowrap; width: 1%;">Last Login:</th>
+							<td>{{ $user->last_login }}</td>
 						</tr>
 					</table>
 				</div>
+			</div>
+			<div class="card-footer">
+				<a class="btn btn-info me-2" href="{{ route('user.edit', $user->slug) }}">
+					<i class="fas fa-pencil-alt"></i>
+					Edit
+				</a>
+				<form action="{{ route('user.destroy', $user->slug) }}" method="post" class="d-inline">
+					@method('delete')
+					@csrf
+					<button class="btn btn-danger" id='deleteData' data-title="{{ $user->nama }}">
+						<i class="fas fa-trash"></i>
+						Delete
+					</button>
+				</form>
 			</div>
 		</div>
 	</div>

@@ -1,4 +1,4 @@
-<div class="modal fade" id="approve-{{ $data_perdin->status_id }}">
+<div class="modal fade" id="approve-{{ $data_perdin->slug }}">
 	<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
 		<div class="modal-content modal-content-demo">
 			<div class="modal-header">
@@ -7,7 +7,7 @@
 			<div class="modal-body">
 				
 				<div class="py-2">
-					<form action="{{ route('status-perdin.tolak', $data_perdin->status_id) }}" method="post" class="d-inline">
+					<form action="{{ route('status-perdin.tolak', $data_perdin->slug) }}" method="post" class="d-inline">
 						@method('put')
 						@csrf
 						
@@ -26,7 +26,7 @@
 				</div>
 				
 				<div class="py-2">
-					<form action="{{ route('status-perdin.approve', $data_perdin->status_id) }}" method="post" class="d-inline">
+					<form action="{{ route('status-perdin.approve', $data_perdin->slug) }}" method="post" class="d-inline">
 						@method('put')
 						@csrf
 						

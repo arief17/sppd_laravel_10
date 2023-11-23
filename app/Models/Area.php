@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class JenisPerdin extends Model
+class Area extends Model
 {
     use HasFactory, Sluggable, SoftDeletes;
 
@@ -21,6 +21,11 @@ class JenisPerdin extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
+    public function provinsis(): HasMany
+    {
+        return $this->hasMany(Provinsi::class, 'area_id');
+    }
+
     public function biaya_perdins(): HasMany
     {
         return $this->hasMany(BiayaPerdin::class, 'area_id');
@@ -28,7 +33,7 @@ class JenisPerdin extends Model
 
     public function data_perdins(): HasMany
     {
-        return $this->hasMany(DataPerdin::class, 'jenis_perdin_id');
+        return $this->hasMany(DataPerdin::class, 'area_id');
     }
 
     public function getRouteKeyName()

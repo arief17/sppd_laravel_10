@@ -5,8 +5,11 @@
 <div class="row row-sm">
 	<div class="col-lg-6 col-xl-6 col-md-12 col-sm-12">
 		<div class="card box-shadow-0 ">
-			<div class="card-header">
+			<div class="card-header d-flex justify-content-between">
 				<h4 class="card-title mb-1">{{ $title }}</h4>
+				<a class="btn btn-secondary btn-sm" href="{{ route('provinsi.index') }}">
+					<i class="fa fa-reply"></i>
+				</a>
 			</div>
 			<div class="card-body pt-0">
 				<form action="{{ route('provinsi.show', $provinsi->slug) }}" method="post">
@@ -17,6 +20,22 @@
 						<label for="nama">Nama</label>
 						<input name="nama" value="{{ old('nama', $provinsi->nama) }}" type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukan nama">
 						@error('nama')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+						@enderror
+					</div>
+					<div class="form-group">
+						<label for="area_id" class="form-label">Area</label>
+						<select name="area_id" id="area_id" class="form-control form-select @error('area_id') is-invalid @enderror">
+							<option value="">Pilih Area</option>
+							@foreach ($areas as $area)
+							<option value="{{ $area->id }}" @selected(old('area_id', $provinsi->area_id) == $area->id)>
+								{{ $area->nama }}
+							</option>
+							@endforeach
+						</select>
+						@error('area_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>

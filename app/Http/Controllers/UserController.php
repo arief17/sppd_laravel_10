@@ -41,7 +41,7 @@ class UserController extends Controller
     {
         $validatedData = $request->validate([
             'username' => 'required|alpha_dash|min:3|max:100|unique:users',
-            'password' => ['required', 'confirmed', Password::min(5)->letters()->numbers()],
+            'password' => ['required', 'confirmed', Password::min(5)->letters()],
             'level_admin_id' => 'required',
             'seksi_id' => 'required',
         ]);
@@ -86,7 +86,7 @@ class UserController extends Controller
         }
 
         $rules = [
-            'password' => ['nullable', 'confirmed', Password::min(5)->letters()->numbers()],
+            'password' => ['nullable', 'confirmed', Password::min(5)->letters()],
             'level_admin_id' => 'required',
             'seksi_id' => 'required',
         ];

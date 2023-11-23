@@ -5,8 +5,11 @@
 <div class="row row-sm">
 	<div class="col-lg-6 col-xl-6 col-md-12 col-sm-12">
 		<div class="card box-shadow-0 ">
-			<div class="card-header">
+			<div class="card-header d-flex justify-content-between">
 				<h4 class="card-title mb-1">{{ $title }}</h4>
+				<a class="btn btn-secondary btn-sm" href="{{ route('kegiatan.index') }}">
+					<i class="fa fa-reply"></i>
+				</a>
 			</div>
 			<div class="card-body pt-0">
 				<form action="{{ route('kegiatan.show', $kegiatan->slug) }}" method="post">
@@ -17,6 +20,22 @@
 						<label for="nama">Nama</label>
 						<input name="nama" value="{{ old('nama', $kegiatan->nama) }}" type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukan nama">
 						@error('nama')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+						@enderror
+					</div>
+					<div class="form-group">
+						<label for="seksi_id" class="form-label">Seksi</label>
+						<select name="seksi_id" id="seksi_id" class="form-control form-select @error('seksi_id') is-invalid @enderror">
+							<option value="">Pilih Seksi</option>
+							@foreach ($seksis as $seksi)
+							<option value="{{ $seksi->id }}" @selected(old('seksi_id', $kegiatan->seksi_id) == $seksi->id)>
+								{{ $seksi->nama }}
+							</option>
+							@endforeach
+						</select>
+						@error('seksi_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>

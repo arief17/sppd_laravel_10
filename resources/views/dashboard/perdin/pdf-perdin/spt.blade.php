@@ -41,12 +41,14 @@
 	<div style="margin: 20px 60px 0 60px;">
 
 		<div style="text-align: center;">
-			<p style="text-decoration: underline; font-weight: bold;">SURAT PERINTAH TUGAS</p>
-			<p>No. {{ $data_perdin->id }}</p>
+			<div style="display: inline-block; text-align: left;">
+				<p style="text-decoration: underline; font-weight: bold; margin: 0;">SURAT PERINTAH TUGAS</p>
+				<p style="margin: 0;">No. </p>
+			</div>
 			<p style="margin: 10px 0;">Kepala Dinas Pekerjaan Umum dan Penataan Ruang Provinsi Banten.</p>
 			<p>MEMERINTAHKAN:</p>
-		</div>
-		
+		</div>	
+
 		<table style="width: 100%;">
 			<tr>
 				<td>Kepada</td>
@@ -105,14 +107,13 @@
 			</table>
 	
 			<div style="text-align: center;">
-				<h4 style="margin: 30px 0 80px 0; text-transform: uppercase">
+				<h4 style="margin-top: 30px; text-transform: uppercase">
 					{{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }} <br>
-					{{ $data_perdin->tanda_tangan->pegawai->seksi->nama }} <br>
 					provinsi banten
 				</h4>
-				
+				<img src="{{ public_path('/storage' .'/'. $data_perdin->tanda_tangan->file_ttd) }}" alt="{{ $data_perdin->tanda_tangan->nama }}" width="100">
 				<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
-				<p>{{ $data_perdin->tanda_tangan->pegawai->nip }}</p>
+				<p>NIP.{{ $data_perdin->tanda_tangan->pegawai->nip }}</p>
 			</div>
 		</div>
 	</div>

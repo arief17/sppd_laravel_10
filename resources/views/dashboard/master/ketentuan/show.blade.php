@@ -5,42 +5,43 @@
 <div class="row row-sm">
 	<div class="col-md-6">
 		<div class="card">
-			<div class="card-header pb-0">
-				<div class="d-flex justify-content-between">
-					<h4 class="card-title mg-b-0">{{ $title }}</h4>
-					<div>
-						<a class="btn btn-info btn-sm" href="{{ route('ketentuan.edit', $ketentuan->id) }}">
-							<i class="fas fa-pencil-alt"></i>
-							Edit
-						</a>
-						<form action="{{ route('ketentuan.destroy', $ketentuan->id) }}" method="post" class="d-inline">
-							@method('delete')
-							@csrf
-							<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $ketentuan->nama }}">
-								<i class="fas fa-trash"></i>
-								Delete
-							</button>
-						</form>
-					</div>
-				</div>
+			<div class="card-header d-flex justify-content-between">
+				<h4 class="card-title mb-1">{{ $title }}</h4>
+				<a class="btn btn-secondary btn-sm" href="{{ route('ketentuan.index') }}">
+					<i class="fa fa-reply"></i>
+				</a>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
 					<table class="table mg-b-0 text-md-nowrap border-bottom">
 						<tr>
-							<th>Nama:</th>
-							<td style="width: 90%">{{ $ketentuan->pegawai->nama }}</td>
+							<th style="white-space: nowrap; width: 1%;">Nama:</th>
+							<td>{{ $ketentuan->pegawai->nama }}</td>
 						</tr>
 						<tr>
-							<th>Jumlah Perdin:</th>
-							<td style="width: 90%">{{ $ketentuan->jumlah_perdin }}</td>
+							<th style="white-space: nowrap; width: 1%;">Jumlah Perdin:</th>
+							<td>{{ $ketentuan->jumlah_perdin }}</td>
 						</tr>
 						<tr>
-							<th>Maksimal Perdin:</th>
-							<td style="width: 90%">{{ $ketentuan->max_perdin }}</td>
+							<th style="white-space: nowrap; width: 1%;">Maksimal Perdin:</th>
+							<td>{{ $ketentuan->max_perdin }}</td>
 						</tr>
 					</table>
 				</div>
+			</div>
+			<div class="card-footer">
+				<a class="btn btn-info me-2" href="{{ route('ketentuan.edit', $ketentuan->slug) }}">
+					<i class="fas fa-pencil-alt"></i>
+					Edit
+				</a>
+				<form action="{{ route('ketentuan.destroy', $ketentuan->slug) }}" method="post" class="d-inline">
+					@method('delete')
+					@csrf
+					<button class="btn btn-danger" id='deleteData' data-title="{{ $ketentuan->nama }}">
+						<i class="fas fa-trash"></i>
+						Delete
+					</button>
+				</form>
 			</div>
 		</div>
 	</div>

@@ -8,7 +8,7 @@
 			<div class="card-header">
 				<div class="d-flex align-items-center">
 					<h3 class="card-title">{{ $title }}</h3>
-					<a href="{{ route('jenis-perdin.create') }}" class="btn btn-primary mg-l-auto">Tambah</a>
+					<a href="{{ route('area.create') }}" class="btn btn-primary mg-l-auto">Tambah</a>
 				</div>
 			</div>
 			<div class="card-body">
@@ -22,23 +22,23 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach ($jenis_perdins as $jenis_perdin)
+							@foreach ($areas as $area)
 							<tr>
 								<td>{{ $loop->iteration }}</td>
-								<td>{{ $jenis_perdin->nama }}</td>
+								<td>{{ $area->nama }}</td>
 								<td>
-									<a class="btn btn-primary btn-sm" href="{{ route('jenis-perdin.show', $jenis_perdin->slug) }}">
+									<a class="btn btn-primary btn-sm" href="{{ route('area.show', $area->slug) }}">
 										<i class="fas fa-folder"></i>
 										View
 									</a>
-									<a class="btn btn-info btn-sm" href="{{ route('jenis-perdin.edit', $jenis_perdin->slug) }}">
+									<a class="btn btn-info btn-sm" href="{{ route('area.edit', $area->slug) }}">
 										<i class="fas fa-pencil-alt"></i>
 										Edit
 									</a>
-									<form action="{{ route('jenis-perdin.destroy', $jenis_perdin->slug) }}" method="post" class="d-inline">
+									<form action="{{ route('area.destroy', $area->slug) }}" method="post" class="d-inline">
 										@method('delete')
 										@csrf
-										<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $jenis_perdin->nama }}">
+										<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $area->nama }}">
 											<i class="fas fa-trash"></i>
 											Delete
 										</button>

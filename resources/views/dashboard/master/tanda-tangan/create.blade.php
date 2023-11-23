@@ -5,11 +5,14 @@
 <div class="row row-sm">
 	<div class="col-lg-6 col-xl-6 col-md-12 col-sm-12">
 		<div class="card box-shadow-0 ">
-			<div class="card-header">
+			<div class="card-header d-flex justify-content-between">
 				<h4 class="card-title mb-1">{{ $title }}</h4>
+				<a class="btn btn-secondary btn-sm" href="{{ route('tanda-tangan.index') }}">
+					<i class="fa fa-reply"></i>
+				</a>
 			</div>
 			<div class="card-body pt-0">
-				<form action="{{ route('tanda-tangan.index') }}" method="post">
+				<form action="{{ route('tanda-tangan.index') }}" method="post" enctype="multipart/form-data">
 					@csrf
 					
 					<div class="form-group">
@@ -23,6 +26,15 @@
 							@endforeach
 						</select>
 						@error('pegawai_id')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+						@enderror
+					</div>
+					<div class="form-group">
+						<label for="file_ttd" class="form-label">File Tanda Tangan</label>
+						<input name="file_ttd" accept="image/png" class="form-control @error('file_ttd') is-invalid @enderror" type="file" id="file_ttd">
+						@error('file_ttd')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>

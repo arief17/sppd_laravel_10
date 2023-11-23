@@ -78,9 +78,9 @@ class User extends Authenticatable
         return $this->hasMany(Golongan::class, 'author_id');
     }
 
-    public function jenis_perdins(): HasMany
+    public function areas(): HasMany
     {
-        return $this->hasMany(JenisPerdin::class, 'author_id');
+        return $this->hasMany(Area::class, 'author_id');
     }
 
     public function provinsis(): HasMany

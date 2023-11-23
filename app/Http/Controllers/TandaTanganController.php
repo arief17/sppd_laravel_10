@@ -6,6 +6,7 @@ use App\Models\Pegawai;
 use App\Models\TandaTangan;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TandaTanganController extends Controller
 {
@@ -38,15 +39,16 @@ class TandaTanganController extends Controller
     {
         $validatedData = $request->validate([
             'pegawai_id' => 'required',
-            'status' => ''
+            'status' => '',
+            'file_ttd' => 'required|image|max:10000'
         ]);
 
         if (!$request->status) {
             $validatedData['status'] = 0;
         }
-
         $pegawai = Pegawai::where('id', $request->pegawai_id)->first();
         
+        $validatedData['file_ttd'] = $request->file('file_ttd')->store('file-ttd');
         $validatedData['slug'] = SlugService::createSlug(TandaTangan::class, 'slug', $pegawai->nama . " " . $pegawai->jabatan->nama);
         $validatedData['author_id'] = auth()->user()->id;
         
@@ -84,16 +86,24 @@ class TandaTanganController extends Controller
     {
         $validatedData = $request->validate([
             'pegawai_id' => 'required',
-            'status' => ''
+            'status' => '',
+            'file_ttd' => 'image|max:10000'
         ]);
 
         if (!$request->status) {
             $validatedData['status'] = 0;
         }
+
+        if ($request->file('file_ttd')) {
+            if($request->oldTtd){
+                Storage::delete($request->oldTtd);
+            }
+            $validatedData['file_ttd'] = $request->file('file_ttd')->store('file-ttd');
+        }
         
-        $pegawai = Pegawai::where('id', $request->pegawai_id)->get('nama');
+        $pegawai = Pegawai::where('id', $request->pegawai_id)->first();
         
-        $validatedData['slug'] = SlugService::createSlug(TandaTangan::class, 'slug', $pegawai + " " + $pegawai->jabatan->nama);
+        $validatedData['slug'] = SlugService::createSlug(TandaTangan::class, 'slug', $pegawai->nama . " " . $pegawai->jabatan->nama);
         $validatedData['author_id'] = auth()->user()->id;
         
         TandaTangan::where('id', $tandaTangan->id)->update($validatedData);

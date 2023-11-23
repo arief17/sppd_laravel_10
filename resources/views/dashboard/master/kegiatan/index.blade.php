@@ -18,6 +18,7 @@
 							<tr>
 								<th class="border-bottom-0" style="width: 1%">No</th>
 								<th class="border-bottom-0">Nama</th>
+								<th class="border-bottom-0">Seksi</th>
 								<th class="border-bottom-0" style="width: 1%">Aksi</th>
 							</tr>
 						</thead>
@@ -26,6 +27,7 @@
 							<tr>
 								<td>{{ $loop->iteration }}</td>
 								<td>{{ $kegiatan->nama }}</td>
+								<td>{{ $kegiatan->seksi->nama }}</td>
 								<td>
 									<a class="btn btn-primary btn-sm" href="{{ route('kegiatan.show', $kegiatan->slug) }}">
 										<i class="fas fa-folder"></i>

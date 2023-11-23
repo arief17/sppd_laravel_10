@@ -5,58 +5,59 @@
 <div class="row row-sm">
 	<div class="col-md-6">
 		<div class="card">
-			<div class="card-header pb-0">
-				<div class="d-flex justify-content-between">
-					<h4 class="card-title mg-b-0">{{ $title }}</h4>
-					<div>
-						<a class="btn btn-info btn-sm" href="{{ route('pegawai.edit', $pegawai->slug) }}">
-							<i class="fas fa-pencil-alt"></i>
-							Edit
-						</a>
-						<form action="{{ route('pegawai.destroy', $pegawai->slug) }}" method="post" class="d-inline">
-							@method('delete')
-							@csrf
-							<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $pegawai->nama }}">
-								<i class="fas fa-trash"></i>
-								Delete
-							</button>
-						</form>
-					</div>
-				</div>
+			<div class="card-header d-flex justify-content-between">
+				<h4 class="card-title mb-1">{{ $title }}</h4>
+				<a class="btn btn-secondary btn-sm" href="{{ route('pegawai.index') }}">
+					<i class="fa fa-reply"></i>
+				</a>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
 					<table class="table mg-b-0 text-md-nowrap border-bottom">
 						<tr>
-							<th>Nama:</th>
-							<td style="width: 90%">{{ $pegawai->nama }}</td>
+							<th style="white-space: nowrap; width: 1%;">Nama:</th>
+							<td>{{ $pegawai->nama }}</td>
 						</tr>
 						<tr>
-							<th>NIP:</th>
-							<td style="width: 90%">{{ $pegawai->nip }}</td>
+							<th style="white-space: nowrap; width: 1%;">NIP:</th>
+							<td>{{ $pegawai->nip }}</td>
 						</tr>
 						<tr>
-							<th>PPTK:</th>
-							<td style="width: 90%">{{ $pegawai->pptk ? 'Ya' : 'Tidak' }}</td>
+							<th style="white-space: nowrap; width: 1%;">PPTK:</th>
+							<td>{{ $pegawai->pptk ? 'Ya' : 'Tidak' }}</td>
 						</tr>
 						<tr>
-							<th>Pangkat:</th>
-							<td style="width: 90%">{{ $pegawai->pangkat->nama }}</td>
+							<th style="white-space: nowrap; width: 1%;">Pangkat:</th>
+							<td>{{ $pegawai->pangkat->nama }}</td>
 						</tr>
 						<tr>
-							<th>Golongan:</th>
-							<td style="width: 90%">{{ $pegawai->golongan }}</td>
+							<th style="white-space: nowrap; width: 1%;">Golongan:</th>
+							<td>{{ $pegawai->golongan }}</td>
 						</tr>
 						<tr>
-							<th>Jabatan:</th>
-							<td style="width: 90%">{{ $pegawai->jabatan }}</td>
+							<th style="white-space: nowrap; width: 1%;">Jabatan:</th>
+							<td>{{ $pegawai->jabatan }}</td>
 						</tr>
 						<tr>
-							<th>Last Perdin:</th>
-							<td style="width: 90%">{{ $pegawai->last_perdin }}</td>
+							<th style="white-space: nowrap; width: 1%;">Last Perdin:</th>
+							<td>{{ $pegawai->last_perdin }}</td>
 						</tr>
 					</table>
 				</div>
+			</div>
+			<div class="card-footer">
+				<a class="btn btn-info me-2" href="{{ route('pegawai.edit', $pegawai->slug) }}">
+					<i class="fas fa-pencil-alt"></i>
+					Edit
+				</a>
+				<form action="{{ route('pegawai.destroy', $pegawai->slug) }}" method="post" class="d-inline">
+					@method('delete')
+					@csrf
+					<button class="btn btn-danger" id='deleteData' data-title="{{ $pegawai->nama }}">
+						<i class="fas fa-trash"></i>
+						Delete
+					</button>
+				</form>
 			</div>
 		</div>
 	</div>

@@ -130,7 +130,7 @@
 					</td>
 					<td colspan="2">
 						<ol style="list-style-type: lower-alpha; padding-left: 20px;">
-							<li>{{ $data_perdin->lama }}</li>
+							<li>{{ $data_perdin->lama }} hari</li>
 							<li>{{ Carbon\Carbon::parse($data_perdin->tgl_berangkat)->formatLocalized('%d %B %Y') }}</li>
 							<li>{{ Carbon\Carbon::parse($data_perdin->tgl_kembali)->formatLocalized('%d %B %Y') }}</li>
 						</ol>
@@ -187,8 +187,9 @@
 
 		<div style="float: right;">
 			<div style="text-align: center;">
-				<p style="margin: 10px 0 50px 0;">{{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}</p>
+				<p style="margin-top: 10px;">{{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}</p>
 				
+				<img src="{{ public_path('/storage' .'/'. $data_perdin->tanda_tangan->file_ttd) }}" alt="{{ $data_perdin->tanda_tangan->nama }}" width="100">
 				<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
 				<p>NIP.{{ $data_perdin->tanda_tangan->pegawai->nip }}</p>
 			</div>

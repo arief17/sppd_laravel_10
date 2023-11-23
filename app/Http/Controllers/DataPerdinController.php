@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AlatAngkut;
 use App\Models\DataPerdin;
-use App\Models\JenisPerdin;
+use App\Models\Area;
 use App\Models\Ketentuan;
 use App\Models\KotaKabupaten;
 use App\Models\LaporanPerdin;
@@ -39,12 +39,23 @@ class DataPerdinController extends Controller
             'title' => 'Tambah Data Perdin',
             'kota_kabupatens' => KotaKabupaten::all(),
             'alat_angkuts' => AlatAngkut::all(),
-            'jenis_perdins' => JenisPerdin::all(),
+            'areas' => Area::all(),
             'tanda_tangans' => TandaTangan::all(),
             'pegawais' => Pegawai::all(),
         ]);
     }
     
+    public function getKotaKabupaten($areaId)
+    {
+        $area = Area::find($areaId);
+        
+        if (!$area) {
+            return response()->json([]);
+        }
+        
+        $kotaKabupatens = $area->provinsis->flatMap->kota_kabupatens->pluck('nama', 'id');
+        return response()->json($kotaKabupatens);
+    }
     /**
     * Store a newly created resource in storage.
     */
@@ -57,21 +68,20 @@ class DataPerdinController extends Controller
                 'nomor_surat' => 'required|numeric',
                 'tgl_surat' => 'required|date',
                 'perihal' => 'required',
-                'no_spt' => 'required|numeric',
                 'tanda_tangan_id' => 'required',
                 'maksud' => 'required',
                 'lama' => 'required',
                 'tgl_berangkat' => 'required|date',
                 'tgl_kembali' => 'required|date',
                 'alat_angkut_id' => 'required',
-                'jenis_perdin_id' => 'required',
+                'area_id' => 'required',
                 'kedudukan_id' => 'required',
                 'tujuan_id' => 'required',
                 'lokasi' => 'required',
                 'biaya' => 'required',
-                'keterangan' => 'required',
+                'keterangan' => 'nullable',
                 'pegawai_diperintah_id' => 'required',
-                'pegawai_mengikuti_id' => 'required',
+                'pegawai_mengikuti_id' => 'nullable',
             ]);
             
             $validatedData['slug'] = SlugService::createSlug(DataPerdin::class, 'slug', $request->perihal);
@@ -87,7 +97,9 @@ class DataPerdinController extends Controller
             $validatedData['laporan_perdin_id'] = $laporan_perdin->id;
             
             $perdin = DataPerdin::create($validatedData);
-            $perdin->pegawai_mengikuti()->attach($selectedPegawaiIds);
+            if($selectedPegawaiIds){
+                $perdin->pegawai_mengikuti()->attach($selectedPegawaiIds);
+            }
             
             $allKetentuanIds = collect([$perdin->pegawai_diperintah->ketentuan_id])->merge($perdin->pegawai_mengikuti->pluck('ketentuan_id'))->unique();
             $ketentuans = Ketentuan::whereIn('id', $allKetentuanIds)->get();
@@ -130,7 +142,7 @@ class DataPerdinController extends Controller
             'data_perdin' => $dataPerdin,
             'kota_kabupatens' => KotaKabupaten::all(),
             'alat_angkuts' => AlatAngkut::all(),
-            'jenis_perdins' => JenisPerdin::all(),
+            'areas' => Area::all(),
             'tanda_tangans' => TandaTangan::all(),
             'pegawais' => Pegawai::all(),
         ]);
@@ -146,20 +158,19 @@ class DataPerdinController extends Controller
             'nomor_surat' => 'required|numeric',
             'tgl_surat' => 'required|date',
             'perihal' => 'required',
-            'no_spt' => 'required|numeric',
             'tanda_tangan_id' => 'required',
             'maksud' => 'required',
             'lama' => 'required',
             'tgl_berangkat' => 'required|date',
             'tgl_kembali' => 'required|date',
             'alat_angkut_id' => 'required',
-            'jenis_perdin_id' => 'required',
+            'area_id' => 'required',
             'kedudukan_id' => 'required',
             'tujuan_id' => 'required',
             'lokasi' => 'required',
             'pegawai_diperintah_id' => 'required',
             'biaya' => 'required',
-            'keterangan' => 'required',
+            'keterangan' => '',
             'pegawai_mengikuti_id' => 'required',
         ]);
         

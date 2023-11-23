@@ -22,7 +22,7 @@ class BiayaPerdin extends Model
 
     public function area(): BelongsTo
     {
-        return $this->belongsTo(JenisPerdin::class,  'area_id');
+        return $this->belongsTo(Area::class,  'area_id');
     }
 
     public function dari(): BelongsTo

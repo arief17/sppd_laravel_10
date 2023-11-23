@@ -39,17 +39,17 @@
 								<td>
 									<div class="btn-group" role="group">
 										@can('isApproval')
-										<a class="modal-effect btn {{ $data_perdin->status->approve ? 'btn-success' : 'btn-danger' }} btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#approve-{{ $data_perdin->status_id }}">Approve</a>
+										<a class="modal-effect btn {{ $data_perdin->status->approve ? 'btn-success' : 'btn-danger' }} btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#approve-{{ $data_perdin->slug }}">Approve</a>
 										@else
 										<button class="not-approval btn {{ $data_perdin->status->approve ? 'btn-success' : 'btn-danger' }} btn-sm">Approve</button>
 										@endcan
 										
 										@if ($data_perdin->status->approve)
-										<a class="modal-effect btn btn-success btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#spt-{{ $data_perdin->status_id }}">SPT</a>
-										<a class="modal-effect btn btn-success btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#visum1-{{ $data_perdin->status_id }}">Visum 1</a>
-										<a class="modal-effect btn btn-success btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#visum2-{{ $data_perdin->status_id }}">Visum 2</a>
+										<a class="modal-effect btn btn-success btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#spt-{{ $data_perdin->slug }}">SPT</a>
+										<a class="modal-effect btn btn-success btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#visum1-{{ $data_perdin->slug }}">Visum 1</a>
+										<a class="modal-effect btn btn-success btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#visum2-{{ $data_perdin->slug }}">Visum 2</a>
 										<a class="modal-effect btn {{ $data_perdin->status->lap ? 'btn-success' : 'btn-danger' }} btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#lap-{{ $data_perdin->laporan_perdin_id }}">Lap</a>
-										<a class="modal-effect btn {{ $data_perdin->status->kwitansi ? 'btn-success' : 'btn-danger' }} btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#kwitansi-{{ $data_perdin->status_id }}">Kwitansi</a>
+										<a class="modal-effect btn {{ $data_perdin->status->kwitansi ? 'btn-success' : 'btn-danger' }} btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#kwitansi-{{ $data_perdin->slug }}">Kwitansi</a>
 										@else
 										<button class="not-approve btn btn-danger btn-sm">SPT</button>
 										<button class="not-approve btn btn-danger btn-sm">Visum 1</button>

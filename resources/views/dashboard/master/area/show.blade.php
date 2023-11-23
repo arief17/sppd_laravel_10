@@ -5,34 +5,35 @@
 <div class="row row-sm">
 	<div class="col-md-6">
 		<div class="card">
-			<div class="card-header pb-0">
-				<div class="d-flex justify-content-between">
-					<h4 class="card-title mg-b-0">{{ $title }}</h4>
-					<div>
-						<a class="btn btn-info btn-sm" href="{{ route('jenis-perdin.edit', $jenis_perdin->slug) }}">
-							<i class="fas fa-pencil-alt"></i>
-							Edit
-						</a>
-						<form action="{{ route('jenis-perdin.destroy', $jenis_perdin->slug) }}" method="post" class="d-inline">
-							@method('delete')
-							@csrf
-							<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $jenis_perdin->nama }}">
-								<i class="fas fa-trash"></i>
-								Delete
-							</button>
-						</form>
-					</div>
-				</div>
+			<div class="card-header d-flex justify-content-between">
+				<h4 class="card-title mb-1">{{ $title }}</h4>
+				<a class="btn btn-secondary btn-sm" href="{{ route('area.index') }}">
+					<i class="fa fa-reply"></i>
+				</a>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
 					<table class="table mg-b-0 text-md-nowrap border-bottom">
 						<tr>
-							<th>Nama:</th>
-							<td style="width: 90%">{{ $jenis_perdin->nama }}</td>
+							<th style="white-space: nowrap; width: 1%;">Nama:</th>
+							<td>{{ $area->nama }}</td>
 						</tr>
 					</table>
 				</div>
+			</div>
+			<div class="card-footer">
+				<a class="btn btn-info me-2" href="{{ route('area.edit', $area->slug) }}">
+					<i class="fas fa-pencil-alt"></i>
+					Edit
+				</a>
+				<form action="{{ route('area.destroy', $area->slug) }}" method="post" class="d-inline">
+					@method('delete')
+					@csrf
+					<button class="btn btn-danger" id='deleteData' data-title="{{ $area->nama }}">
+						<i class="fas fa-trash"></i>
+						Delete
+					</button>
+				</form>
 			</div>
 		</div>
 	</div>

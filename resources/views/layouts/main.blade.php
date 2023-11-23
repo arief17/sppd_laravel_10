@@ -46,7 +46,7 @@
 				<div class="container-fluid main-container ">
 					<div class="main-header-left ">
 						<div class="responsive-logo">
-							<a href="index.html" class="header-logo">
+							<a href="/" class="header-logo">
 								<img src="/assets/img/brand/logo.png" class="logo-1" alt="logo">
 								<img src="/assets/img/brand/logo-white.png" class="dark-logo-1" alt="logo">
 							</a>
@@ -283,10 +283,30 @@
 				<div class="sticky">
 					<aside class="app-sidebar sidebar-scroll">
 						<div class="main-sidebar-header active">
-							<a class="desktop-logo logo-light active" href="index.html"><img src="/assets/img/logo-banten.png" class="main-logo" alt="logo"></a>
-							<a class="desktop-logo logo-dark active" href="index.html"><img src="/assets/img/logo-banten.png" class="main-logo" alt="logo"></a>
-							<a class="logo-icon mobile-logo icon-light active" href="index.html"><img src="/assets/img/logo-banten.png" alt="logo"></a>
-							<a class="logo-icon mobile-logo icon-dark active" href="index.html"><img src="/assets/img/logo-banten.png" alt="logo"></a>
+							<a class="desktop-logo logo-light active text-decoration-none" href="/">
+								<div class="d-flex justify-content-center align-items-center">
+									<img src="/assets/img/logo-banten.png" class="main-logo m-0" alt="logo">
+									<h4 class="mb-0 ms-2 text-black">SPPD</h4>
+								</div>
+							</a>
+							<a class="desktop-logo logo-dark active text-decoration-none" href="/">
+								<div class="d-flex justify-content-center align-items-center">
+									<img src="/assets/img/logo-banten.png" class="main-logo m-0" alt="logo">
+									<h4 class="mb-0 ms-2 text-light">SPPD</h4>
+								</div>
+							</a>
+							<a class="logo-icon mobile-logo icon-light active text-decoration-none" href="/">
+								<div class="d-flex justify-content-center align-items-center">
+									<img src="/assets/img/logo-banten.png" alt="logo">
+									<h4 class="mb-0 ms-2 text-black">SPPD</h4>
+								</div>
+							</a>
+							<a class="logo-icon mobile-logo icon-dark active text-decoration-none" href="/">
+								<div class="d-flex justify-content-center align-items-center">
+									<img src="/assets/img/logo-banten.png" alt="logo">
+									<h4 class="mb-0 ms-2 text-light">SPPD</h4>
+								</div>
+							</a>
 						</div>
 						<div class="main-sidemenu">
 							<div class="app-sidebar__user clearfix">
@@ -294,7 +314,7 @@
 									<div class="">
 										<img alt="user-img" class="avatar avatar-xl brround" src="/assets/img/profile.jpg"><span class="avatar-status profile-status bg-green"></span>
 									</div>
-									<div class="user-info">
+									<div class="user-info px-2">
 										<h4 class="fw-semibold mt-3 mb-0">{{ auth()->user()->username }}</h4>
 										<span class="mb-0 text-muted">{{ auth()->user()->seksi->nama ?? 'Belum ditentukan' }}</span>
 									</div>
@@ -304,13 +324,17 @@
 							<ul class="side-menu">
 								<li class="side-item side-item-category">Main</li>
 								<li class="slide">
-									<a class="side-menu__item {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24" ><path d="M0 0h24v24H0V0z" fill="none"/><path d="M5 5h4v6H5zm10 8h4v6h-4zM5 17h4v2H5zM15 5h4v2h-4z" opacity=".3"/><path d="M3 13h8V3H3v10zm2-8h4v6H5V5zm8 16h8V11h-8v10zm2-8h4v6h-4v-6zM13 3v6h8V3h-8zm6 4h-4V5h4v2zM3 21h8v-6H3v6zm2-4h4v2H5v-2z"/></svg><span class="side-menu__label">Index</span></a>
+									<a class="side-menu__item {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
+										<svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24" ><path d="M0 0h24v24H0V0z" fill="none"/><path d="M5 5h4v6H5zm10 8h4v6h-4zM5 17h4v2H5zM15 5h4v2h-4z" opacity=".3"/><path d="M3 13h8V3H3v10zm2-8h4v6H5V5zm8 16h8V11h-8v10zm2-8h4v6h-4v-6zM13 3v6h8V3h-8zm6 4h-4V5h4v2zM3 21h8v-6H3v6zm2-4h4v2H5v-2z"/></svg>
+										<span class="side-menu__label">Dashboard</span>
+									</a>
 								</li>
 								
 								<li class="side-item side-item-category">General</li>
 								@can('isAdmin')
-								<li class="slide {{ request()->routeIs('bidang*', 'seksi*', 'kegiatan*', 'pegawai*', 'tanda-tangan*', 'alat-angkut*', 'jabatan*', 'ketentuan*', 'user*', 'golongan*', 'jenis-perdin*', 'provinsi*', 'kota-kabupaten*', 'uang-harian*', 'uang-transport*', 'biaya-perdin*') ? 'is-expanded' : '' }}">
-									<a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"  viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 4c-4.42 0-8 3.58-8 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.5 4c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zm-7 0c.83 0 1.5.67 1.5 1.5S9.33 11 8.5 11 7 10.33 7 9.5 7.67 8 8.5 8zm3.5 9.5c-2.33 0-4.32-1.45-5.12-3.5h1.67c.7 1.19 1.97 2 3.45 2s2.76-.81 3.45-2h1.67c-.8 2.05-2.79 3.5-5.12 3.5z" opacity=".3"/><circle cx="15.5" cy="9.5" r="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M12 16c-1.48 0-2.75-.81-3.45-2H6.88c.8 2.05 2.79 3.5 5.12 3.5s4.32-1.45 5.12-3.5h-1.67c-.69 1.19-1.97 2-3.45 2zm-.01-14C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>
+								<li class="slide {{ request()->routeIs('bidang*', 'seksi*', 'kegiatan*', 'pegawai*', 'tanda-tangan*', 'alat-angkut*', 'jabatan*', 'ketentuan*', 'user*', 'golongan*', 'area*', 'provinsi*', 'kota-kabupaten*', 'uang-harian*', 'uang-transport*', 'biaya-perdin*') ? 'is-expanded' : '' }}">
+									<a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
+										<svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M5 9h14V5H5v4zm2-3.5c.83 0 1.5.67 1.5 1.5S7.83 8.5 7 8.5 5.5 7.83 5.5 7 6.17 5.5 7 5.5zM5 19h14v-4H5v4zm2-3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5z" opacity=".3"></path><path d="M20 13H4c-.55 0-1 .45-1 1v6c0 .55.45 1 1 1h16c.55 0 1-.45 1-1v-6c0-.55-.45-1-1-1zm-1 6H5v-4h14v4zm-12-.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5zM20 3H4c-.55 0-1 .45-1 1v6c0 .55.45 1 1 1h16c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1zm-1 6H5V5h14v4zM7 8.5c.83 0 1.5-.67 1.5-1.5S7.83 5.5 7 5.5 5.5 6.17 5.5 7 6.17 8.5 7 8.5z"></path></svg>
 										<span class="side-menu__label">Master</span><i class="angle fe fe-chevron-down"></i>
 									</a>
 									<ul class="slide-menu">
@@ -319,13 +343,13 @@
 										<li><a class="slide-item {{ request()->routeIs('seksi.index') ? 'active' : '' }}" href="{{ route('seksi.index') }}">Seksi </a></li>
 										<li><a class="slide-item {{ request()->routeIs('kegiatan.index') ? 'active' : '' }}" href="{{ route('kegiatan.index') }}">Kegiatan </a></li>
 										
-										<li class="sub-slide {{ request()->routeIs('golongan*', 'jenis-perdin*', 'provinsi*', 'kota-kabupaten*', 'uang-harian*', 'uang-transport*', 'biaya-perdin*') ? 'is-expanded' : '' }}">
+										<li class="sub-slide {{ request()->routeIs('golongan*', 'area*', 'provinsi*', 'kota-kabupaten*', 'uang-harian*', 'uang-transport*', 'biaya-perdin*') ? 'is-expanded' : '' }}">
 											<a class="slide-item" data-bs-toggle="sub-slide" href="javascript:void(0);">
 												<span class="sub-side-menu__label">Setting Biaya</span><i class="sub-angle fe fe-chevron-down"></i>
 											</a>
 											<ul class="sub-slide-menu">
 												<li><a class="sub-side-menu__item {{ request()->routeIs('golongan.index') ? 'active' : '' }}" href="{{ route('golongan.index') }}">Golongan</a></li>
-												<li><a class="sub-side-menu__item {{ request()->routeIs('jenis-perdin.index') ? 'active' : '' }}" href="{{ route('jenis-perdin.index') }}">Jenis Perdin</a></li>
+												<li><a class="sub-side-menu__item {{ request()->routeIs('area.index') ? 'active' : '' }}" href="{{ route('area.index') }}">Area</a></li>
 												<li><a class="sub-side-menu__item {{ request()->routeIs('provinsi.index') ? 'active' : '' }}" href="{{ route('provinsi.index') }}">Provinsi</a></li>
 												<li><a class="sub-side-menu__item {{ request()->routeIs('kota-kabupaten.index') ? 'active' : '' }}" href="{{ route('kota-kabupaten.index') }}">Kota/Kabupaten</a></li>
 												<li><a class="sub-side-menu__item {{ request()->routeIs('uang-harian.index') ? 'active' : '' }}" href="{{ route('uang-harian.index') }}">Uang Harian</a></li>
@@ -345,7 +369,8 @@
 								</li>
 								@endcan
 								<li class="slide {{ request()->routeIs('data-perdin*', 'data-anggaran*', 'laporan-perdin*') ? 'is-expanded' : '' }}">
-									<a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"  viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 4c-4.42 0-8 3.58-8 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.5 4c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zm-7 0c.83 0 1.5.67 1.5 1.5S9.33 11 8.5 11 7 10.33 7 9.5 7.67 8 8.5 8zm3.5 9.5c-2.33 0-4.32-1.45-5.12-3.5h1.67c.7 1.19 1.97 2 3.45 2s2.76-.81 3.45-2h1.67c-.8 2.05-2.79 3.5-5.12 3.5z" opacity=".3"/><circle cx="15.5" cy="9.5" r="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M12 16c-1.48 0-2.75-.81-3.45-2H6.88c.8 2.05 2.79 3.5 5.12 3.5s4.32-1.45 5.12-3.5h-1.67c-.69 1.19-1.97 2-3.45 2zm-.01-14C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>
+									<a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
+										<svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M13 4H6v16h12V9h-5V4zm3 14H8v-2h8v2zm0-6v2H8v-2h8z" opacity=".3"></path><path d="M8 16h8v2H8zm0-4h8v2H8zm6-10H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"></path></svg>
 										<span class="side-menu__label">Perdin</span>
 										<i class="angle fe fe-chevron-down"></i>
 									</a>

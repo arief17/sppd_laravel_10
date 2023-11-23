@@ -36,6 +36,7 @@ class KegiatanController extends Controller
     {
         $validatedData = $request->validate([
             'nama' => 'required|min:3|max:100',
+            'seksi_id' => 'required',
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(Kegiatan::class, 'slug', $request->nama);
@@ -74,6 +75,7 @@ class KegiatanController extends Controller
     {
         $validatedData = $request->validate([
             'nama' => 'required|min:3|max:100',
+            'seksi_id' => 'required',
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(Kegiatan::class, 'slug', $request->nama);

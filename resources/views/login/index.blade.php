@@ -63,7 +63,7 @@
 								<div class="col-md-10 col-lg-10 col-xl-9 mx-auto">
 									<div class="card-sigin">
 										<div class="mb-5 d-flex">
-											<a href="index.html">
+											<a href="/">
 												<img src="/assets/img/logo-banten.png" class="sign-favicon-a" width="80" alt="logo">
 												<img src="/assets/img/logo-banten.png" class="sign-favicon-b" width="80" alt="logo">
 											</a>

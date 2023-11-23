@@ -14,7 +14,7 @@ class DataPerdin extends Model
     use HasFactory, Sluggable, SoftDeletes;
     
     protected $guarded = ['id'];
-    protected $with = ['author', 'tanda_tangan', 'alat_angkut', 'jenis_perdin', 'kedudukan', 'tujuan', 'pegawai_diperintah', 'status'];
+    protected $with = ['author', 'tanda_tangan', 'alat_angkut', 'area', 'kedudukan', 'tujuan', 'pegawai_diperintah', 'status'];
     
     public static function filterByStatus($status)
     {
@@ -67,9 +67,9 @@ class DataPerdin extends Model
         return $this->belongsTo(AlatAngkut::class, 'alat_angkut_id');
     }
     
-    public function jenis_perdin(): BelongsTo
+    public function area(): BelongsTo
     {
-        return $this->belongsTo(JenisPerdin::class, 'jenis_perdin_id');
+        return $this->belongsTo(Area::class, 'area_id');
     }
     
     public function kedudukan(): BelongsTo

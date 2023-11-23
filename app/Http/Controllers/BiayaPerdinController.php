@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BiayaPerdin;
-use App\Models\JenisPerdin;
+use App\Models\Area;
 use App\Models\KotaKabupaten;
 use App\Models\UangHarian;
 use App\Models\UangTransport;
@@ -30,7 +30,7 @@ class BiayaPerdinController extends Controller
     {
         return view('dashboard.master.biaya-perdin.create', [
             'title' => 'Tambah Biaya Perdin',
-            'jenis_perdins' => JenisPerdin::all(),
+            'areas' => Area::all(),
             'kota_kabupatens' => KotaKabupaten::all(),
             'uang_transports' => UangTransport::all(),
             'uang_harians' => UangHarian::all(),
@@ -50,7 +50,7 @@ class BiayaPerdinController extends Controller
             'harian_id' => 'required',
         ]);
 
-        $area = JenisPerdin::where('id', $request->area_id)->get('nama');
+        $area = Area::where('id', $request->area_id)->get('nama');
         $dari = KotaKabupaten::where('id', $request->dari_id)->get('nama');
         $ke = KotaKabupaten::where('id', $request->ke_id)->get('nama');
         
@@ -80,7 +80,7 @@ class BiayaPerdinController extends Controller
         return view('dashboard.master.biaya-perdin.edit', [
             'title' => 'Perbarui Biaya Perdin',
             'biaya_perdin' => $biayaPerdin,
-            'jenis_perdins' => JenisPerdin::all(),
+            'areas' => Area::all(),
             'kota_kabupatens' => KotaKabupaten::all(),
             'uang_transports' => UangTransport::all(),
             'uang_harians' => UangHarian::all(),
@@ -100,7 +100,7 @@ class BiayaPerdinController extends Controller
             'harian_id' => 'required',
         ]);
         
-        $area = JenisPerdin::where('id', $request->area_id)->get('nama');
+        $area = Area::where('id', $request->area_id)->get('nama');
         $dari = KotaKabupaten::where('id', $request->dari_id)->get('nama');
         $ke = KotaKabupaten::where('id', $request->ke_id)->get('nama');
         

@@ -7,7 +7,7 @@ use App\Http\Controllers\DataAnggaranController;
 use App\Http\Controllers\DataPerdinController;
 use App\Http\Controllers\GolonganController;
 use App\Http\Controllers\JabatanController;
-use App\Http\Controllers\JenisPerdinController;
+use App\Http\Controllers\AreaController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\KetentuanController;
 use App\Http\Controllers\KotaKabupatenController;
@@ -57,7 +57,7 @@ Route::middleware('can:isAdmin')->group(function(){
 	Route::resource('/dashboard/bidang', BidangController::class)->middleware('auth');
 	Route::resource('/dashboard/golongan', GolonganController::class)->middleware('auth');
 	Route::resource('/dashboard/jabatan', JabatanController::class)->middleware('auth');
-	Route::resource('/dashboard/jenis-perdin', JenisPerdinController::class)->middleware('auth');
+	Route::resource('/dashboard/area', AreaController::class)->middleware('auth');
 	Route::resource('/dashboard/kegiatan', KegiatanController::class)->middleware('auth');
 	Route::resource('/dashboard/ketentuan', KetentuanController::class)->except('create', 'store')->middleware('auth');
 	Route::resource('/dashboard/kota-kabupaten', KotaKabupatenController::class)->middleware('auth');
@@ -82,20 +82,21 @@ Route::middleware('can:isApproval')->group(function(){
 Route::middleware('can:isOperator')->group(function(){
 	Route::controller(DataPerdinController::class)->group(function(){
 		Route::get('/dashboard/data-perdin/status/{status}', 'index')->name('data-perdin.index')->middleware('auth');
+		Route::get('/get-kota-kabupaten/{areaId}', 'getKotaKabupaten')->name('data-perdin.area')->middleware('auth');
 	});	
 	
 	
 	Route::controller(PerdinPdfController::class)->group(function(){
-		Route::get('/dashboard/status-perdin/spt/pdf/{status_id}', 'spt')->name('spt-pdf')->middleware('auth');
-		Route::get('/dashboard/status-perdin/visum1/pdf/{status_id}', 'visum1')->name('visum1-pdf')->middleware('auth');
-		Route::get('/dashboard/status-perdin/visum2/pdf/{status_id}', 'visum2')->name('visum2-pdf')->middleware('auth');
+		Route::get('/dashboard/status-perdin/spt/pdf/{slug}', 'spt')->name('spt-pdf')->middleware('auth');
+		Route::get('/dashboard/status-perdin/visum1/pdf/{slug}', 'visum1')->name('visum1-pdf')->middleware('auth');
+		Route::get('/dashboard/status-perdin/visum2/pdf/{slug}', 'visum2')->name('visum2-pdf')->middleware('auth');
 		Route::get('/dashboard/status-perdin/lap/pdf/{id}', 'lap')->name('lap-pdf')->middleware('auth');
 	});
 
 	Route::resource('/dashboard/data-anggaran', DataAnggaranController::class)->except('create', 'edit', 'update', 'destroy')->middleware('auth');
 	Route::resource('/dashboard/uang-masuk', UangMasukController::class)->except('index')->middleware('auth');
 	Route::resource('/dashboard/uang-keluar', UangKeluarController::class)->except('index')->middleware('auth');
-	Route::resource('/dashboard/laporan-perdin', LaporanPerdinController::class)->middleware('auth');
+	Route::resource('/dashboard/laporan-perdin', LaporanPerdinController::class)->except('create', 'store', 'show', 'destroy')->middleware('auth');
 });
 
 Route::middleware('can:isOperator')->group(function(){

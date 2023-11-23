@@ -18,6 +18,7 @@
 							<tr>
 								<th class="border-bottom-0" style="width: 1%">No</th>
 								<th class="border-bottom-0">Nama</th>
+								<th class="border-bottom-0">Area</th>
 								<th class="border-bottom-0" style="width: 1%">Aksi</th>
 							</tr>
 						</thead>
@@ -26,6 +27,7 @@
 							<tr>
 								<td>{{ $loop->iteration }}</td>
 								<td>{{ $provinsi->nama }}</td>
+								<td>{{ $provinsi->area->nama }}</td>
 								<td>
 									<a class="btn btn-primary btn-sm" href="{{ route('provinsi.show', $provinsi->slug) }}">
 										<i class="fas fa-folder"></i>

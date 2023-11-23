@@ -5,17 +5,19 @@
 <div class="row row-sm">
 	<div class="col-lg-6 col-xl-6 col-md-12 col-sm-12">
 		<div class="card box-shadow-0 ">
-			<div class="card-header">
+			<div class="card-header d-flex justify-content-between">
 				<h4 class="card-title mb-1">{{ $title }}</h4>
+				<a class="btn btn-secondary btn-sm" href="{{ route('area.index') }}">
+					<i class="fa fa-reply"></i>
+				</a>
 			</div>
 			<div class="card-body pt-0">
-				<form action="{{ route('jenis-perdin.show', $jenis_perdin->slug) }}" method="post">
+				<form action="{{ route('area.index') }}" method="post">
 					@csrf
-					@method('put')
 					
 					<div class="form-group">
 						<label for="nama">Nama</label>
-						<input name="nama" value="{{ old('nama', $jenis_perdin->nama) }}" type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukan nama">
+						<input name="nama" value="{{ old('nama') }}" type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukan nama">
 						@error('nama')
 						<div class="invalid-feedback">
 							{{ $message }}

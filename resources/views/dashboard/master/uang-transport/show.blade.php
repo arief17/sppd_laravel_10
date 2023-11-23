@@ -5,70 +5,71 @@
 <div class="row row-sm">
 	<div class="col-md-6">
 		<div class="card">
-			<div class="card-header pb-0">
-				<div class="d-flex justify-content-between">
-					<h4 class="card-title mg-b-0">{{ $title }}</h4>
-					<div>
-						<a class="btn btn-info btn-sm" href="{{ route('uang-transport.edit', $uang_transport->slug) }}">
-							<i class="fas fa-pencil-alt"></i>
-							Edit
-						</a>
-						<form action="{{ route('uang-transport.destroy', $uang_transport->slug) }}" method="post" class="d-inline">
-							@method('delete')
-							@csrf
-							<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $uang_transport->nama }}">
-								<i class="fas fa-trash"></i>
-								Delete
-							</button>
-						</form>
-					</div>
-				</div>
+			<div class="card-header d-flex justify-content-between">
+				<h4 class="card-title mb-1">{{ $title }}</h4>
+				<a class="btn btn-secondary btn-sm" href="{{ route('uang-transport.index') }}">
+					<i class="fa fa-reply"></i>
+				</a>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
 					<table class="table mg-b-0 text-md-nowrap border-bottom">
 						<tr>
-							<th>Wilayah:</th>
-							<td style="width: 90%">{{ $uang_transport->wilayah }}</td>
+							<th style="white-space: nowrap; width: 1%;">Wilayah:</th>
+							<td>{{ $uang_transport->wilayah }}</td>
 						</tr>
 						<tr>
-							<th>Alat Angkut:</th>
-							<td style="width: 90%">{{ $uang_transport->alat_angkut }}</td>
+							<th style="white-space: nowrap; width: 1%;">Alat Angkut:</th>
+							<td>{{ $uang_transport->uang_transport }}</td>
 						</tr>
 						<tr>
-							<th>Eselon I:</th>
-							<td style="width: 90%">{{ $uang_transport->eselon_i }}</td>
+							<th style="white-space: nowrap; width: 1%;">Eselon I:</th>
+							<td>{{ $uang_transport->eselon_i }}</td>
 						</tr>
 						<tr>
-							<th>Eselon II:</th>
-							<td style="width: 90%">{{ $uang_transport->eselon_ii }}</td>
+							<th style="white-space: nowrap; width: 1%;">Eselon II:</th>
+							<td>{{ $uang_transport->eselon_ii }}</td>
 						</tr>
 						<tr>
-							<th>Eselon III</th>
-							<td style="width: 90%">{{ $uang_transport->eselon_iii }}</td>
+							<th style="white-space: nowrap; width: 1%;">Eselon III</th>
+							<td>{{ $uang_transport->eselon_iii }}</td>
 						</tr>
 						<tr>
-							<th>Eselon IV</th>
-							<td style="width: 90%">{{ $uang_transport->eselon_iv }}</td>
+							<th style="white-space: nowrap; width: 1%;">Eselon IV</th>
+							<td>{{ $uang_transport->eselon_iv }}</td>
 						</tr>
 						<tr>
-							<th>Golongan IV</th>
-							<td style="width: 90%">{{ $uang_transport->golongan_iv }}</td>
+							<th style="white-space: nowrap; width: 1%;">Golongan IV</th>
+							<td>{{ $uang_transport->golongan_iv }}</td>
 						</tr>
 						<tr>
-							<th>Golongan III</th>
-							<td style="width: 90%">{{ $uang_transport->golongan_iii }}</td>
+							<th style="white-space: nowrap; width: 1%;">Golongan III</th>
+							<td>{{ $uang_transport->golongan_iii }}</td>
 						</tr>
 						<tr>
-							<th>Golongan II</th>
-							<td style="width: 90%">{{ $uang_transport->golongan_ii }}</td>
+							<th style="white-space: nowrap; width: 1%;">Golongan II</th>
+							<td>{{ $uang_transport->golongan_ii }}</td>
 						</tr>
 						<tr>
-							<th>Golongan I</th>
-							<td style="width: 90%">{{ $uang_transport->golongan_i }}</td>
+							<th style="white-space: nowrap; width: 1%;">Golongan I</th>
+							<td>{{ $uang_transport->golongan_i }}</td>
 						</tr>
 					</table>
 				</div>
+			</div>
+			<div class="card-footer">
+				<a class="btn btn-info me-2" href="{{ route('uang-transport.edit', $uang_transport->slug) }}">
+					<i class="fas fa-pencil-alt"></i>
+					Edit
+				</a>
+				<form action="{{ route('uang-transport.destroy', $uang_transport->slug) }}" method="post" class="d-inline">
+					@method('delete')
+					@csrf
+					<button class="btn btn-danger" id='deleteData' data-title="{{ $uang_transport->nama }}">
+						<i class="fas fa-trash"></i>
+						Delete
+					</button>
+				</form>
 			</div>
 		</div>
 	</div>

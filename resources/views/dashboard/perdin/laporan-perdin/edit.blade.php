@@ -11,6 +11,18 @@
 		<section>
 			<div class="table-responsive mg-t-20">
 				<table class="table mg-b-0 text-md-nowrap">
+					@if ($laporan_perdin->data_perdin->status->lap)
+					<tr>
+						<td colspan="2">
+							<div class="text-center">
+								<a class="btn btn-secondary px-5" href="{{ route('lap-pdf', $laporan_perdin->id) }}">
+									<i class="fa fa-file"></i>
+									Cetak Laporan
+								</a>
+							</div>
+						</td>
+					</tr>
+					@endif
 					<tr>
 						<td class="align-middle">Tanggal Laporan</td>
 						<td>
@@ -147,90 +159,90 @@
 			</div>
 			@enderror
 		</section>
-		<h3>Cetak Laporan</h3>
-		<section>
-			<div class="text-center">
-				<a class="btn btn-secondary px-5" href="{{ route('lap-pdf', $laporan_perdin->id) }}">
-					<i class="fa fa-file"></i>
-					Cetak Laporan
-				</a>
-			</div>
-		</section>
-	</div>
-</form>
-
-@endsection
-
-@section('js')
-
-<!-- Back-to-top -->
-<a href="#top" id="back-to-top"><i class="ti-angle-double-up"></i></a>
-
-<!-- JQuery min js -->
-<script src="/assets/plugins/jquery/jquery.min.js"></script>
-
-<!-- Bootstrap Bundle js -->
-<script src="/assets/plugins/bootstrap/js/popper.min.js"></script>
-<script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-
-<!-- Internal Jquery.steps js -->
-<script src="/assets/plugins/jquery-steps/jquery.steps.min.js"></script>
-<script src="/assets/plugins/parsleyjs/parsley.min.js"></script>
-
-<!--Internal  Form-wizard js -->
-<script src="/assets/js/form-wizard.js"></script>
-
-<!-- Moment js -->
-<script src="/assets/plugins/moment/moment.js"></script>
-
-<!-- eva-icons js -->
-<script src="/assets/js/eva-icons.min.js"></script>
-
-<!-- Sticky js -->
-<script src="/assets/js/sticky.js"></script>
-
-<!--themecolor js-->
-<script src="/assets/js/themecolor.js"></script>
-
-<!-- custom js -->
-<script src="/assets/js/custom.js"></script>
-
-<!-- Sweet-alert js  -->
-<script src="/assets/plugins/sweet-alert/sweetalert2.all.min.js"></script>
-
-<script>
-	$(document).ready(function() {
-		let finishButton = $('a[href="#finish"]');
-		let form = $('#laporanForm');
-		
-		finishButton.click(function(e) {
-			e.preventDefault();
-			form.submit();
+		{{-- <h3>Cetak Laporan</h3>
+			<section>
+				<div class="text-center">
+					<a class="btn btn-secondary px-5" href="{{ route('lap-pdf', $laporan_perdin->id) }}">
+						<i class="fa fa-file"></i>
+						Cetak Laporan
+					</a>
+				</div>
+			</section> --}}
+		</div>
+	</form>
+	
+	@endsection
+	
+	@section('js')
+	
+	<!-- Back-to-top -->
+	<a href="#top" id="back-to-top"><i class="ti-angle-double-up"></i></a>
+	
+	<!-- JQuery min js -->
+	<script src="/assets/plugins/jquery/jquery.min.js"></script>
+	
+	<!-- Bootstrap Bundle js -->
+	<script src="/assets/plugins/bootstrap/js/popper.min.js"></script>
+	<script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	
+	<!-- Internal Jquery.steps js -->
+	<script src="/assets/plugins/jquery-steps/jquery.steps.min.js"></script>
+	<script src="/assets/plugins/parsleyjs/parsley.min.js"></script>
+	
+	<!--Internal  Form-wizard js -->
+	<script src="/assets/js/form-wizard.js"></script>
+	
+	<!-- Moment js -->
+	<script src="/assets/plugins/moment/moment.js"></script>
+	
+	<!-- eva-icons js -->
+	<script src="/assets/js/eva-icons.min.js"></script>
+	
+	<!-- Sticky js -->
+	<script src="/assets/js/sticky.js"></script>
+	
+	<!--themecolor js-->
+	<script src="/assets/js/themecolor.js"></script>
+	
+	<!-- custom js -->
+	<script src="/assets/js/custom.js"></script>
+	
+	<!-- Sweet-alert js  -->
+	<script src="/assets/plugins/sweet-alert/sweetalert2.all.min.js"></script>
+	
+	<script>
+		$(document).ready(function() {
+			let finishButton = $('a[href="#finish"]');
+			let form = $('#laporanForm');
+			
+			finishButton.click(function(e) {
+				e.preventDefault();
+				form.submit();
+			});
 		});
-	});
-</script>
-
-@if(session()->has('success'))
-<script>
-	$(document).ready(function() {
-		var Toast = Swal.mixin({
-			toast: true,
-			position: 'top',
-			showConfirmButton: false,
-			timer: 10000,
-			timerProgressBar: true,
-			didOpen: (toast) => {
-				toast.addEventListener('mouseenter', Swal.stopTimer)
-				toast.addEventListener('mouseleave', Swal.resumeTimer)
-			}
+	</script>
+	
+	@if(session()->has('success'))
+	<script>
+		$(document).ready(function() {
+			var Toast = Swal.mixin({
+				toast: true,
+				position: 'top',
+				showConfirmButton: false,
+				timer: 10000,
+				timerProgressBar: true,
+				didOpen: (toast) => {
+					toast.addEventListener('mouseenter', Swal.stopTimer)
+					toast.addEventListener('mouseleave', Swal.resumeTimer)
+				}
+			});
+			
+			Toast.fire({
+				icon: 'success',
+				title: '{{ session('success') }}'
+			});
 		});
-		
-		Toast.fire({
-			icon: 'success',
-			title: '{{ session('success') }}'
-		});
-	});
-</script>
-@endif
-
-@endsection
+	</script>
+	@endif
+	
+	@endsection

@@ -89,7 +89,6 @@ class LaporanPerdinController extends Controller
      */
     public function destroy(LaporanPerdin $laporanPerdin)
     {
-        $laporanPerdin->delete();
-        return redirect()->route('laporan-perdin.index')->with('success', 'Laporan Perdin berhasil dihapus!');
+        //
     }
 }

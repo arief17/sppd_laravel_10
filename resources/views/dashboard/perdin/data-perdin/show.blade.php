@@ -5,66 +5,71 @@
 <div class="row row-sm">
 	<div class="col-md-6">
 		<div class="card">
-			<div class="card-header pb-0">
-				<div class="d-flex justify-content-between">
-					<h4 class="card-title mg-b-0">{{ $title }}</h4>
-					<div>
-						<a class="btn btn-info btn-sm" href="{{ route('data-perdin.edit', $data_perdin->slug) }}">
-							<i class="fas fa-pencil-alt"></i>
-							Edit
-						</a>
-						<form action="{{ route('data-perdin.destroy', $data_perdin->slug) }}" method="post" class="d-inline">
-							@method('delete')
-							@csrf
-							<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $data_perdin->perihal }}">
-								<i class="fas fa-trash"></i>
-								Delete
-							</button>
-						</form>
-					</div>
-				</div>
+			<div class="card-header d-flex justify-content-between">
+				<h4 class="card-title mb-1">{{ $title }}</h4>
+				<a class="btn btn-secondary btn-sm" href="{{ route('data-perdin.index') }}">
+					<i class="fa fa-reply"></i>
+				</a>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
 					<table class="table mg-b-0 text-md-nowrap border-bottom">
 						<tr>
-							<th>Surat Dari:</th>
-							<td style="width: 90%">{{ $data_perdin->surat_dari }}</td>
+							<th style="white-space: nowrap; width: 1%;">Surat Dari</th>
+							<td>{{ $data_perdin->surat_dari }}</td>
 						</tr>
 						<tr>
-							<th>Tanggal Surat:</th>
-							<td style="width: 90%">{{ $data_perdin->tgl_surat }}</td>
+							<th style="white-space: nowrap; width: 1%;">Tanggal Surat</th>
+							<td>{{ $data_perdin->tgl_surat }}</td>
 						</tr>
 						<tr>
-							<th>Perihal:</th>
-							<td style="width: 90%">{{ $data_perdin->perihal }}</td>
+							<th style="white-space: nowrap; width: 1%;">Perihal</th>
+							<td>{{ $data_perdin->perihal }}</td>
 						</tr>
 						<tr>
-							<th>Pegawai:</th>
-							<td style="width: 90%">{{ $data_perdin->author->pegawai->nama }}</td>
+							<th style="white-space: nowrap; width: 1%;">Petugas</th>
+							<td>{{ $data_perdin->pegawai_diperintah->nama }}</td>
 						</tr>
 						<tr>
-							<th>Tanggal Berangkat:</th>
-							<td style="width: 90%">{{ $data_perdin->tgl_berangkat }}</td>
+							<th style="white-space: nowrap; width: 1%;">Tanggal Berangkat</th>
+							<td>{{ $data_perdin->tgl_berangkat }}</td>
 						</tr>
 						<tr>
-							<th>Lama:</th>
-							<td style="width: 90%">{{ $data_perdin->lama }}</td>
+							<th style="white-space: nowrap; width: 1%;">Lama</th>
+							<td>{{ $data_perdin->lama }}</td>
 						</tr>
 						<tr>
-							<th>Lokasi:</th>
-							<td style="width: 90%">{{ $data_perdin->lokasi->nama }}</td>
+							<th style="white-space: nowrap; width: 1%;">Lokasi</th>
+							<td>{{ $data_perdin->lokasi }}</td>
 						</tr>
 						<tr>
-							<th>Jumlah Pegawai</th>
-							<td style="width: 90%">{{ $data_perdin->jumlah_pegawai }}</td>
+							<th style="white-space: nowrap; width: 1%;">Jumlah Pegawai</th>
+							<td>{{ $data_perdin->jumlah_pegawai }}</td>
 						</tr>
 						<tr>
-							<th>Biaya</th>
-							<td style="width: 90%">{{ $data_perdin->biaya }}</td>
+							<th style="white-space: nowrap; width: 1%;">Biaya</th>
+							<td>{{ $data_perdin->biaya }}</td>
 						</tr>
-					</table>
+						<tr>
+							<th style="white-space: nowrap; width: 1%;">User</th>
+							<td>{{ $data_perdin->author->username }}</td>
+						</tr>
+					</table>				
 				</div>
+			</div>
+			<div class="card-footer">
+				<a class="btn btn-info me-2" href="{{ route('data-perdin.edit', $data_perdin->slug) }}">
+					<i class="fas fa-pencil-alt"></i>
+					Edit
+				</a>
+				<form action="{{ route('data-perdin.destroy', $data_perdin->slug) }}" method="post" class="d-inline">
+					@method('delete')
+					@csrf
+					<button class="btn btn-danger" id='deleteData' data-title="{{ $data_perdin->nama }}">
+						<i class="fas fa-trash"></i>
+						Delete
+					</button>
+				</form>
 			</div>
 		</div>
 	</div>

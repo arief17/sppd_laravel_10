@@ -17,6 +17,7 @@
 						<thead>
 							<tr>
 								<th class="border-bottom-0" style="width: 1%">No</th>
+								<th class="border-bottom-0">Tanda Tangan</th>
 								<th class="border-bottom-0">Nama</th>
 								<th class="border-bottom-0">Jabatan</th>
 								<th class="border-bottom-0">Status</th>
@@ -27,6 +28,9 @@
 							@foreach ($tanda_tangans as $tanda_tangan)
 							<tr>
 								<td>{{ $loop->iteration }}</td>
+								<td>
+									<img class="img-fluid" style="max-width: 100px;" src="{{ asset('storage/' . $tanda_tangan->file_ttd) }}" alt="{{ $tanda_tangan->nama }}">
+								</td>
 								<td>{{ $tanda_tangan->pegawai->nama }}</td>
 								<td>{{ $tanda_tangan->pegawai->jabatan->nama }}</td>
 								<td>{{ $tanda_tangan->status ? 'Aktif' : 'Tidak Aktif' }}</td>
