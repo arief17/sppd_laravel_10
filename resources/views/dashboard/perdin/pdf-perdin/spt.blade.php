@@ -80,10 +80,10 @@
 			<tr>
 				<td rowspan="4"></td>
 				<td>Hari</td>
-				<td>: {{ Carbon\Carbon::parse($data_perdin->tgl_berangkat)->formatLocalized('%A') }}</td>
+				<td>: {{ Carbon\Carbon::parse($data_perdin->tgl_berangkat)->isoFormat('dddd') }}</td>
 				<tr>
 					<td>Tanggal</td>
-					<td>: {{ Carbon\Carbon::parse($data_perdin->tgl_berangkat)->formatLocalized('%d %B %Y') }}</td>
+					<td>: {{ Carbon\Carbon::parse($data_perdin->tgl_berangkat)->isoFormat('D MMMM YYYY') }}</td>
 				</tr>
 				<tr>
 					<td>Tempat</td>
@@ -102,7 +102,7 @@
 				</tr>
 				<tr>
 					<td>Pada Tanggal</td>
-					<td>: {{ now()->formatLocalized('%d %B %Y') }}</td>
+					<td>: {{ now()->isoFormat('D MMMM YYYY') }}</td>
 				</tr>
 			</table>
 	

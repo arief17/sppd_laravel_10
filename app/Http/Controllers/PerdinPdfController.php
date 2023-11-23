@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\App;
 use App\Models\DataPerdin;
 use App\Models\LaporanPerdin;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -10,9 +11,9 @@ use Illuminate\Http\Request;
 class PerdinPdfController extends Controller
 {
     public function spt($slug)
-    {
-        setlocale(LC_ALL, 'IND');
-        
+    {        
+        App::setLocale('id');
+
         $data_perdin = DataPerdin::where('slug', $slug)->first();
 
         $pdf = Pdf::loadView('dashboard.perdin.pdf-perdin.spt', [
