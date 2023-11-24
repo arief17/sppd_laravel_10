@@ -36,14 +36,15 @@
 								<td>{{ $loop->iteration }}</td>
 								<td>{{ $uang_transport->wilayah->nama }}</td>
 								<td>{{ $uang_transport->alat_angkut->nama }}</td>
-								<td>{{ $uang_transport->eselon_i }}</td>
-								<td>{{ $uang_transport->eselon_ii }}</td>
-								<td>{{ $uang_transport->eselon_iii }}</td>
-								<td>{{ $uang_transport->eselon_iv }}</td>
-								<td>{{ $uang_transport->golongan_iv }}</td>
-								<td>{{ $uang_transport->golongan_iii }}</td>
-								<td>{{ $uang_transport->golongan_ii }}</td>
-								<td>{{ $uang_transport->golongan_i }}</td>
+								<td>Rp {{ number_format($uang_transport->eselon_i, 0, ',', '.') }}</td>
+								<td>Rp {{ number_format($uang_transport->eselon_ii, 0, ',', '.') }}</td>
+								<td>Rp {{ number_format($uang_transport->eselon_iii, 0, ',', '.') }}</td>
+								<td>Rp {{ number_format($uang_transport->eselon_iv, 0, ',', '.') }}</td>
+								<td>Rp {{ number_format($uang_transport->golongan_iv, 0, ',', '.') }}</td>
+								<td>Rp {{ number_format($uang_transport->golongan_iii, 0, ',', '.') }}</td>
+								<td>Rp {{ number_format($uang_transport->golongan_ii, 0, ',', '.') }}</td>
+								<td>Rp {{ number_format($uang_transport->golongan_i, 0, ',', '.') }}</td>
+								
 								<td>
 									<a class="btn btn-primary btn-sm" href="{{ route('uang-transport.show', $uang_transport->slug) }}">
 										<i class="fas fa-folder"></i>
@@ -87,24 +88,24 @@
 
 @if(session()->has('success'))
 <script>
-    $(document).ready(function() {
-        var Toast = Swal.mixin({
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 5000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        });
-        
-        Toast.fire({
-            icon: 'success',
-            title: '{{ session('success') }}'
-        });
-    });
+	$(document).ready(function() {
+		var Toast = Swal.mixin({
+			toast: true,
+			position: 'top',
+			showConfirmButton: false,
+			timer: 5000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		});
+		
+		Toast.fire({
+			icon: 'success',
+			title: '{{ session('success') }}'
+		});
+	});
 </script>
 @endif
 

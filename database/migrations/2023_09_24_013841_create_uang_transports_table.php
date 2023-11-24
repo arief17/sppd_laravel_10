@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('uang_transports', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('slug')->unique();
-            $table->string('eselon_i');
-            $table->string('eselon_ii');
-            $table->string('eselon_iii');
-            $table->string('eselon_iv');
-            $table->string('golongan_iv');
-            $table->string('golongan_iii');
-            $table->string('golongan_ii');
-            $table->string('golongan_i');
+            $table->integer('eselon_i');
+            $table->integer('eselon_ii');
+            $table->integer('eselon_iii');
+            $table->integer('eselon_iv');
+            $table->integer('golongan_iv');
+            $table->integer('golongan_iii');
+            $table->integer('golongan_ii');
+            $table->integer('golongan_i');
             $table->unsignedBigInteger('wilayah_id');
             $table->unsignedBigInteger('alat_angkut_id');
             $table->unsignedBigInteger('author_id');

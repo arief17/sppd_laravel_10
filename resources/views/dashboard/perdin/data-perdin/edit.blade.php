@@ -65,15 +65,6 @@
 						</div>
 						@enderror
 					</div>
-					{{-- <div class="form-group">
-						<label for="no_spt">No. SPT</label>
-						<input name="no_spt" value="{{ old('no_spt') }}" type="text" class="form-control @error('no_spt') is-invalid @enderror" id="no_spt" placeholder="Masukan no_spt">
-						@error('no_spt')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div> --}}
 					
 					<hr>
 					
@@ -226,15 +217,6 @@
 							@endforeach
 						</select>
 						@error('pegawai_diperintah_id')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
-					<div class="form-group">
-						<label for="biaya">Tingkat Biaya</label>
-						<input name="biaya" value="{{ old('biaya') }}" type="text" class="form-control @error('biaya') is-invalid @enderror" id="biaya" placeholder="Masukan biaya">
-						@error('biaya')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>

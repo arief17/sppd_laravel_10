@@ -34,14 +34,15 @@
 							<tr>
 								<td>{{ $loop->iteration }}</td>
 								<td>{{ $uang_harian->keterangan }}</td>
-								<td>{{ $uang_harian->eselon_i }}</td>
-								<td>{{ $uang_harian->eselon_ii }}</td>
-								<td>{{ $uang_harian->eselon_iii }}</td>
-								<td>{{ $uang_harian->eselon_iv }}</td>
-								<td>{{ $uang_harian->golongan_iv }}</td>
-								<td>{{ $uang_harian->golongan_iii }}</td>
-								<td>{{ $uang_harian->golongan_ii }}</td>
-								<td>{{ $uang_harian->golongan_i }}</td>
+								<td>Rp {{ number_format($uang_harian->eselon_i, 0, ',', '.') }}</td>
+								<td>Rp {{ number_format($uang_harian->eselon_ii, 0, ',', '.') }}</td>
+								<td>Rp {{ number_format($uang_harian->eselon_iii, 0, ',', '.') }}</td>
+								<td>Rp {{ number_format($uang_harian->eselon_iv, 0, ',', '.') }}</td>
+								<td>Rp {{ number_format($uang_harian->golongan_iv, 0, ',', '.') }}</td>
+								<td>Rp {{ number_format($uang_harian->golongan_iii, 0, ',', '.') }}</td>
+								<td>Rp {{ number_format($uang_harian->golongan_ii, 0, ',', '.') }}</td>
+								<td>Rp {{ number_format($uang_harian->golongan_i, 0, ',', '.') }}</td>
+								
 								<td>
 									<a class="btn btn-primary btn-sm" href="{{ route('uang-harian.show', $uang_harian->slug) }}">
 										<i class="fas fa-folder"></i>
@@ -85,24 +86,24 @@
 
 @if(session()->has('success'))
 <script>
-    $(document).ready(function() {
-        var Toast = Swal.mixin({
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 5000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        });
-        
-        Toast.fire({
-            icon: 'success',
-            title: '{{ session('success') }}'
-        });
-    });
+	$(document).ready(function() {
+		var Toast = Swal.mixin({
+			toast: true,
+			position: 'top',
+			showConfirmButton: false,
+			timer: 5000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		});
+		
+		Toast.fire({
+			icon: 'success',
+			title: '{{ session('success') }}'
+		});
+	});
 </script>
 @endif
 

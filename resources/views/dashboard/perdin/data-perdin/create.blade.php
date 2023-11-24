@@ -203,15 +203,6 @@
 						</div>
 						@enderror
 					</div>
-					<div class="form-group">
-						<label for="biaya">Tingkat Biaya</label>
-						<input name="biaya" value="{{ old('biaya') }}" type="text" class="form-control @error('biaya') is-invalid @enderror" id="biaya" placeholder="Masukan biaya">
-						@error('biaya')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
 					
 					<div class="form-group">
 						<label for="pegawai_diperintah_id" class="form-label">Pegawai Yang Diperintahkan</label>

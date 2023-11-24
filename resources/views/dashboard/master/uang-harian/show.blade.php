@@ -20,35 +20,35 @@
 						</tr>
 						<tr>
 							<th style="white-space: nowrap; width: 1%;">Eselon I:</th>
-							<td>{{ $uang_harian->eselon_i }}</td>
+							<td>Rp {{ number_format($uang_harian->eselon_i, 0, ',', '.') }}</td>
 						</tr>
 						<tr>
 							<th style="white-space: nowrap; width: 1%;">Eselon II:</th>
-							<td>{{ $uang_harian->eselon_ii }}</td>
+							<td>Rp {{ number_format($uang_harian->eselon_ii, 0, ',', '.') }}</td>
 						</tr>
 						<tr>
-							<th style="white-space: nowrap; width: 1%;">Eselon III</th>
-							<td>{{ $uang_harian->eselon_iii }}</td>
+							<th style="white-space: nowrap; width: 1%;">Eselon III:</th>
+							<td>Rp {{ number_format($uang_harian->eselon_iii, 0, ',', '.') }}</td>
 						</tr>
 						<tr>
-							<th style="white-space: nowrap; width: 1%;">Eselon IV</th>
-							<td>{{ $uang_harian->eselon_iv }}</td>
+							<th style="white-space: nowrap; width: 1%;">Eselon IV:</th>
+							<td>Rp {{ number_format($uang_harian->eselon_iv, 0, ',', '.') }}</td>
 						</tr>
 						<tr>
-							<th style="white-space: nowrap; width: 1%;">Golongan IV</th>
-							<td>{{ $uang_harian->golongan_iv }}</td>
+							<th style="white-space: nowrap; width: 1%;">Golongan IV:</th>
+							<td>Rp {{ number_format($uang_harian->golongan_iv, 0, ',', '.') }}</td>
 						</tr>
 						<tr>
-							<th style="white-space: nowrap; width: 1%;">Golongan III</th>
-							<td>{{ $uang_harian->golongan_iii }}</td>
+							<th style="white-space: nowrap; width: 1%;">Golongan III:</th>
+							<td>Rp {{ number_format($uang_harian->golongan_iii, 0, ',', '.') }}</td>
 						</tr>
 						<tr>
-							<th style="white-space: nowrap; width: 1%;">Golongan II</th>
-							<td>{{ $uang_harian->golongan_ii }}</td>
+							<th style="white-space: nowrap; width: 1%;">Golongan II:</th>
+							<td>Rp {{ number_format($uang_harian->golongan_ii, 0, ',', '.') }}</td>
 						</tr>
 						<tr>
-							<th style="white-space: nowrap; width: 1%;">Golongan I</th>
-							<td>{{ $uang_harian->golongan_i }}</td>
+							<th style="white-space: nowrap; width: 1%;">Golongan I:</th>
+							<td>Rp {{ number_format($uang_harian->golongan_i, 0, ',', '.') }}</td>
 						</tr>
 					</table>
 				</div>
