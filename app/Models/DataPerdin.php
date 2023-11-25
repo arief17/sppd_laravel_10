@@ -14,7 +14,7 @@ class DataPerdin extends Model
     use HasFactory, Sluggable, SoftDeletes;
     
     protected $guarded = ['id'];
-    protected $with = ['author', 'tanda_tangan', 'alat_angkut', 'area', 'kedudukan', 'tujuan', 'pegawai_diperintah', 'status'];
+    protected $with = ['author', 'tanda_tangan', 'alat_angkut', 'area', 'kedudukan', 'pegawai_diperintah', 'status'];
     
     public static function filterByStatus($status)
     {
@@ -79,7 +79,15 @@ class DataPerdin extends Model
     
     public function tujuan(): BelongsTo
     {
-        return $this->belongsTo(KotaKabupaten::class, 'tujuan_id');
+        $area = Area::find($this->area_id);
+
+        if ($area->slug === 'dalam-daerah') {
+            return $this->belongsTo(KotaKabupaten::class, 'tujuan_id');
+        } elseif ($area->slug === 'perjalanan-dinas-biasa') {
+            return $this->belongsTo(Provinsi::class, 'tujuan_id');
+        } else {
+            return $this->belongsTo(Provinsi::class, 'tujuan_id');
+        }
     }
     
     public function pegawai_diperintah(): BelongsTo

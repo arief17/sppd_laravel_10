@@ -9,6 +9,7 @@ use App\Models\Ketentuan;
 use App\Models\KotaKabupaten;
 use App\Models\LaporanPerdin;
 use App\Models\Pegawai;
+use App\Models\Provinsi;
 use App\Models\StatusPerdin;
 use App\Models\TandaTangan;
 use Cviebrock\EloquentSluggable\Services\SlugService;
@@ -53,9 +54,17 @@ class DataPerdinController extends Controller
             return response()->json([]);
         }
         
-        $kotaKabupatens = $area->provinsis->flatMap->kota_kabupatens->pluck('nama', 'id');
+        $kotaKabupatens = [];
+        
+        if ($area->slug == 'dalam-daerah') {
+            $kotaKabupatens = $area->provinsis->flatMap->kota_kabupatens->pluck('nama', 'id');
+        } elseif ($area->slug == 'perjalanan-dinas-biasa') {
+            $kotaKabupatens = $area->provinsis->pluck('nama', 'id');
+        }
+        
         return response()->json($kotaKabupatens);
     }
+    
     /**
     * Store a newly created resource in storage.
     */
@@ -85,6 +94,9 @@ class DataPerdinController extends Controller
             
             $validatedData['slug'] = SlugService::createSlug(DataPerdin::class, 'slug', $request->perihal);
             $validatedData['author_id'] = auth()->user()->id;
+
+            $area = Area::find($request->area_id);
+            $validatedData['tujuan_id'] = $area->slug === 'dalam-daerah' ? $request->tujuan_id : Provinsi::find($request->tujuan_id)->kota_kabupatens->first()->id;
             
             $selectedPegawaiIds = explode(',', $request->pegawai_mengikuti_id);
             $validatedData['jumlah_pegawai'] = count($selectedPegawaiIds);
