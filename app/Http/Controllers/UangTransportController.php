@@ -41,6 +41,7 @@ class UangTransportController extends Controller
         $validatedData = $request->validate([
             'wilayah_id' => 'required',
             'alat_angkut_id' => 'required',
+            'harga_tiket' => 'nullable|numeric',
             'eselon_i' => 'required|numeric',
             'eselon_ii' => 'required|numeric',
             'eselon_iii' => 'required|numeric',
@@ -50,6 +51,8 @@ class UangTransportController extends Controller
             'golongan_ii' => 'required|numeric',
             'golongan_i' => 'required|numeric',
         ]);
+
+        $validatedData['harga_tiket'] = $request->harga_tiket ?? 0;
         
         $wilayah = KotaKabupaten::where('id', $request->wilayah_id)->get('nama');
         $alat_angkut = AlatAngkut::where('id', $request->alat_angkut_id)->get('nama');
@@ -93,6 +96,7 @@ class UangTransportController extends Controller
         $validatedData = $request->validate([
             'wilayah_id' => 'required',
             'alat_angkut_id' => 'required',
+            'harga_tiket' => 'nullable|numeric',
             'eselon_i' => 'required|numeric',
             'eselon_ii' => 'required|numeric',
             'eselon_iii' => 'required|numeric',
@@ -102,6 +106,8 @@ class UangTransportController extends Controller
             'golongan_ii' => 'required|numeric',
             'golongan_i' => 'required|numeric',
         ]);
+
+        $validatedData['harga_tiket'] = $request->harga_tiket ?? 0;
         
         $wilayah = KotaKabupaten::where('id', $request->wilayah_id)->get('nama');
         $alat_angkut = AlatAngkut::where('id', $request->alat_angkut_id)->get('nama');

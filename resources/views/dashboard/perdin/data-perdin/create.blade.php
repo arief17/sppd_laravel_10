@@ -250,6 +250,7 @@
 									<th>Uang Harian</th>
 									<th>Uang Penginapan</th>
 									<th>Uang Transport</th>
+									<th>Harga Tiket</th>
 									<th>Total</th>
 									<th style="width: 1%">Aksi</th>
 								</tr>

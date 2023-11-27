@@ -19,6 +19,7 @@
 								<th class="border-bottom-0" style="width: 1%">No</th>
 								<th class="border-bottom-0">Wilayah</th>
 								<th class="border-bottom-0">Alat Angkut</th>
+								<th class="border-bottom-0">Harga Tiket</th>
 								<th class="border-bottom-0">Eselon I</th>
 								<th class="border-bottom-0">Eselon II</th>
 								<th class="border-bottom-0">Eselon III</th>
@@ -36,6 +37,7 @@
 								<td>{{ $loop->iteration }}</td>
 								<td>{{ $uang_transport->wilayah->nama }}</td>
 								<td>{{ $uang_transport->alat_angkut->nama }}</td>
+								<td>Rp {{ number_format($uang_transport->harga_tiket, 0, ',', '.') }}</td>
 								<td>Rp {{ number_format($uang_transport->eselon_i, 0, ',', '.') }}</td>
 								<td>Rp {{ number_format($uang_transport->eselon_ii, 0, ',', '.') }}</td>
 								<td>Rp {{ number_format($uang_transport->eselon_iii, 0, ',', '.') }}</td>

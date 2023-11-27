@@ -76,12 +76,14 @@ class DataPerdinController extends Controller
         $uangHarian = UangHarian::where('wilayah_id', $kotaKabupatenId)->value($pegawaiGolongan);
         $uangPenginapan = UangPenginapan::where('wilayah_id', $kotaKabupatenId)->value($pegawaiGolongan);
         $uangTransport = UangTransport::where('wilayah_id', $kotaKabupatenId)->where('alat_angkut_id', $alatAngkutId)->value($pegawaiGolongan);
-        $totalBiaya = $uangHarian + $uangPenginapan + $uangTransport;
+        $hargaTiket = UangTransport::where('wilayah_id', $kotaKabupatenId)->where('alat_angkut_id', $alatAngkutId)->value('harga_tiket');
+        $totalBiaya = $uangHarian + $uangPenginapan + $uangTransport + $hargaTiket;
         
         return response()->json(['biaya' => [
             'uang_harian'=> $uangHarian,
             'uang_penginapan'=> $uangPenginapan,
             'uang_transport'=> $uangTransport,
+            'harga_tiket'=> $hargaTiket,
             'total_biaya'=> $totalBiaya,
         ]]);
     }

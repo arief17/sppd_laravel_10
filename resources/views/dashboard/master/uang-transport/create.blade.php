@@ -36,7 +36,7 @@
 						<select name="alat_angkut_id" id="alat_angkut_id" class="form-control form-select @error('alat_angkut_id') is-invalid @enderror">
 							<option value="">Pilih Alat Angkut</option>
 							@foreach ($alat_angkuts as $alat_angkut)
-							<option value="{{ $alat_angkut->id }}" @selected(old('alat_angkut_id') == $alat_angkut->id)>
+							<option value="{{ $alat_angkut->id }}" @selected(old('alat_angkut_id') == $alat_angkut->id) data-tiket="{{ $alat_angkut->tiket }}">
 								{{ $alat_angkut->nama }}
 							</option>
 							@endforeach
@@ -47,6 +47,17 @@
 						</div>
 						@enderror
 					</div>
+					
+					<div id="tiketHide" class="form-group">
+						<label for="harga_tiket">Harga Tiket</label>
+						<input name="harga_tiket" value="{{ old('harga_tiket') }}" type="number" class="form-control @error('harga_tiket') is-invalid @enderror" id="harga_tiket" placeholder="Masukan harga_tiket">
+						@error('harga_tiket')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+						@enderror
+					</div>
+					
 					<div class="form-group">
 						<label for="eselon_i">Eselon I</label>
 						<input name="eselon_i" value="{{ old('eselon_i') }}" type="number" class="form-control @error('eselon_i') is-invalid @enderror" id="eselon_i" placeholder="Masukan eselon_i">
@@ -138,6 +149,28 @@
 
 <!-- JQuery min js -->
 <script src="/assets/plugins/jquery/jquery.min.js"></script>
+
+<script>
+	$(document).ready(function() {
+		$('#tiketHide').hide();
+		$('#alat_angkut_id').on('change', function() {
+			const selectedOption = $(this).find(':selected');
+			const tiketStatus = selectedOption.data('tiket');
+			
+			if (tiketStatus === 1) {
+				$('#tiketHide').show();
+			} else {
+				$('#tiketHide').hide();
+			}
+		});
+		
+		// Cek kondisi saat halaman dimuat
+		const initialTiketStatus = $('#alat_angkut_id').find(':selected').data('tiket');
+		if (initialTiketStatus === 0) {
+			$('#tiketHide').hide();
+		}
+	});
+</script>
 
 <!--Internal  Datepicker js -->
 <script src="/assets/plugins/jquery-ui/ui/widgets/datepicker.js"></script>

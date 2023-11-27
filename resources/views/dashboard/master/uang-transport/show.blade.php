@@ -15,6 +15,10 @@
 				<div class="table-responsive">
 					<table class="table mg-b-0 text-md-nowrap border-bottom">
 						<tr>
+							<th style="white-space: nowrap; width: 1%;">Harga Tiket:</th>
+							<td>{{ $uang_transport->harga_tiket }}</td>
+						</tr>
+						<tr>
 							<th style="white-space: nowrap; width: 1%;">Wilayah:</th>
 							<td>{{ $uang_transport->wilayah }}</td>
 						</tr>

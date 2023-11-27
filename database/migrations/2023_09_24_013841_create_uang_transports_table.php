@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('uang_transports', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('slug')->unique();
+            $table->integer('harga_tiket')->default('0');
             $table->integer('eselon_i');
             $table->integer('eselon_ii');
             $table->integer('eselon_iii');
