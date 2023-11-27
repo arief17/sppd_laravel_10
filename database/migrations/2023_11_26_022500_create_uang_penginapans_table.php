@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('uang_harians', function (Blueprint $table) {
+        Schema::create('uang_penginapans', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('keterangan');
             $table->string('slug')->unique();
@@ -35,8 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('uang_harians', function (Blueprint $table) {
-            $table->dropSoftDeletes();
-        });
+        Schema::dropIfExists('uang_penginapans');
     }
 };

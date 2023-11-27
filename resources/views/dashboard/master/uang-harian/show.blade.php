@@ -19,6 +19,10 @@
 							<td>{{ $uang_harian->keterangan }}</td>
 						</tr>
 						<tr>
+							<th style="white-space: nowrap; width: 1%;">Wilayah:</th>
+							<td>{{ $uang_harian->wilayah->nama }}</td>
+						</tr>
+						<tr>
 							<th style="white-space: nowrap; width: 1%;">Eselon I:</th>
 							<td>Rp {{ number_format($uang_harian->eselon_i, 0, ',', '.') }}</td>
 						</tr>

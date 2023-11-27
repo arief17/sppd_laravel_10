@@ -354,6 +354,7 @@
 											<ul class="sub-slide-menu">
 												<li><a class="sub-side-menu__item {{ request()->routeIs('uang-harian.index') ? 'active' : '' }}" href="{{ route('uang-harian.index') }}">Uang Harian</a></li>
 												<li><a class="sub-side-menu__item {{ request()->routeIs('uang-transport.index') ? 'active' : '' }}" href="{{ route('uang-transport.index') }}">Uang Transport</a></li>
+												<li><a class="sub-side-menu__item {{ request()->routeIs('uang-penginapan.index') ? 'active' : '' }}" href="{{ route('uang-penginapan.index') }}">Uang Penginapan</a></li>
 												<li><a class="sub-side-menu__item {{ request()->routeIs('biaya-perdin.index') ? 'active' : '' }}" href="{{ route('biaya-perdin.index') }}">Biaya Perdin</a></li>
 											</ul>
 										</li>

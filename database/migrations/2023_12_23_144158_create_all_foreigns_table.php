@@ -74,12 +74,18 @@ return new class extends Migration
         });
 
         Schema::table('uang_harians', function (Blueprint $table) {
+            $table->foreign('wilayah_id')->references('id')->on('kota_kabupatens');
             $table->foreign('author_id')->references('id')->on('users');
         });
-
+        
         Schema::table('uang_transports', function (Blueprint $table) {
             $table->foreign('wilayah_id')->references('id')->on('kota_kabupatens');
             $table->foreign('alat_angkut_id')->references('id')->on('alat_angkuts');
+            $table->foreign('author_id')->references('id')->on('users');
+        });
+
+        Schema::table('uang_penginapans', function (Blueprint $table) {
+            $table->foreign('wilayah_id')->references('id')->on('kota_kabupatens');
             $table->foreign('author_id')->references('id')->on('users');
         });
 
@@ -133,6 +139,7 @@ return new class extends Migration
         Schema::dropIfExists('kota_kabupatens');
         Schema::dropIfExists('uang_harians');
         Schema::dropIfExists('uang_transports');
+        Schema::dropIfExists('uang_penginapans');
         Schema::dropIfExists('biaya_perdins');
         Schema::dropIfExists('data_perdins');
         Schema::dropIfExists('data_anggarans');

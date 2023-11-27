@@ -3,20 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\KotaKabupaten;
-use App\Models\UangHarian;
+use App\Models\UangPenginapan;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 
-class UangHarianController extends Controller
+class UangPenginapanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('dashboard.master.uang-harian.index', [
-            'title' => 'Daftar Uang Harian',
-            'uang_harians' => UangHarian::all(),
+        return view('dashboard.master.uang-penginapan.index', [
+            'title' => 'Daftar Uang Penginapan',
+            'uang_penginapans' => UangPenginapan::all(),
         ]);
     }
 
@@ -25,8 +25,8 @@ class UangHarianController extends Controller
      */
     public function create()
     {
-        return view('dashboard.master.uang-harian.create', [
-            'title' => 'Tambah Uang Harian',
+        return view('dashboard.master.uang-penginapan.create', [
+            'title' => 'Tambah Uang Penginapan',
             'wilayahs' => KotaKabupaten::all(),
         ]);
     }
@@ -49,32 +49,32 @@ class UangHarianController extends Controller
             'golongan_i' => 'required|integer',
         ]);
         
-        $validatedData['slug'] = SlugService::createSlug(UangHarian::class, 'slug', $request->keterangan);
+        $validatedData['slug'] = SlugService::createSlug(UangPenginapan::class, 'slug', $request->keterangan);
         $validatedData['author_id'] = auth()->user()->id;
         
-        UangHarian::create($validatedData);
-        return redirect()->route('uang-harian.index')->with('success', 'Uang Harian berhasil ditambahkan!');
+        UangPenginapan::create($validatedData);
+        return redirect()->route('uang-penginapan.index')->with('success', 'Uang Penginapan berhasil ditambahkan!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(UangHarian $uangHarian)
+    public function show(UangPenginapan $uangPenginapan)
     {
-        return view('dashboard.master.uang-harian.show', [
-            'title' => 'Detail Uang Harian',
-            'uang_harian' => $uangHarian,
+        return view('dashboard.master.uang-penginapan.show', [
+            'title' => 'Detail Uang Penginapan',
+            'uang_penginapan' => $uangPenginapan,
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(UangHarian $uangHarian)
+    public function edit(UangPenginapan $uangPenginapan)
     {
-        return view('dashboard.master.uang-harian.edit', [
-            'title' => 'Perbarui Uang Harian',
-            'uang_harian' => $uangHarian,
+        return view('dashboard.master.uang-penginapan.edit', [
+            'title' => 'Perbarui Uang Penginapan',
+            'uang_penginapan' => $uangPenginapan,
             'wilayahs' => KotaKabupaten::all(),
         ]);
     }
@@ -82,7 +82,7 @@ class UangHarianController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, UangHarian $uangHarian)
+    public function update(Request $request, UangPenginapan $uangPenginapan)
     {
         $validatedData = $request->validate([
             'keterangan' => 'required',
@@ -97,19 +97,19 @@ class UangHarianController extends Controller
             'golongan_i' => 'required|integer',
         ]);
         
-        $validatedData['slug'] = SlugService::createSlug(UangHarian::class, 'slug', $request->keterangan);
+        $validatedData['slug'] = SlugService::createSlug(UangPenginapan::class, 'slug', $request->keterangan);
         $validatedData['author_id'] = auth()->user()->id;
         
-        UangHarian::where('id', $uangHarian->id)->update($validatedData);
-        return redirect()->route('uang-harian.index')->with('success', 'Uang Harian berhasil diperbarui!');
+        UangPenginapan::where('id', $uangPenginapan->id)->update($validatedData);
+        return redirect()->route('uang-penginapan.index')->with('success', 'Uang Penginapan berhasil diperbarui!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UangHarian $uangHarian)
+    public function destroy(UangPenginapan $uangPenginapan)
     {
-        $uangHarian->delete();
-        return redirect()->route('uang-harian.index')->with('success', 'Uang Harian berhasil dihapus!');
+        $uangPenginapan->delete();
+        return redirect()->route('uang-penginapan.index')->with('success', 'Uang Penginapan berhasil dihapus!');
     }
 }

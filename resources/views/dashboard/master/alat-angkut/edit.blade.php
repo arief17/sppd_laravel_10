@@ -25,6 +25,22 @@
 						</div>
 						@enderror
 					</div>
+					<div class="form-group">
+						<label for="tiket" class="form-label">Tiket</label>
+						<select name="tiket" id="tiket" class="form-control form-select @error('tiket') is-invalid @enderror">
+							<option value="">Pilih Tiket</option>
+							@foreach ($tikets as $key => $value)
+							<option value="{{ $value }}" @selected(old('tiket', $alat_angkut->tiket) == $value)>
+								{{ $key }}
+							</option>
+							@endforeach
+						</select>
+						@error('tiket')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+						@enderror
+					</div>
 					
 					<div class="form-group mb-0 mt-3 justify-content-end">
 						<button type="submit" class="btn btn-primary">Simpan</button>

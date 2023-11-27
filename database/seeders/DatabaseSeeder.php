@@ -19,6 +19,7 @@ use App\Models\Pangkat;
 use App\Models\Seksi;
 use App\Models\TandaTangan;
 use App\Models\UangHarian;
+use App\Models\UangPenginapan;
 use App\Models\UangTransport;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -127,33 +128,6 @@ class DatabaseSeeder extends Seeder
             'nama' => 'Balikpapan',
             'slug' => 'balikpapan',
             'provinsi_id' => 2,
-            'author_id' => 1,
-        ]);
-
-        UangHarian::create([
-            'keterangan' => 'U Harian Dinas luar',
-            'slug' => 'u-harian-dinas-luar',
-            'eselon_i' => 150000,
-            'eselon_ii' => 150000,
-            'eselon_iii' => 150000,
-            'eselon_iv' => 150000,
-            'golongan_iv' => 150000,
-            'golongan_iii' => 150000,
-            'golongan_ii' => 150000,
-            'golongan_i' => 150000,
-            'author_id' => 1,
-        ]);
-        UangHarian::create([
-            'keterangan' => 'U Harian Dinas Luar (Kunjungan Kerja)',
-            'slug' => 'u-harian-dinas-luar-(kunjungan-kerja)',
-            'eselon_i' => 150000,
-            'eselon_ii' => 150000,
-            'eselon_iii' => 150000,
-            'eselon_iv' => 150000,
-            'golongan_iv' => 150000,
-            'golongan_iii' => 150000,
-            'golongan_ii' => 150000,
-            'golongan_i' => 150000,
             'author_id' => 1,
         ]);
         
@@ -340,13 +314,44 @@ class DatabaseSeeder extends Seeder
         ]);
 
         AlatAngkut::create([
-            'nama' => 'Kereta Api',
-            'slug' => 'kereta-api',
+            'nama' => 'Pesawat',
+            'slug' => 'pesawat',
+            'tiket' => 1,
             'author_id' => 1,
         ]);
         AlatAngkut::create([
             'nama' => 'Mobil',
             'slug' => 'mobil',
+            'tiket' => 0,
+            'author_id' => 1,
+        ]);
+
+        UangHarian::create([
+            'keterangan' => 'U Harian Dinas luar',
+            'slug' => 'u-harian-dinas-luar',
+            'wilayah_id' => 1,
+            'eselon_i' => 150000,
+            'eselon_ii' => 150000,
+            'eselon_iii' => 150000,
+            'eselon_iv' => 150000,
+            'golongan_iv' => 150000,
+            'golongan_iii' => 150000,
+            'golongan_ii' => 150000,
+            'golongan_i' => 150000,
+            'author_id' => 1,
+        ]);
+        UangHarian::create([
+            'keterangan' => 'U Harian Dinas Luar (Kunjungan Kerja)',
+            'slug' => 'u-harian-dinas-luar-(kunjungan-kerja)',
+            'wilayah_id' => 2,
+            'eselon_i' => 150000,
+            'eselon_ii' => 150000,
+            'eselon_iii' => 150000,
+            'eselon_iv' => 150000,
+            'golongan_iv' => 150000,
+            'golongan_iii' => 150000,
+            'golongan_ii' => 150000,
+            'golongan_i' => 150000,
             'author_id' => 1,
         ]);
 
@@ -376,6 +381,35 @@ class DatabaseSeeder extends Seeder
             'golongan_iii' => 350000,
             'golongan_ii' => 350000,
             'golongan_i' => 350000,
+            'author_id' => 1,
+        ]);
+
+        UangPenginapan::create([
+            'keterangan' => 'U Harian Dinas luar',
+            'slug' => 'u-harian-dinas-luar',
+            'wilayah_id' => 1,
+            'eselon_i' => 150000,
+            'eselon_ii' => 150000,
+            'eselon_iii' => 150000,
+            'eselon_iv' => 150000,
+            'golongan_iv' => 150000,
+            'golongan_iii' => 150000,
+            'golongan_ii' => 150000,
+            'golongan_i' => 150000,
+            'author_id' => 1,
+        ]);
+        UangPenginapan::create([
+            'keterangan' => 'U Harian Dinas Luar (Kunjungan Kerja)',
+            'slug' => 'u-harian-dinas-luar-(kunjungan-kerja)',
+            'wilayah_id' => 2,
+            'eselon_i' => 150000,
+            'eselon_ii' => 150000,
+            'eselon_iii' => 150000,
+            'eselon_iv' => 150000,
+            'golongan_iv' => 150000,
+            'golongan_iii' => 150000,
+            'golongan_ii' => 150000,
+            'golongan_i' => 150000,
             'author_id' => 1,
         ]);
 

@@ -25,6 +25,22 @@
 						@enderror
 					</div>
 					<div class="form-group">
+						<label for="wilayah_id" class="form-label">Wilayah</label>
+						<select name="wilayah_id" id="wilayah_id" class="form-control form-select @error('wilayah_id') is-invalid @enderror">
+							<option value="">Pilih Wilayah</option>
+							@foreach ($wilayahs as $wilayah)
+							<option value="{{ $wilayah->id }}" @selected(old('wilayah_id') == $wilayah->id)>
+								{{ $wilayah->nama }}
+							</option>
+							@endforeach
+						</select>
+						@error('wilayah_id')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+						@enderror
+					</div>
+					<div class="form-group">
 						<label for="eselon_i">Eselon I</label>
 						<input name="eselon_i" value="{{ old('eselon_i') }}" type="number" class="form-control @error('eselon_i') is-invalid @enderror" id="eselon_i" placeholder="Masukan eselon_i">
 						@error('eselon_i')

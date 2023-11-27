@@ -24,6 +24,7 @@ use App\Http\Controllers\TandaTanganController;
 use App\Http\Controllers\UangHarianController;
 use App\Http\Controllers\UangKeluarController;
 use App\Http\Controllers\UangMasukController;
+use App\Http\Controllers\UangPenginapanController;
 use App\Http\Controllers\UangTransportController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -68,6 +69,7 @@ Route::middleware('can:isAdmin')->group(function(){
 	Route::resource('/dashboard/tanda-tangan', TandaTanganController::class)->middleware('auth');
 	Route::resource('/dashboard/uang-harian', UangHarianController::class)->middleware('auth');
 	Route::resource('/dashboard/uang-transport', UangTransportController::class)->middleware('auth');
+	Route::resource('/dashboard/uang-penginapan', UangPenginapanController::class)->middleware('auth');
 	Route::resource('/dashboard/user', UserController::class)->middleware('auth');
 });
 

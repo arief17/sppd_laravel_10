@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class UangHarian extends Model
+class UangPenginapan extends Model
 {
     use HasFactory, Sluggable, SoftDeletes;
 
@@ -24,11 +24,6 @@ class UangHarian extends Model
     public function wilayah(): BelongsTo
     {
         return $this->belongsTo(KotaKabupaten::class, 'wilayah_id');
-    }
-
-    public function biaya_perdins(): HasMany
-    {
-        return $this->hasMany(BiayaPerdin::class, 'harian_id');
     }
 
     public function getRouteKeyName()

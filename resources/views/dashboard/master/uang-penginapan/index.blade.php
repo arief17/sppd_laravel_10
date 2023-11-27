@@ -8,7 +8,7 @@
 			<div class="card-header">
 				<div class="d-flex align-items-center">
 					<h3 class="card-title">{{ $title }}</h3>
-					<a href="{{ route('uang-harian.create') }}" class="btn btn-primary mg-l-auto">Tambah</a>
+					<a href="{{ route('uang-penginapan.create') }}" class="btn btn-primary mg-l-auto">Tambah</a>
 				</div>
 			</div>
 			<div class="card-body">
@@ -31,33 +31,33 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach ($uang_harians as $uang_harian)
+							@foreach ($uang_penginapans as $uang_penginapan)
 							<tr>
 								<td>{{ $loop->iteration }}</td>
-								<td>{{ $uang_harian->keterangan }}</td>
-								<td>{{ $uang_harian->wilayah->nama }}</td>
-								<td>Rp {{ number_format($uang_harian->eselon_i, 0, ',', '.') }}</td>
-								<td>Rp {{ number_format($uang_harian->eselon_ii, 0, ',', '.') }}</td>
-								<td>Rp {{ number_format($uang_harian->eselon_iii, 0, ',', '.') }}</td>
-								<td>Rp {{ number_format($uang_harian->eselon_iv, 0, ',', '.') }}</td>
-								<td>Rp {{ number_format($uang_harian->golongan_iv, 0, ',', '.') }}</td>
-								<td>Rp {{ number_format($uang_harian->golongan_iii, 0, ',', '.') }}</td>
-								<td>Rp {{ number_format($uang_harian->golongan_ii, 0, ',', '.') }}</td>
-								<td>Rp {{ number_format($uang_harian->golongan_i, 0, ',', '.') }}</td>
+								<td>{{ $uang_penginapan->keterangan }}</td>
+								<td>{{ $uang_penginapan->wilayah->nama }}</td>
+								<td>Rp {{ number_format($uang_penginapan->eselon_i, 0, ',', '.') }}</td>
+								<td>Rp {{ number_format($uang_penginapan->eselon_ii, 0, ',', '.') }}</td>
+								<td>Rp {{ number_format($uang_penginapan->eselon_iii, 0, ',', '.') }}</td>
+								<td>Rp {{ number_format($uang_penginapan->eselon_iv, 0, ',', '.') }}</td>
+								<td>Rp {{ number_format($uang_penginapan->golongan_iv, 0, ',', '.') }}</td>
+								<td>Rp {{ number_format($uang_penginapan->golongan_iii, 0, ',', '.') }}</td>
+								<td>Rp {{ number_format($uang_penginapan->golongan_ii, 0, ',', '.') }}</td>
+								<td>Rp {{ number_format($uang_penginapan->golongan_i, 0, ',', '.') }}</td>
 								
 								<td>
-									<a class="btn btn-primary btn-sm" href="{{ route('uang-harian.show', $uang_harian->slug) }}">
+									<a class="btn btn-primary btn-sm" href="{{ route('uang-penginapan.show', $uang_penginapan->slug) }}">
 										<i class="fas fa-folder"></i>
 										View
 									</a>
-									<a class="btn btn-info btn-sm" href="{{ route('uang-harian.edit', $uang_harian->slug) }}">
+									<a class="btn btn-info btn-sm" href="{{ route('uang-penginapan.edit', $uang_penginapan->slug) }}">
 										<i class="fas fa-pencil-alt"></i>
 										Edit
 									</a>
-									<form action="{{ route('uang-harian.destroy', $uang_harian->slug) }}" method="post" class="d-inline">
+									<form action="{{ route('uang-penginapan.destroy', $uang_penginapan->slug) }}" method="post" class="d-inline">
 										@method('delete')
 										@csrf
-										<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $uang_harian->nama }}">
+										<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $uang_penginapan->nama }}">
 											<i class="fas fa-trash"></i>
 											Delete
 										</button>

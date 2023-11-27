@@ -26,6 +26,16 @@ class KotaKabupaten extends Model
         return $this->belongsTo(Provinsi::class, 'provinsi_id');
     }
 
+    public function uang_harians(): HasMany
+    {
+        return $this->hasMany(UangHarian::class, 'wilayah_id');
+    }
+
+    public function uang_transports(): HasMany
+    {
+        return $this->hasMany(UangTransport::class, 'wilayah_id');
+    }
+
     public function biaya_perdins_dari(): HasMany
     {
         return $this->hasMany(BiayaPerdin::class, 'dari_id');

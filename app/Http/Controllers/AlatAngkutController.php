@@ -13,6 +13,7 @@ class AlatAngkutController extends Controller
      */
     public function index()
     {
+
         return view('dashboard.master.alat-angkut.index', [
             'title' => 'Daftar Alat Angkut',
             'alat_angkuts' => AlatAngkut::all(),
@@ -24,8 +25,11 @@ class AlatAngkutController extends Controller
      */
     public function create()
     {
+        $tikets = ['Menggunakan tiket' => 1, 'Tidak menggunakan tiket' => 0];
+
         return view('dashboard.master.alat-angkut.create', [
             'title' => 'Tambah Alat Angkut',
+            'tikets' => $tikets
         ]);
     }
 
@@ -36,6 +40,7 @@ class AlatAngkutController extends Controller
     {
         $validatedData = $request->validate([
             'nama' => 'required|min:3|max:100',
+            'tiket' => 'required'
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(AlatAngkut::class, 'slug', $request->nama);
@@ -61,9 +66,12 @@ class AlatAngkutController extends Controller
      */
     public function edit(AlatAngkut $alatAngkut)
     {
+        $tikets = ['Menggunakan tiket' => 1, 'Tidak menggunakan tiket' => 0];
+
         return view('dashboard.master.alat-angkut.edit', [
             'title' => 'Perbarui Alat Angkut',
             'alat_angkut' => $alatAngkut,
+            'tikets' => $tikets
         ]);
     }
 
@@ -74,6 +82,7 @@ class AlatAngkutController extends Controller
     {
         $validatedData = $request->validate([
             'nama' => 'required|min:3|max:100',
+            'tiket' => 'required'
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(AlatAngkut::class, 'slug', $request->nama);
