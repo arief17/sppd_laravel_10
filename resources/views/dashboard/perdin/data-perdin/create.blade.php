@@ -208,7 +208,7 @@
 					
 					<div class="form-group">
 						<label for="pegawai_diperintah_id" class="form-label">Pegawai Yang Diperintahkan</label>
-						<select name="pegawai_diperintah_id" id="pegawai_diperintah_id" class="form-control form-select @error('pegawai_diperintah_id') is-invalid @enderror">
+						<select name="pegawai_diperintah_id" id="pegawai_diperintah_id" class="form-control form-select @error('pegawai_diperintah_id') is-invalid @enderror" disabled>
 							<option value="">Pilih Pegawai Yang Diperintahkan</option>
 							@foreach ($pegawais as $pegawai)
 							<option value="{{ $pegawai->id }}" @selected(old('pegawai_diperintah_id') == $pegawai->id)>
@@ -225,7 +225,7 @@
 					
 					<div class="form-group">
 						<label for="pegawai_mengikuti_id" class="form-label">Pegawai Yang Mengikuti</label>
-						<select name="pegawai" id="pegawai_mengikuti_id" class="form-control form-select @error('pegawai_mengikuti_id') is-invalid @enderror">
+						<select name="pegawai" id="pegawai_mengikuti_id" class="form-control form-select @error('pegawai_mengikuti_id') is-invalid @enderror" disabled>
 							<option value="">Pilih Pegawai Yang Mengikuti</option>
 							@foreach ($pegawais as $pegawai)
 							<option value="{{ $pegawai->id }}">{{ $pegawai->nama }}</option>
@@ -247,10 +247,15 @@
 								<tr>
 									<th style="width: 1%">No</th>
 									<th>Nama</th>
+									<th>Uang Harian</th>
+									<th>Uang Penginapan</th>
+									<th>Uang Transport</th>
+									<th>Total</th>
 									<th style="width: 1%">Aksi</th>
 								</tr>
 							</thead>
 							<tbody id="pegawai-list"></tbody>
+							<tfoot id="pegawai-total"></tfoot>
 						</table>
 					</div>
 					<hr>
@@ -347,113 +352,8 @@
 <!--themecolor js-->
 <script src="/assets/js/themecolor.js"></script>
 
-<script>
-	function hitungTanggalKembali() {
-		var tanggalBerangkat = new Date(document.getElementById('tgl_berangkat').value);
-		var lama = parseInt(document.getElementById('lama').value);
-		
-		if (!isNaN(lama) && tanggalBerangkat instanceof Date && !isNaN(tanggalBerangkat.getTime())) {
-			var tanggalKembali = new Date(tanggalBerangkat);
-			tanggalKembali.setDate(tanggalKembali.getDate() + lama);
-			var formattedDate = tanggalKembali.toISOString().split('T')[0];
-			document.getElementById('tgl_kembali').value = formattedDate;
-		} else {
-			document.getElementById('tgl_kembali').value = '';
-		}
-	}
-	
-	document.getElementById('lama').addEventListener('change', hitungTanggalKembali);
-	document.getElementById('tgl_berangkat').addEventListener('input', hitungTanggalKembali);
-</script>
-
-<script>
-	let selectedPegawai = [];
-	
-	function addPegawaiDiperintah() {
-		const pegawaiDiperintahSelect = document.getElementById('pegawai_diperintah_id');
-		const selectedOption = pegawaiDiperintahSelect.options[pegawaiDiperintahSelect.selectedIndex];
-		const pegawaiId = selectedOption.value;
-		const pegawaiNama = selectedOption.text;
-		
-		if (!selectedPegawai.find(pegawai => pegawai.id === pegawaiId)) {
-			selectedPegawai.push({ id: pegawaiId, nama: pegawaiNama });
-			updatePegawaiList();
-			updateSelectedPegawaiInput();
-		}
-	}
-	
-	function addPegawaiToSelected() {
-		const pegawaiSelect = document.getElementById('pegawai_mengikuti_id');
-		const selectedOption = pegawaiSelect.options[pegawaiSelect.selectedIndex];
-		const pegawaiId = selectedOption.value;
-		const pegawaiNama = selectedOption.text;
-		
-		if (!selectedPegawai.find(pegawai => pegawai.id === pegawaiId)) {
-			selectedPegawai.push({ id: pegawaiId, nama: pegawaiNama });
-			updatePegawaiList();
-			updateSelectedPegawaiInput();
-			
-			pegawaiSelect.selectedIndex = 0;
-		} else {
-			pegawaiSelect.selectedIndex = 0;
-		}
-	}
-	
-	function removePegawaiFromSelected(pegawaiId) {
-		selectedPegawai = selectedPegawai.filter(pegawai => pegawai.id !== pegawaiId);
-		updatePegawaiList();
-		updateSelectedPegawaiInput();
-	}
-	
-	function updateSelectedPegawaiInput() {
-		const selectedPegawaiInput = document.getElementById('selected_pegawais');
-		selectedPegawaiInput.value = selectedPegawai.map(pegawai => pegawai.id).join(',');
-	}
-	
-	function updatePegawaiList() {
-		const pegawaiList = document.getElementById('pegawai-list');
-		pegawaiList.innerHTML = '';
-		
-		selectedPegawai.forEach((pegawai, index) => {
-			const row = document.createElement('tr');
-			row.innerHTML = `
-			<td>${index + 1}</td>
-			<td>${pegawai.nama}</td>
-			<td>
-				<button type="button" class="btn btn-danger btn-sm btn-hapus-pegawai"
-				onclick="removePegawaiFromSelected('${pegawai.id}')">Hapus</button>
-			</td>
-			`;
-			pegawaiList.appendChild(row);
-		});
-	}
-	
-	document.getElementById('pegawai_diperintah_id').addEventListener('change', addPegawaiDiperintah);
-	document.getElementById('pegawai_mengikuti_id').addEventListener('change', addPegawaiToSelected);
-</script>
-
-<script>
-	$(document).ready(function() {
-		$('#area_id').on('change', function() {
-			var areaId = $(this).val();
-			$('#tujuan_id').empty();
-			$('#tujuan_id').append('<option value="">Pilih Tujuan</option>');
-			
-			if (areaId) {
-				$.ajax({
-					url: '/get-kota-kabupaten/' + areaId,
-					type: 'GET',
-					dataType: 'json',
-					success: function(data) {
-						$.each(data, function(key, value) {
-							$('#tujuan_id').append('<option value="' + key + '">' + value + '</option>');
-						});
-					}
-				});
-			}
-		});
-	});
-</script>
+<!-- data perdin js -->
+<script src="/assets/js/data_perdin.js"></script>
 
 <!-- custom js -->
 <script src="/assets/js/custom.js"></script>

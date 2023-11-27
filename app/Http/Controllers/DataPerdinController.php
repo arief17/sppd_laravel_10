@@ -12,6 +12,9 @@ use App\Models\Pegawai;
 use App\Models\Provinsi;
 use App\Models\StatusPerdin;
 use App\Models\TandaTangan;
+use App\Models\UangHarian;
+use App\Models\UangPenginapan;
+use App\Models\UangTransport;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -65,6 +68,24 @@ class DataPerdinController extends Controller
         return response()->json($kotaKabupatens);
     }
     
+    public function getPegawaiInfo($kotaKabupatenId, $alatAngkutId, $pegawaiId)
+    {
+        $pegawai = Pegawai::find($pegawaiId);
+        $pegawaiGolongan = str_replace('-', '_', $pegawai->golongan->slug);
+
+        $uangHarian = UangHarian::where('wilayah_id', $kotaKabupatenId)->value($pegawaiGolongan);
+        $uangPenginapan = UangPenginapan::where('wilayah_id', $kotaKabupatenId)->value($pegawaiGolongan);
+        $uangTransport = UangTransport::where('wilayah_id', $kotaKabupatenId)->where('alat_angkut_id', $alatAngkutId)->value($pegawaiGolongan);
+        $totalBiaya = $uangHarian + $uangPenginapan + $uangTransport;
+        
+        return response()->json(['biaya' => [
+            'uang_harian'=> $uangHarian,
+            'uang_penginapan'=> $uangPenginapan,
+            'uang_transport'=> $uangTransport,
+            'total_biaya'=> $totalBiaya,
+        ]]);
+    }
+    
     /**
     * Store a newly created resource in storage.
     */
@@ -94,7 +115,7 @@ class DataPerdinController extends Controller
             
             $validatedData['slug'] = SlugService::createSlug(DataPerdin::class, 'slug', $request->perihal);
             $validatedData['author_id'] = auth()->user()->id;
-
+            
             $area = Area::find($request->area_id);
             $validatedData['tujuan_id'] = $area->slug === 'dalam-daerah' ? $request->tujuan_id : Provinsi::find($request->tujuan_id)->kota_kabupatens->first()->id;
             
