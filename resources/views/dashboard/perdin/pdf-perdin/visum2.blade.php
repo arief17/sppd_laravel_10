@@ -35,7 +35,7 @@
 					</tr>
 					<tr>
 						<td style="white-space: nowrap; width: 1%; padding-right: 20px;">Pada Tanggal</td>
-						<td>: {{ Carbon\Carbon::parse($data_perdin->tgl_berangkat)->formatLocalized('%d %B %Y') }}</td>
+						<td>: {{ Carbon\Carbon::parse($data_perdin->tgl_berangkat)->isoFormat('D MMMM YYYY') }}</td>
 					</tr>
 				</table>
 				<div style="text-align: center;">
@@ -57,7 +57,7 @@
 					</tr>
 					<tr>
 						<td style="white-space: nowrap; width: 1%; padding-right: 20px;">Pada Tanggal</td>
-						<td>: {{ Carbon\Carbon::parse($data_perdin->tgl_berangkat)->formatLocalized('%d %B %Y') }}</td>
+						<td>: {{ Carbon\Carbon::parse($data_perdin->tgl_berangkat)->isoFormat('D MMMM YYYY') }}</td>
 					</tr>
 					<tr>
 						<td colspan="2">Kepala</td>
@@ -85,7 +85,7 @@
 					</tr>
 					<tr>
 						<td style="white-space: nowrap; width: 1%; padding-right: 20px;">Pada Tanggal</td>
-						<td>: {{ Carbon\Carbon::parse($data_perdin->tgl_kembali)->formatLocalized('%d %B %Y') }}</td>
+						<td>: {{ Carbon\Carbon::parse($data_perdin->tgl_kembali)->isoFormat('D MMMM YYYY') }}</td>
 					</tr>
 					<tr>
 						<td colspan="2">Kepala</td>
@@ -277,7 +277,7 @@
 					</tr>
 					<tr>
 						<td style="white-space: nowrap; width: 1%; padding-right: 20px;">Pada Tanggal</td>
-						<td>: {{ Carbon\Carbon::parse($data_perdin->tgl_kembali)->formatLocalized('%d %B %Y') }}</td>
+						<td>: {{ Carbon\Carbon::parse($data_perdin->tgl_kembali)->isoFormat('D MMMM YYYY') }}</td>
 					</tr>
 				</table>
 				<div style="text-align: center;">

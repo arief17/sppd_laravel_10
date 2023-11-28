@@ -131,8 +131,8 @@
 					<td colspan="2">
 						<ol style="list-style-type: lower-alpha; padding-left: 20px;">
 							<li>{{ $data_perdin->lama }} hari</li>
-							<li>{{ Carbon\Carbon::parse($data_perdin->tgl_berangkat)->formatLocalized('%d %B %Y') }}</li>
-							<li>{{ Carbon\Carbon::parse($data_perdin->tgl_kembali)->formatLocalized('%d %B %Y') }}</li>
+							<li>{{ Carbon\Carbon::parse($data_perdin->tgl_berangkat)->isoFormat('D MMMM YYYY') }}</li>
+							<li>{{ Carbon\Carbon::parse($data_perdin->tgl_kembali)->isoFormat('D MMMM YYYY') }}</li>
 						</ol>
 					</td>
 				</tr>
@@ -181,7 +181,7 @@
 			</tr>
 			<tr>
 				<td>Tanggal</td>
-				<td>: {{ now()->formatLocalized('%d %B %Y') }}</td>
+				<td>: {{ now()->isoFormat('D MMMM YYYY') }}</td>
 			</tr>
 		</table>
 

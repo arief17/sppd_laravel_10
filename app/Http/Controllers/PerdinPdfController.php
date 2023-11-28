@@ -67,7 +67,7 @@ class PerdinPdfController extends Controller
     public function lap($id)
     {
         App::setLocale('id');
-        $laporan_perdin = LaporanPerdin::where('slug', $id)->first();
+        $laporan_perdin = LaporanPerdin::where('id', $id)->first();
 
         $imgLogo = base64_encode(file_get_contents(public_path('assets/img/logo-banten.png')));
         

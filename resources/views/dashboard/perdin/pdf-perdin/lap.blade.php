@@ -120,7 +120,7 @@
 		</table>
 		
 		<p style="margin: 30px 0 10px 0;">
-			Serang, {{ now()->formatLocalized('%d %B %Y') }} <br>
+			Serang, {{ now()->isoFormat('D MMMM YYYY') }} <br>
 			Yang melaksanakan Tugas
 		</p>
 		
