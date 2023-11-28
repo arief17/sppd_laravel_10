@@ -18,7 +18,7 @@
 </head>
 <body style="font-family: Times, serif; margin: 30px;">
 	<div style="float: left;">
-		<img src="{{ public_path('/assets/img/logo-banten.png') }}" width="80">
+		<img src="data:image/jpeg;base64,{{ $imgLogo }}" width="80">
 	</div>
 	<div style="text-align: center;">
 		<h2>

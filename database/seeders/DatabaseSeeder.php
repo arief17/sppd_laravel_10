@@ -305,14 +305,6 @@ class DatabaseSeeder extends Seeder
             'author_id' => 1,
         ]);
 
-        TandaTangan::create([
-            'slug' => 'tanda-tangan-1',
-            'pegawai_id' => 2,
-            'status' => 1,
-            'file_ttd' => 'kosong',
-            'author_id' => 1,
-        ]);
-
         AlatAngkut::create([
             'nama' => 'Pesawat',
             'slug' => 'pesawat',

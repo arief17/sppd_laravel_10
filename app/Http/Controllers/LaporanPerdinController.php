@@ -74,7 +74,7 @@ class LaporanPerdinController extends Controller
             if($request->oldLaporan){
                 Storage::delete($request->oldLaporan);
             }
-            $validatedData['file_laporan'] = $request->file('file_laporan')->store('file-laporan');
+            $validatedData['file_laporan'] = $request->file('file_laporan')->store('file-laporan', ['disk' => 'public_uploads']);
         }
 
         $validatedData['author_id'] = auth()->user()->id;
