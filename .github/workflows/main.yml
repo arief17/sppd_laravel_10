@@ -20,45 +20,30 @@ jobs:
       #   run: php -r "file_exists('.env') || copy('.env.example', '.env');"
       # - name: Generate key
       #   run: php artisan key:generate
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 1
-  
-      - name: Cache composer dependencies
-        uses: actions/cache@v3
-        with:
-          path: vendor
-          key: composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            composer-
-  
-      - name: Install PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.1
-  
-      - name: Install composer dependencies
-        run: |
-          composer install --no-scripts
-  
-      - name: Prepare Laravel Application
-        run: |
-          php -r "file_exists('.env') || copy('.env.example', '.env');"
-          php artisan key:generate
 
-      - name: Update .env for Database
-        run: |
-          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
-          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
-          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+      # - name: Update .env for Database
+      #   run: |
+      #     echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
+      #     echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
+      #     echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
 
-      - name: Deployment
+      # - name: Deployment
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{ secrets.SSH_HOST }}
+      #     port: ${{ secrets.SSH_PORT }}
+      #     username: ${{ secrets.SSH_USERNAME }}
+      #     password: ${{ secrets.SSH_PASSWORD }}
+      #     script: |
+      #       cd public_html/sppd_laravel_10
+      #       git pull origin production
+
+      - uses: actions/checkout@v2
+      - name: Deploy to server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           port: ${{ secrets.SSH_PORT }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
-          script: |
-            cd public_html/sppd_laravel_10
-            git pull origin production
+          script: "cd public_html/sppd_laravel_10 && ./.scripts/deploy.sh"
