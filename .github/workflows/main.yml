@@ -10,16 +10,42 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Install Dependencies
-        run: composer update --ignore-platform-reqs
-      - name: Directory Permissions
-        run: chmod -R 777 storage bootstrap/cache
-      - name: Copy .env
-        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-      - name: Generate key
-        run: php artisan key:generate
+      # - name: Checkout
+      #   uses: actions/checkout@v3
+      # - name: Install Dependencies
+      #   run: composer update --ignore-platform-reqs
+      # - name: Directory Permissions
+      #   run: chmod -R 777 storage bootstrap/cache
+      # - name: Copy .env
+      #   run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      # - name: Generate key
+      #   run: php artisan key:generate
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+  
+      - name: Cache composer dependencies
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            composer-
+  
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+  
+      - name: Install composer dependencies
+        run: |
+          composer install --no-scripts
+  
+      - name: Prepare Laravel Application
+        run: |
+          php -r "file_exists('.env') || copy('.env.example', '.env');"
+          php artisan key:generate
+
       - name: Update .env for Database
         run: |
           echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
@@ -29,11 +55,10 @@ jobs:
       - name: Deployment
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.HOST }}
-          key: ${{ secrets.PRIVATE_KEY }}
-          port: ${{ secrets.PORT }}
-          username: ${{ secrets.USERNAME }}
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
           script: |
-            cd public_html/sppd
-            git checkout -f 
-            git pull
+            cd public_html/sppd_laravel_10
+            git pull origin production
