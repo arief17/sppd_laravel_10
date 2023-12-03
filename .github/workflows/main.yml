@@ -12,20 +12,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Install Dependencies
-        run: composer update --ignore-platform-reqs
-      - name: Directory Permissions
-        run: chmod -R 777 storage bootstrap/cache
-      - name: Copy .env
-        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-      - name: Generate key
-        run: php artisan key:generate
 
-      - name: Update .env for Database
-        run: |
-          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
-          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
-          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+      # - name: Install Dependencies
+      #   run: composer update --ignore-platform-reqs
+      # - name: Directory Permissions
+      #   run: chmod -R 777 storage bootstrap/cache
+      # - name: Copy .env
+      #   run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      # - name: Generate key
+      #   run: php artisan key:generate
+
+      # - name: Update .env for Database
+      #   run: |
+      #     echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
+      #     echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
+      #     echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
 
       - name: Deployment
         uses: appleboy/ssh-action@master
@@ -37,3 +38,10 @@ jobs:
           script: |
             cd public_html/sppd_laravel_10
             git pull
+            composer update --ignore-platform-reqs
+            chmod -R 777 storage bootstrap/cache
+            php -r "file_exists('.env') || copy('.env.example', '.env');"
+            php artisan key:generate
+            echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
+            echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
+            echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
