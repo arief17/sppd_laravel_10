@@ -36,7 +36,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
-            cd public_html/sppd_laravel_10
+            cd public_html/sppd
             git pull
             composer update --ignore-platform-reqs
             chmod -R 777 storage bootstrap/cache
