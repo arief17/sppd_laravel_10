@@ -155,13 +155,8 @@
 					</div>
 					<div class="form-group">
 						<label for="kedudukan_id" class="form-label">Tempat Kedudukan</label>
-						<select name="kedudukan_id" id="kedudukan_id" class="form-control form-select @error('kedudukan_id') is-invalid @enderror">
-							<option value="">Pilih Tempat Kedudukan</option>
-							@foreach ($kota_kabupatens as $kota_kabupaten)
-							<option value="{{ $kota_kabupaten->id }}" @selected(old('kedudukan_id') == $kota_kabupaten->id)>
-								{{ $kota_kabupaten->nama }}
-							</option>
-							@endforeach
+						<select name="kedudukan_id" id="kedudukan_id" class="form-control form-select @error('kedudukan_id') is-invalid @enderror" disabled>
+							<option value="Kabupaten Serang">Kabupaten Serang</option>
 						</select>
 						@error('kedudukan_id')
 						<div class="invalid-feedback">
@@ -170,16 +165,16 @@
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="area_id" class="form-label">Area</label>
-						<select name="area_id" id="area_id" class="form-control form-select @error('area_id') is-invalid @enderror">
-							<option value="">Pilih Area</option>
-							@foreach ($areas as $area)
-							<option value="{{ $area->id }}" @selected(old('area_id') == $area->id)>
-								{{ $area->nama }}
+						<label for="jenis_perdin_id" class="form-label">Jenis Perdin</label>
+						<select name="jenis_perdin_id" id="jenis_perdin_id" class="form-control form-select @error('jenis_perdin_id') is-invalid @enderror">
+							<option value="">Pilih Jenis Perdin</option>
+							@foreach ($jenis_perdins as $jenis_perdin)
+							<option value="{{ $jenis_perdin->id }}" @selected(old('jenis_perdin_id') == $jenis_perdin->id)>
+								{{ $jenis_perdin->nama }}
 							</option>
 							@endforeach
 						</select>
-						@error('area_id')
+						@error('jenis_perdin_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
@@ -261,15 +256,6 @@
 					</div>
 					<hr>
 					
-					<div class="form-group">
-						<label for="keterangan">Keterangan</label>
-						<textarea name="keterangan" class="form-control @error('keterangan') is-invalid @enderror" id="keterangan" placeholder="Masukan keterangan" rows="3">{{ old('keterangan') }}</textarea>
-						@error('keterangan')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
 					<hr>
 					
 					<div class="form-group mb-0 mt-3 justify-content-end">

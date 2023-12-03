@@ -161,14 +161,14 @@ function calculateTotal() {
 
 // Tujuan yang menyesuaikan wilayah
 $(document).ready(function() {
-	$('#area_id').on('change', function() {
-		var areaId = $(this).val();
+	$('#jenis_perdin_id').on('change', function() {
+		var jenisPerdinId = $(this).val();
 		$('#tujuan_id').empty();
 		$('#tujuan_id').append('<option value="">Pilih Tujuan</option>');
 		
-		if (areaId) {
+		if (jenisPerdinId) {
 			$.ajax({
-				url: '/get-kota-kabupaten/' + areaId,
+				url: '/get-kota-kabupaten/' + jenisPerdinId,
 				type: 'GET',
 				dataType: 'json',
 				success: function(data) {

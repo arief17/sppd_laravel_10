@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BiayaPerdin;
-use App\Models\Area;
+use App\Models\JenisPerdin;
 use App\Models\KotaKabupaten;
 use App\Models\UangHarian;
 use App\Models\UangTransport;
@@ -30,7 +30,7 @@ class BiayaPerdinController extends Controller
     {
         return view('dashboard.master.biaya-perdin.create', [
             'title' => 'Tambah Biaya Perdin',
-            'areas' => Area::all(),
+            'jenis_perdins' => JenisPerdin::all(),
             'kota_kabupatens' => KotaKabupaten::all(),
             'uang_transports' => UangTransport::all(),
             'uang_harians' => UangHarian::all(),
@@ -43,18 +43,18 @@ class BiayaPerdinController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'area_id' => 'required',
+            'jenis_perdin_id' => 'required',
             'dari_id' => 'required',
             'ke_id' => 'required',
             'transport_id' => 'required',
             'harian_id' => 'required',
         ]);
 
-        $area = Area::where('id', $request->area_id)->get('nama');
+        $jenis_perdin = JenisPerdin::where('id', $request->jenis_perdin_id)->get('nama');
         $dari = KotaKabupaten::where('id', $request->dari_id)->get('nama');
         $ke = KotaKabupaten::where('id', $request->ke_id)->get('nama');
         
-        $validatedData['slug'] = SlugService::createSlug(BiayaPerdin::class, 'slug', "$area $dari $ke");
+        $validatedData['slug'] = SlugService::createSlug(BiayaPerdin::class, 'slug', "$jenis_perdin $dari $ke");
         $validatedData['author_id'] = auth()->user()->id;
         
         BiayaPerdin::create($validatedData);
@@ -80,7 +80,7 @@ class BiayaPerdinController extends Controller
         return view('dashboard.master.biaya-perdin.edit', [
             'title' => 'Perbarui Biaya Perdin',
             'biaya_perdin' => $biayaPerdin,
-            'areas' => Area::all(),
+            'jenis_perdins' => JenisPerdin::all(),
             'kota_kabupatens' => KotaKabupaten::all(),
             'uang_transports' => UangTransport::all(),
             'uang_harians' => UangHarian::all(),
@@ -93,18 +93,18 @@ class BiayaPerdinController extends Controller
     public function update(Request $request, BiayaPerdin $biayaPerdin)
     {
         $validatedData = $request->validate([
-            'area_id' => 'required',
+            'jenis_perdin_id' => 'required',
             'dari_id' => 'required',
             'ke_id' => 'required',
             'transport_id' => 'required',
             'harian_id' => 'required',
         ]);
         
-        $area = Area::where('id', $request->area_id)->get('nama');
+        $jenis_perdin = JenisPerdin::where('id', $request->jenis_perdin_id)->get('nama');
         $dari = KotaKabupaten::where('id', $request->dari_id)->get('nama');
         $ke = KotaKabupaten::where('id', $request->ke_id)->get('nama');
         
-        $validatedData['slug'] = SlugService::createSlug(BiayaPerdin::class, 'slug', "$area $dari $ke");
+        $validatedData['slug'] = SlugService::createSlug(BiayaPerdin::class, 'slug', "$jenis_perdin $dari $ke");
         $validatedData['author_id'] = auth()->user()->id;
         
         BiayaPerdin::where('id', $biayaPerdin->id)->update($validatedData);

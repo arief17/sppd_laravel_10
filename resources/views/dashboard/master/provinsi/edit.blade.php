@@ -26,16 +26,16 @@
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="area_id" class="form-label">Area</label>
-						<select name="area_id" id="area_id" class="form-control form-select @error('area_id') is-invalid @enderror">
-							<option value="">Pilih Area</option>
-							@foreach ($areas as $area)
-							<option value="{{ $area->id }}" @selected(old('area_id', $provinsi->area_id) == $area->id)>
-								{{ $area->nama }}
+						<label for="jenis_perdin_id" class="form-label">Jenis Perdin</label>
+						<select name="jenis_perdin_id" id="jenis_perdin_id" class="form-control form-select @error('jenis_perdin_id') is-invalid @enderror">
+							<option value="">Pilih Jenis Perdin</option>
+							@foreach ($jenis_perdins as $jenis_perdin)
+							<option value="{{ $jenis_perdin->id }}" @selected(old('jenis_perdin_id', $provinsi->jenis_perdin_id) == $jenis_perdin->id)>
+								{{ $jenis_perdin->nama }}
 							</option>
 							@endforeach
 						</select>
-						@error('area_id')
+						@error('jenis_perdin_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>

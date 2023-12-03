@@ -29,7 +29,7 @@
 							<tr>
 								<td>{{ $loop->iteration }}</td>
 								<td>
-									<img class="img-fluid" style="max-width: 100px;" src="{{ asset('uploads/' . $tanda_tangan->file_ttd) }}" alt="{{ $tanda_tangan->nama }}">
+									<img class="img-fluid" style="max-width: 100px;" src="data:image/png;base64,{{ $tanda_tangan->fileTtdEncoded }}" alt="{{ $tanda_tangan->nama }}">
 								</td>
 								<td>{{ $tanda_tangan->pegawai->nama }}</td>
 								<td>{{ $tanda_tangan->pegawai->jabatan->nama }}</td>

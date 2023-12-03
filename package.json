@@ -4,7 +4,7 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "deploy": "git checkout production && git pull origin main && git checkout main"
+        "deploy": "git checkout production && git pull origin main && git merge main && git checkout main"
     },
     "devDependencies": {
         "axios": "^1.1.2",

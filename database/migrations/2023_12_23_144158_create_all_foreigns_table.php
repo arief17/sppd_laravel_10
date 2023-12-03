@@ -54,7 +54,7 @@ return new class extends Migration
             $table->foreign('author_id')->references('id')->on('users');
         });
 
-        Schema::table('areas', function (Blueprint $table) {
+        Schema::table('jenis_perdins', function (Blueprint $table) {
             $table->foreign('author_id')->references('id')->on('users');
         });
 
@@ -64,7 +64,7 @@ return new class extends Migration
         });
         
         Schema::table('provinsis', function (Blueprint $table) {
-            $table->foreign('area_id')->references('id')->on('areas');
+            $table->foreign('jenis_perdin_id')->references('id')->on('jenis_perdins');
             $table->foreign('author_id')->references('id')->on('users');
         });
 
@@ -90,7 +90,7 @@ return new class extends Migration
         });
 
         Schema::table('biaya_perdins', function (Blueprint $table) {
-            $table->foreign('area_id')->references('id')->on('areas');
+            $table->foreign('jenis_perdin_id')->references('id')->on('jenis_perdins');
             $table->foreign('dari_id')->references('id')->on('kota_kabupatens');
             $table->foreign('ke_id')->references('id')->on('kota_kabupatens');
             $table->foreign('transport_id')->references('id')->on('uang_transports');
@@ -101,7 +101,7 @@ return new class extends Migration
         Schema::table('data_perdins', function (Blueprint $table) {
             $table->foreign('tanda_tangan_id')->references('id')->on('tanda_tangans');
             $table->foreign('alat_angkut_id')->references('id')->on('alat_angkuts');
-            $table->foreign('area_id')->references('id')->on('areas');
+            $table->foreign('jenis_perdin_id')->references('id')->on('jenis_perdins');
             $table->foreign('kedudukan_id')->references('id')->on('kota_kabupatens');
             $table->foreign('tujuan_id')->references('id')->on('kota_kabupatens');
             $table->foreign('pegawai_diperintah_id')->references('id')->on('pegawais');
@@ -133,7 +133,7 @@ return new class extends Migration
         Schema::dropIfExists('jabatans');
         Schema::dropIfExists('ketentuans');
         Schema::dropIfExists('golongans');
-        Schema::dropIfExists('areas');
+        Schema::dropIfExists('jenis_perdins');
         Schema::dropIfExists('provinsis');
         Schema::dropIfExists('seksis');
         Schema::dropIfExists('kota_kabupatens');

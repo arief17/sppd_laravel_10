@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('biaya_perdins', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('slug')->unique();
-            $table->unsignedBigInteger('area_id');
+            $table->unsignedBigInteger('jenis_perdin_id');
             $table->unsignedBigInteger('dari_id');
             $table->unsignedBigInteger('ke_id');
             $table->unsignedBigInteger('transport_id');

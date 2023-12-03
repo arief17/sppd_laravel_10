@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('areas', function (Blueprint $table) {
+        Schema::create('jenis_perdins', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama');
             $table->string('slug')->unique();
@@ -26,7 +26,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('areas', function (Blueprint $table) {
+        Schema::table('jenis_perdins', function (Blueprint $table) {
             $table->dropSoftDeletes();
         });
     }

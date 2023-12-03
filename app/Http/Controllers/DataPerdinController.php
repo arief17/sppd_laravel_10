@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AlatAngkut;
 use App\Models\DataPerdin;
-use App\Models\Area;
+use App\Models\JenisPerdin;
 use App\Models\Ketentuan;
 use App\Models\KotaKabupaten;
 use App\Models\LaporanPerdin;
@@ -43,26 +43,26 @@ class DataPerdinController extends Controller
             'title' => 'Tambah Data Perdin',
             'kota_kabupatens' => KotaKabupaten::all(),
             'alat_angkuts' => AlatAngkut::all(),
-            'areas' => Area::all(),
+            'jenis_perdins' => JenisPerdin::all(),
             'tanda_tangans' => TandaTangan::all(),
             'pegawais' => Pegawai::all(),
         ]);
     }
     
-    public function getKotaKabupaten($areaId)
+    public function getKotaKabupaten($jenisPerdinId)
     {
-        $area = Area::find($areaId);
+        $jenis_perdin = JenisPerdin::find($jenisPerdinId);
         
-        if (!$area) {
+        if (!$jenis_perdin) {
             return response()->json([]);
         }
         
         $kotaKabupatens = [];
         
-        if ($area->slug == 'dalam-daerah') {
-            $kotaKabupatens = $area->provinsis->flatMap->kota_kabupatens->pluck('nama', 'id');
-        } elseif ($area->slug == 'perjalanan-dinas-biasa') {
-            $kotaKabupatens = $area->provinsis->pluck('nama', 'id');
+        if ($jenis_perdin->slug == 'dalam-daerah') {
+            $kotaKabupatens = $jenis_perdin->provinsis->flatMap->kota_kabupatens->pluck('nama', 'id');
+        } elseif ($jenis_perdin->slug == 'perjalanan-dinas-biasa') {
+            $kotaKabupatens = $jenis_perdin->provinsis->pluck('nama', 'id');
         }
         
         return response()->json($kotaKabupatens);
@@ -96,30 +96,29 @@ class DataPerdinController extends Controller
     {
         return DB::transaction(function () use ($request) {
             $validatedData = $request->validate([
-                'surat_dari' => 'required',
-                'nomor_surat' => 'required|numeric',
-                'tgl_surat' => 'required|date',
-                'perihal' => 'required',
+                'surat_dari' => 'nullable',
+                'nomor_surat' => 'nullable|snumeric',
+                'tgl_surat' => 'nullable|date',
+                'perihal' => 'nullable',
                 'tanda_tangan_id' => 'required',
                 'maksud' => 'required',
                 'lama' => 'required',
                 'tgl_berangkat' => 'required|date',
                 'tgl_kembali' => 'required|date',
                 'alat_angkut_id' => 'required',
-                'area_id' => 'required',
-                'kedudukan_id' => 'required',
+                'jenis_perdin_id' => 'required',
                 'tujuan_id' => 'required',
                 'lokasi' => 'required',
-                'keterangan' => 'nullable',
                 'pegawai_diperintah_id' => 'required',
                 'pegawai_mengikuti_id' => 'nullable',
             ]);
             
-            $validatedData['slug'] = SlugService::createSlug(DataPerdin::class, 'slug', $request->perihal);
+            $validatedData['slug'] = SlugService::createSlug(DataPerdin::class, 'slug', $request->maksud);
             $validatedData['author_id'] = auth()->user()->id;
+            $validatedData['kedudukan_id'] = KotaKabupaten::where('nama', 'LIKE', '%' . $request->kedudukan_id . '%')->value('id');
             
-            $area = Area::find($request->area_id);
-            $validatedData['tujuan_id'] = $area->slug === 'dalam-daerah' ? $request->tujuan_id : Provinsi::find($request->tujuan_id)->kota_kabupatens->first()->id;
+            $jenis_perdin = JenisPerdin::find($request->jenis_perdin_id);
+            $validatedData['tujuan_id'] = $jenis_perdin->slug === 'dalam-daerah' ? $request->tujuan_id : Provinsi::find($request->tujuan_id)->kota_kabupatens->first()->id;
             
             $selectedPegawaiIds = explode(',', $request->pegawai_mengikuti_id);
             $validatedData['jumlah_pegawai'] = count($selectedPegawaiIds);
@@ -176,7 +175,7 @@ class DataPerdinController extends Controller
             'data_perdin' => $dataPerdin,
             'kota_kabupatens' => KotaKabupaten::all(),
             'alat_angkuts' => AlatAngkut::all(),
-            'areas' => Area::all(),
+            'jenis_perdins' => JenisPerdin::all(),
             'tanda_tangans' => TandaTangan::all(),
             'pegawais' => Pegawai::all(),
         ]);
@@ -188,28 +187,27 @@ class DataPerdinController extends Controller
     public function update(Request $request, DataPerdin $dataPerdin)
     {
         $validatedData = $request->validate([
-            'surat_dari' => 'required',
-            'nomor_surat' => 'required|numeric',
-            'tgl_surat' => 'required|date',
-            'perihal' => 'required',
+            'surat_dari' => 'nullable',
+            'nomor_surat' => 'numeric',
+            'tgl_surat' => 'date',
+            'perihal' => 'nullable',
             'tanda_tangan_id' => 'required',
             'maksud' => 'required',
             'lama' => 'required',
             'tgl_berangkat' => 'required|date',
             'tgl_kembali' => 'required|date',
             'alat_angkut_id' => 'required',
-            'area_id' => 'required',
-            'kedudukan_id' => 'required',
+            'jenis_perdin_id' => 'required',
             'tujuan_id' => 'required',
             'lokasi' => 'required',
             'pegawai_diperintah_id' => 'required',
             'biaya' => 'required',
-            'keterangan' => '',
             'pegawai_mengikuti_id' => 'required',
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(DataPerdin::class, 'slug', $request->perihal);
         $validatedData['author_id'] = auth()->user()->id;
+        $validatedData['kedudukan_id'] = KotaKabupaten::where('nama', 'LIKE', '%' . $request->kedudukan_id . '%')->value('id');
         
         $selectedPegawaiIds = explode(',', $request->pegawai_mengikuti_id);
         $validatedData['jumlah_pegawai'] = count($selectedPegawaiIds);

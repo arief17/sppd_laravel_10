@@ -48,7 +48,7 @@ class TandaTanganController extends Controller
         }
         $pegawai = Pegawai::where('id', $request->pegawai_id)->first();
         
-        $validatedData['file_ttd'] = $request->file('file_ttd')->store('file-ttd', ['disk' => 'public_uploads']);
+        $validatedData['file_ttd'] = $request->file('file_ttd')->store('file-ttd');
         $validatedData['slug'] = SlugService::createSlug(TandaTangan::class, 'slug', $pegawai->nama . " " . $pegawai->jabatan->nama);
         $validatedData['author_id'] = auth()->user()->id;
         
@@ -98,7 +98,7 @@ class TandaTanganController extends Controller
             if($request->oldTtd){
                 Storage::delete($request->oldTtd);
             }
-            $validatedData['file_ttd'] = $request->file('file_ttd')->store('file-ttd', ['disk' => 'public_uploads']);
+            $validatedData['file_ttd'] = $request->file('file_ttd')->store('file-ttd');
         }
         
         $pegawai = Pegawai::where('id', $request->pegawai_id)->first();

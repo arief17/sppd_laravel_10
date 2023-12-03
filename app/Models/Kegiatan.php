@@ -14,7 +14,7 @@ class Kegiatan extends Model
     use HasFactory, Sluggable, SoftDeletes;
 
     protected $guarded = ['id'];
-    protected $with = ['author'];
+    protected $with = ['author', 'seksi'];
 
     public function author(): BelongsTo
     {

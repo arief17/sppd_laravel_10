@@ -8,7 +8,7 @@ use App\Models\BiayaPerdin;
 use App\Models\Bidang;
 use App\Models\Golongan;
 use App\Models\Jabatan;
-use App\Models\Area;
+use App\Models\JenisPerdin;
 use App\Models\Kegiatan;
 use App\Models\Ketentuan;
 use App\Models\KotaKabupaten;
@@ -94,12 +94,12 @@ class DatabaseSeeder extends Seeder
             'author_id' => 1,
         ]);
 
-        Area::create([
+        JenisPerdin::create([
             'nama' => 'Dalam Daerah',
             'slug' => 'dalam-daerah',
             'author_id' => 1,
         ]);
-        Area::create([
+        JenisPerdin::create([
             'nama' => 'Perjalanan Dinas Biasa',
             'slug' => 'perjalanan-dinas-biasa',
             'author_id' => 1,
@@ -108,13 +108,13 @@ class DatabaseSeeder extends Seeder
         Provinsi::create([
             'nama' => 'Banten',
             'slug' => 'banten',
-            'area_id' => 1,
+            'jenis_perdin_id' => 1,
             'author_id' => 1,
         ]);
         Provinsi::create([
             'nama' => 'BALI',
             'slug' => 'bali',
-            'area_id' => 2,
+            'jenis_perdin_id' => 2,
             'author_id' => 1,
         ]);
 
@@ -409,7 +409,7 @@ class DatabaseSeeder extends Seeder
 
         BiayaPerdin::create([
             'slug' => 'biaya-perdin-1',
-            'area_id' => 1,
+            'jenis_perdin_id' => 1,
             'dari_id' => 1,
             'ke_id' => 1,
             'transport_id' => 1,
@@ -418,7 +418,7 @@ class DatabaseSeeder extends Seeder
         ]);
         BiayaPerdin::create([
             'slug' => 'biaya-perdin-2',
-            'area_id' => 2,
+            'jenis_perdin_id' => 2,
             'dari_id' => 2,
             'ke_id' => 2,
             'transport_id' => 2,

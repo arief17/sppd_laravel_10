@@ -15,8 +15,8 @@
 				<div class="table-responsive">
 					<table class="table mg-b-0 text-md-nowrap border-bottom">
 						<tr>
-							<th style="white-space: nowrap; width: 1%;">Area:</th>
-							<td>{{ $biaya_perdin->area->nama }}</td>
+							<th style="white-space: nowrap; width: 1%;">Jenis Perdin:</th>
+							<td>{{ $biaya_perdin->jenis_perdin->nama }}</td>
 						</tr>
 						<tr>
 							<th style="white-space: nowrap; width: 1%;">Dari:</th>

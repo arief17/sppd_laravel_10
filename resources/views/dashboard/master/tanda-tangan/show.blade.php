@@ -29,7 +29,7 @@
 						<tr>
 							<th style="white-space: nowrap; width: 1%;">Tanda Tangan: </th>
 							<td>
-								<img class="img-fluid" style="max-width: 100px;" src="{{ asset('uploads/' . $tanda_tangan->file_ttd) }}" alt="{{ $tanda_tangan->nama }}">
+								<img class="img-fluid" style="max-width: 100px;" src="data:image/png;base64,{{ $tanda_tangan->fileTtdEncoded }}" alt="{{ $tanda_tangan->nama }}">
 							</td>
 						</tr>
 					</table>

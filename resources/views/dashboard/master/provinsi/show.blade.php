@@ -19,8 +19,8 @@
 							<td>{{ $provinsi->nama }}</td>
 						</tr>
 						<tr>
-							<th style="white-space: nowrap; width: 1%;">Area:</th>
-							<td>{{ $provinsi->area->nama }}</td>
+							<th style="white-space: nowrap; width: 1%;">Jenis Perdin:</th>
+							<td>{{ $provinsi->jenis_perdin->nama }}</td>
 						</tr>
 					</table>
 				</div>

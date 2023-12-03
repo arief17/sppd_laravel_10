@@ -7,18 +7,17 @@
 		<div class="card box-shadow-0 ">
 			<div class="card-header d-flex justify-content-between">
 				<h4 class="card-title mb-1">{{ $title }}</h4>
-				<a class="btn btn-secondary btn-sm" href="{{ route('area.index') }}">
+				<a class="btn btn-secondary btn-sm" href="{{ route('jenis-perdin.index') }}">
 					<i class="fa fa-reply"></i>
 				</a>
 			</div>
 			<div class="card-body pt-0">
-				<form action="{{ route('area.show', $area->slug) }}" method="post">
+				<form action="{{ route('jenis-perdin.index') }}" method="post">
 					@csrf
-					@method('put')
 					
 					<div class="form-group">
 						<label for="nama">Nama</label>
-						<input name="nama" value="{{ old('nama', $area->nama) }}" type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukan nama">
+						<input name="nama" value="{{ old('nama') }}" type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukan nama">
 						@error('nama')
 						<div class="invalid-feedback">
 							{{ $message }}

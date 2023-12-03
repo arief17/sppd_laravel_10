@@ -14,16 +14,16 @@ class Provinsi extends Model
     use HasFactory, Sluggable, SoftDeletes;
 
     protected $guarded = ['id'];
-    protected $with = ['author', 'area'];
+    protected $with = ['author', 'jenis_perdin'];
 
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
     }
 
-    public function area(): BelongsTo
+    public function jenis_perdin(): BelongsTo
     {
-        return $this->belongsTo(Area::class, 'area_id');
+        return $this->belongsTo(JenisPerdin::class, 'jenis_perdin_id');
     }
 
     public function kota_kabupatens(): HasMany

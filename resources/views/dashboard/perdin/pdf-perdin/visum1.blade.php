@@ -18,7 +18,7 @@
 </head>
 <body style="font-family: Times, serif; margin: 30px;">
 	<div style="float: left;">
-		<img src="data:image/jpeg;base64,{{ $imgLogo }}" width="80">
+		<img src="data:image/png;base64,{{ $imgLogo }}" width="80">
 	</div>
 	<div style="text-align: center;">
 		<h2>
@@ -189,7 +189,7 @@
 			<div style="text-align: center;">
 				<p style="margin-top: 10px;">{{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}</p>
 				
-				<img src="data:image/jpeg;base64,{{ $imgTtd }}" alt="{{ $data_perdin->tanda_tangan->nama }}" width="100">
+				<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" width="100">
 				<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
 				<p>NIP.{{ $data_perdin->tanda_tangan->pegawai->nip }}</p>
 			</div>

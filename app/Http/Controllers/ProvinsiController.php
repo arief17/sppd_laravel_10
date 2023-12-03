@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Area;
+use App\Models\JenisPerdin;
 use App\Models\Provinsi;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
@@ -27,7 +27,7 @@ class ProvinsiController extends Controller
     {
         return view('dashboard.master.provinsi.create', [
             'title' => 'Tambah Provinsi',
-            'areas' => Area::all(),
+            'jenis_perdins' => JenisPerdin::all(),
         ]);
     }
 
@@ -38,7 +38,7 @@ class ProvinsiController extends Controller
     {
         $validatedData = $request->validate([
             'nama' => 'required|min:3|max:100',
-            'area_id' => 'required',
+            'jenis_perdin_id' => 'required',
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(Provinsi::class, 'slug', $request->nama);
@@ -67,7 +67,7 @@ class ProvinsiController extends Controller
         return view('dashboard.master.provinsi.edit', [
             'title' => 'Perbarui Provinsi',
             'provinsi' => $provinsi,
-            'areas' => Area::all(),
+            'jenis_perdins' => JenisPerdin::all(),
         ]);
     }
 
@@ -78,7 +78,7 @@ class ProvinsiController extends Controller
     {
         $validatedData = $request->validate([
             'nama' => 'required|min:3|max:100',
-            'area_id' => 'required',
+            'jenis_perdin_id' => 'required',
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(Provinsi::class, 'slug', $request->nama);

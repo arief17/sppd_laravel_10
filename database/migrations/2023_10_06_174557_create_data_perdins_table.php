@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('data_perdins', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('slug')->unique();
-            $table->string('surat_dari');
-            $table->string('nomor_surat');
-            $table->date('tgl_surat');
-            $table->text('perihal');
+            $table->string('surat_dari')->nullable();
+            $table->string('nomor_surat')->nullable();
+            $table->date('tgl_surat')->nullable();
+            $table->text('perihal')->nullable();
             $table->string('no_spt')->nullable();
             $table->unsignedBigInteger('tanda_tangan_id');
             $table->text('maksud');
@@ -25,13 +25,12 @@ return new class extends Migration
             $table->date('tgl_berangkat');
             $table->date('tgl_kembali');
             $table->unsignedBigInteger('alat_angkut_id');
-            $table->unsignedBigInteger('area_id');
+            $table->unsignedBigInteger('jenis_perdin_id');
             $table->unsignedBigInteger('kedudukan_id');
             $table->unsignedBigInteger('tujuan_id');
             $table->text('lokasi');
             $table->unsignedBigInteger('pegawai_diperintah_id');
             $table->string('jumlah_pegawai');
-            $table->text('keterangan')->nullable();
             $table->unsignedBigInteger('status_id');
             $table->unsignedBigInteger('laporan_perdin_id');
             $table->unsignedBigInteger('author_id');

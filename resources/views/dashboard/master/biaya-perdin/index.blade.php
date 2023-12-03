@@ -17,7 +17,7 @@
 						<thead>
 							<tr>
 								<th class="border-bottom-0" style="width: 1%">No</th>
-								<th class="border-bottom-0">Area</th>
+								<th class="border-bottom-0">Jenis Perdin</th>
 								<th class="border-bottom-0">Dari</th>
 								<th class="border-bottom-0">Ke</th>
 								<th class="border-bottom-0">transport</th>
@@ -29,7 +29,7 @@
 							@foreach ($biaya_perdins as $biaya_perdin)
 							<tr>
 								<td>{{ $loop->iteration }}</td>
-								<td>{{ $biaya_perdin->area->nama }}</td>
+								<td>{{ $biaya_perdin->jenis_perdin->nama }}</td>
 								<td>{{ $biaya_perdin->dari->nama }}</td>
 								<td>{{ $biaya_perdin->ke->nama }}</td>
 								<td>{{ $biaya_perdin->transport->nama }}</td>
