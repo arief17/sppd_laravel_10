@@ -60,6 +60,6 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
-            cd public_html/sppd
+            cd public_html/sppd_laravel_10
             git checkout -f 
             git pull
