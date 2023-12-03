@@ -38,7 +38,8 @@ jobs:
       #       cd public_html/sppd_laravel_10
       #       git pull origin production
 
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Deploy to server
         uses: appleboy/ssh-action@master
         with:
@@ -46,4 +47,4 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
-          script: "cd public_html/sppd_laravel_10 && ./.scripts/deploy.sh"
+          script: "cd public_html/sppd_laravel_10 && .scripts/deploy.sh"
