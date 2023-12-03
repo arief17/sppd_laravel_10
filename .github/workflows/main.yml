@@ -20,12 +20,12 @@ jobs:
       #   run: php -r "file_exists('.env') || copy('.env.example', '.env');"
       # - name: Generate key
       #   run: php artisan key:generate
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 1
   
       - name: Cache composer dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: vendor
           key: composer-${{ hashFiles('**/composer.lock') }}
