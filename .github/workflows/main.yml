@@ -43,7 +43,7 @@ jobs:
   
       - name: Prepare Laravel Application
         run: |
-          cp .env.example .env
+          php -r "file_exists('.env') || copy('.env.ci', '.env');"
           php artisan key:generate
 
       - name: Update .env for Database
@@ -61,5 +61,4 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
             cd public_html/sppd_laravel_10
-            git checkout -f 
-            git pull
+            git pull origin production
