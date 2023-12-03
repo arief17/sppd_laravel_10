@@ -36,14 +36,4 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
             cd public_html/sppd_laravel_10
-            git pull origin production
-      
-      - name: Copy vendor folder
-        run: |
-          tar -czvf vendor.tar.gz vendor
-          scp vendor.tar.gz ${{ secrets.SSH_HOST }}:public_html/sppd_laravel_10
-          ssh ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} 'tar -xvf vendor.tar.gz'
-      
-      - name: Copy .env file
-        run: |
-          scp .env ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:public_html/sppd_laravel_10
+            git pull
