@@ -3,7 +3,7 @@
 @section('container')
 
 <div class="row row-sm">
-	<div class="col-lg-6 col-xl-6 col-md-12 col-sm-12">
+	<div class="col-xl-6">
 		<div class="card box-shadow-0 ">
 			<div class="card-header d-flex justify-content-between">
 				<h4 class="card-title mb-1">{{ $title }}</h4>

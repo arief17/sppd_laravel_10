@@ -3,7 +3,7 @@
 @section('container')
 
 <div class="row row-sm">
-	<div class="col-md-6">
+	<div class="col-xl-6">
 		<div class="card">
 			<div class="card-header d-flex justify-content-between">
 				<h4 class="card-title mb-1">{{ $title }}</h4>
@@ -21,6 +21,10 @@
 						<tr>
 							<th style="white-space: nowrap; width: 1%;">Provinsi:</th>
 							<td>{{ $kota_kabupaten->provinsi->nama }}</td>
+						</tr>
+						<tr>
+							<th style="white-space: nowrap; width: 1%;">Jenis Perdin:</th>
+							<td>{{ $kota_kabupaten->jenis_perdin->nama }}</td>
 						</tr>
 					</table>
 				</div>

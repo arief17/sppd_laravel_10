@@ -122,12 +122,14 @@ class DatabaseSeeder extends Seeder
             'nama' => 'Serang',
             'slug' => 'serang',
             'provinsi_id' => 1,
+            'jenis_perdin_id' => 1,
             'author_id' => 1,
         ]);
         KotaKabupaten::create([
             'nama' => 'Balikpapan',
             'slug' => 'balikpapan',
             'provinsi_id' => 2,
+            'jenis_perdin_id' => 2,
             'author_id' => 1,
         ]);
         

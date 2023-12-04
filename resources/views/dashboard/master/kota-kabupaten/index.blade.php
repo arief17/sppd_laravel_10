@@ -19,6 +19,7 @@
 								<th class="border-bottom-0" style="width: 1%">No</th>
 								<th class="border-bottom-0">Nama</th>
 								<th class="border-bottom-0">Provinsi</th>
+								<th class="border-bottom-0">Jenis Perdin</th>
 								<th class="border-bottom-0" style="width: 1%">Aksi</th>
 							</tr>
 						</thead>
@@ -28,6 +29,7 @@
 								<td>{{ $loop->iteration }}</td>
 								<td>{{ $kota_kabupaten->nama }}</td>
 								<td>{{ $kota_kabupaten->provinsi->nama }}</td>
+								<td>{{ $kota_kabupaten->jenis_perdin->nama }}</td>
 								<td>
 									<a class="btn btn-primary btn-sm" href="{{ route('kota-kabupaten.show', $kota_kabupaten->slug) }}">
 										<i class="fas fa-folder"></i>

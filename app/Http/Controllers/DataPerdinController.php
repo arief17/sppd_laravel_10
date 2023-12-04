@@ -49,30 +49,32 @@ class DataPerdinController extends Controller
         ]);
     }
     
-    public function getKotaKabupaten($jenisPerdinId)
+    public function getTujuan($jenisPerdinId)
     {
-        $jenis_perdin = JenisPerdin::find($jenisPerdinId);
+        $tujuan = [];
+        $jenisPerdin = JenisPerdin::find($jenisPerdinId);
         
-        if (!$jenis_perdin) {
-            return response()->json([]);
+        if ($jenisPerdin->slug === 'dalam-daerah') {
+            $tujuan = $jenisPerdin->kota_kabupatens->pluck('nama', 'id');
+        } elseif ($jenisPerdin->slug === 'perjalanan-dinas-biasa') {
+            $dalamLuarValue = request()->query('dalam_luar');
+            
+            if ($dalamLuarValue === 'Dalam Provinsi') {
+                $tujuan = $jenisPerdin->kota_kabupatens->pluck('nama', 'id');
+            } elseif ($dalamLuarValue === 'Luar Provinsi') {
+                $tujuan = $jenisPerdin->provinsis->pluck('nama', 'id');
+            }
         }
         
-        $kotaKabupatens = [];
-        
-        if ($jenis_perdin->slug == 'dalam-daerah') {
-            $kotaKabupatens = $jenis_perdin->provinsis->flatMap->kota_kabupatens->pluck('nama', 'id');
-        } elseif ($jenis_perdin->slug == 'perjalanan-dinas-biasa') {
-            $kotaKabupatens = $jenis_perdin->provinsis->pluck('nama', 'id');
-        }
-        
-        return response()->json($kotaKabupatens);
+        return response()->json($tujuan);
     }
+    
     
     public function getPegawaiInfo($kotaKabupatenId, $alatAngkutId, $pegawaiId)
     {
         $pegawai = Pegawai::find($pegawaiId);
         $pegawaiGolongan = str_replace('-', '_', $pegawai->golongan->slug);
-
+        
         $uangHarian = UangHarian::where('wilayah_id', $kotaKabupatenId)->value($pegawaiGolongan);
         $uangPenginapan = UangPenginapan::where('wilayah_id', $kotaKabupatenId)->value($pegawaiGolongan);
         $uangTransport = UangTransport::where('wilayah_id', $kotaKabupatenId)->where('alat_angkut_id', $alatAngkutId)->value($pegawaiGolongan);
@@ -85,7 +87,8 @@ class DataPerdinController extends Controller
             'uang_transport'=> $uangTransport,
             'harga_tiket'=> $hargaTiket,
             'total_biaya'=> $totalBiaya,
-        ]]);
+            ]
+        ]);
     }
     
     /**
@@ -118,7 +121,19 @@ class DataPerdinController extends Controller
             $validatedData['kedudukan_id'] = KotaKabupaten::where('nama', 'LIKE', '%' . $request->kedudukan_id . '%')->value('id');
             
             $jenis_perdin = JenisPerdin::find($request->jenis_perdin_id);
-            $validatedData['tujuan_id'] = $jenis_perdin->slug === 'dalam-daerah' ? $request->tujuan_id : Provinsi::find($request->tujuan_id)->kota_kabupatens->first()->id;
+            $tujuan = null;
+            
+            if ($jenis_perdin->slug === 'dalam-daerah') {
+                $tujuan = KotaKabupaten::find($request->tujuan_id);
+            } elseif ($jenis_perdin->slug === 'perjalanan-dinas-biasa') {
+                if ($request->dalamLuar === 'Dalam Provinsi') {
+                    $tujuan = KotaKabupaten::find($request->tujuan_id);
+                } elseif ($request->dalamLuar === 'Luar Provinsi') {
+                    $tujuan = Provinsi::find($request->tujuan_id);
+                }
+            }
+            $validatedData['tujuan_type'] = get_class($tujuan);
+            $validatedData['tujuan_id'] = $tujuan->id;
             
             $selectedPegawaiIds = explode(',', $request->pegawai_mengikuti_id);
             $validatedData['jumlah_pegawai'] = count($selectedPegawaiIds);

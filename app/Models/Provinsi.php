@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Provinsi extends Model
@@ -29,6 +30,11 @@ class Provinsi extends Model
     public function kota_kabupatens(): HasMany
     {
         return $this->hasMany(KotaKabupaten::class, 'provinsi_id');
+    }
+
+    public function data_perdins(): MorphMany
+    {
+        return $this->morphMany(DataPerdin::class, 'tujuan');
     }
 
     public function getRouteKeyName()

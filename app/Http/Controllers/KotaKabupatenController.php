@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JenisPerdin;
 use App\Models\KotaKabupaten;
 use App\Models\Provinsi;
 use Cviebrock\EloquentSluggable\Services\SlugService;
@@ -28,6 +29,7 @@ class KotaKabupatenController extends Controller
         return view('dashboard.master.kota-kabupaten.create', [
             'title' => 'Tambah Kota/Kabupaten',
             'provinsis' => Provinsi::all(),
+            'jenis_perdins' => JenisPerdin::all(),
         ]);
     }
 
@@ -39,6 +41,7 @@ class KotaKabupatenController extends Controller
         $validatedData = $request->validate([
             'nama' => 'required|min:3|max:100',
             'provinsi_id' => 'required',
+            'jenis_perdin_id' => 'required',
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(KotaKabupaten::class, 'slug', $request->nama);
@@ -68,6 +71,7 @@ class KotaKabupatenController extends Controller
             'title' => 'Perbarui Kota/Kabupaten',
             'kota_kabupaten' => $kotaKabupaten,
             'provinsis' => Provinsi::all(),
+            'jenis_perdins' => JenisPerdin::all(),
         ]);
     }
 
@@ -79,6 +83,7 @@ class KotaKabupatenController extends Controller
         $validatedData = $request->validate([
             'nama' => 'required|min:3|max:100',
             'provinsi_id' => 'required',
+            'jenis_perdin_id' => 'required',
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(KotaKabupaten::class, 'slug', $request->nama);

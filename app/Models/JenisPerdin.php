@@ -26,6 +26,11 @@ class JenisPerdin extends Model
         return $this->hasMany(Provinsi::class, 'jenis_perdin_id');
     }
 
+    public function kota_kabupatens(): HasMany
+    {
+        return $this->hasMany(KotaKabupaten::class, 'jenis_perdin_id');
+    }
+
     public function biaya_perdins(): HasMany
     {
         return $this->hasMany(BiayaPerdin::class, 'jenis_perdin_id');

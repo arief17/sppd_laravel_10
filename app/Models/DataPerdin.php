@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DataPerdin extends Model
@@ -14,7 +15,7 @@ class DataPerdin extends Model
     use HasFactory, Sluggable, SoftDeletes;
     
     protected $guarded = ['id'];
-    protected $with = ['author', 'tanda_tangan', 'alat_angkut', 'jenis_perdin', 'kedudukan', 'pegawai_diperintah', 'status'];
+    protected $with = ['author', 'tanda_tangan', 'alat_angkut', 'jenis_perdin', 'kedudukan', 'tujuan', 'pegawai_diperintah', 'status'];
     
     public static function filterByStatus($status)
     {
@@ -77,17 +78,9 @@ class DataPerdin extends Model
         return $this->belongsTo(KotaKabupaten::class, 'kedudukan_id');
     }
     
-    public function tujuan(): BelongsTo
+    public function tujuan(): MorphTo
     {
-        $jenis_perdin = JenisPerdin::find($this->jenis_perdin_id);
-
-        if ($jenis_perdin->slug === 'dalam-daerah') {
-            return $this->belongsTo(KotaKabupaten::class, 'tujuan_id');
-        } elseif ($jenis_perdin->slug === 'perjalanan-dinas-biasa') {
-            return $this->belongsTo(Provinsi::class, 'tujuan_id');
-        } else {
-            return $this->belongsTo(Provinsi::class, 'tujuan_id');
-        }
+        return $this->morphTo();
     }
     
     public function pegawai_diperintah(): BelongsTo

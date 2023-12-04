@@ -3,7 +3,7 @@
 @section('container')
 
 <div class="row row-sm">
-	<div class="col-lg-6 col-xl-6 col-md-12 col-sm-12">
+	<div class="col-xl-6">
 		<div class="card box-shadow-0 ">
 			<div class="card-header d-flex justify-content-between">
 				<h4 class="card-title mb-1">{{ $title }}</h4>
@@ -36,6 +36,22 @@
 							@endforeach
 						</select>
 						@error('provinsi_id')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+						@enderror
+					</div>
+					<div class="form-group">
+						<label for="jenis_perdin_id" class="form-label">Jenis Perdin</label>
+						<select name="jenis_perdin_id" id="jenis_perdin_id" class="form-control form-select @error('jenis_perdin_id') is-invalid @enderror">
+							<option value="">Pilih Jenis Perdin</option>
+							@foreach ($jenis_perdins as $jenis_perdin)
+							<option value="{{ $jenis_perdin->id }}" @selected(old('jenis_perdin_id', $kota_kabupaten->jenis_perdin_id) == $jenis_perdin->id)>
+								{{ $jenis_perdin->nama }}
+							</option>
+							@endforeach
+						</select>
+						@error('jenis_perdin_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>

@@ -84,7 +84,7 @@ Route::middleware('can:isApproval')->group(function(){
 Route::middleware('can:isOperator')->group(function(){
 	Route::controller(DataPerdinController::class)->group(function(){
 		Route::get('/dashboard/data-perdin/status/{status}', 'index')->name('data-perdin.index')->middleware('auth');
-		Route::get('/get-kota-kabupaten/{jenisPerdinId}', 'getKotaKabupaten')->name('data-perdin.jenis_perdin')->middleware('auth');
+		Route::get('/get-tujuan/{jenisPerdinId}', 'getTujuan')->name('data-perdin.jenis_perdin')->middleware('auth');
 		Route::get('/get-pegawai-info/{kotaKabupatenId}/{alatAngkutId}/{pegawaiId}', 'getPegawaiInfo')->name('data-perdin.uangHarian')->middleware('auth');
 	});	
 	

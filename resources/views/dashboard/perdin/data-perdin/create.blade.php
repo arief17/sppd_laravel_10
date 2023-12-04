@@ -3,7 +3,7 @@
 @section('container')
 
 <div class="row row-sm">
-	<div class="col-lg-6 col-xl-6 col-md-12 col-sm-12">
+	<div class="col-xl-6">
 		<div class="card box-shadow-0 ">
 			<div class="card-header">
 				@if(session()->has('failedSave'))
@@ -179,6 +179,14 @@
 							{{ $message }}
 						</div>
 						@enderror
+					</div>
+					<div  id="dalamLuarHide" class="form-group">
+						<label for="dalamLuar" class="form-label">Tujuan Luar atau Dalam Provinsi</label>
+						<select name="dalamLuar" id="dalamLuar" class="form-control form-select">
+							<option value="">Pilih Luar atau Dalam Provinsi</option>
+							<option value="Dalam Provinsi">Dalam Provinsi</option>
+							<option value="Luar Provinsi">Luar Provinsi</option>
+						</select>
 					</div>
 					<div class="form-group">
 						<label for="tujuan_id" class="form-label">Tujuan</label>

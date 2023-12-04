@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('slug')->unique();
             $table->unsignedBigInteger('provinsi_id');
+            $table->unsignedBigInteger('jenis_perdin_id');
             $table->unsignedBigInteger('author_id');
             $table->timestamps();
             $table->softDeletes();

@@ -70,6 +70,7 @@ return new class extends Migration
 
         Schema::table('kota_kabupatens', function (Blueprint $table) {
             $table->foreign('provinsi_id')->references('id')->on('provinsis');
+            $table->foreign('jenis_perdin_id')->references('id')->on('jenis_perdins');
             $table->foreign('author_id')->references('id')->on('users');
         });
 
@@ -103,7 +104,6 @@ return new class extends Migration
             $table->foreign('alat_angkut_id')->references('id')->on('alat_angkuts');
             $table->foreign('jenis_perdin_id')->references('id')->on('jenis_perdins');
             $table->foreign('kedudukan_id')->references('id')->on('kota_kabupatens');
-            $table->foreign('tujuan_id')->references('id')->on('kota_kabupatens');
             $table->foreign('pegawai_diperintah_id')->references('id')->on('pegawais');
             $table->foreign('status_id')->references('id')->on('status_perdins');
             $table->foreign('laporan_perdin_id')->references('id')->on('laporan_perdins');

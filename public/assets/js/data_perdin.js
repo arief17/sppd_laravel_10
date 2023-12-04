@@ -1,12 +1,12 @@
 // Tanggal kembali otomatis
 function hitungTanggalKembali() {
-	var tanggalBerangkat = new Date($('#tgl_berangkat').val());
-	var lama = parseInt($('#lama').val());
+	let tanggalBerangkat = new Date($('#tgl_berangkat').val());
+	let lama = parseInt($('#lama').val());
 	
 	if (!isNaN(lama) && tanggalBerangkat instanceof Date && !isNaN(tanggalBerangkat.getTime())) {
-		var tanggalKembali = new Date(tanggalBerangkat);
+		let tanggalKembali = new Date(tanggalBerangkat);
 		tanggalKembali.setDate(tanggalKembali.getDate() + lama);
-		var formattedDate = tanggalKembali.toISOString().split('T')[0];
+		let formattedDate = tanggalKembali.toISOString().split('T')[0];
 		$('#tgl_kembali').val(formattedDate);
 	} else {
 		$('#tgl_kembali').val('');
@@ -124,8 +124,8 @@ $('#pegawai_mengikuti_id').on('change', addPegawaiToSelected);
 
 function formatToRupiah(angka) {
 	return new Intl.NumberFormat('id-ID', {
-			style: 'currency',
-			currency: 'IDR'
+		style: 'currency',
+		currency: 'IDR'
 	}).format(angka);
 }
 
@@ -161,14 +161,20 @@ function calculateTotal() {
 
 // Tujuan yang menyesuaikan wilayah
 $(document).ready(function() {
+	$('#dalamLuarHide').hide();
 	$('#jenis_perdin_id').on('change', function() {
-		var jenisPerdinId = $(this).val();
+		let jenisPerdinId = $('#jenis_perdin_id').val();
+		let jenisPerdinSelected = $('#jenis_perdin_id option:selected').text();
+		jenisPerdinText = jenisPerdinSelected.replaceAll(/\s/g, "")
+		
 		$('#tujuan_id').empty();
 		$('#tujuan_id').append('<option value="">Pilih Tujuan</option>');
-		
-		if (jenisPerdinId) {
+
+		if (jenisPerdinText == 'DalamDaerah') {
+			$('#dalamLuarHide').hide();
+	
 			$.ajax({
-				url: '/get-kota-kabupaten/' + jenisPerdinId,
+				url: '/get-tujuan/' + jenisPerdinId,
 				type: 'GET',
 				dataType: 'json',
 				success: function(data) {
@@ -176,6 +182,26 @@ $(document).ready(function() {
 						$('#tujuan_id').append('<option value="' + key + '">' + value + '</option>');
 					});
 				}
+			});
+		} else if (jenisPerdinText == 'PerjalananDinasBiasa') {
+			$('#dalamLuarHide').show();
+			
+			$('#dalamLuar').on('change', function() {
+				$('#tujuan_id').empty();
+				$('#tujuan_id').append('<option value="">Pilih Tujuan</option>');
+	
+				let dalamLuarValue = $('#dalamLuar').val();
+				
+				$.ajax({
+					url: '/get-tujuan/' + jenisPerdinId + '?dalam_luar=' + dalamLuarValue,
+					type: 'GET',
+					dataType: 'json',
+					success: function(data) {
+						$.each(data, function(key, value) {
+							$('#tujuan_id').append('<option value="' + key + '">' + value + '</option>');
+						});
+					}
+				});
 			});
 		}
 	});

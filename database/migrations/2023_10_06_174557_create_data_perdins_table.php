@@ -28,6 +28,7 @@ return new class extends Migration
             $table->unsignedBigInteger('jenis_perdin_id');
             $table->unsignedBigInteger('kedudukan_id');
             $table->unsignedBigInteger('tujuan_id');
+            $table->string('tujuan_type');
             $table->text('lokasi');
             $table->unsignedBigInteger('pegawai_diperintah_id');
             $table->string('jumlah_pegawai');
