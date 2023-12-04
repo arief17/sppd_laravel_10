@@ -18,12 +18,11 @@ return new class extends Migration
             $table->string('nip')->unique();
             $table->string('email')->unique();
             $table->string('no_hp')->unique();
-            $table->unsignedBigInteger('seksi_id');
-            $table->unsignedBigInteger('golongan_id');
-            $table->unsignedBigInteger('pangkat_id');
             $table->unsignedBigInteger('jabatan_id');
+            $table->unsignedBigInteger('seksi_id')->nullable();
+            $table->unsignedBigInteger('golongan_id')->nullable();
+            $table->unsignedBigInteger('pangkat_id')->nullable();
             $table->boolean('pptk');
-            $table->date('last_perdin')->nullable();
             $table->unsignedBigInteger('ketentuan_id');
             $table->unsignedBigInteger('author_id');
             $table->timestamps();

@@ -38,10 +38,6 @@
 							<th style="white-space: nowrap; width: 1%;">Jabatan:</th>
 							<td>{{ $pegawai->jabatan }}</td>
 						</tr>
-						<tr>
-							<th style="white-space: nowrap; width: 1%;">Last Perdin:</th>
-							<td>{{ $pegawai->last_perdin }}</td>
-						</tr>
 					</table>
 				</div>
 			</div>

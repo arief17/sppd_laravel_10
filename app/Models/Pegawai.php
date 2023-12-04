@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,10 +12,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Pegawai extends Model
 {
-    use HasFactory, Sluggable, SoftDeletes;
+    use HasFactory, Sluggable, SoftDeletes, CascadeSoftDeletes;
 
     protected $guarded = ['id'];
     protected $with = ['author', 'seksi', 'golongan', 'jabatan', 'pangkat'];
+    protected $cascadeDeletes = ['ketentuan'];
 
     public function author(): BelongsTo
     {
@@ -44,21 +46,6 @@ class Pegawai extends Model
     public function ketentuan(): BelongsTo
     {
         return $this->belongsTo(Ketentuan::class, 'ketentuan_id');
-    }
-
-    public function ketentuan_pptks(): HasMany
-    {
-        return $this->hasMany(Ketentuan::class, 'pptk_id');
-    }
-
-    public function ketentuan_bendaharas(): HasMany
-    {
-        return $this->hasMany(Ketentuan::class, 'bendahara_id');
-    }
-
-    public function ketentuan_pelaksana_administrasis(): HasMany
-    {
-        return $this->hasMany(Ketentuan::class, 'pelaksana_administrasi_id');
     }
 
     public function tanda_tangans(): HasMany

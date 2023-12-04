@@ -45,13 +45,13 @@ class PegawaiController extends Controller
     {
         $validatedData = $request->validate([
             'nama' => 'required|min:3|max:100',
-            'nip' => 'required|numeric|unique:pegawais',
+            'nip' => 'numeric|unique:pegawais',
             'email' => 'required|email|unique:pegawais',
             'no_hp' => 'required|numeric|unique:pegawais',
-            'seksi_id' => 'required',
-            'golongan_id' => 'required',
-            'pangkat_id' => 'required',
             'jabatan_id' => 'required',
+            'seksi_id' => 'nullable',
+            'golongan_id' => 'nullable',
+            'pangkat_id' => 'nullable',
             'pptk' => 'boolean',
         ]);
 
@@ -102,21 +102,21 @@ class PegawaiController extends Controller
     {
         $rules = [
             'nama' => 'required|min:3|max:100',
-            'seksi_id' => 'required',
-            'golongan_id' => 'required',
-            'pangkat_id' => 'required',
             'jabatan_id' => 'required',
+            'seksi_id' => 'nullable',
+            'golongan_id' => 'nullable',
+            'pangkat_id' => 'nullable',
             'pptk' => '',
         ];
 
         if ($request->nip != $pegawai->nip) {
-            $rules['nip'] = 'required|integer|unique:pegawais|max:20';
+            $rules['nip'] = 'numeric|unique:pegawais';
         }
         if ($request->email != $pegawai->email) {
-            $rules['email'] = 'required|integer|unique:pegawais|max:20';
+            $rules['email'] = 'required|numeric|unique:pegawais';
         }
         if ($request->no_hp != $pegawai->no_hp) {
-            $rules['no_hp'] = 'required|integer|unique:pegawais|max:20';
+            $rules['no_hp'] = 'required|numeric|unique:pegawais';
         }
         $validatedData = $request->validate($rules);
 

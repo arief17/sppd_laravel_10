@@ -9,6 +9,7 @@
         "ext-gd": "*",
         "barryvdh/laravel-dompdf": "^2.0",
         "cviebrock/eloquent-sluggable": "^10.0",
+        "dyrynda/laravel-cascade-soft-deletes": "^4.3",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",

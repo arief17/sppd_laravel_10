@@ -52,6 +52,22 @@
 						@enderror
 					</div>
 					<div class="form-group">
+						<label for="jabatan_id" class="form-label">Jabatan</label>
+						<select name="jabatan_id" id="jabatan_id" class="form-control form-select @error('jabatan_id') is-invalid @enderror">
+							<option value="">Pilih Jabatan</option>
+							@foreach ($jabatans as $jabatan)
+							<option value="{{ $jabatan->id }}" @selected(old('jabatan_id') == $jabatan->id)>
+								{{ $jabatan->nama }}
+							</option>
+							@endforeach
+						</select>
+						@error('jabatan_id')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+						@enderror
+					</div>
+					<div id="seksi_hide" class="form-group">
 						<label for="seksi_id" class="form-label">Seksi</label>
 						<select name="seksi_id" id="seksi_id" class="form-control form-select @error('seksi_id') is-invalid @enderror">
 							<option value="">Pilih Seksi</option>
@@ -67,7 +83,7 @@
 						</div>
 						@enderror
 					</div>
-					<div class="form-group">
+					<div id="pangkat_hide" class="form-group">
 						<label for="pangkat_id" class="form-label">Pangkat</label>
 						<select name="pangkat_id" id="pangkat_id" class="form-control form-select @error('pangkat_id') is-invalid @enderror">
 							<option value="">Pilih Pangkat</option>
@@ -83,7 +99,7 @@
 						</div>
 						@enderror
 					</div>
-					<div class="form-group">
+					<div id="golongan_hide" class="form-group">
 						<label for="golongan_id" class="form-label">Golongan</label>
 						<select name="golongan_id" id="golongan_id" class="form-control form-select @error('golongan_id') is-invalid @enderror">
 							<option value="">Pilih Golongan</option>
@@ -94,22 +110,6 @@
 							@endforeach
 						</select>
 						@error('golongan_id')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
-					<div class="form-group">
-						<label for="jabatan_id" class="form-label">Jabatan</label>
-						<select name="jabatan_id" id="jabatan_id" class="form-control form-select @error('jabatan_id') is-invalid @enderror">
-							<option value="">Pilih Jabatan</option>
-							@foreach ($jabatans as $jabatan)
-							<option value="{{ $jabatan->id }}" @selected(old('jabatan_id') == $jabatan->id)>
-								{{ $jabatan->nama }}
-							</option>
-							@endforeach
-						</select>
-						@error('jabatan_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
@@ -147,6 +147,45 @@
 
 <!-- JQuery min js -->
 <script src="/assets/plugins/jquery/jquery.min.js"></script>
+
+<script>
+	$(document).ready(function() {
+		$('#seksi_hide').hide();
+		$('#pangkat_hide').hide();
+		$('#golongan_hide').hide();
+		
+		$('#jabatan_id').on('change', function() {
+			let selectedJabatan = $('#jabatan_id option:selected').text();
+			let jabatan = selectedJabatan.trim().toLowerCase();
+			
+			if (jabatan === 'kepala bidang') {
+				$('#seksi_hide').hide();
+				$('#pangkat_hide').show();
+				$('#golongan_hide').show();
+				
+				$('#seksi_id').removeAttr('required');
+				$('#golongan_id').attr('required', 'required');
+				$('#pangkat_id').attr('required', 'required');
+			} else if (jabatan === 'non pns') {
+				$('#seksi_hide').show();
+				$('#pangkat_hide').hide();
+				$('#golongan_hide').hide();
+				
+				$('#golongan_id').removeAttr('required');
+				$('#pangkat_id').removeAttr('required');
+				$('#seksi_id').attr('required', 'required');
+			} else {
+				$('#seksi_hide').show();
+				$('#pangkat_hide').show();
+				$('#golongan_hide').show();
+				
+				$('#seksi_id').attr('required', 'required');
+				$('#golongan_id').attr('required', 'required');
+				$('#pangkat_id').attr('required', 'required');
+			}
+		});
+	});
+</script>
 
 <!--Internal  Datepicker js -->
 <script src="/assets/plugins/jquery-ui/ui/widgets/datepicker.js"></script>

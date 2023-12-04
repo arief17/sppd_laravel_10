@@ -28,7 +28,7 @@
 								<th class="border-bottom-0">Lama</th>
 								<th class="border-bottom-0">Lokasi</th>
 								<th class="border-bottom-0">Jumlah Pegawai</th>
-								<th class="border-bottom-0">Biaya</th>
+								<th class="border-bottom-0">Jenis Perdin</th>
 								<th class="border-bottom-0">User</th>
 							</tr>
 						</thead>
@@ -83,7 +83,7 @@
 								<td>{{ $data_perdin->lama }}</td>
 								<td>{{ $data_perdin->lokasi }}</td>
 								<td>{{ $data_perdin->jumlah_pegawai }}</td>
-								<td>{{ $data_perdin->biaya }}</td>
+								<td>{{ $data_perdin->jenis_perdin->nama }}</td>
 								<td>{{ $data_perdin->author->username }}</td>
 								
 								@include('dashboard.perdin.status-perdin.approve')

@@ -47,8 +47,8 @@
 							<td>{{ $data_perdin->jumlah_pegawai }}</td>
 						</tr>
 						<tr>
-							<th style="white-space: nowrap; width: 1%;">Biaya</th>
-							<td>{{ $data_perdin->biaya }}</td>
+							<th style="white-space: nowrap; width: 1%;">Jenis Perdin</th>
+							<td>{{ $data_perdin->jenis_perdin->nama }}</td>
 						</tr>
 						<tr>
 							<th style="white-space: nowrap; width: 1%;">User</th>

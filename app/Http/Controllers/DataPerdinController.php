@@ -45,7 +45,7 @@ class DataPerdinController extends Controller
             'alat_angkuts' => AlatAngkut::all(),
             'jenis_perdins' => JenisPerdin::all(),
             'tanda_tangans' => TandaTangan::all(),
-            'pegawais' => Pegawai::all(),
+            'pegawais' => Pegawai::whereNotNull('golongan_id')->get(),
         ]);
     }
     
@@ -70,23 +70,16 @@ class DataPerdinController extends Controller
     }
     
     
-    public function getPegawaiInfo($kotaKabupatenId, $alatAngkutId, $pegawaiId)
+    public function getPegawaiInfo($kotaKabupatenId, $pegawaiId)
     {
         $pegawai = Pegawai::find($pegawaiId);
         $pegawaiGolongan = str_replace('-', '_', $pegawai->golongan->slug);
-        
         $uangHarian = UangHarian::where('wilayah_id', $kotaKabupatenId)->value($pegawaiGolongan);
-        $uangPenginapan = UangPenginapan::where('wilayah_id', $kotaKabupatenId)->value($pegawaiGolongan);
-        $uangTransport = UangTransport::where('wilayah_id', $kotaKabupatenId)->where('alat_angkut_id', $alatAngkutId)->value($pegawaiGolongan);
-        $hargaTiket = UangTransport::where('wilayah_id', $kotaKabupatenId)->where('alat_angkut_id', $alatAngkutId)->value('harga_tiket');
-        $totalBiaya = $uangHarian + $uangPenginapan + $uangTransport + $hargaTiket;
         
-        return response()->json(['biaya' => [
+        return response()->json(['data_pegawai' => [
+            'nip' => $pegawai->nip,
+            'jabatan' => $pegawai->jabatan->nama,
             'uang_harian'=> $uangHarian,
-            'uang_penginapan'=> $uangPenginapan,
-            'uang_transport'=> $uangTransport,
-            'harga_tiket'=> $hargaTiket,
-            'total_biaya'=> $totalBiaya,
             ]
         ]);
     }
@@ -239,6 +232,6 @@ class DataPerdinController extends Controller
     public function destroy(DataPerdin $dataPerdin)
     {
         $dataPerdin->delete();
-        return redirect()->route('data-perdin.index')->with('success', 'Data Perdin berhasil dihapus!');
+        return redirect()->route('data-perdin.index', 'baru')->with('success', 'Data Perdin berhasil dihapus!');
     }
 }

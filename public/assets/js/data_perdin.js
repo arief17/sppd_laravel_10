@@ -19,8 +19,8 @@ $('#tgl_berangkat').on('input', hitungTanggalKembali);
 
 // Pegawai disable
 $(document).ready(function() {
-	$('#tujuan_id, #alat_angkut_id').on('change', function() {
-		if ($('#tujuan_id').val() !== '' && $('#alat_angkut_id').val() !== '') {
+	$('#tujuan_id').on('change', function() {
+		if ($('#tujuan_id').val() !== '') {
 			$('#pegawai_diperintah_id').prop('disabled', false);
 			$('#pegawai_mengikuti_id').prop('disabled', false);
 		} else {
@@ -39,11 +39,17 @@ async function addPegawaiDiperintah() {
 	const pegawaiId = selectedOption.val();
 	const pegawaiNama = selectedOption.text();
 	const kotaKabupatenId = $('#tujuan_id').val();
-	const alatAngkutId = $('#alat_angkut_id').val();
 	
 	if (!selectedPegawai.find(pegawai => pegawai.id === pegawaiId)) {
-		const dataBiaya = await getPegawaiInfo(kotaKabupatenId, alatAngkutId, pegawaiId);
-		selectedPegawai.push({ id: pegawaiId, nama: pegawaiNama, uang_harian: dataBiaya.uang_harian, uang_penginapan: dataBiaya.uang_penginapan, uang_transport: dataBiaya.uang_transport, harga_tiket: dataBiaya.harga_tiket, total_biaya: dataBiaya.total_biaya });
+		const dataPegawai = await getPegawaiInfo(kotaKabupatenId, pegawaiId);
+		selectedPegawai.push({
+			id: pegawaiId,
+			nama: pegawaiNama,
+			nip: dataPegawai.nip,
+			jabatan: dataPegawai.jabatan,
+			uang_harian: dataPegawai.uang_harian,
+			keterangan: 'Pegawai yang ditugaskan'
+		});
 		updatePegawaiList();
 		updateSelectedPegawaiInput();
 	}
@@ -55,11 +61,17 @@ async function addPegawaiToSelected() {
 	const pegawaiId = selectedOption.val();
 	const pegawaiNama = selectedOption.text();
 	const kotaKabupatenId = $('#tujuan_id').val();
-	const alatAngkutId = $('#alat_angkut_id').val();
 	
 	if (!selectedPegawai.find(pegawai => pegawai.id === pegawaiId)) {
-		const dataBiaya = await getPegawaiInfo(kotaKabupatenId, alatAngkutId, pegawaiId);
-		selectedPegawai.push({ id: pegawaiId, nama: pegawaiNama, uang_harian: dataBiaya.uang_harian, uang_penginapan: dataBiaya.uang_penginapan, uang_transport: dataBiaya.uang_transport, harga_tiket: dataBiaya.harga_tiket, total_biaya: dataBiaya.total_biaya });
+		const dataPegawai = await getPegawaiInfo(kotaKabupatenId, pegawaiId);
+		selectedPegawai.push({
+			id: pegawaiId,
+			nama: pegawaiNama,
+			nip: dataPegawai.nip,
+			jabatan: dataPegawai.jabatan,
+			uang_harian: dataPegawai.uang_harian,
+			keterangan: 'Pegawai sebagai pengikut'
+		});
 		updatePegawaiList();
 		updateSelectedPegawaiInput();
 		
@@ -69,14 +81,14 @@ async function addPegawaiToSelected() {
 	}
 }
 
-async function getPegawaiInfo(kotaKabupatenId, alatAngkutId, pegawaiId) {
+async function getPegawaiInfo(kotaKabupatenId, pegawaiId) {
 	try {
-		const response = await fetch(`/get-pegawai-info/${kotaKabupatenId}/${alatAngkutId}/${pegawaiId}`);
+		const response = await fetch(`/get-pegawai-info/${kotaKabupatenId}/${pegawaiId}`);
 		if (!response.ok) {
 			throw new Error('Network response was not ok.');
 		}
 		const data = await response.json();
-		return data.biaya;
+		return data.data_pegawai;
 	} catch (error) {
 		console.error('There was a problem with the fetch operation:', error.message);
 	}
@@ -102,11 +114,10 @@ function updatePegawaiList() {
 		<tr>
 		<td>${index + 1}</td>
 		<td>${pegawai.nama}</td>
+		<td>${pegawai.nip}</td>
+		<td>${pegawai.jabatan}</td>
 		<td>${formatToRupiah(pegawai.uang_harian)}</td>
-		<td>${formatToRupiah(pegawai.uang_penginapan)}</td>
-		<td>${formatToRupiah(pegawai.uang_transport)}</td>
-		<td>${formatToRupiah(pegawai.harga_tiket)}</td>
-		<td>${formatToRupiah(pegawai.total_biaya)}</td>
+		<td>${pegawai.keterangan}</td>
 		<td>
 		<button type="button" class="btn btn-danger btn-sm btn-hapus-pegawai" onclick="removePegawaiFromSelected('${pegawai.id}')">Hapus</button>
 		</td>
@@ -131,28 +142,15 @@ function formatToRupiah(angka) {
 
 function calculateTotal() {
 	let totalUangHarian = 0;
-	let totalUangPenginapan = 0;
-	let totalUangTransport = 0;
-	let totalHargaTiket = 0;
-	let totalBiaya = 0;
 	
 	selectedPegawai.forEach(pegawai => {
 		totalUangHarian += pegawai.uang_harian;
-		totalUangPenginapan += pegawai.uang_penginapan;
-		totalUangTransport += pegawai.uang_transport;
-		totalHargaTiket += pegawai.harga_tiket;
-		totalBiaya += pegawai.total_biaya;
 	});
 	
 	const tfootRow = `
 	<tr>
-	<th colspan="2">Total:</th>
-	<td>${formatToRupiah(totalUangHarian)}</td>
-	<td>${formatToRupiah(totalUangPenginapan)}</td>
-	<td>${formatToRupiah(totalUangTransport)}</td>
-	<td>${formatToRupiah(totalHargaTiket)}</td>
-	<td>${formatToRupiah(totalBiaya)}</td>
-	<td></td>
+	<th colspan="4">Total:</th>
+	<td colspan="4">${formatToRupiah(totalUangHarian)}</td>
 	</tr>
 	`;
 	
@@ -165,14 +163,14 @@ $(document).ready(function() {
 	$('#jenis_perdin_id').on('change', function() {
 		let jenisPerdinId = $('#jenis_perdin_id').val();
 		let jenisPerdinSelected = $('#jenis_perdin_id option:selected').text();
-		jenisPerdinText = jenisPerdinSelected.replaceAll(/\s/g, "")
+		jenisPerdinText = jenisPerdinSelected.trim().toLowerCase();
 		
 		$('#tujuan_id').empty();
 		$('#tujuan_id').append('<option value="">Pilih Tujuan</option>');
-
-		if (jenisPerdinText == 'DalamDaerah') {
+		
+		if (jenisPerdinText == 'dalam daerah') {
 			$('#dalamLuarHide').hide();
-	
+			
 			$.ajax({
 				url: '/get-tujuan/' + jenisPerdinId,
 				type: 'GET',
@@ -183,13 +181,13 @@ $(document).ready(function() {
 					});
 				}
 			});
-		} else if (jenisPerdinText == 'PerjalananDinasBiasa') {
+		} else if (jenisPerdinText == 'perjalanan dinas biasa') {
 			$('#dalamLuarHide').show();
 			
 			$('#dalamLuar').on('change', function() {
 				$('#tujuan_id').empty();
 				$('#tujuan_id').append('<option value="">Pilih Tujuan</option>');
-	
+				
 				let dalamLuarValue = $('#dalamLuar').val();
 				
 				$.ajax({

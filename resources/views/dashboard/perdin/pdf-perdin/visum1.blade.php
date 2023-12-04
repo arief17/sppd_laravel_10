@@ -169,7 +169,7 @@
 				<tr>
 					<td style="text-align: center;">10</td>
 					<td>Keterangan Lain-lain</td>
-					<td colspan="2">{{ $data_perdin->keterangan }}</td>
+					<td colspan="2">-</td>
 				</tr>
 			</table>
 		</div>

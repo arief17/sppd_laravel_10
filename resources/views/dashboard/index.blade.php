@@ -7,7 +7,7 @@
 	@foreach($totals as $total)
 	<div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
 			<div class="card overflow-hidden sales-card {{$total['class']}}">
-					<div class="px-3 pt-3 pb-2 pt-0">
+					<div class="px-3 pt-3 pb-2">
 							<div class="">
 									<h6 class="mb-3 tx-12 text-white">{{ $total['title'] }}</h6>
 							</div>
