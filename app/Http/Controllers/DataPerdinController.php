@@ -136,6 +136,9 @@ class DataPerdinController extends Controller
             $validatedData['laporan_perdin_id'] = $laporan_perdin->id;
             
             $perdin = DataPerdin::create($validatedData);
+
+            $pegawaiDiperintahId = $request->pegawai_diperintah_id;
+            $selectedPegawaiIds = array_diff($selectedPegawaiIds, [$pegawaiDiperintahId]);
             if($selectedPegawaiIds){
                 $perdin->pegawai_mengikuti()->attach($selectedPegawaiIds);
             }
