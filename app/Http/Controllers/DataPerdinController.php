@@ -13,8 +13,6 @@ use App\Models\Provinsi;
 use App\Models\StatusPerdin;
 use App\Models\TandaTangan;
 use App\Models\UangHarian;
-use App\Models\UangPenginapan;
-use App\Models\UangTransport;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

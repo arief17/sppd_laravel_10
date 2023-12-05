@@ -19,6 +19,21 @@ class DataPerdin extends Model
     protected $with = ['author', 'tanda_tangan', 'alat_angkut', 'jenis_perdin', 'kedudukan', 'tujuan', 'pegawai_diperintah', 'status'];
     protected $cascadeDeletes = ['status', 'laporan_perdin'];
     
+    public function getTtdFormatedAttribute()
+    {
+        $words = explode(' ', $this->tanda_tangan->pegawai->jabatan->nama);
+        
+        if (count($words) > 3) {
+            $line1 = implode(' ', array_slice($words, 0, 2));
+            $line2 = implode(' ', array_slice($words, 2));
+            return "{$line1}<br>{$line2}<br>provinsi banten";
+        } else {
+            $line = implode(' ', $words);
+            return "{$line}<br>provinsi banten";
+        }
+    }
+    
+    
     public static function filterByStatus($status)
     {
         return static::orderBy('created_at', 'desc')->whereHas('status', function ($query) use ($status) {
@@ -114,7 +129,8 @@ class DataPerdin extends Model
     {
         return [
             'slug' => [
-                'source' => 'maksud'
+                'source' => 'maksud',
+                'includeTrashed' => true,
                 ]
             ];
         }

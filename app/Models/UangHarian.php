@@ -40,7 +40,8 @@ class UangHarian extends Model
     {
         return [
             'slug' => [
-                'source' => 'keterangan'
+                'source' => 'keterangan',
+                'includeTrashed' => true,
             ]
         ];
     }

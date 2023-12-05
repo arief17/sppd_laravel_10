@@ -72,7 +72,8 @@ class Pegawai extends Model
     {
         return [
             'slug' => [
-                'source' => 'nama'
+                'source' => 'nama',
+                'includeTrashed' => true,
             ]
         ];
     }

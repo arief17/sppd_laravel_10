@@ -54,7 +54,8 @@ class BiayaPerdin extends Model
     {
         return [
             'slug' => [
-                'source' => ['jenis_perdin.nama', 'dari.nama', 'ke.nama']
+                'source' => ['jenis_perdin.nama', 'dari.nama', 'ke.nama'],
+                'includeTrashed' => true,
             ]
         ];
     }

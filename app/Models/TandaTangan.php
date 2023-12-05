@@ -46,7 +46,8 @@ class TandaTangan extends Model
     {
         return [
             'slug' => [
-                'source' => ['pegawai.nama', 'pegawai.jabatan.nama']
+                'source' => ['pegawai.nama', 'pegawai.jabatan.nama'],
+                'includeTrashed' => true,
                 ]
             ];
         }

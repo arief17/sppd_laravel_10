@@ -45,7 +45,8 @@ class UangTransport extends Model
     {
         return [
             'slug' => [
-                'source' => ['wilayah.nama', 'alat_angkut.nama']
+                'source' => ['wilayah.nama', 'alat_angkut.nama'],
+                'includeTrashed' => true,
             ]
         ];
     }

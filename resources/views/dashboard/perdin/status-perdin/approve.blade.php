@@ -7,7 +7,7 @@
 			<div class="modal-body">
 				
 				<div class="py-2">
-					<form action="{{ route('status-perdin.tolak', $data_perdin->id) }}" method="post" class="d-inline">
+					<form action="{{ route('status-perdin.tolak', $data_perdin->status_id) }}" method="post" class="d-inline">
 						@method('put')
 						@csrf
 						
@@ -26,7 +26,7 @@
 				</div>
 				
 				<div class="py-2">
-					<form action="{{ route('status-perdin.approve', $data_perdin->id) }}" method="post" class="d-inline">
+					<form action="{{ route('status-perdin.approve', $data_perdin->status_id) }}" method="post" class="d-inline">
 						@method('put')
 						@csrf
 						

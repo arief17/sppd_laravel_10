@@ -71,7 +71,8 @@ class KotaKabupaten extends Model
     {
         return [
             'slug' => [
-                'source' => 'nama'
+                'source' => 'nama',
+                'includeTrashed' => true,
             ]
         ];
     }

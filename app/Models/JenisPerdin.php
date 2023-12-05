@@ -50,7 +50,8 @@ class JenisPerdin extends Model
     {
         return [
             'slug' => [
-                'source' => 'nama'
+                'source' => 'nama',
+                'includeTrashed' => true,
             ]
         ];
     }

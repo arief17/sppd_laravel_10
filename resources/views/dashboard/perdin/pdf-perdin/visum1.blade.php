@@ -67,7 +67,7 @@
 				<tr>
 					<td style="text-align: center;">1</td>
 					<td>Pejabat yang memberi perintah</td>
-					<td colspan="2">{{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}</td>
+					<td colspan="2" style="text-transform: capitalize;">{{ strtolower($data_perdin->tanda_tangan->pegawai->jabatan->nama) }}</td>
 				</tr>
 				<tr>
 					<td style="text-align: center;">2</td>
@@ -79,16 +79,16 @@
 				</tr>
 				<tr>
 					<td style="text-align: center;">3</td>
-					<td>
+					<td style="vertical-align: top;">
 						<ol style="list-style-type: lower-alpha; padding-left: 20px;">
-							<li>Pangkat dan Golongan ruang gaji menurut <br> PP No.11/Tahun 2011</li>
+							<li>Pangkat dan Golongan ruang gaji menurut PP No.11/Tahun 2011</li>
 							<li>Jabatan/Instansi</li>
 							<li>Tingkat Biaya</li>
 						</ol>
 					</td>
-					<td colspan="2">
+					<td style="vertical-align: top;" colspan="2">
 						<ol style="list-style-type: lower-alpha; padding-left: 20px;">
-							<li>{{ $data_perdin->pegawai_diperintah->pangkat->nama }}</li>
+							<li>{{ $data_perdin->pegawai_diperintah->pangkat->nama }}</li><br>
 							<li>{{ $data_perdin->pegawai_diperintah->jabatan->nama }}</li>
 							<li>{{ $data_perdin->biaya }}</li>
 						</ol>
@@ -151,15 +151,18 @@
 				@endforeach
 
 				<tr>
-					<td style="text-align: center;">9</td>
-					<td>
-						<p>Pembebanan Anggaran</p>
+					<td style="text-align: center;" rowspan="2">9</td>
+					<td style="border-bottom: 0; padding-bottom: 0;">Pembebanan Anggaran</td>
+					<td style="border-bottom: 0; padding-bottom: 0;" colspan="2"></td>
+				</tr>
+				<tr>
+					<td style="border-top: 0; vertical-align: top;">
 						<ol style="list-style-type: lower-alpha; padding-left: 20px;">
-							<li>Instansi</li>
+							<li>Instansi</li> <br>
 							<li>Mata Anggaran</li>
 						</ol>
 					</td>
-					<td colspan="2">
+					<td style="border-top: 0; vertical-align: top;" colspan="2">
 						<ol style="list-style-type: lower-alpha; padding-left: 20px;">
 							<li>Dinas Pekerjaan Umum dan Penataan Ruang</li>
 							<li>5.1.02.04.01.0003</li>
@@ -187,7 +190,7 @@
 
 		<div style="float: right;">
 			<div style="text-align: center;">
-				<p style="margin-top: 10px;">{{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}</p>
+				<p style="margin-top: 10px;" style="text-transform: uppercase;">{!! $data_perdin->ttdFormated !!}</p>
 				
 				<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" width="100">
 				<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>

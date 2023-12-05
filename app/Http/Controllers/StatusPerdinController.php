@@ -7,15 +7,15 @@ use Illuminate\Http\Request;
 
 class StatusPerdinController extends Controller
 {
-    public function approve(Request $request, $id)
+    public function approve($id)
     {
         StatusPerdin::where('id', $id)->update(['approve' => 1]);
         return redirect()->route('data-perdin.index', 'no_laporan')->with('success', 'Status Perdin berhasil diperbarui!');
     }
     
-    public function tolak(Request $request, $id)
+    public function tolak($id)
     {
-        $validatedData = $request->validate([
+        $validatedData = request()->validate([
             'alasan_tolak' => 'required',
         ]);
 

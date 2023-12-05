@@ -11,12 +11,12 @@
 		}
 
 		p, td {
-			font-size: 15px;
+			font-size: 14px;
 		}
 	</style>
 </head>
-<body style="font-family: Times, serif; margin: 30px;">
-	<table class="gap-t" style="border-collapse: collapse; border: 1px solid black;"">
+<body style="font-family: Times, serif; margin: 20px;">
+	<table class="gap-t" style="border-collapse: collapse; border: 1px solid black;">
 		<tr>
 			<td style="border: 1px solid black; width: 50%;"></td>
 			<td style="border: 1px solid black; width: 50%;">
@@ -39,7 +39,7 @@
 					</tr>
 				</table>
 				<div style="text-align: center;">
-					<p style="margin-top: 10px;">{{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}</p>
+					<p style="margin-top: 10px;" style="text-transform: uppercase;">{!! $data_perdin->ttdFormated !!}</p>
 					
 					<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" width="50">
 					<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
@@ -281,7 +281,7 @@
 					</tr>
 				</table>
 				<div style="text-align: center;">
-					<p style="margin-top: 10px;">{{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}</p>
+					<p style="margin-top: 10px;" style="text-transform: uppercase;">{!! $data_perdin->ttdFormated !!}</p>
 					
 					<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" width="50">
 					<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
@@ -291,7 +291,7 @@
 			<td style="border: 1px solid black; width: 50%;">
 				<p style="padding-left: 20px;">Telah diperiksa dengan keterangan bahwa perjalan tersebut atas perintahnya dan semata mata untuk kepentingan jabatan dalam waktu sesingkat-singkatnya</p>
 				<div style="text-align: center;">
-					<p style="margin-top: 10px;">{{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}</p>
+					<p style="margin-top: 10px;" style="text-transform: uppercase;">{!! $data_perdin->ttdFormated !!}</p>
 					
 					<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" width="50">
 					<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
