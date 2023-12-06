@@ -75,18 +75,15 @@ return new class extends Migration
         });
 
         Schema::table('uang_harians', function (Blueprint $table) {
-            $table->foreign('wilayah_id')->references('id')->on('kota_kabupatens');
             $table->foreign('author_id')->references('id')->on('users');
         });
         
         Schema::table('uang_transports', function (Blueprint $table) {
-            $table->foreign('wilayah_id')->references('id')->on('kota_kabupatens');
             $table->foreign('alat_angkut_id')->references('id')->on('alat_angkuts');
             $table->foreign('author_id')->references('id')->on('users');
         });
 
         Schema::table('uang_penginapans', function (Blueprint $table) {
-            $table->foreign('wilayah_id')->references('id')->on('kota_kabupatens');
             $table->foreign('author_id')->references('id')->on('users');
         });
 
@@ -107,6 +104,17 @@ return new class extends Migration
             $table->foreign('pegawai_diperintah_id')->references('id')->on('pegawais');
             $table->foreign('status_id')->references('id')->on('status_perdins');
             $table->foreign('laporan_perdin_id')->references('id')->on('laporan_perdins');
+            $table->foreign('kwitansi_perdin_id')->references('id')->on('kwitansi_perdins');
+            $table->foreign('author_id')->references('id')->on('users');
+        });
+
+        Schema::table('laporan_perdins', function (Blueprint $table) {
+            $table->foreign('author_id')->references('id')->on('users');
+        });
+
+        Schema::table('kwitansi_perdins', function (Blueprint $table) {
+            $table->foreign('kegiatan_id')->references('id')->on('kegiatans');
+            $table->foreign('pptk_id')->references('id')->on('pegawais');
             $table->foreign('author_id')->references('id')->on('users');
         });
 
@@ -142,6 +150,8 @@ return new class extends Migration
         Schema::dropIfExists('uang_penginapans');
         Schema::dropIfExists('biaya_perdins');
         Schema::dropIfExists('data_perdins');
+        Schema::dropIfExists('laporan_perdins');
+        Schema::dropIfExists('kwitansi_perdins');
         Schema::dropIfExists('data_anggarans');
         Schema::dropIfExists('uang_masuks');
         Schema::dropIfExists('uang_keluars');

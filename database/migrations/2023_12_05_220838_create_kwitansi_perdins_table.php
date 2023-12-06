@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jenis_perdins', function (Blueprint $table) {
+        Schema::create('kwitansi_perdins', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama');
-            $table->string('slug')->unique();
-            $table->string('no_rek');
-            $table->unsignedBigInteger('author_id');
+            $table->date('tgl_bayar')->nullable();
+            $table->string('no_rek')->nullable();
+            $table->unsignedBigInteger('kegiatan_id')->nullable();
+            $table->unsignedBigInteger('pptk_id')->nullable();
+            $table->unsignedBigInteger('author_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -27,7 +28,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('jenis_perdins', function (Blueprint $table) {
+        Schema::table('kwitansi_perdins', function (Blueprint $table) {
             $table->dropSoftDeletes();
         });
     }

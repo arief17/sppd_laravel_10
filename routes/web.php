@@ -11,6 +11,7 @@ use App\Http\Controllers\JenisPerdinController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\KetentuanController;
 use App\Http\Controllers\KotaKabupatenController;
+use App\Http\Controllers\KwitansiPerdinController;
 use App\Http\Controllers\LaporanPerdinController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PageController;
@@ -100,6 +101,7 @@ Route::middleware('can:isOperator')->group(function(){
 	Route::resource('/dashboard/uang-masuk', UangMasukController::class)->except('index')->middleware('auth');
 	Route::resource('/dashboard/uang-keluar', UangKeluarController::class)->except('index')->middleware('auth');
 	Route::resource('/dashboard/laporan-perdin', LaporanPerdinController::class)->except('create', 'store', 'show', 'destroy')->middleware('auth');
+	Route::resource('/dashboard/kwitansi-perdin', KwitansiPerdinController::class)->except('index', 'create', 'store', 'show', 'destroy')->middleware('auth');
 });
 
 Route::middleware('can:isOperator')->group(function(){

@@ -32,14 +32,19 @@ class KotaKabupaten extends Model
         return $this->belongsTo(JenisPerdin::class, 'jenis_perdin_id');
     }
 
-    public function uang_harians(): HasMany
+    public function uang_harians(): MorphMany
     {
-        return $this->hasMany(UangHarian::class, 'wilayah_id');
+        return $this->morphMany(UangHarian::class, 'wilayah');
     }
 
-    public function uang_transports(): HasMany
+    public function uang_transports(): MorphMany
     {
-        return $this->hasMany(UangTransport::class, 'wilayah_id');
+        return $this->morphMany(UangTransport::class, 'wilayah');
+    }
+
+    public function uang_penginapans(): MorphMany
+    {
+        return $this->morphMany(UangPenginapan::class, 'wilayah');
     }
 
     public function biaya_perdins_dari(): HasMany

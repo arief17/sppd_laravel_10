@@ -34,6 +34,7 @@ return new class extends Migration
             $table->string('jumlah_pegawai');
             $table->unsignedBigInteger('status_id');
             $table->unsignedBigInteger('laporan_perdin_id');
+            $table->unsignedBigInteger('kwitansi_perdin_id');
             $table->unsignedBigInteger('author_id');
             $table->timestamps();
             $table->softDeletes();

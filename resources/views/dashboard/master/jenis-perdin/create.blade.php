@@ -24,6 +24,15 @@
 						</div>
 						@enderror
 					</div>
+					<div class="form-group">
+						<label for="no_rek">No Rekening</label>
+						<input name="no_rek" value="{{ old('no_rek') }}" type="text" class="form-control @error('no_rek') is-invalid @enderror" id="no_rek" placeholder="Masukan no_rek">
+						@error('no_rek')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+						@enderror
+					</div>
 					
 					<div class="form-group mb-0 mt-3 justify-content-end">
 						<button type="submit" class="btn btn-primary">Simpan</button>

@@ -18,6 +18,10 @@
 							<th style="white-space: nowrap; width: 1%;">Nama:</th>
 							<td>{{ $jenis_perdin->nama }}</td>
 						</tr>
+						<tr>
+							<th style="white-space: nowrap; width: 1%;">No Rekening:</th>
+							<td>{{ $jenis_perdin->no_rek }}</td>
+						</tr>
 					</table>
 				</div>
 			</div>

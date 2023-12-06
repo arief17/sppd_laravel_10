@@ -168,7 +168,7 @@ $(document).ready(function() {
 		$('#tujuan_id').empty();
 		$('#tujuan_id').append('<option value="">Pilih Tujuan</option>');
 		
-		if (jenisPerdinText == 'dalam daerah') {
+		if (jenisPerdinText == 'perjalanan dinas dalam kota') {
 			$('#dalamLuarHide').hide();
 			
 			$.ajax({

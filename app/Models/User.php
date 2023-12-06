@@ -108,6 +108,16 @@ class User extends Authenticatable
         return $this->hasMany(BiayaPerdin::class, 'author_id');
     }
 
+    public function laporan_perdin(): HasMany
+    {
+        return $this->hasMany(LaporanPerdin::class, 'laporan_perdin_id');
+    }
+
+    public function kwitansi_perdin(): HasMany
+    {
+        return $this->hasMany(KwitansiPerdin::class, 'kwitansi_perdin_id');
+    }
+
     public function getRouteKeyName()
     {
         return 'username';

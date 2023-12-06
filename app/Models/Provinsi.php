@@ -32,6 +32,21 @@ class Provinsi extends Model
         return $this->hasMany(KotaKabupaten::class, 'provinsi_id');
     }
 
+    public function uang_harians(): MorphMany
+    {
+        return $this->morphMany(UangHarian::class, 'wilayah');
+    }
+
+    public function uang_transports(): MorphMany
+    {
+        return $this->morphMany(UangTransport::class, 'wilayah');
+    }
+
+    public function uang_penginapans(): MorphMany
+    {
+        return $this->morphMany(UangPenginapan::class, 'wilayah');
+    }
+
     public function data_perdins(): MorphMany
     {
         return $this->morphMany(DataPerdin::class, 'tujuan');

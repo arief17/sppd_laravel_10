@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('golongan_ii');
             $table->integer('golongan_i');
             $table->unsignedBigInteger('wilayah_id');
+            $table->string('wilayah_type');
             $table->unsignedBigInteger('author_id');
             $table->timestamps();
             $table->softDeletes();

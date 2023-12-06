@@ -105,6 +105,11 @@ class DataPerdin extends Model
         return $this->belongsTo(Pegawai::class, 'pegawai_diperintah_id');
     }
     
+    public function pegawai_mengikuti(): BelongsToMany
+    {
+        return $this->belongsToMany(Pegawai::class, 'perdin_pegawai', 'data_perdin_id', 'pegawai_id');
+    }
+    
     public function status(): BelongsTo
     {
         return $this->belongsTo(StatusPerdin::class, 'status_id');
@@ -114,10 +119,10 @@ class DataPerdin extends Model
     {
         return $this->belongsTo(LaporanPerdin::class, 'laporan_perdin_id');
     }
-    
-    public function pegawai_mengikuti(): BelongsToMany
+
+    public function kwitansi_perdin(): BelongsTo
     {
-        return $this->belongsToMany(Pegawai::class, 'perdin_pegawai', 'data_perdin_id', 'pegawai_id');
+        return $this->belongsTo(KwitansiPerdin::class, 'kwitansi_perdin_id');
     }
     
     public function getRouteKeyName()

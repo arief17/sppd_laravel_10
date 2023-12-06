@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AlatAngkut;
 use App\Models\KotaKabupaten;
+use App\Models\Provinsi;
 use App\Models\UangTransport;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
@@ -28,7 +29,8 @@ class UangTransportController extends Controller
     {
         return view('dashboard.master.uang-transport.create', [
             'title' => 'Tambah Uang Transport',
-            'wilayahs' => KotaKabupaten::all(),
+            'kota_kabupatens' => KotaKabupaten::all(),
+            'provinsis' => Provinsi::all(),
             'alat_angkuts' => AlatAngkut::all(),
         ]);
     }
@@ -39,7 +41,6 @@ class UangTransportController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'wilayah_id' => 'required',
             'alat_angkut_id' => 'required',
             'harga_tiket' => 'nullable|numeric',
             'eselon_i' => 'required|numeric',
@@ -51,6 +52,15 @@ class UangTransportController extends Controller
             'golongan_ii' => 'required|numeric',
             'golongan_i' => 'required|numeric',
         ]);
+
+        $wilayah = null;
+        if ($request->wilayah == 'kota_kabupaten') {
+            $wilayah = KotaKabupaten::find($request->kota_kabupaten_id);
+        } elseif ($request->wilayah == 'provinsi') {
+            $wilayah = Provinsi::find($request->provinsi_id);
+        }
+        $validatedData['wilayah_type'] = get_class($wilayah);
+        $validatedData['wilayah_id'] = $wilayah->id;
 
         $validatedData['harga_tiket'] = $request->harga_tiket ?? 0;
         
@@ -83,7 +93,8 @@ class UangTransportController extends Controller
         return view('dashboard.master.uang-transport.edit', [
             'title' => 'Perbarui Uang Transport',
             'uang_transport' => $uangTransport,
-            'wilayahs' => KotaKabupaten::all(),
+            'kota_kabupatens' => KotaKabupaten::all(),
+            'provinsis' => Provinsi::all(),
             'alat_angkuts' => AlatAngkut::all(),
         ]);
     }
@@ -94,7 +105,6 @@ class UangTransportController extends Controller
     public function update(Request $request, UangTransport $uangTransport)
     {
         $validatedData = $request->validate([
-            'wilayah_id' => 'required',
             'alat_angkut_id' => 'required',
             'harga_tiket' => 'nullable|numeric',
             'eselon_i' => 'required|numeric',

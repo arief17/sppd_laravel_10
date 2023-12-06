@@ -36,6 +36,7 @@ class JenisPerdinController extends Controller
     {
         $validatedData = $request->validate([
             'nama' => 'required|min:3|max:100',
+            'no_rek' => 'required',
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(JenisPerdin::class, 'slug', $request->nama);
@@ -74,8 +75,9 @@ class JenisPerdinController extends Controller
     {
         $validatedData = $request->validate([
             'nama' => 'required|min:3|max:100',
+            'no_rek' => 'required',
         ]);
-        
+
         $validatedData['slug'] = SlugService::createSlug(JenisPerdin::class, 'slug', $request->nama);
         $validatedData['author_id'] = auth()->user()->id;
         

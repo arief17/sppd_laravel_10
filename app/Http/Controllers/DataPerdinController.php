@@ -7,12 +7,15 @@ use App\Models\DataPerdin;
 use App\Models\JenisPerdin;
 use App\Models\Ketentuan;
 use App\Models\KotaKabupaten;
+use App\Models\KwitansiPerdin;
 use App\Models\LaporanPerdin;
 use App\Models\Pegawai;
 use App\Models\Provinsi;
 use App\Models\StatusPerdin;
 use App\Models\TandaTangan;
 use App\Models\UangHarian;
+use App\Models\UangPenginapan;
+use App\Models\UangTransport;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -52,7 +55,7 @@ class DataPerdinController extends Controller
         $tujuan = [];
         $jenisPerdin = JenisPerdin::find($jenisPerdinId);
         
-        if ($jenisPerdin->slug === 'dalam-daerah') {
+        if ($jenisPerdin->slug === 'perjalanan-dinas-dalam-kota') {
             $tujuan = $jenisPerdin->kota_kabupatens->pluck('nama', 'id');
         } elseif ($jenisPerdin->slug === 'perjalanan-dinas-biasa') {
             $dalamLuarValue = request()->query('dalam_luar');
@@ -114,7 +117,7 @@ class DataPerdinController extends Controller
             $jenis_perdin = JenisPerdin::find($request->jenis_perdin_id);
             $tujuan = null;
             
-            if ($jenis_perdin->slug === 'dalam-daerah') {
+            if ($jenis_perdin->slug === 'perjalanan-dinas-dalam-kota') {
                 $tujuan = KotaKabupaten::find($request->tujuan_id);
             } elseif ($jenis_perdin->slug === 'perjalanan-dinas-biasa') {
                 if ($request->dalamLuar === 'Dalam Provinsi') {
@@ -134,9 +137,28 @@ class DataPerdinController extends Controller
             
             $laporan_perdin = LaporanPerdin::create();
             $validatedData['laporan_perdin_id'] = $laporan_perdin->id;
+
+            $kwitansi_perdin = KwitansiPerdin::create();
+            $validatedData['kwitansi_perdin_id'] = $kwitansi_perdin->id;
+
+            foreach ($selectedPegawaiIds as $pegawaiId) {
+                $pegawai = Pegawai::find($pegawaiId);
+                $pegawaiGolongan = str_replace('-', '_', $pegawai->golongan->slug);
+                $uangHarian = UangHarian::where('wilayah_id', $validatedData['tujuan_id'])->where('wilayah_type', $validatedData['tujuan_type'])->value($pegawaiGolongan);
+                $uangTransport = UangTransport::where('wilayah_id', $validatedData['tujuan_id'])->where('wilayah_type', $validatedData['tujuan_type'])->value($pegawaiGolongan);
+                $uangTiket = UangTransport::where('wilayah_id', $validatedData['tujuan_id'])->where('wilayah_type', $validatedData['tujuan_type'])->value('harga_tiket');
+                $uangPenginapan = UangPenginapan::where('wilayah_id', $validatedData['tujuan_id'])->where('wilayah_type', $validatedData['tujuan_type'])->value($pegawaiGolongan);
+                
+                $kwitansi_perdin->pegawais()->attach($pegawaiId, [
+                    'uang_harian' => $uangHarian,
+                    'uang_transport' => $uangTransport,
+                    'uang_tiket' => $uangTiket,
+                    'uang_penginapan' => $uangPenginapan,
+                ]);
+            }
             
             $perdin = DataPerdin::create($validatedData);
-
+            
             $pegawaiDiperintahId = $request->pegawai_diperintah_id;
             $selectedPegawaiIds = array_diff($selectedPegawaiIds, [$pegawaiDiperintahId]);
             if($selectedPegawaiIds){

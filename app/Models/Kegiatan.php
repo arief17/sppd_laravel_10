@@ -31,6 +31,11 @@ class Kegiatan extends Model
         return $this->hasMany(Ketentuan::class, 'kegiatan_id');
     }
 
+    public function kwitansi_perdins(): HasMany
+    {
+        return $this->hasMany(KwitansiPerdin::class, 'kegiatan_id');
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';
