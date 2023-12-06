@@ -33,7 +33,7 @@ $(document).ready(function() {
 // Pilih pegawai
 let selectedPegawai = [];
 
-async function addPegawaiDiperintah() {
+function addPegawaiDiperintah() {
 	const pegawaiDiperintahSelect = $('#pegawai_diperintah_id');
 	const selectedOption = pegawaiDiperintahSelect.find(':selected');
 	const pegawaiId = selectedOption.val();
@@ -41,21 +41,22 @@ async function addPegawaiDiperintah() {
 	const kotaKabupatenId = $('#tujuan_id').val();
 	
 	if (!selectedPegawai.find(pegawai => pegawai.id === pegawaiId)) {
-		const dataPegawai = await getPegawaiInfo(kotaKabupatenId, pegawaiId);
-		selectedPegawai.push({
-			id: pegawaiId,
-			nama: pegawaiNama,
-			nip: dataPegawai.nip,
-			jabatan: dataPegawai.jabatan,
-			uang_harian: dataPegawai.uang_harian,
-			keterangan: 'Pegawai yang ditugaskan'
+		getPegawaiInfo(kotaKabupatenId, pegawaiId, function(dataPegawai) {
+			selectedPegawai.push({
+				id: pegawaiId,
+				nama: pegawaiNama,
+				nip: dataPegawai.nip,
+				jabatan: dataPegawai.jabatan,
+				uang_harian: dataPegawai.uang_harian,
+				keterangan: 'Pegawai yang ditugaskan'
+			});
+			updatePegawaiList();
+			updateSelectedPegawaiInput();
 		});
-		updatePegawaiList();
-		updateSelectedPegawaiInput();
 	}
 }
 
-async function addPegawaiToSelected() {
+function addPegawaiToSelected() {
 	const pegawaiSelect = $('#pegawai_mengikuti_id');
 	const selectedOption = pegawaiSelect.find(':selected');
 	const pegawaiId = selectedOption.val();
@@ -63,35 +64,35 @@ async function addPegawaiToSelected() {
 	const kotaKabupatenId = $('#tujuan_id').val();
 	
 	if (!selectedPegawai.find(pegawai => pegawai.id === pegawaiId)) {
-		const dataPegawai = await getPegawaiInfo(kotaKabupatenId, pegawaiId);
-		selectedPegawai.push({
-			id: pegawaiId,
-			nama: pegawaiNama,
-			nip: dataPegawai.nip,
-			jabatan: dataPegawai.jabatan,
-			uang_harian: dataPegawai.uang_harian,
-			keterangan: 'Pegawai sebagai pengikut'
+		getPegawaiInfo(kotaKabupatenId, pegawaiId, function(dataPegawai) {
+			selectedPegawai.push({
+				id: pegawaiId,
+				nama: pegawaiNama,
+				nip: dataPegawai.nip,
+				jabatan: dataPegawai.jabatan,
+				uang_harian: dataPegawai.uang_harian,
+				keterangan: 'Pegawai sebagai pengikut'
+			});
+			updatePegawaiList();
+			updateSelectedPegawaiInput();
+			
+			pegawaiSelect.val('');
 		});
-		updatePegawaiList();
-		updateSelectedPegawaiInput();
-		
-		pegawaiSelect.val('');
 	} else {
 		pegawaiSelect.val('');
 	}
 }
 
-async function getPegawaiInfo(kotaKabupatenId, pegawaiId) {
-	try {
-		const response = await fetch(`/get-pegawai-info/${kotaKabupatenId}/${pegawaiId}`);
-		if (!response.ok) {
-			throw new Error('Network response was not ok.');
+function getPegawaiInfo(kotaKabupatenId, pegawaiId, callback) {
+	$.ajax({
+		url: `/get-pegawai-info/${kotaKabupatenId}/${pegawaiId}`,
+		success: function(data) {
+			callback(data.data_pegawai);
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			console.error('There was a problem with the fetch operation:', errorThrown);
 		}
-		const data = await response.json();
-		return data.data_pegawai;
-	} catch (error) {
-		console.error('There was a problem with the fetch operation:', error.message);
-	}
+	});
 }
 
 function removePegawaiFromSelected(pegawaiId) {
@@ -131,7 +132,6 @@ function updatePegawaiList() {
 
 $('#pegawai_diperintah_id').on('change', addPegawaiDiperintah);
 $('#pegawai_mengikuti_id').on('change', addPegawaiToSelected);
-
 
 function formatToRupiah(angka) {
 	return new Intl.NumberFormat('id-ID', {
