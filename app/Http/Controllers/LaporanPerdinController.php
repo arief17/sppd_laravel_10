@@ -50,6 +50,10 @@ class LaporanPerdinController extends Controller
     */
     public function edit(LaporanPerdin $laporanPerdin)
     {
+        if (!$laporanPerdin->data_perdin->status->approve) {
+            return abort(404);
+        }
+
         return view('dashboard.perdin.laporan-perdin.edit', [
             'title' => 'Perbarui Laporan Perdin',
             'laporan_perdin' => $laporanPerdin,
@@ -61,6 +65,10 @@ class LaporanPerdinController extends Controller
     */
     public function update(Request $request, LaporanPerdin $laporanPerdin)
     {
+        if (!$laporanPerdin->data_perdin->status->approve) {
+            return abort(404);
+        }
+        
         return DB::transaction(function () use ($request, $laporanPerdin) {
             $validatedData = $request->validate([
                 'tgl_laporan' => 'required|date',

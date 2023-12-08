@@ -49,13 +49,18 @@
 										<a class="modal-effect btn btn-success btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#visum1-{{ $data_perdin->slug }}">Visum 1</a>
 										<a class="modal-effect btn btn-success btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#visum2-{{ $data_perdin->slug }}">Visum 2</a>
 										<a class="modal-effect btn {{ $data_perdin->status->lap ? 'btn-success' : 'btn-danger' }} btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#lap-{{ $data_perdin->laporan_perdin_id }}">Lap</a>
-										<a class="modal-effect btn {{ $data_perdin->status->kwitansi ? 'btn-success' : 'btn-danger' }} btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#kwitansi-{{ $data_perdin->slug }}">Kwitansi</a>
 										@else
 										<button class="not-approve btn btn-danger btn-sm">SPT</button>
 										<button class="not-approve btn btn-danger btn-sm">Visum 1</button>
 										<button class="not-approve btn btn-danger btn-sm">Visum 2</button>
 										<button class="not-approve btn btn-danger btn-sm">Lap</button>
 										<button class="not-approve btn btn-danger btn-sm">Kwitansi</button>
+										@endif
+
+										@if ($data_perdin->status->approve && $data_perdin->status->lap)
+										<a class="btn {{ $data_perdin->status->kwitansi ? 'btn-success' : 'btn-danger' }} btn-sm" href="{{ route('kwitansi-perdin.edit', $data_perdin->kwitansi_perdin_id) }}">Kwitansi</a>
+										@else
+										<button class="not-laporan btn btn-danger btn-sm">Kwitansi</button>
 										@endif
 									</div>
 									
@@ -91,7 +96,6 @@
 								@include('dashboard.perdin.status-perdin.visum1')
 								@include('dashboard.perdin.status-perdin.visum2')
 								@include('dashboard.perdin.status-perdin.lap')
-								@include('dashboard.perdin.status-perdin.kwitansi')
 							</tr>
 							@endforeach
 						</tbody>
@@ -163,6 +167,14 @@
 		$('.not-approve').click(function(e) {
 			Swal.fire({
 				title: 'Belum Approve',
+				icon: 'warning',
+				confirmButtonColor: '#3085d6',
+				confirmButtonText: 'Ok',
+			});
+		});
+		$('.not-laporan').click(function(e) {
+			Swal.fire({
+				title: 'Belum ada laporan',
 				icon: 'warning',
 				confirmButtonColor: '#3085d6',
 				confirmButtonText: 'Ok',

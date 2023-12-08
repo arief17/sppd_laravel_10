@@ -95,6 +95,7 @@ Route::middleware('can:isOperator')->group(function(){
 		Route::get('/dashboard/status-perdin/visum1/pdf/{slug}', 'visum1')->name('visum1-pdf')->middleware('auth');
 		Route::get('/dashboard/status-perdin/visum2/pdf/{slug}', 'visum2')->name('visum2-pdf')->middleware('auth');
 		Route::get('/dashboard/status-perdin/lap/pdf/{id}', 'lap')->name('lap-pdf')->middleware('auth');
+		Route::get('/dashboard/status-perdin/kwitansi/pdf/{id}', 'kwitansi')->name('kwitansi-pdf')->middleware('auth');
 	});
 
 	Route::resource('/dashboard/data-anggaran', DataAnggaranController::class)->except('create', 'edit', 'update', 'destroy')->middleware('auth');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KwitansiPerdin;
 use Illuminate\Support\Facades\App;
 use App\Models\DataPerdin;
 use App\Models\LaporanPerdin;
@@ -67,6 +68,22 @@ class PerdinPdfController extends Controller
         
         $pdf = Pdf::loadView('dashboard.perdin.pdf-perdin.lap', [
             'laporan_perdin' => $laporan_perdin,
+            'imgLogo' => $imgLogo,
+        ]);
+        
+        $pdf->setPaper(array(0,0,609.4488,935.433), 'portrait');
+        
+        return $pdf->stream();
+    }
+    public function kwitansi($id)
+    {
+        App::setLocale('id');
+        $kwitansi_perdin = KwitansiPerdin::where('id', $id)->first();
+
+        $imgLogo = base64_encode(file_get_contents(public_path('assets/img/logo-banten.png')));
+        
+        $pdf = Pdf::loadView('dashboard.perdin.pdf-perdin.kwitansi', [
+            'laporan_perdin' => $kwitansi_perdin,
             'imgLogo' => $imgLogo,
         ]);
         
