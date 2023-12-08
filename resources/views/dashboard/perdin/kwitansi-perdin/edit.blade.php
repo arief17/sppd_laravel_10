@@ -162,10 +162,12 @@
 							<button type="submit" class="btn btn-primary me-3">Simpan</button>
 							<button type="reset" class="btn btn-secondary">Batal</button>
 						</div>
+						@if ($kwitansi_perdin->data_perdin->status->kwitansi)
 						<a class="modal-effect btn btn-secondary" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#kwitansi-{{ $kwitansi_perdin->id }}">
 							<i class="fa fa-file"></i>
 							Cetak Laporan
 						</a>
+						@endif
 					</div>
 					@include('dashboard.perdin.status-perdin.kwitansi')
 				</form>
