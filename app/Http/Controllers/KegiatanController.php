@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kegiatan;
+use App\Models\Seksi;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 
@@ -26,6 +27,7 @@ class KegiatanController extends Controller
     {
         return view('dashboard.master.kegiatan.create', [
             'title' => 'Tambah Kegiatan',
+            'seksis' => Seksi::all(),
         ]);
     }
 
@@ -65,6 +67,7 @@ class KegiatanController extends Controller
         return view('dashboard.master.kegiatan.edit', [
             'title' => 'Perbarui Kegiatan',
             'kegiatan' => $kegiatan,
+            'seksis' => Seksi::all(),
         ]);
     }
 

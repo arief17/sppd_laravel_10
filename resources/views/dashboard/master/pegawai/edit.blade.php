@@ -17,6 +17,22 @@
 					@method('put')
 					
 					<div class="form-group">
+						<label for="jabatan_id" class="form-label">Jabatan</label>
+						<select name="jabatan_id" id="jabatan_id" class="form-control form-select @error('jabatan_id') is-invalid @enderror">
+							<option value="">Pilih Jabatan</option>
+							@foreach ($jabatans as $jabatan)
+							<option value="{{ $jabatan->id }}" @selected(old('jabatan_id', $pegawai->jabatan_id) == $jabatan->id)>
+								{{ $jabatan->nama }}
+							</option>
+							@endforeach
+						</select>
+						@error('jabatan_id')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+						@enderror
+					</div>
+					<div class="form-group">
 						<label for="nama">Nama</label>
 						<input name="nama" value="{{ old('nama', $pegawai->nama) }}" type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukan nama">
 						@error('nama')
@@ -25,7 +41,7 @@
 						</div>
 						@enderror
 					</div>
-					<div class="form-group">
+					<div id="nip_hide" class="form-group">
 						<label for="nip">NIP</label>
 						<input name="nip" value="{{ old('nip', $pegawai->nip) }}" type="number" class="form-control @error('nip') is-invalid @enderror" id="nip" placeholder="Masukan nip">
 						@error('nip')
@@ -47,22 +63,6 @@
 						<label for="no_hp">Handphone</label>
 						<input name="no_hp" value="{{ old('no_hp', $pegawai->no_hp) }}" type="number" class="form-control @error('no_hp') is-invalid @enderror" id="no_hp" placeholder="Masukan no_hp">
 						@error('no_hp')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
-					<div class="form-group">
-						<label for="jabatan_id" class="form-label">Jabatan</label>
-						<select name="jabatan_id" id="jabatan_id" class="form-control form-select @error('jabatan_id') is-invalid @enderror">
-							<option value="">Pilih Jabatan</option>
-							@foreach ($jabatans as $jabatan)
-							<option value="{{ $jabatan->id }}" @selected(old('jabatan_id', $pegawai->jabatan_id) == $jabatan->id)>
-								{{ $jabatan->nama }}
-							</option>
-							@endforeach
-						</select>
-						@error('jabatan_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
@@ -154,40 +154,46 @@
 		$('#seksi_hide').hide();
 		$('#pangkat_hide').hide();
 		$('#golongan_hide').hide();
+		$('#nip_hide').hide();
 		
 		$('#jabatan_id').on('change', function() {
 			let selectedJabatan = $('#jabatan_id option:selected').text();
 			let jabatan = selectedJabatan.trim().toLowerCase();
 			
-			if (jabatan === 'kepala bidang') {
+			if (jabatan.includes('kepala bidang') || jabatan.includes('kepala dinas')) {
 				$('#seksi_hide').hide();
 				$('#pangkat_hide').show();
 				$('#golongan_hide').show();
+				$('#nip_hide').show();
 				
-				$('#seksi_id').removeAttr('required');
-				$('#golongan_id').attr('required', 'required');
+				$('#seksi_id').removeAttr('required').val('');
 				$('#pangkat_id').attr('required', 'required');
-			} else if (jabatan === 'non pns') {
+				$('#golongan_id').attr('required', 'required');
+				$('#nip').attr('required', 'required');
+			} else if (jabatan.includes('non pns')) {
 				$('#seksi_hide').show();
 				$('#pangkat_hide').hide();
 				$('#golongan_hide').hide();
+				$('#nip_hide').hide();
 				
-				$('#golongan_id').removeAttr('required');
-				$('#pangkat_id').removeAttr('required');
 				$('#seksi_id').attr('required', 'required');
+				$('#pangkat_id').removeAttr('required').val('');
+				$('#golongan_id').removeAttr('required').val('');
+				$('#nip').removeAttr('required').val('');
 			} else {
 				$('#seksi_hide').show();
 				$('#pangkat_hide').show();
 				$('#golongan_hide').show();
+				$('#nip_hide').show();
 				
 				$('#seksi_id').attr('required', 'required');
 				$('#golongan_id').attr('required', 'required');
 				$('#pangkat_id').attr('required', 'required');
+				$('#nip').attr('required', 'required');
 			}
 		});
 	});
 </script>
-
 <!--Internal  Datepicker js -->
 <script src="/assets/plugins/jquery-ui/ui/widgets/datepicker.js"></script>
 

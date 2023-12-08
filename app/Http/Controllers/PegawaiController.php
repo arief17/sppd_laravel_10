@@ -113,7 +113,7 @@ class PegawaiController extends Controller
             $rules['nip'] = 'numeric|unique:pegawais';
         }
         if ($request->email != $pegawai->email) {
-            $rules['email'] = 'required|numeric|unique:pegawais';
+            $rules['email'] = 'required|email|unique:pegawais';
         }
         if ($request->no_hp != $pegawai->no_hp) {
             $rules['no_hp'] = 'required|numeric|unique:pegawais';
