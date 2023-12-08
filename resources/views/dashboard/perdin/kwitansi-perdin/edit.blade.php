@@ -96,8 +96,9 @@
 							</tr>
 						</table>
 					</div>
+					<hr>
 					<div class="table-responsive">
-						<table class="table mg-b-0 text-md-nowrap border-bottom">
+						<table id="pegawai_table" class="table mg-b-0 text-md-nowrap border-bottom">
 							<thead>
 								<tr>
 									<th class="border-bottom-0" style="width: 1%">No</th>
@@ -150,10 +151,20 @@
 										</div>
 										@enderror
 									</td>
-									<td>total</td>
+									<td>0</td>
 								</tr>
 								@endforeach
-							</tbody>	
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="4" class="text-end">Total</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td> 
+								</tr>
+							</tfoot>
 						</table>
 					</div>
 					
@@ -184,6 +195,55 @@
 
 <!-- JQuery min js -->
 <script src="/assets/plugins/jquery/jquery.min.js"></script>
+
+<script>
+	$(document).ready(function() {
+		function hitungTotalPerBaris(row) {
+			let uangHarian = parseFloat(row.find('input[name^="uang_harian"]').val()) || 0;
+			let uangTransport = parseFloat(row.find('input[name^="uang_transport"]').val()) || 0;
+			let uangTiket = parseFloat(row.find('input[name^="uang_tiket"]').val()) || 0;
+			let uangPenginapan = parseFloat(row.find('input[name^="uang_penginapan"]').val()) || 0;
+			
+			let total = uangHarian + uangTransport + uangTiket + uangPenginapan;
+			row.find('td:last-child').text(total);
+			return total;
+		}
+		
+		function hitungTotalKeseluruhan() {
+			let totalHarian = 0,
+			totalTransport = 0,
+			totalTiket = 0,
+			totalPenginapan = 0;
+			
+			$('#pegawai_table tbody tr').each(function() {
+				let rowTotal = hitungTotalPerBaris($(this));
+				totalHarian += parseFloat($(this).find('input[name^="uang_harian"]').val()) || 0;
+				totalTransport += parseFloat($(this).find('input[name^="uang_transport"]').val()) || 0;
+				totalTiket += parseFloat($(this).find('input[name^="uang_tiket"]').val()) || 0;
+				totalPenginapan += parseFloat($(this).find('input[name^="uang_penginapan"]').val()) || 0;
+			});
+			
+			$('tfoot tr td:nth-child(2)').text(totalHarian);
+			$('tfoot tr td:nth-child(3)').text(totalTransport);
+			$('tfoot tr td:nth-child(4)').text(totalTiket);
+			$('tfoot tr td:nth-child(5)').text(totalPenginapan);
+			
+			let totalKeseluruhan = totalHarian + totalTransport + totalTiket + totalPenginapan;
+			$('tfoot tr td:last-child').text(totalKeseluruhan);
+		}
+		
+		$('#pegawai_table tbody tr').each(function() {
+			hitungTotalPerBaris($(this));
+		});
+		hitungTotalKeseluruhan();
+		
+		$('#pegawai_table tbody input').on('blur', function() {
+			let row = $(this).closest('tr');
+			hitungTotalPerBaris(row);
+			hitungTotalKeseluruhan();
+		});
+	});
+</script>
 
 <!--Internal  Datepicker js -->
 <script src="/assets/plugins/jquery-ui/ui/widgets/datepicker.js"></script>
