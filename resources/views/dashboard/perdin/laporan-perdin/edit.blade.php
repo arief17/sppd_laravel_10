@@ -43,7 +43,7 @@
 						<td colspan="2" class="fw-bold">A. Dasar Hukum Perjalanan Dinas</td>
 					</tr>
 					<tr>
-						<td colspan="2">Surat Perintah Tugas dari Atas Nama {{ $laporan_perdin->data_perdin->tanda_tangan->pegawai->seksi->nama }}</td>
+						<td colspan="2">Surat Perintah Tugas dari Atas Nama {{ $laporan_perdin->data_perdin->tanda_tangan->pegawai->seksi->nama ?? '' }}</td>
 					</tr>
 					<tr>
 						<td class="align-middle">Nomor</td>
