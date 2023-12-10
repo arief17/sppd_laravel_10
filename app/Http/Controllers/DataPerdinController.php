@@ -21,7 +21,42 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class DataPerdinController extends Controller
+
 {
+    public function getTujuan($jenisPerdinId)
+    {
+        $tujuan = [];
+        $jenisPerdin = JenisPerdin::find($jenisPerdinId);
+        
+        if ($jenisPerdin->slug === 'perjalanan-dinas-dalam-kota') {
+            $tujuan = $jenisPerdin->kota_kabupatens->pluck('nama', 'id');
+        } elseif ($jenisPerdin->slug === 'perjalanan-dinas-biasa') {
+            $dalamLuarValue = request()->query('dalam_luar');
+            
+            if ($dalamLuarValue === 'Dalam Provinsi') {
+                $tujuan = $jenisPerdin->kota_kabupatens->pluck('nama', 'id');
+            } elseif ($dalamLuarValue === 'Luar Provinsi') {
+                $tujuan = $jenisPerdin->provinsis->pluck('nama', 'id');
+            }
+        }
+        
+        return response()->json($tujuan);
+    }
+    
+    public function getPegawaiInfo($kotaKabupatenId, $pegawaiId)
+    {
+        $pegawai = Pegawai::find($pegawaiId);
+        $pegawaiGolongan = str_replace('-', '_', $pegawai->golongan->slug);
+        $uangHarian = UangHarian::where('wilayah_id', $kotaKabupatenId)->value($pegawaiGolongan);
+        
+        return response()->json(['data_pegawai' => [
+            'nip' => $pegawai->nip,
+            'jabatan' => $pegawai->jabatan->nama,
+            'uang_harian'=> $uangHarian,
+            ]
+        ]);
+    }
+    
     /**
     * Display a listing of the resource.
     */
@@ -50,41 +85,6 @@ class DataPerdinController extends Controller
         ]);
     }
     
-    public function getTujuan($jenisPerdinId)
-    {
-        $tujuan = [];
-        $jenisPerdin = JenisPerdin::find($jenisPerdinId);
-        
-        if ($jenisPerdin->slug === 'perjalanan-dinas-dalam-kota') {
-            $tujuan = $jenisPerdin->kota_kabupatens->pluck('nama', 'id');
-        } elseif ($jenisPerdin->slug === 'perjalanan-dinas-biasa') {
-            $dalamLuarValue = request()->query('dalam_luar');
-            
-            if ($dalamLuarValue === 'Dalam Provinsi') {
-                $tujuan = $jenisPerdin->kota_kabupatens->pluck('nama', 'id');
-            } elseif ($dalamLuarValue === 'Luar Provinsi') {
-                $tujuan = $jenisPerdin->provinsis->pluck('nama', 'id');
-            }
-        }
-        
-        return response()->json($tujuan);
-    }
-    
-    
-    public function getPegawaiInfo($kotaKabupatenId, $pegawaiId)
-    {
-        $pegawai = Pegawai::find($pegawaiId);
-        $pegawaiGolongan = str_replace('-', '_', $pegawai->golongan->slug);
-        $uangHarian = UangHarian::where('wilayah_id', $kotaKabupatenId)->value($pegawaiGolongan);
-        
-        return response()->json(['data_pegawai' => [
-            'nip' => $pegawai->nip,
-            'jabatan' => $pegawai->jabatan->nama,
-            'uang_harian'=> $uangHarian,
-            ]
-        ]);
-    }
-    
     /**
     * Store a newly created resource in storage.
     */
@@ -94,7 +94,7 @@ class DataPerdinController extends Controller
         return DB::transaction(function () use ($request) {
             $validatedData = $request->validate([
                 'surat_dari' => 'nullable',
-                'nomor_surat' => 'nullable|snumeric',
+                'nomor_surat' => 'nullable|numeric',
                 'tgl_surat' => 'nullable|date',
                 'perihal' => 'nullable',
                 'tanda_tangan_id' => 'required',

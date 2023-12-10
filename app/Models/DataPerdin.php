@@ -17,7 +17,7 @@ class DataPerdin extends Model
     
     protected $guarded = ['id'];
     protected $with = ['author', 'tanda_tangan', 'alat_angkut', 'jenis_perdin', 'kedudukan', 'tujuan', 'pegawai_diperintah', 'status'];
-    protected $cascadeDeletes = ['status', 'laporan_perdin'];
+    protected $cascadeDeletes = ['status', 'laporan_perdin', 'kwitansi_perdin'];
     
     public function getTtdFormatedAttribute()
     {
