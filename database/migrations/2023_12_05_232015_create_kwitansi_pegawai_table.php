@@ -17,10 +17,10 @@ return new class extends Migration
             $table->foreign('kwitansi_perdin_id')->references('id')->on('kwitansi_perdins');
             $table->unsignedBigInteger('pegawai_id');
             $table->foreign('pegawai_id')->references('id')->on('pegawais');
-            $table->integer('uang_harian')->default(0);
-            $table->integer('uang_transport')->default(0);
-            $table->integer('uang_tiket')->default(0);
-            $table->integer('uang_penginapan')->default(0);
+            $table->integer('uang_harian')->default('0');
+            $table->integer('uang_transport')->default('0');
+            $table->integer('uang_tiket')->default('0');
+            $table->integer('uang_penginapan')->default('0');
             $table->timestamps();
             $table->softDeletes();
         });

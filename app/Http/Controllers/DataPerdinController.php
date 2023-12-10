@@ -150,10 +150,10 @@ class DataPerdinController extends Controller
                 $uangPenginapan = UangPenginapan::where('wilayah_id', $validatedData['tujuan_id'])->where('wilayah_type', $validatedData['tujuan_type'])->value($pegawaiGolongan);
                 
                 $kwitansi_perdin->pegawais()->attach($pegawaiId, [
-                    'uang_harian' => $uangHarian,
-                    'uang_transport' => $uangTransport,
-                    'uang_tiket' => $uangTiket,
-                    'uang_penginapan' => $uangPenginapan,
+                    'uang_harian' => $uangHarian ?? 0,
+                    'uang_transport' => $uangTransport ?? 0,
+                    'uang_tiket' => $uangTiket ?? 0,
+                    'uang_penginapan' => $uangPenginapan ?? 0,
                 ]);
             }
             
