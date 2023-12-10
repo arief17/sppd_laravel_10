@@ -43,7 +43,7 @@
 										@else
 										<button class="not-approval btn {{ $data_perdin->status->approve ? 'btn-success' : 'btn-danger' }} btn-sm">Approve</button>
 										@endcan
-										
+
 										@if ($data_perdin->status->approve)
 										<a class="modal-effect btn btn-success btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#spt-{{ $data_perdin->slug }}">SPT</a>
 										<a class="modal-effect btn btn-success btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#visum1-{{ $data_perdin->slug }}">Visum 1</a>
@@ -54,7 +54,6 @@
 										<button class="not-approve btn btn-danger btn-sm">Visum 1</button>
 										<button class="not-approve btn btn-danger btn-sm">Visum 2</button>
 										<button class="not-approve btn btn-danger btn-sm">Lap</button>
-										<button class="not-approve btn btn-danger btn-sm">Kwitansi</button>
 										@endif
 
 										@if ($data_perdin->status->approve && $data_perdin->status->lap)
