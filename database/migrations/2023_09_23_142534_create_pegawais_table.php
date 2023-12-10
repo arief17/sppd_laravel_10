@@ -15,7 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('nama');
             $table->string('slug')->unique();
-            $table->string('nip')->unique();
+            $table->string('nip')->unique()->nullable();
             $table->string('email')->unique();
             $table->string('no_hp')->unique();
             $table->unsignedBigInteger('jabatan_id');
