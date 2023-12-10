@@ -157,7 +157,7 @@
 							</tbody>
 							<tfoot>
 								<tr>
-									<td colspan="4" class="text-end">Total</td>
+									<th colspan="4" class="text-end">Total :</th>
 									<td>0</td>
 									<td>0</td>
 									<td>0</td>
@@ -197,6 +197,13 @@
 <script src="/assets/plugins/jquery/jquery.min.js"></script>
 
 <script>
+	function formatToRupiah(angka) {
+		return new Intl.NumberFormat('id-ID', {
+			style: 'currency',
+			currency: 'IDR'
+		}).format(angka);
+	}
+	
 	$(document).ready(function() {
 		function hitungTotalPerBaris(row) {
 			let uangHarian = parseFloat(row.find('input[name^="uang_harian"]').val()) || 0;
@@ -205,7 +212,7 @@
 			let uangPenginapan = parseFloat(row.find('input[name^="uang_penginapan"]').val()) || 0;
 			
 			let total = uangHarian + uangTransport + uangTiket + uangPenginapan;
-			row.find('td:last-child').text(total);
+			row.find('td:last-child').text(formatToRupiah(total));
 			return total;
 		}
 		
@@ -223,13 +230,13 @@
 				totalPenginapan += parseFloat($(this).find('input[name^="uang_penginapan"]').val()) || 0;
 			});
 			
-			$('tfoot tr td:nth-child(2)').text(totalHarian);
-			$('tfoot tr td:nth-child(3)').text(totalTransport);
-			$('tfoot tr td:nth-child(4)').text(totalTiket);
-			$('tfoot tr td:nth-child(5)').text(totalPenginapan);
+			$('tfoot tr td:nth-child(2)').text(formatToRupiah(totalHarian));
+			$('tfoot tr td:nth-child(3)').text(formatToRupiah(totalTransport));
+			$('tfoot tr td:nth-child(4)').text(formatToRupiah(totalTiket));
+			$('tfoot tr td:nth-child(5)').text(formatToRupiah(totalPenginapan));
 			
 			let totalKeseluruhan = totalHarian + totalTransport + totalTiket + totalPenginapan;
-			$('tfoot tr td:last-child').text(totalKeseluruhan);
+			$('tfoot tr td:last-child').text(formatToRupiah(totalKeseluruhan));
 		}
 		
 		$('#pegawai_table tbody tr').each(function() {
