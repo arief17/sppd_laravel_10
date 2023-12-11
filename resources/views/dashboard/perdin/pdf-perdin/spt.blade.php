@@ -108,7 +108,8 @@
 	
 			<div style="text-align: center;">
 				<h4 style="margin-top: 30px; text-transform: uppercase">
-					{!! $data_perdin->ttdFormated !!}
+					{!! $data_perdin->ttdFormated !!} <br>
+					provinsi banten
 				</h4>
 				<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" width="100">
 				<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>

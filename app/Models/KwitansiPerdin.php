@@ -15,6 +15,34 @@ class KwitansiPerdin extends Model
     protected $guarded = ['id'];
     protected $with = ['author'];
     
+    public function getTotalUangHarianAttribute()
+    {
+        return $this->pegawais->sum('pivot.uang_harian');
+    }
+    
+    public function getTotalUangTransportAttribute()
+    {
+        return $this->pegawais->sum('pivot.uang_transport');
+    }
+    
+    public function getTotalUangTiketAttribute()
+    {
+        return $this->pegawais->sum('pivot.uang_tiket');
+    }
+    
+    public function getTotalUangPenginapanAttribute()
+    {
+        return $this->pegawais->sum('pivot.uang_penginapan');
+    }
+    
+    public function getTotalSemuaAttribute()
+    {
+        return $this->getTotalUangHarianAttribute() +
+            $this->getTotalUangTransportAttribute() +
+            $this->getTotalUangTiketAttribute() +
+            $this->getTotalUangPenginapanAttribute();
+    }
+    
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
@@ -29,7 +57,7 @@ class KwitansiPerdin extends Model
     {
         return $this->belongsTo(Pegawai::class, 'pptk_id');
     }
-
+    
     public function pegawais()
     {
         return $this->belongsToMany(Pegawai::class, 'kwitansi_pegawai', 'kwitansi_perdin_id', 'pegawai_id')

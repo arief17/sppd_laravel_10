@@ -83,7 +83,7 @@ class PerdinPdfController extends Controller
         $imgLogo = base64_encode(file_get_contents(public_path('assets/img/logo-banten.png')));
         
         $pdf = Pdf::loadView('dashboard.perdin.pdf-perdin.kwitansi', [
-            'laporan_perdin' => $kwitansi_perdin,
+            'kwitansi_perdin' => $kwitansi_perdin,
             'imgLogo' => $imgLogo,
         ]);
         

@@ -26,10 +26,10 @@ class DataPerdin extends Model
         if (count($words) > 3) {
             $line1 = implode(' ', array_slice($words, 0, 2));
             $line2 = implode(' ', array_slice($words, 2));
-            return "{$line1}<br>{$line2}<br>provinsi banten";
+            return "{$line1}<br>{$line2}";
         } else {
             $line = implode(' ', $words);
-            return "{$line}<br>provinsi banten";
+            return "{$line}";
         }
     }
     
