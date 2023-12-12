@@ -10,9 +10,9 @@
 			padding: 5px;
 			vertical-align: top;
 		}
-
+		
 		p, td {
-			font-size: 15px;
+			font-size: 17px;
 		}
 	</style>
 </head>
@@ -30,7 +30,7 @@
 			Jln. Syekh Nawawi Al Bantani, Palima Serang-Banten Telp.(0254) 267053, Fax.(0254) 267052 Serang
 		</small>
 	</div>
-
+	
 	<hr style="
 	border-top: 3px solid;
 	border-bottom: 1px solid;
@@ -39,43 +39,59 @@
 	">
 	
 	<div style="margin: 20px 60px 0 60px;">
-
+		
 		<div style="text-align: center;">
 			<div style="display: inline-block; text-align: left;">
 				<p style="text-decoration: underline; font-weight: bold; margin: 0;">SURAT PERINTAH TUGAS</p>
 				<p style="margin: 0;">No. </p>
 			</div>
-			<p style="margin: 10px 0;">Kepala Dinas Pekerjaan Umum dan Penataan Ruang Provinsi Banten.</p>
+			<p style="margin: 10px 0; text-transform: capitalize;">Dengan ini, {!! strtolower($data_perdin->ttdFormated) !!}.</p>
 			<p>MEMERINTAHKAN:</p>
 		</div>	
-
+		
 		<table style="width: 100%;">
 			<tr>
 				<td>Kepada</td>
 				<td colspan="2">:</td>
 			</tr>
+			
 			<tr>
-				<td style="text-align: end;">1. </td>
+				<td style="text-align: right;">1. </td>
 				<td>Nama</td>
 				<td>: <b>{{ $data_perdin->pegawai_diperintah->nama }}</b></td>
-				<tr>
-					<td rowspan="3"></td>
-					<td>NIP</td>
-					<td>: {{ $data_perdin->pegawai_diperintah->nip }}</td>
-				</tr>
-				<tr>
-					<td>Pangkat/Gol Ruang</td>
-					<td>: {{ $data_perdin->pegawai_diperintah->pangkat->nama }}</td>
-				</tr>
-				<tr>
-					<td>Jabatan</td>
-					<td>: {{ $data_perdin->pegawai_diperintah->jabatan->nama }}</td>
-				</tr>
 			</tr>
+			<tr>
+				<td></td>
+				<td>NIP</td>
+				<td>: {{ $data_perdin->pegawai_diperintah->nip }}</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>Jabatan</td>
+				<td style="padding-bottom: 30px">: {{ $data_perdin->pegawai_diperintah->jabatan->nama }}</td>
+			</tr>
+			@foreach ($data_perdin->pegawai_mengikuti as $pegawai)
+			<tr>
+				<td style="text-align: right;">{{ $loop->iteration + 1 }}. </td>
+				<td>Nama</td>
+				<td>: <b>{{ $pegawai->nama }}</b></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>NIP</td>
+				<td>: {{ $pegawai->nip }}</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>Jabatan</td>
+				<td style="padding-bottom: 30px">: {{ $pegawai->jabatan->nama }}</td>
+			</tr>
+			@endforeach
+			
 			
 			<tr>
 				<td>Untuk</td>
-				<td colspan="2">: {{ $data_perdin->perihal }}</td>
+				<td colspan="2">: {{ $data_perdin->maksud }}</td>
 			</tr>
 			<tr>
 				<td rowspan="4"></td>
@@ -87,7 +103,7 @@
 				</tr>
 				<tr>
 					<td>Tempat</td>
-					<td>: {{ $data_perdin->lokasi }}, {{ $data_perdin->kedudukan->nama }}, {{ $data_perdin->kedudukan->provinsi->nama }}</td>
+					<td>: {{ $data_perdin->tujuan->nama }}</td>
 				</tr>
 			</tr>
 		</table>
@@ -95,19 +111,8 @@
 		<p style="margin: 30px 0;">Demikian Surat Perintah Tugas ini dibuat, untuk dilaksanakan dengan penuh rasa tanggung jawab.</p>
 		
 		<div style="float: right;">
-			<table style="margin-left: auto;">
-				<tr>
-					<td>Ditetapkan di</td>
-					<td>: Serang</td>
-				</tr>
-				<tr>
-					<td>Pada Tanggal</td>
-					<td>: {{ now()->isoFormat('D MMMM YYYY') }}</td>
-				</tr>
-			</table>
-	
 			<div style="text-align: center;">
-				<h4 style="margin-top: 30px; text-transform: uppercase">
+				<h4 style="margin-top: 20px; text-transform: uppercase">
 					{!! $data_perdin->ttdFormated !!} <br>
 					provinsi banten
 				</h4>

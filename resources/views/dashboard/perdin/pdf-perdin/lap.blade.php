@@ -10,10 +10,6 @@
 			padding: 5px;
 			vertical-align: top;
 		}
-
-		p, td {
-			font-size: 15px;
-		}
 	</style>
 </head>
 <body style="font-family: Times, serif; margin: 30px;">
@@ -38,10 +34,10 @@
 	margin: 10px 0;
 	">
 	
-	<div style="margin: 20px 60px 0 60px;">
+	<div style="margin: 0 60px 0 60px;">
 		
 		<div style="text-align: center;">
-			<p style="text-decoration: underline; font-weight: bold;">Laporan Hasil Perjalanan Dinas</p>
+			<h3 style="text-decoration: underline;">Laporan Hasil Perjalanan Dinas</h3>
 		</div>
 		
 		<table style="width: 100%;">

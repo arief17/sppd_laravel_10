@@ -11,7 +11,7 @@
 		}
 
 		p, td {
-			font-size: 14px;
+			font-size: 15px;
 		}
 	</style>
 </head>
@@ -39,9 +39,9 @@
 					</tr>
 				</table>
 				<div style="text-align: center;">
-					<p style="margin-top: 10px;" style="text-transform: uppercase;">{!! $data_perdin->ttdFormated !!}</p>
+					<p style="margin-top: 10px;" style="text-transform: uppercase; font-weight: bold;">{!! $data_perdin->ttdFormated !!}</p>
 					
-					<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" width="50">
+					<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" width="60">
 					<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
 					<p>NIP.{{ $data_perdin->tanda_tangan->pegawai->nip }}</p>
 				</div>
@@ -65,7 +65,7 @@
 					<tr>
 						<td colspan="2">
 							<p style="padding-top: 50px;">
-								(................................................) <br>
+								(..........................................................) <br>
 								NIP.
 							</p>
 						</td>
@@ -93,7 +93,7 @@
 					<tr>
 						<td colspan="2">
 							<p style="padding-top: 50px;">
-								(................................................) <br>
+								(..........................................................) <br>
 								NIP.
 							</p>
 						</td>
@@ -120,7 +120,7 @@
 					<tr>
 						<td colspan="2">
 							<p style="padding-top: 50px;">
-								(................................................) <br>
+								(..........................................................) <br>
 								NIP.
 							</p>
 						</td>
@@ -148,7 +148,7 @@
 					<tr>
 						<td colspan="2">
 							<p style="padding-top: 50px;">
-								(................................................) <br>
+								(..........................................................) <br>
 								NIP.
 							</p>
 						</td>
@@ -175,7 +175,7 @@
 					<tr>
 						<td colspan="2">
 							<p style="padding-top: 50px;">
-								(................................................) <br>
+								(..........................................................) <br>
 								NIP.
 							</p>
 						</td>
@@ -203,7 +203,7 @@
 					<tr>
 						<td colspan="2">
 							<p style="padding-top: 50px;">
-								(................................................) <br>
+								(..........................................................) <br>
 								NIP.
 							</p>
 						</td>
@@ -230,7 +230,7 @@
 					<tr>
 						<td colspan="2">
 							<p style="padding-top: 50px;">
-								(................................................) <br>
+								(..........................................................) <br>
 								NIP.
 							</p>
 						</td>
@@ -258,7 +258,7 @@
 					<tr>
 						<td colspan="2">
 							<p style="padding-top: 50px;">
-								(................................................) <br>
+								(..........................................................) <br>
 								NIP.
 							</p>
 						</td>
@@ -281,9 +281,9 @@
 					</tr>
 				</table>
 				<div style="text-align: center;">
-					<p style="margin-top: 10px;" style="text-transform: uppercase;">{!! $data_perdin->ttdFormated !!}</p>
+					<p style="margin-top: 10px;" style="text-transform: uppercase; font-weight: bold;">{!! $data_perdin->ttdFormated !!}</p>
 					
-					<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" width="50">
+					<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" width="60">
 					<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
 					<p>NIP.{{ $data_perdin->tanda_tangan->pegawai->nip }}</p>
 				</div>
@@ -291,9 +291,9 @@
 			<td style="border: 1px solid black; width: 50%;">
 				<p style="padding-left: 20px;">Telah diperiksa dengan keterangan bahwa perjalan tersebut atas perintahnya dan semata mata untuk kepentingan jabatan dalam waktu sesingkat-singkatnya</p>
 				<div style="text-align: center;">
-					<p style="margin-top: 10px;" style="text-transform: uppercase;">{!! $data_perdin->ttdFormated !!}</p>
+					<p style="margin-top: 10px;" style="text-transform: uppercase; font-weight: bold;">{!! $data_perdin->ttdFormated !!}</p>
 					
-					<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" width="50">
+					<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" width="60">
 					<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
 					<p>NIP.{{ $data_perdin->tanda_tangan->pegawai->nip }}</p>
 				</div>
@@ -302,6 +302,6 @@
 	</table>
 
 	<p style="margin-top: 10px;">VII. <b>PERHATIAN</b></p>
-	<p>Pejabat yang berwenang menertibkan SPPD, pegawai yang melakukan perjalanan dinas, para pejabat yang menentukan tanggal berangkat/tiba, serta bendaharawan, bertanggung jawab berdasarkan peraturan-peraturan Keuangan Negara, apabila menderita rugi akibat kesalahan, kelalaian dan kealpaannya.</p>
+	<p>Pejabat yang berwenang menertibkan SPPD, pegawai yang melakukan perjalanan dinas, para pejabat yang menentukan tanggal berangkat/tiba, serta bendaharawan, bertanggung jawab berdasarkan peraturan-peraturan keuangan negara, apabila menderita rugi akibat kesalahan, kelalaian dan kealpaannya.</p>
 </body>
 </html>

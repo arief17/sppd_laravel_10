@@ -10,9 +10,9 @@
 			padding: 5px;
 			border: 1px solid black;
 		}
-
+		
 		p, td {
-			font-size: 15px;
+			font-size: 17px;
 		}
 	</style>
 </head>
@@ -30,67 +30,66 @@
 			Jln. Syekh Nawawi Al Bantani, Palima Serang-Banten Telp.(0254) 267053, Fax.(0254) 267052 Serang
 		</small>
 	</div>
-
+	
 	<hr style="
 	border-top: 3px solid;
 	border-bottom: 1px solid;
 	padding: 1px 0;
 	margin: 10px 0 0 0;
 	">
-
-	<div style="text-align: end;">
-		<table style="margin-left: auto;">
-			<tr>
-				<td>Lembar</td>
-				<td style="width: 150px;">:</td>
-			</tr>
-			<tr>
-				<td>Kode No.</td>
-				<td>:</td>
-			</tr>
-			<tr>
-				<td>Nomor</td>
-				<td>:</td>
-			</tr>
-		</table>
-	</div>
+	
+	<table style="width: 100%;">
+		<tr>
+			<td style="width: 50%;"></td>
+			<td style="width: 1%; white-space: nowrap; padding-right: 10px;">Lembar Ke</td>
+			<td>:</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>Kode No.</td>
+			<td>:</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>Nomor</td>
+			<td>:</td>
+		</tr>
+	</table>
 	
 	<div style="margin: 5px 0;">
-
+		
 		<div style="text-align: center; margin: 0 0 5px 0;">
-			<h2 style="text-decoration: underline;">"SURAT PERINTAH PERJALANAN DINAS"</h2>
-			<h2>(SPPD)</h2>
+			<h4 style="text-decoration: underline;">SURAT PERINTAH PERJALANAN DINAS</h4>
 		</div>
 		
 		<div style="border: 1px solid black; padding: 2px;">
 			<table class="gap-t" style="width: 100%; border-collapse: collapse; border: 1px solid black;">
 				<tr>
 					<td style="text-align: center;">1</td>
-					<td>Pejabat yang memberi perintah</td>
+					<td>Pejabat yang berwenang memberikan perintah</td>
 					<td colspan="2" style="text-transform: capitalize;">{{ strtolower($data_perdin->tanda_tangan->pegawai->jabatan->nama) }}</td>
 				</tr>
 				<tr>
 					<td style="text-align: center;">2</td>
-					<td>Nama/NIP yang diperintahkan</td>
+					<td>Nama/NIP. Pegawai yang diperintah mengadakan perjalanan dinas</td>
 					<td colspan="2">
-						{{ $data_perdin->pegawai_diperintah->nama }} <br>
-						{{ $data_perdin->pegawai_diperintah->nip }}
+						{{ $data_perdin->pegawai_diperintah->nama }} / {{ $data_perdin->pegawai_diperintah->nip }}
 					</td>
 				</tr>
 				<tr>
 					<td style="text-align: center;">3</td>
 					<td style="vertical-align: top;">
 						<ol style="list-style-type: lower-alpha; padding-left: 20px;">
-							<li>Pangkat dan Golongan ruang gaji menurut PP No.11/Tahun 2011</li>
+							<li>Pangkat dan Golongan ruang gaji menurut PP No.6 Tahun 1997</li>
 							<li>Jabatan/Instansi</li>
-							<li>Tingkat Biaya</li>
+							<li>Tingkat Biaya Perjalanan Dinas</li>
 						</ol>
 					</td>
 					<td style="vertical-align: top;" colspan="2">
 						<ol style="list-style-type: lower-alpha; padding-left: 20px;">
 							<li>{{ $data_perdin->pegawai_diperintah->pangkat->nama }}</li><br>
 							<li>{{ $data_perdin->pegawai_diperintah->jabatan->nama }}</li>
-							<li>{{ $data_perdin->biaya }}</li>
+							<li></li>
 						</ol>
 					</td>
 				</tr>
@@ -101,7 +100,7 @@
 				</tr>
 				<tr>
 					<td style="text-align: center;">5</td>
-					<td>Alat Angkut yang di Pergunakan</td>
+					<td>Alat angkutan yang di Pergunakan</td>
 					<td colspan="2">{{ $data_perdin->alat_angkut->nama }}</td>
 				</tr>
 				<tr>
@@ -124,8 +123,8 @@
 					<td>
 						<ol style="list-style-type: lower-alpha; padding-left: 20px;">
 							<li>Lamanya Perjalanan Dinas</li>
-							<li>Tgl Berangkat</li>
-							<li>Tgl harus kembali/Tiba ditempat baru*</li>
+							<li>Tanggal Berangkat</li>
+							<li>Tanggal kembali/tiba di tempat baru</li>
 						</ol>
 					</td>
 					<td colspan="2">
@@ -138,7 +137,7 @@
 				</tr>
 				<tr>
 					<td rowspan="{{ $data_perdin->pegawai_mengikuti->count() + 1 }}" style="text-align: center;">8</td>
-					<td style="text-align: center;">Pengikut/Nama</td>
+					<td style="text-align: center;">Pengikut: Nama</td>
 					<td style="text-align: center;">NIP</td>
 					<td style="text-align: center;">Keterangan</td>
 				</tr>
@@ -146,10 +145,10 @@
 				<tr>
 					<td>{{ $pengikut->nama }}</td>
 					<td>{{ $pengikut->nip }}</td>
-					<td>{{ $pengikut->Keterangan }}</td>
+					<td></td>
 				</tr>
 				@endforeach
-
+				
 				<tr>
 					<td style="text-align: center;" rowspan="2">9</td>
 					<td style="border-bottom: 0; padding-bottom: 0;">Pembebanan Anggaran</td>
@@ -172,12 +171,12 @@
 				<tr>
 					<td style="text-align: center;">10</td>
 					<td>Keterangan Lain-lain</td>
-					<td colspan="2">-</td>
+					<td colspan="2"></td>
 				</tr>
 			</table>
 		</div>
-
-		<table style="margin-left: auto;">
+		
+		<table style="margin-left: auto; margin-top: 20px; margin-bottom: 20px;">
 			<tr>
 				<td>Dikeluarkan di</td>
 				<td>: Serang</td>
@@ -187,10 +186,10 @@
 				<td>: {{ now()->isoFormat('D MMMM YYYY') }}</td>
 			</tr>
 		</table>
-
+		
 		<div style="float: right;">
 			<div style="text-align: center;">
-				<p style="margin-top: 10px;" style="text-transform: uppercase;">{!! $data_perdin->ttdFormated !!}</p>
+				<p style="margin-top: 10px;" style="text-transform: uppercase; font-weight: bold;">{!! $data_perdin->ttdFormated !!}</p>
 				
 				<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" width="100">
 				<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
