@@ -33,7 +33,6 @@ class DataPerdin extends Model
         }
     }
     
-    
     public static function filterByStatus($status)
     {
         return static::orderBy('created_at', 'desc')->whereHas('status', function ($query) use ($status) {

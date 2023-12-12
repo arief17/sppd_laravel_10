@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\DataPerdinController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\StatusPerdinController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +23,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/login', [LoginController::class, 'apiLogin']);
 Route::middleware('auth:sanctum')->post('/logout', [LoginController::class, 'apiLogout']);
+
+Route::post('/data-perdin', [DataPerdinController::class, 'apiDataPerdin']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::put('/status-perdin/approve', [StatusPerdinController::class, 'apiApprove']);
+    Route::put('/status-perdin/tolak', [StatusPerdinController::class, 'apiTolak']);
+});

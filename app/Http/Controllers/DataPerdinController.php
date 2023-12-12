@@ -57,6 +57,17 @@ class DataPerdinController extends Controller
         ]);
     }
     
+    public function apiDataPerdin(Request $request)
+    {
+        $status = $request->input('status');
+        $data_perdins = DataPerdin::filterByStatus($status)->toArray();
+    
+        return response()->json([
+            'status' => 'success',
+            'data' => $data_perdins,
+        ]);
+    }
+    
     /**
     * Display a listing of the resource.
     */
@@ -137,10 +148,10 @@ class DataPerdinController extends Controller
             
             $laporan_perdin = LaporanPerdin::create();
             $validatedData['laporan_perdin_id'] = $laporan_perdin->id;
-
+            
             $kwitansi_perdin = KwitansiPerdin::create();
             $validatedData['kwitansi_perdin_id'] = $kwitansi_perdin->id;
-
+            
             foreach ($selectedPegawaiIds as $pegawaiId) {
                 $pegawai = Pegawai::find($pegawaiId);
                 $pegawaiGolongan = str_replace('-', '_', $pegawai->golongan->slug);
