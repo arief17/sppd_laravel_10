@@ -27,7 +27,7 @@
 							<tr>
 								<td>{{ $loop->iteration }}</td>
 								<td>{{ $kegiatan->nama }}</td>
-								<td>{{ $kegiatan->seksi->nama }}</td>
+								<td>{{ $kegiatan->seksi->nama ?? '' }}</td>
 								<td>
 									<a class="btn btn-primary btn-sm" href="{{ route('kegiatan.show', $kegiatan->slug) }}">
 										<i class="fas fa-folder"></i>

@@ -20,7 +20,7 @@
 						</tr>
 						<tr>
 							<th style="white-space: nowrap; width: 1%;">Seksi:</th>
-							<td>{{ $kegiatan->seksi->nama }}</td>
+							<td>{{ $kegiatan->seksi->nama ?? '' }}</td>
 						</tr>
 					</table>
 				</div>
