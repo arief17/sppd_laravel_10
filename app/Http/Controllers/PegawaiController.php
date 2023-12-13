@@ -22,7 +22,9 @@ class PegawaiController extends Controller
         if (auth()->user()->level_admin->slug === 'admin') {
             $pegawais = Pegawai::all();
         } else {
-            $pegawais = Pegawai::where('author_id', auth()->user()->id)->get();
+            $pegawais = Pegawai::whereHas('seksi', function ($query) {
+                $query->where('bidang_id', auth()->user()->seksi->bidang_id);
+            })->get();
         }
         
         return view('dashboard.master.pegawai.index', [
@@ -83,7 +85,7 @@ class PegawaiController extends Controller
     */
     public function show(Pegawai $pegawai)
     {
-        if (auth()->user()->level_admin->slug != 'admin' && auth()->user()->id != $pegawai->id) {
+        if (auth()->user()->level_admin->slug != 'admin' && auth()->user()->seksi->bidang_id != $pegawai->seksi->bidang_id) {
             return abort(403);
         }
 
@@ -98,7 +100,7 @@ class PegawaiController extends Controller
     */
     public function edit(Pegawai $pegawai)
     {
-        if (auth()->user()->level_admin->slug != 'admin' && auth()->user()->id != $pegawai->id) {
+        if (auth()->user()->level_admin->slug != 'admin' && auth()->user()->seksi->bidang_id != $pegawai->seksi->bidang_id) {
             return abort(403);
         }
 
@@ -117,7 +119,7 @@ class PegawaiController extends Controller
     */
     public function update(Request $request, Pegawai $pegawai)
     {
-        if (auth()->user()->level_admin->slug != 'admin' && auth()->user()->id != $pegawai->id) {
+        if (auth()->user()->level_admin->slug != 'admin' && auth()->user()->seksi->bidang_id != $pegawai->seksi->bidang_id) {
             return abort(403);
         }
 
@@ -157,7 +159,7 @@ class PegawaiController extends Controller
     */
     public function destroy(Pegawai $pegawai)
     {
-        if (auth()->user()->level_admin->slug != 'admin' && auth()->user()->id != $pegawai->id) {
+        if (auth()->user()->level_admin->slug != 'admin' && auth()->user()->seksi->bidang_id != $pegawai->seksi->bidang_id) {
             return abort(403);
         }
 
