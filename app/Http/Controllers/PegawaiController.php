@@ -19,9 +19,15 @@ class PegawaiController extends Controller
     */
     public function index()
     {
+        if (auth()->user()->level_admin->slug === 'admin') {
+            $pegawais = Pegawai::all();
+        } else {
+            $pegawais = Pegawai::where('author_id', auth()->user()->id)->get();
+        }
+        
         return view('dashboard.master.pegawai.index', [
             'title' => 'Daftar Pegawai',
-            'pegawais' => Pegawai::all(),
+            'pegawais' => $pegawais,
         ]);
     }
     
@@ -77,6 +83,10 @@ class PegawaiController extends Controller
     */
     public function show(Pegawai $pegawai)
     {
+        if (auth()->user()->level_admin->slug != 'admin' && auth()->user()->id != $pegawai->id) {
+            return abort(403);
+        }
+
         return view('dashboard.master.pegawai.show', [
             'title' => 'Detail Pegawai',
             'pegawai' => $pegawai,
@@ -88,6 +98,10 @@ class PegawaiController extends Controller
     */
     public function edit(Pegawai $pegawai)
     {
+        if (auth()->user()->level_admin->slug != 'admin' && auth()->user()->id != $pegawai->id) {
+            return abort(403);
+        }
+
         return view('dashboard.master.pegawai.edit', [
             'title' => 'Perbarui Pegawai',
             'pegawai' => $pegawai,
@@ -103,6 +117,10 @@ class PegawaiController extends Controller
     */
     public function update(Request $request, Pegawai $pegawai)
     {
+        if (auth()->user()->level_admin->slug != 'admin' && auth()->user()->id != $pegawai->id) {
+            return abort(403);
+        }
+
         $rules = [
             'nama' => 'required|min:3|max:100',
             'jabatan_id' => 'required',
@@ -139,6 +157,10 @@ class PegawaiController extends Controller
     */
     public function destroy(Pegawai $pegawai)
     {
+        if (auth()->user()->level_admin->slug != 'admin' && auth()->user()->id != $pegawai->id) {
+            return abort(403);
+        }
+
         $pegawai->delete();
         return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil dihapus!');
     }
