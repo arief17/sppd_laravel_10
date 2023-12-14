@@ -62,18 +62,22 @@ class DataPerdinController extends Controller
         $status = $request->input('status');
         $data_perdins = DataPerdin::filterByStatus($status)->toArray();
         
-        return response()->json([
-            'status' => 'success',
-            'data' => $data_perdins,
-        ]);
+        return response()->json($data_perdins);
     }
     
     public function apiDataPerdinNotApprove(Request $request)
     {
-        $data_perdins = DataPerdin::filterByStatus('baru');
+        $data_perdins = DataPerdin::latest()
+        ->whereHas('status', function($query) {
+            $query->whereNull('approve');
+        })
+        ->without('author', 'tanda_tangan', 'pegawai', 'alat_angkut', 'jenis_perdin', 'kedudukan', 'tujuan', 'pegawai_diperintah', 'status')
+        ->get();
         
         return response()->json($data_perdins);
     }
+    
+    
     
     /**
     * Display a listing of the resource.
@@ -230,6 +234,17 @@ class DataPerdinController extends Controller
     */
     public function edit(DataPerdin $dataPerdin)
     {
+        $authBidangId = auth()->user()->bidang_id;
+        
+        if (empty($authBidangId)) {
+            $pegawais = Pegawai::whereNotNull('golongan_id')->get();
+        } else {
+            $pegawais = Pegawai::whereNotNull('golongan_id')
+            ->whereHas('seksi', function ($query) use ($authBidangId) {
+                $query->where('bidang_id', $authBidangId);
+            })->get();
+        }
+        
         return view('dashboard.perdin.data-perdin.edit', [
             'title' => 'Perbarui Data Perdin',
             'data_perdin' => $dataPerdin,
@@ -237,7 +252,7 @@ class DataPerdinController extends Controller
             'alat_angkuts' => AlatAngkut::all(),
             'jenis_perdins' => JenisPerdin::all(),
             'tanda_tangans' => TandaTangan::all(),
-            'pegawais' => Pegawai::all(),
+            'pegawais' => $pegawais,
         ]);
     }
     
@@ -246,36 +261,63 @@ class DataPerdinController extends Controller
     */
     public function update(Request $request, DataPerdin $dataPerdin)
     {
-        $validatedData = $request->validate([
-            'surat_dari' => 'nullable',
-            'nomor_surat' => 'nullable',
-            'tgl_surat' => 'date',
-            'perihal' => 'nullable',
-            'tanda_tangan_id' => 'required',
-            'maksud' => 'required',
-            'lama' => 'required',
-            'tgl_berangkat' => 'required|date',
-            'tgl_kembali' => 'required|date',
-            'alat_angkut_id' => 'required',
-            'jenis_perdin_id' => 'required',
-            'tujuan_id' => 'required',
-            'lokasi' => 'required',
-            'pegawai_diperintah_id' => 'required',
-            'biaya' => 'required',
-            'pegawai_mengikuti_id' => 'required',
-        ]);
-        
-        $validatedData['slug'] = SlugService::createSlug(DataPerdin::class, 'slug', $request->perihal);
-        $validatedData['author_id'] = auth()->user()->id;
-        $validatedData['kedudukan_id'] = KotaKabupaten::where('nama', 'LIKE', '%' . $request->kedudukan_id . '%')->value('id');
-        
-        $selectedPegawaiIds = explode(',', $request->pegawai_mengikuti_id);
-        $validatedData['jumlah_pegawai'] = count($selectedPegawaiIds);
-        
-        $dataPerdin->update($validatedData);
-        $dataPerdin->pegawai_mengikuti()->sync($selectedPegawaiIds);
-        
-        return redirect()->route('data-perdin.index', 'baru')->with('success', 'Data Perdin berhasil diperbarui!');
+        return DB::transaction(function () use ($request, $dataPerdin) {
+            $validatedData = $request->validate([
+                'surat_dari' => 'nullable',
+                'nomor_surat' => 'nullable',
+                'tgl_surat' => 'date',
+                'perihal' => 'nullable',
+                'tanda_tangan_id' => 'required',
+                'maksud' => 'required',
+                'lama' => 'required',
+                'tgl_berangkat' => 'required|date',
+                'tgl_kembali' => 'required|date',
+                'alat_angkut_id' => 'required',
+                'jenis_perdin_id' => 'required',
+                'tujuan_id' => 'required',
+                'lokasi' => 'required',
+                'pegawai_diperintah_id' => 'required',
+                'biaya' => 'required',
+                'pegawai_mengikuti_id' => 'required',
+            ]);
+            
+            $validatedData['slug'] = SlugService::createSlug(DataPerdin::class, 'slug', $request->maksud);
+            $validatedData['author_id'] = auth()->user()->id;
+            $validatedData['kedudukan_id'] = KotaKabupaten::where('nama', 'LIKE', '%' . $request->kedudukan_id . '%')->value('id');
+            
+            $selectedPegawaiIds = explode(',', $request->pegawai_mengikuti_id);
+            $validatedData['jumlah_pegawai'] = count($selectedPegawaiIds);
+            
+            $oldPegawaiIds = $dataPerdin->pegawai_mengikuti()->pluck('id')->toArray();
+            $updatedPegawaiIds = explode(',', $request->pegawai_mengikuti_id);
+            
+            $removedPegawaiIds = array_diff($oldPegawaiIds, $updatedPegawaiIds);
+            
+            $allKetentuanIds = collect([$dataPerdin->pegawai_diperintah->ketentuan_id])->merge($updatedPegawaiIds)->unique();
+            
+            $ketentuans = Ketentuan::whereIn('id', $allKetentuanIds)->get();
+            $pegawaiBatasMaksimal = [];
+            
+            foreach ($ketentuans as $ketentuan) {
+                if ($ketentuan->jumlah_perdin >= $ketentuan->max_perdin) {
+                    $pegawaiBatasMaksimal[] = $ketentuan->pegawai->nama;
+                }
+            }
+            
+            if (!empty($pegawaiBatasMaksimal)) {
+                return redirect()->back()->withInput()->with('failedSave', implode(', ', $pegawaiBatasMaksimal) . ' telah mencapai batas maksimal perdin!');
+            }
+            
+            Ketentuan::whereIn('id', $allKetentuanIds)->increment('jumlah_perdin');
+            
+            Ketentuan::whereIn('id', Ketentuan::whereIn('id', $dataPerdin->pegawai_mengikuti()->whereIn('id', $removedPegawaiIds)->pluck('ketentuan_id'))->get()->pluck('id'))
+            ->decrement('jumlah_perdin');
+            
+            $dataPerdin->update($validatedData);
+            $dataPerdin->pegawai_mengikuti()->sync($selectedPegawaiIds);
+            
+            return redirect()->route('data-perdin.index', 'baru')->with('success', 'Data Perdin berhasil diperbarui!');
+        }, 2);
     }
     
     /**
@@ -283,7 +325,15 @@ class DataPerdinController extends Controller
     */
     public function destroy(DataPerdin $dataPerdin)
     {
-        $dataPerdin->delete();
-        return redirect()->route('data-perdin.index', 'baru')->with('success', 'Data Perdin berhasil dihapus!');
+        return DB::transaction(function () use ($dataPerdin) {
+            $pegawaiIds = $dataPerdin->pegawai_mengikuti()->pluck('id')->toArray();
+            
+            Ketentuan::whereIn('id', Ketentuan::whereIn('id', $pegawaiIds)->pluck('ketentuan_id')->get())
+            ->decrement('jumlah_perdin');
+            
+            $dataPerdin->delete();
+            
+            return redirect()->route('data-perdin.index', 'baru')->with('success', 'Data Perdin berhasil dihapus!');
+        }, 2);
     }
 }

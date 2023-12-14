@@ -420,6 +420,24 @@ function updatePegawaiList() {
 $('#pegawai_diperintah_id').on('change', addPegawaiDiperintah);
 $('#pegawai_mengikuti_id').on('change', addPegawaiToSelected);
 
+function resetSelectedEmployees() {
+    $('#pegawai_diperintah_id').val('').trigger('change');
+    $('#pegawai_mengikuti_id').val('').trigger('change');
+    selectedPegawai = [];
+    updatePegawaiList();
+    updateSelectedPegawaiInput();
+}
+
+$('#jenis_perdin_id').on('change', function() {
+    resetSelectedEmployees();
+});
+$('#dalamLuar').on('change', function() {
+    resetSelectedEmployees();
+});
+$('#tujuan_id').on('change', function() {
+    resetSelectedEmployees();
+});
+
 function formatToRupiah(angka) {
 	return new Intl.NumberFormat('id-ID', {
 		style: 'currency',
