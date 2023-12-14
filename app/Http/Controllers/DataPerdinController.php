@@ -81,8 +81,8 @@ class DataPerdinController extends Controller
                     'tgl_berangkat' => $perdin->tgl_berangkat,
                     'tgl_kembali' => $perdin->tgl_kembali,
                     'jumlah_pegawai' => $perdin->jumlah_pegawai,
-                    'tanda_tangan' => $perdin->tanda_tangan->pegawai->bidang->nama ?? $perdin->tanda_tangan->pegawai->seksi->nama,
-                    'pegawai_diperintah' => $perdin->pegawai_diperintah->nama ?? null,
+                    'tanda_tangan' => $perdin->tanda_tangan->pegawai->nama,
+                    'pegawai_diperintah' => $perdin->pegawai_diperintah->nama,
                 ];
             });
     
