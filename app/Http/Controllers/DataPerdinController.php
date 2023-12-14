@@ -61,7 +61,7 @@ class DataPerdinController extends Controller
     {
         $status = $request->input('status');
         $data_perdins = DataPerdin::filterByStatus($status)->toArray();
-    
+        
         return response()->json([
             'status' => 'success',
             'data' => $data_perdins,
@@ -86,10 +86,17 @@ class DataPerdinController extends Controller
     */
     public function create()
     {
-        $pegawais = Pegawai::whereNotNull('golongan_id')->whereHas('seksi', function ($query) {
-            $query->where('bidang_id', auth()->user()->bidang_id);
-        })->get();
-
+        $authBidangId = auth()->user()->bidang_id;
+        
+        if (empty($authBidangId)) {
+            $pegawais = Pegawai::whereNotNull('golongan_id')->get();
+        } else {
+            $pegawais = Pegawai::whereNotNull('golongan_id')
+            ->whereHas('seksi', function ($query) use ($authBidangId) {
+                $query->where('bidang_id', $authBidangId);
+            })->get();
+        }
+        
         return view('dashboard.perdin.data-perdin.create', [
             'title' => 'Tambah Data Perdin',
             'kota_kabupatens' => KotaKabupaten::all(),
