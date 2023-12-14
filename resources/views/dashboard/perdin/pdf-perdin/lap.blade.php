@@ -51,7 +51,7 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					Surat Perintah Tugas dari Atas Nama {{ $laporan_perdin->data_perdin->author->seksi->nama }}
+					Surat Perintah Tugas dari Atas Nama {{ $laporan_perdin->data_perdin->author->bidang->nama }}
 				</td>
 			</tr>
 			<tr>
