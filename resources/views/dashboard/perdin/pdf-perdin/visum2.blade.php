@@ -41,7 +41,7 @@
 				<div style="text-align: center;">
 					<p style="margin-top: 10px;" style="text-transform: uppercase; font-weight: bold;">{!! $data_perdin->ttdFormated !!}</p>
 					
-					<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" width="60">
+					<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" height="60">
 					<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
 					<p>NIP.{{ $data_perdin->tanda_tangan->pegawai->nip }}</p>
 				</div>
@@ -283,7 +283,7 @@
 				<div style="text-align: center;">
 					<p style="margin-top: 10px;" style="text-transform: uppercase; font-weight: bold;">{!! $data_perdin->ttdFormated !!}</p>
 					
-					<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" width="60">
+					<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" height="60">
 					<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
 					<p>NIP.{{ $data_perdin->tanda_tangan->pegawai->nip }}</p>
 				</div>
@@ -293,7 +293,7 @@
 				<div style="text-align: center;">
 					<p style="margin-top: 10px;" style="text-transform: uppercase; font-weight: bold;">{!! $data_perdin->ttdFormated !!}</p>
 					
-					<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" width="60">
+					<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" height="60">
 					<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
 					<p>NIP.{{ $data_perdin->tanda_tangan->pegawai->nip }}</p>
 				</div>
