@@ -87,7 +87,7 @@ class DataPerdinController extends Controller
     public function create()
     {
         $pegawais = Pegawai::whereNotNull('golongan_id')->whereHas('seksi', function ($query) {
-            $query->where('bidang_id', auth()->user()->seksi->bidang_id);
+            $query->where('bidang_id', auth()->user()->bidang_id);
         })->get();
 
         return view('dashboard.perdin.data-perdin.create', [
