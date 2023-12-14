@@ -59,7 +59,7 @@
 	
 	<div style="margin: 5px 0;">
 		
-		<div style="text-align: center; margin: 0 0 5px 0;">
+		<div style="text-align: center; margin: 0 0 10px 0;">
 			<h4 style="text-decoration: underline;">SURAT PERINTAH PERJALANAN DINAS</h4>
 		</div>
 		
@@ -81,21 +81,21 @@
 				</tr>
 				<tr>
 					<td rowspan="3" style="text-align: center; width: 1%">3</td>
-					<td style="border-right: 0; border-bottom: 0;">a. </td>
+					<td style="width: 1%; border-right: 0; border-bottom: 0;">a. </td>
 					<td style="border-left: 0; border-bottom: 0;">Pangkat dan Golongan ruang gaji menurut PP No.6 Tahun 1997</td>
-					<td style="border-right: 0; border-bottom: 0;">a. </td>
+					<td style="width: 1%; border-right: 0; border-bottom: 0;">a. </td>
 					<td colspan="2" style="border-left: 0; border-bottom: 0;">{{ $data_perdin->pegawai_diperintah->pangkat->nama }}</td>
 				</tr>
 				<tr>
-					<td style="border-right: 0; border-bottom: 0; border-top: 0;">b. </td>
+					<td style="width: 1%; border-right: 0; border-bottom: 0; border-top: 0;">b. </td>
 					<td style="border-left: 0; border-bottom: 0; border-top: 0;">Jabatan/Instansi</td>
-					<td style="border-right: 0; border-bottom: 0; border-top: 0;">b. </td>
+					<td style="width: 1%; border-right: 0; border-bottom: 0; border-top: 0;">b. </td>
 					<td colspan="2" style="border-left: 0; border-bottom: 0; border-top: 0;">{{ $data_perdin->pegawai_diperintah->jabatan->nama }}</td>
 				</tr>
 				<tr>
-					<td style="border-right: 0; border-top: 0;">c. </td>
+					<td style="width: 1%; border-right: 0; border-top: 0;">c. </td>
 					<td style="border-left: 0; border-top: 0;">Tingkat Biaya Perjalanan Dinas</td>
-					<td style="border-right: 0; border-top: 0;">c. </td>
+					<td style="width: 1%; border-right: 0; border-top: 0;">c. </td>
 					<td colspan="2" style="border-left: 0; border-top: 0;"></td>
 				</tr>
 
@@ -114,35 +114,35 @@
 
 				<tr>
 					<td rowspan="2" style="text-align: center; width: 1%">6</td>
-					<td style="border-right: 0; border-bottom: 0;">a. </td>
+					<td style="width: 1%; border-right: 0; border-bottom: 0;">a. </td>
 					<td style="border-left: 0; border-bottom: 0;">Tempat Berangkat</td>
-					<td style="border-right: 0; border-bottom: 0;">a. </td>
+					<td style="width: 1%; border-right: 0; border-bottom: 0;">a. </td>
 					<td colspan="2" style="border-left: 0; border-bottom: 0;">{{ $data_perdin->kedudukan->nama }}</td>
 				</tr>
 				<tr>
-					<td style="border-right: 0; border-top: 0;">b. </td>
+					<td style="width: 1%; border-right: 0; border-top: 0;">b. </td>
 					<td style="border-left: 0; border-top: 0;">Tempat Tujuan</td>
-					<td style="border-right: 0; border-top: 0;">b. </td>
+					<td style="width: 1%; border-right: 0; border-top: 0;">b. </td>
 					<td colspan="2" style="border-left: 0; border-top: 0;">{{ $data_perdin->tujuan->nama }}</td>
 				</tr>
 				
 				<tr>
 					<td rowspan="3" style="text-align: center; width: 1%">7</td>
-					<td style="border-right: 0; border-bottom: 0;">a. </td>
+					<td style="width: 1%; border-right: 0; border-bottom: 0;">a. </td>
 					<td style="border-left: 0; border-bottom: 0;">Lamanya Perjalanan Dinas</td>
-					<td style="border-right: 0; border-bottom: 0;">a. </td>
+					<td style="width: 1%; border-right: 0; border-bottom: 0;">a. </td>
 					<td colspan="2" style="border-left: 0; border-bottom: 0;">{{ $data_perdin->lama }} hari</td>
 				</tr>
 				<tr>
-					<td style="border-right: 0; border-bottom: 0; border-top: 0;">b. </td>
+					<td style="width: 1%; border-right: 0; border-bottom: 0; border-top: 0;">b. </td>
 					<td style="border-left: 0; border-bottom: 0; border-top: 0;">Tanggal Berangkat</td>
-					<td style="border-right: 0; border-bottom: 0; border-top: 0;">b. </td>
+					<td style="width: 1%; border-right: 0; border-bottom: 0; border-top: 0;">b. </td>
 					<td colspan="2" style="border-left: 0; border-bottom: 0; border-top: 0;">{{ Carbon\Carbon::parse($data_perdin->tgl_berangkat)->isoFormat('D MMMM YYYY') }}</td>
 				</tr>
 				<tr>
-					<td style="border-right: 0; border-top: 0;">c. </td>
+					<td style="width: 1%; border-right: 0; border-top: 0;">c. </td>
 					<td style="border-left: 0; border-top: 0;">Tanggal kembali/tiba di tempat baru</td>
-					<td style="border-right: 0; border-top: 0;">c. </td>
+					<td style="width: 1%; border-right: 0; border-top: 0;">c. </td>
 					<td colspan="2" style="border-left: 0; border-top: 0;">{{ Carbon\Carbon::parse($data_perdin->tgl_kembali)->isoFormat('D MMMM YYYY') }}</td>
 				</tr>				
 
@@ -163,24 +163,24 @@
 				<tr>
 					<td rowspan="3" style="text-align: center; width: 1%">9</td>
 					<td colspan="2" style="border-bottom: 0; padding-bottom: 0;">Pembebanan Anggaran</td>
-					<td colspan="4" style="border-bottom: 0; padding-bottom: 0;"></td>
+					<td colspan="3" style="border-bottom: 0; padding-bottom: 0;"></td>
 				</tr>
 				<tr>
-					<td style="border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top;">a. </td>
+					<td style="width: 1%; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top;">a. </td>
 					<td style="border-left: 0; border-top: 0; border-bottom: 0; vertical-align: top;">Instansi</td>
-					<td style="border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top;">a. </td>
-					<td colspan="2" style="border-left: 0; border-top: 0; border-bottom: 0; vertical-align: top;">Dinas Pekerjaan Umum dan Penataan Ruang</td>
+					<td style="width: 1%; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top;">a. </td>
+					<td colspan="2" style="border-left: 0; border-top: 0; border-bottom: 0; vertical-align: top;">{{ $data_perdin->pegawai_diperintah->bidang->nama ?? $data_perdin->pegawai_diperintah->seksi->nama ?? '' }}</td>
 				</tr>
 				<tr>
-					<td style="border-right: 0; border-top: 0; vertical-align: top;">b. </td>
+					<td style="width: 1%; border-right: 0; border-top: 0; vertical-align: top;">b. </td>
 					<td style="border-left: 0; border-top: 0; vertical-align: top;">Mata Anggaran</td>
-					<td style="border-right: 0; border-top: 0; vertical-align: top;">b. </td>
-					<td colspan="2" style="border-left: 0; border-top: 0; vertical-align: top;">5.1.02.04.01.0003</td>
+					<td style="width: 1%; border-right: 0; border-top: 0; vertical-align: top;">b. </td>
+					<td colspan="2" style="border-left: 0; border-top: 0; vertical-align: top;">{{ $data_perdin->kwitansi_perdin->no_rek ?? '' }}</td>
 				</tr>
 				<tr>
 					<td style="text-align: center; width: 1%">10</td>
 					<td colspan="2">Keterangan Lain-lain</td>
-					<td colspan="4"></td>
+					<td colspan="3"></td>
 				</tr>
 			</table>
 		</div>
