@@ -28,15 +28,23 @@
 						</tr>
 						<tr>
 							<th style="white-space: nowrap; width: 1%;">Pangkat:</th>
-							<td>{{ $pegawai->pangkat->nama }}</td>
+							<td>{{ $pegawai->pangkat->nama ?? '-' }}</td>
 						</tr>
 						<tr>
 							<th style="white-space: nowrap; width: 1%;">Golongan:</th>
-							<td>{{ $pegawai->golongan }}</td>
+							<td>{{ $pegawai->golongan->nama ?? '-' }}</td>
 						</tr>
 						<tr>
 							<th style="white-space: nowrap; width: 1%;">Jabatan:</th>
-							<td>{{ $pegawai->jabatan }}</td>
+							<td>{{ $pegawai->jabatan->nama ?? '-' }}</td>
+						</tr>
+						<tr>
+							<th style="white-space: nowrap; width: 1%;">Seksi:</th>
+							<td>{{ $pegawai->seksi->nama ?? '-' }}</td>
+						</tr>
+						<tr>
+							<th style="white-space: nowrap; width: 1%;">Bidang:</th>
+							<td>{{ $pegawai->bidang->nama ?? '-' }}</td>
 						</tr>
 					</table>
 				</div>

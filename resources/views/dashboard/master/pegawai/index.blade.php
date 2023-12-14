@@ -23,6 +23,8 @@
 								<th class="border-bottom-0">Pangkat</th>
 								<th class="border-bottom-0">Golongan</th>
 								<th class="border-bottom-0">Jabatan</th>
+								<th class="border-bottom-0">Seksi</th>
+								<th class="border-bottom-0">Bidang</th>
 								<th class="border-bottom-0" style="width: 1%">Aksi</th>
 							</tr>
 						</thead>
@@ -36,6 +38,8 @@
 								<td>{{ $pegawai->pangkat->nama ?? '-'}}</td>
 								<td>{{ $pegawai->golongan->nama ?? '-' }}</td>
 								<td>{{ $pegawai->jabatan->nama ?? '-' }}</td>
+								<td>{{ $pegawai->seksi->nama ?? '-' }}</td>
+								<td>{{ $pegawai->bidang->nama ?? '-' }}</td>
 								<td>
 									<a class="btn btn-primary btn-sm" href="{{ route('pegawai.show', $pegawai->slug) }}">
 										<i class="fas fa-folder"></i>

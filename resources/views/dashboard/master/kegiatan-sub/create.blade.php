@@ -7,89 +7,34 @@
 		<div class="card box-shadow-0 ">
 			<div class="card-header d-flex justify-content-between">
 				<h4 class="card-title mb-1">{{ $title }}</h4>
-				<a class="btn btn-secondary btn-sm" href="{{ route('biaya-perdin.index') }}">
+				<a class="btn btn-secondary btn-sm" href="{{ route('kegiatan-sub.index') }}">
 					<i class="fa fa-reply"></i>
 				</a>
 			</div>
 			<div class="card-body pt-0">
-				<form action="{{ route('biaya-perdin.index') }}" method="post">
+				<form action="{{ route('kegiatan-sub.index') }}" method="post">
 					@csrf
 					
 					<div class="form-group">
-						<label for="jenis_perdin_id" class="form-label">Jenis Perdin</label>
-						<select name="jenis_perdin_id" id="jenis_perdin_id" class="form-control form-select @error('jenis_perdin_id') is-invalid @enderror">
-							<option value="">Pilih Jenis Perdin</option>
-							@foreach ($jenis_perdins as $jenis_perdin)
-							<option value="{{ $jenis_perdin->id }}" @selected(old('jenis_perdin_id') == $jenis_perdin->id)>
-								{{ $jenis_perdin->nama }}
-							</option>
-							@endforeach
-						</select>
-						@error('jenis_perdin_id')
+						<label for="nama">Nama</label>
+						<input name="nama" value="{{ old('nama') }}" type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukan nama">
+						@error('nama')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="dari_id" class="form-label">Dari</label>
-						<select name="dari_id" id="dari_id" class="form-control form-select @error('dari_id') is-invalid @enderror">
-							<option value="">Darimana</option>
-							@foreach ($kota_kabupatens as $dari)
-							<option value="{{ $dari->id }}" @selected(old('dari_id') == $dari->id)>
-								{{ $dari->nama }}
+						<label for="kegiatan_id" class="form-label">Kegiatan</label>
+						<select name="kegiatan_id" id="kegiatan_id" class="form-control form-select @error('kegiatan_id') is-invalid @enderror">
+							<option value="">Pilih Kegiatan</option>
+							@foreach ($kegiatans as $kegiatan)
+							<option value="{{ $kegiatan->id }}" @selected(old('kegiatan_id') == $kegiatan->id)>
+								{{ $kegiatan->nama }}
 							</option>
 							@endforeach
 						</select>
-						@error('dari_id')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
-					<div class="form-group">
-						<label for="ke_id" class="form-label">Ke</label>
-						<select name="ke_id" id="ke_id" class="form-control form-select @error('ke_id') is-invalid @enderror">
-							<option value="">Kemana</option>
-							@foreach ($kota_kabupatens as $ke)
-							<option value="{{ $ke->id }}" @selected(old('ke_id') == $ke->id)>
-								{{ $ke->nama }}
-							</option>
-							@endforeach
-						</select>
-						@error('ke_id')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
-					<div class="form-group">
-						<label for="transport_id" class="form-label">Uang Transport</label>
-						<select name="transport_id" id="transport_id" class="form-control form-select @error('transport_id') is-invalid @enderror">
-							<option value="">Pilih Uang Transport</option>
-							@foreach ($uang_transports as $transport)
-							<option value="{{ $transport->id }}" @selected(old('transport_id') == $transport->id)>
-								{{ $transport->nama }}
-							</option>
-							@endforeach
-						</select>
-						@error('transport_id')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
-					<div class="form-group">
-						<label for="harian_id" class="form-label">Uang Harian</label>
-						<select name="harian_id" id="harian_id" class="form-control form-select @error('harian_id') is-invalid @enderror">
-							<option value="">Pilih Uang Harian</option>
-							@foreach ($uang_harians as $harian)
-							<option value="{{ $harian->id }}" @selected(old('harian_id') == $harian->id)>
-								{{ $harian->nama }}
-							</option>
-							@endforeach
-						</select>
-						@error('harian_id')
+						@error('kegiatan_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>

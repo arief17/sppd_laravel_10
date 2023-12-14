@@ -19,7 +19,6 @@
 								<th class="border-bottom-0" style="width: 1%">No</th>
 								<th class="border-bottom-0">Username</th>
 								<th class="border-bottom-0">Level Admin</th>
-								<th class="border-bottom-0">Seksi</th>
 								<th class="border-bottom-0">Bidang</th>
 								<th class="border-bottom-0">Last Login</th>
 								<th class="border-bottom-0" style="width: 1%">Aksi</th>
@@ -31,8 +30,7 @@
 								<td>{{ $loop->iteration }}</td>
 								<td>{{ $user->username }}</td>
 								<td>{{ $user->level_admin->nama }}</td>
-								<td>{{ $user->seksi->nama ?? 'Belum ditentukan' }}</td>
-								<td>{{ $user->seksi->bidang->nama ?? 'Belum ditentukan' }}</td>
+								<td>{{ $user->bidang->nama ?? 'Belum ditentukan' }}</td>
 								<td>{{ $user->last_login }}</td>
 								<td>
 									<a class="btn btn-primary btn-sm" href="{{ route('user.show', $user->username) }}">

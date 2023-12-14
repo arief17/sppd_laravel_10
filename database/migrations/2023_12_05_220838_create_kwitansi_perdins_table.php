@@ -15,7 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->date('tgl_bayar')->nullable();
             $table->string('no_rek')->nullable();
-            $table->unsignedBigInteger('kegiatan_id')->nullable();
+            $table->unsignedBigInteger('kegiatan_sub_id')->nullable();
             $table->unsignedBigInteger('pptk_id')->nullable();
             $table->unsignedBigInteger('author_id')->nullable();
             $table->timestamps();

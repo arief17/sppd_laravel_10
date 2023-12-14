@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bidang;
 use App\Models\Golongan;
 use App\Models\Jabatan;
 use App\Models\Ketentuan;
@@ -19,17 +20,9 @@ class PegawaiController extends Controller
     */
     public function index()
     {
-        if (auth()->user()->level_admin->slug === 'admin') {
-            $pegawais = Pegawai::all();
-        } else {
-            $pegawais = Pegawai::whereHas('seksi', function ($query) {
-                $query->where('bidang_id', auth()->user()->seksi->bidang_id);
-            })->get();
-        }
-        
         return view('dashboard.master.pegawai.index', [
             'title' => 'Daftar Pegawai',
-            'pegawais' => $pegawais,
+            'pegawais' => Pegawai::all(),
         ]);
     }
     
@@ -41,6 +34,7 @@ class PegawaiController extends Controller
         return view('dashboard.master.pegawai.create', [
             'title' => 'Tambah Pegawai',
             'seksis' => Seksi::all(),
+            'bidangs' => Bidang::all(),
             'pangkats' => Pangkat::all(),
             'jabatans' => Jabatan::all(),
             'golongans' => Golongan::all(),
@@ -56,10 +50,11 @@ class PegawaiController extends Controller
             $validatedData = $request->validate([
                 'nama' => 'required|min:3|max:100',
                 'nip' => 'nullable|numeric|unique:pegawais',
-                'email' => 'required|email|unique:pegawais',
-                'no_hp' => 'required|numeric|unique:pegawais',
+                'email' => 'nullable|email|unique:pegawais',
+                'no_hp' => 'nullable|numeric|unique:pegawais',
                 'jabatan_id' => 'required',
                 'seksi_id' => 'nullable',
+                'bidang_id' => 'nullable',
                 'golongan_id' => 'nullable',
                 'pangkat_id' => 'nullable',
                 'pptk' => 'boolean',
@@ -85,10 +80,6 @@ class PegawaiController extends Controller
     */
     public function show(Pegawai $pegawai)
     {
-        if (auth()->user()->level_admin->slug != 'admin' && auth()->user()->seksi->bidang_id != $pegawai->seksi->bidang_id) {
-            return abort(403);
-        }
-
         return view('dashboard.master.pegawai.show', [
             'title' => 'Detail Pegawai',
             'pegawai' => $pegawai,
@@ -100,14 +91,11 @@ class PegawaiController extends Controller
     */
     public function edit(Pegawai $pegawai)
     {
-        if (auth()->user()->level_admin->slug != 'admin' && auth()->user()->seksi->bidang_id != $pegawai->seksi->bidang_id) {
-            return abort(403);
-        }
-
         return view('dashboard.master.pegawai.edit', [
             'title' => 'Perbarui Pegawai',
             'pegawai' => $pegawai,
             'seksis' => Seksi::all(),
+            'bidangs' => Bidang::all(),
             'pangkats' => Pangkat::all(),
             'jabatans' => Jabatan::all(),
             'golongans' => Golongan::all(),
@@ -119,27 +107,24 @@ class PegawaiController extends Controller
     */
     public function update(Request $request, Pegawai $pegawai)
     {
-        if (auth()->user()->level_admin->slug != 'admin' && auth()->user()->seksi->bidang_id != $pegawai->seksi->bidang_id) {
-            return abort(403);
-        }
-
         $rules = [
             'nama' => 'required|min:3|max:100',
             'jabatan_id' => 'required',
             'seksi_id' => 'nullable',
+            'bidang_id' => 'nullable',
             'golongan_id' => 'nullable',
             'pangkat_id' => 'nullable',
             'pptk' => '',
         ];
         
         if ($request->nip != $pegawai->nip) {
-            $rules['nip'] = '|nullable|numeric|unique:pegawais';
+            $rules['nip'] = 'nullable|numeric|unique:pegawais';
         }
         if ($request->email != $pegawai->email) {
-            $rules['email'] = 'required|email|unique:pegawais';
+            $rules['email'] = 'nullable|email|unique:pegawais';
         }
         if ($request->no_hp != $pegawai->no_hp) {
-            $rules['no_hp'] = 'required|numeric|unique:pegawais';
+            $rules['no_hp'] = 'nullable|numeric|unique:pegawais';
         }
         $validatedData = $request->validate($rules);
         
@@ -159,10 +144,6 @@ class PegawaiController extends Controller
     */
     public function destroy(Pegawai $pegawai)
     {
-        if (auth()->user()->level_admin->slug != 'admin' && auth()->user()->seksi->bidang_id != $pegawai->seksi->bidang_id) {
-            return abort(403);
-        }
-
         $pegawai->delete();
         return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil dihapus!');
     }

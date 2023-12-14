@@ -28,24 +28,29 @@ class User extends Authenticatable
         return $this->belongsTo(LevelAdmin::class, 'level_admin_id');
     }
     
-    public function seksi(): BelongsTo
+    public function bidang(): BelongsTo
     {
-        return $this->belongsTo(Seksi::class, 'seksi_id');
+        return $this->belongsTo(Bidang::class, 'bidang_id');
     }
     
-    public function seksi_authors(): HasMany
-    {
-        return $this->hasMany(Seksi::class, 'author_id');
-    }
-
-    public function bidang(): HasMany
+    public function bidang_authors(): HasMany
     {
         return $this->hasMany(Bidang::class, 'author_id');
+    }
+    
+    public function seksi(): HasMany
+    {
+        return $this->hasMany(Seksi::class, 'author_id');
     }
 
     public function kegiatans(): HasMany
     {
         return $this->hasMany(Kegiatan::class, 'author_id');
+    }
+
+    public function kegiatan_subs(): HasMany
+    {
+        return $this->hasMany(KegiatanSub::class, 'author_id');
     }
 
     public function pegawais(): HasMany
@@ -103,19 +108,19 @@ class User extends Authenticatable
         return $this->hasMany(UangTransport::class, 'author_id');
     }
 
-    public function biaya_perdins(): HasMany
+    public function laporan_perdins(): HasMany
     {
-        return $this->hasMany(BiayaPerdin::class, 'author_id');
+        return $this->hasMany(LaporanPerdin::class, 'author_id');
     }
 
-    public function laporan_perdin(): HasMany
+    public function kwitansi_perdins(): HasMany
     {
-        return $this->hasMany(LaporanPerdin::class, 'laporan_perdin_id');
+        return $this->hasMany(KwitansiPerdin::class, 'author_id');
     }
 
-    public function kwitansi_perdin(): HasMany
+    public function bendaharas(): HasMany
     {
-        return $this->hasMany(KwitansiPerdin::class, 'kwitansi_perdin_id');
+        return $this->hasMany(Bendahara::class, 'author_id');
     }
 
     public function getRouteKeyName()

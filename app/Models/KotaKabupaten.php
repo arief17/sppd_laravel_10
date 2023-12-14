@@ -47,16 +47,6 @@ class KotaKabupaten extends Model
         return $this->morphMany(UangPenginapan::class, 'wilayah');
     }
 
-    public function biaya_perdins_dari(): HasMany
-    {
-        return $this->hasMany(BiayaPerdin::class, 'dari_id');
-    }
-
-    public function biaya_perdins_ke(): HasMany
-    {
-        return $this->hasMany(BiayaPerdin::class, 'ke_id');
-    }
-
     public function data_perdins_kedudukan(): HasMany
     {
         return $this->hasMany(DataPerdin::class, 'kedudukan_id');

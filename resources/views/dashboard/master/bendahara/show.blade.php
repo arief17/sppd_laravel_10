@@ -7,7 +7,7 @@
 		<div class="card">
 			<div class="card-header d-flex justify-content-between">
 				<h4 class="card-title mb-1">{{ $title }}</h4>
-				<a class="btn btn-secondary btn-sm" href="{{ route('uang-masuk.index') }}">
+				<a class="btn btn-secondary btn-sm" href="{{ route('bendahara.index') }}">
 					<i class="fa fa-reply"></i>
 				</a>
 			</div>
@@ -15,33 +15,21 @@
 				<div class="table-responsive">
 					<table class="table mg-b-0 text-md-nowrap border-bottom">
 						<tr>
-							<th style="white-space: nowrap; width: 1%;">Tanggal Input:</th>
-							<td>{{ $uang_masuk->created_at->format('d F Y') }}</td>
-						</tr>
-						<tr>
-							<th style="white-space: nowrap; width: 1%;">Tanggal Uang Keluar:</th>
-							<td>{{ $uang_masuk->tgl_saldo->format('d F Y') }}</td>
-						</tr>
-						<tr>
-							<th style="white-space: nowrap; width: 1%;">Keterangan:</th>
-							<td>{{ $uang_masuk->keterangan }}</td>
-						</tr>
-						<tr>
-							<th style="white-space: nowrap; width: 1%;">Saldo:</th>
-							<td>{{ number_format($uang_masuk->saldo, 0, ',', '.') }}</td>
+							<th style="white-space: nowrap; width: 1%;">Nama:</th>
+							<td>{{ $bendahara->pegawai->nama }}</td>
 						</tr>
 					</table>
 				</div>
 			</div>
 			<div class="card-footer">
-				<a class="btn btn-info me-2" href="{{ route('uang-masuk.edit', $uang_masuk->slug) }}">
+				<a class="btn btn-info me-2" href="{{ route('bendahara.edit', $bendahara->slug) }}">
 					<i class="fas fa-pencil-alt"></i>
 					Edit
 				</a>
-				<form action="{{ route('uang-masuk.destroy', $uang_masuk->slug) }}" method="post" class="d-inline">
+				<form action="{{ route('bendahara.destroy', $bendahara->slug) }}" method="post" class="d-inline">
 					@method('delete')
 					@csrf
-					<button class="btn btn-danger" id='deleteData' data-title="{{ $uang_masuk->nama }}">
+					<button class="btn btn-danger" id='deleteData' data-title="{{ $bendahara->nama }}">
 						<i class="fas fa-trash"></i>
 						Delete
 					</button>

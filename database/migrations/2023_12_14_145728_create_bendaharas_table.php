@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('biaya_perdins', function (Blueprint $table) {
+        Schema::create('bendaharas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('slug')->unique();
-            $table->unsignedBigInteger('jenis_perdin_id');
-            $table->unsignedBigInteger('dari_id');
-            $table->unsignedBigInteger('ke_id');
-            $table->unsignedBigInteger('transport_id');
-            $table->unsignedBigInteger('harian_id');
+            $table->string('slug')->unique()->nullable();
+            $table->unsignedBigInteger('pegawai_id');
             $table->unsignedBigInteger('author_id');
             $table->timestamps();
             $table->softDeletes();
@@ -30,7 +26,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('biaya_perdins', function (Blueprint $table) {
+        Schema::table('bendaharas', function (Blueprint $table) {
             $table->dropSoftDeletes();
         });
     }

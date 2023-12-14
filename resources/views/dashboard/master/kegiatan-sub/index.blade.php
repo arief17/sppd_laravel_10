@@ -8,7 +8,7 @@
 			<div class="card-header">
 				<div class="d-flex align-items-center">
 					<h3 class="card-title">{{ $title }}</h3>
-					<a href="{{ route('biaya-perdin.create') }}" class="btn btn-primary mg-l-auto">Tambah</a>
+					<a href="{{ route('kegiatan-sub.create') }}" class="btn btn-primary mg-l-auto">Tambah</a>
 				</div>
 			</div>
 			<div class="card-body">
@@ -17,36 +17,30 @@
 						<thead>
 							<tr>
 								<th class="border-bottom-0" style="width: 1%">No</th>
-								<th class="border-bottom-0">Jenis Perdin</th>
-								<th class="border-bottom-0">Dari</th>
-								<th class="border-bottom-0">Ke</th>
-								<th class="border-bottom-0">transport</th>
-								<th class="border-bottom-0">harian</th>
+								<th class="border-bottom-0">Nama</th>
+								<th class="border-bottom-0">Kegiatan</th>
 								<th class="border-bottom-0" style="width: 1%">Aksi</th>
 							</tr>
 						</thead>
 						<tbody>
-							@foreach ($biaya_perdins as $biaya_perdin)
+							@foreach ($kegiatan_subs as $kegiatan_sub)
 							<tr>
 								<td>{{ $loop->iteration }}</td>
-								<td>{{ $biaya_perdin->jenis_perdin->nama }}</td>
-								<td>{{ $biaya_perdin->dari->nama }}</td>
-								<td>{{ $biaya_perdin->ke->nama }}</td>
-								<td>{{ $biaya_perdin->transport->nama }}</td>
-								<td>{{ $biaya_perdin->harian->nama }}</td>
+								<td>{{ $kegiatan_sub->nama }}</td>
+								<td>{{ $kegiatan_sub->kegiatan->nama }}</td>
 								<td>
-									<a class="btn btn-primary btn-sm" href="{{ route('biaya-perdin.show', $biaya_perdin->slug) }}">
+									<a class="btn btn-primary btn-sm" href="{{ route('kegiatan-sub.show', $kegiatan_sub->slug) }}">
 										<i class="fas fa-folder"></i>
 										View
 									</a>
-									<a class="btn btn-info btn-sm" href="{{ route('biaya-perdin.edit', $biaya_perdin->slug) }}">
+									<a class="btn btn-info btn-sm" href="{{ route('kegiatan-sub.edit', $kegiatan_sub->slug) }}">
 										<i class="fas fa-pencil-alt"></i>
 										Edit
 									</a>
-									<form action="{{ route('biaya-perdin.destroy', $biaya_perdin->slug) }}" method="post" class="d-inline">
+									<form action="{{ route('kegiatan-sub.destroy', $kegiatan_sub->slug) }}" method="post" class="d-inline">
 										@method('delete')
 										@csrf
-										<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $biaya_perdin->nama }}">
+										<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $kegiatan_sub->nama }}">
 											<i class="fas fa-trash"></i>
 											Delete
 										</button>

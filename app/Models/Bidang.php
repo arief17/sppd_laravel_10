@@ -26,6 +26,16 @@ class Bidang extends Model
         return $this->hasMany(Seksi::class, 'bidang_id');
     }
 
+    public function pegawais(): HasMany
+    {
+        return $this->hasMany(Pegawai::class, 'bidang_id');
+    }
+
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class, 'bidang_id');
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';

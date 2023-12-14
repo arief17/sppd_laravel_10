@@ -86,13 +86,17 @@ class DataPerdinController extends Controller
     */
     public function create()
     {
+        $pegawais = Pegawai::whereNotNull('golongan_id')->whereHas('seksi', function ($query) {
+            $query->where('bidang_id', auth()->user()->seksi->bidang_id);
+        })->get();
+
         return view('dashboard.perdin.data-perdin.create', [
             'title' => 'Tambah Data Perdin',
             'kota_kabupatens' => KotaKabupaten::all(),
             'alat_angkuts' => AlatAngkut::all(),
             'jenis_perdins' => JenisPerdin::all(),
             'tanda_tangans' => TandaTangan::all(),
-            'pegawais' => Pegawai::whereNotNull('golongan_id')->get(),
+            'pegawais' => $pegawais
         ]);
     }
     
@@ -105,7 +109,7 @@ class DataPerdinController extends Controller
         return DB::transaction(function () use ($request) {
             $validatedData = $request->validate([
                 'surat_dari' => 'nullable',
-                'nomor_surat' => 'nullable|numeric',
+                'nomor_surat' => 'nullable',
                 'tgl_surat' => 'nullable|date',
                 'perihal' => 'nullable',
                 'tanda_tangan_id' => 'required',
@@ -230,7 +234,7 @@ class DataPerdinController extends Controller
     {
         $validatedData = $request->validate([
             'surat_dari' => 'nullable',
-            'nomor_surat' => 'numeric',
+            'nomor_surat' => 'nullable',
             'tgl_surat' => 'date',
             'perihal' => 'nullable',
             'tanda_tangan_id' => 'required',

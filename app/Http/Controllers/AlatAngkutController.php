@@ -13,7 +13,6 @@ class AlatAngkutController extends Controller
      */
     public function index()
     {
-
         return view('dashboard.master.alat-angkut.index', [
             'title' => 'Daftar Alat Angkut',
             'alat_angkuts' => AlatAngkut::all(),

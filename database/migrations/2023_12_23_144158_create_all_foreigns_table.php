@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->foreign('level_admin_id')->references('id')->on('level_admins');
-            $table->foreign('seksi_id')->references('id')->on('seksis');
+            $table->foreign('bidang_id')->references('id')->on('bidangs');
         });
 
         Schema::table('bidangs', function (Blueprint $table) {
@@ -25,7 +25,14 @@ return new class extends Migration
             $table->foreign('author_id')->references('id')->on('users');
         });
 
+        Schema::table('kegiatan_subs', function (Blueprint $table) {
+            $table->foreign('kegiatan_id')->references('id')->on('kegiatans');
+            $table->foreign('author_id')->references('id')->on('users');
+        });
+
         Schema::table('pegawais', function (Blueprint $table) {
+            $table->foreign('seksi_id')->references('id')->on('seksis');
+            $table->foreign('bidang_id')->references('id')->on('bidangs');
             $table->foreign('jabatan_id')->references('id')->on('jabatans');
             $table->foreign('golongan_id')->references('id')->on('golongans');
             $table->foreign('pangkat_id')->references('id')->on('pangkats');
@@ -86,15 +93,6 @@ return new class extends Migration
         Schema::table('uang_penginapans', function (Blueprint $table) {
             $table->foreign('author_id')->references('id')->on('users');
         });
-
-        Schema::table('biaya_perdins', function (Blueprint $table) {
-            $table->foreign('jenis_perdin_id')->references('id')->on('jenis_perdins');
-            $table->foreign('dari_id')->references('id')->on('kota_kabupatens');
-            $table->foreign('ke_id')->references('id')->on('kota_kabupatens');
-            $table->foreign('transport_id')->references('id')->on('uang_transports');
-            $table->foreign('harian_id')->references('id')->on('uang_harians');
-            $table->foreign('author_id')->references('id')->on('users');
-        });
         
         Schema::table('data_perdins', function (Blueprint $table) {
             $table->foreign('tanda_tangan_id')->references('id')->on('tanda_tangans');
@@ -111,18 +109,15 @@ return new class extends Migration
         Schema::table('laporan_perdins', function (Blueprint $table) {
             $table->foreign('author_id')->references('id')->on('users');
         });
-
+        
         Schema::table('kwitansi_perdins', function (Blueprint $table) {
             $table->foreign('kegiatan_id')->references('id')->on('kegiatans');
             $table->foreign('pptk_id')->references('id')->on('pegawais');
             $table->foreign('author_id')->references('id')->on('users');
         });
 
-        Schema::table('uang_masuks', function (Blueprint $table) {
-            $table->foreign('author_id')->references('id')->on('users');
-        });
-        
-        Schema::table('uang_keluars', function (Blueprint $table) {
+        Schema::table('bendaharas', function (Blueprint $table) {
+            $table->foreign('pegawai_id')->references('id')->on('pegawais');
             $table->foreign('author_id')->references('id')->on('users');
         });
     }
@@ -135,6 +130,7 @@ return new class extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('bidangs');
         Schema::dropIfExists('kegiatans');
+        Schema::dropIfExists('kegiatan_subs');
         Schema::dropIfExists('pegawais');
         Schema::dropIfExists('tanda_tangans');
         Schema::dropIfExists('alat_angkuts');
@@ -148,12 +144,9 @@ return new class extends Migration
         Schema::dropIfExists('uang_harians');
         Schema::dropIfExists('uang_transports');
         Schema::dropIfExists('uang_penginapans');
-        Schema::dropIfExists('biaya_perdins');
         Schema::dropIfExists('data_perdins');
         Schema::dropIfExists('laporan_perdins');
         Schema::dropIfExists('kwitansi_perdins');
-        Schema::dropIfExists('data_anggarans');
-        Schema::dropIfExists('uang_masuks');
-        Schema::dropIfExists('uang_keluars');
+        Schema::dropIfExists('bendaharas');
     }
 };

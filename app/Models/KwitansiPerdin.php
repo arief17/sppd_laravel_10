@@ -13,7 +13,7 @@ class KwitansiPerdin extends Model
     use HasFactory, SoftDeletes;
     
     protected $guarded = ['id'];
-    protected $with = ['author'];
+    protected $with = ['author', 'kegiatan_sub', 'pptk'];
     
     public function getTotalUangHarianAttribute()
     {
@@ -24,33 +24,27 @@ class KwitansiPerdin extends Model
     {
         return $this->pegawais->sum('pivot.uang_transport');
     }
-    
-    public function getTotalUangTiketAttribute()
+
+    public function getTotalUangAkomodasiAttribute()
     {
-        return $this->pegawais->sum('pivot.uang_tiket');
-    }
-    
-    public function getTotalUangPenginapanAttribute()
-    {
-        return $this->pegawais->sum('pivot.uang_penginapan');
+        return $this->pegawais->sum('pivot.uang_tiket') + $this->pegawais->sum('pivot.uang_penginapan');
     }
     
     public function getTotalSemuaAttribute()
     {
         return $this->getTotalUangHarianAttribute() +
             $this->getTotalUangTransportAttribute() +
-            $this->getTotalUangTiketAttribute() +
-            $this->getTotalUangPenginapanAttribute();
+            $this->getTotalUangAkomodasiAttribute();
     }
     
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
     }
-    
-    public function kegiatan(): BelongsTo
+
+    public function kegiatan_sub(): BelongsTo
     {
-        return $this->belongsTo(Kegiatan::class, 'kegiatan_id');
+        return $this->belongsTo(KegiatanSub::class, 'kegiatan_sub_id');
     }
     
     public function pptk(): BelongsTo

@@ -7,7 +7,7 @@
 		<div class="card">
 			<div class="card-header d-flex justify-content-between">
 				<h4 class="card-title mb-1">{{ $title }}</h4>
-				<a class="btn btn-secondary btn-sm" href="{{ route('data-anggaran.index') }}">
+				<a class="btn btn-secondary btn-sm" href="{{ route('kegiatan.index') }}">
 					<i class="fa fa-reply"></i>
 				</a>
 			</div>
@@ -16,20 +16,24 @@
 					<table class="table mg-b-0 text-md-nowrap border-bottom">
 						<tr>
 							<th style="white-space: nowrap; width: 1%;">Nama:</th>
-							<td>{{ $data_anggaran->nama }}</td>
+							<td>{{ $kegiatan_sub->nama }}</td>
+						</tr>
+						<tr>
+							<th style="white-space: nowrap; width: 1%;">Kegiatan:</th>
+							<td>{{ $kegiatan_sub->kegiatan->nama }}</td>
 						</tr>
 					</table>
 				</div>
 			</div>
 			<div class="card-footer">
-				<a class="btn btn-info me-2" href="{{ route('data-anggaran.edit', $data_anggaran->slug) }}">
+				<a class="btn btn-info me-2" href="{{ route('kegiatan.edit', $kegiatan_sub->slug) }}">
 					<i class="fas fa-pencil-alt"></i>
 					Edit
 				</a>
-				<form action="{{ route('data-anggaran.destroy', $data_anggaran->slug) }}" method="post" class="d-inline">
+				<form action="{{ route('kegiatan.destroy', $kegiatan_sub->slug) }}" method="post" class="d-inline">
 					@method('delete')
 					@csrf
-					<button class="btn btn-danger" id='deleteData' data-title="{{ $data_anggaran->nama }}">
+					<button class="btn btn-danger" id='deleteData' data-title="{{ $kegiatan_sub->nama }}">
 						<i class="fas fa-trash"></i>
 						Delete
 					</button>

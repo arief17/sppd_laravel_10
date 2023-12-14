@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LevelAdmin;
-use App\Models\Seksi;
+use App\Models\Bidang;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -30,7 +30,7 @@ class UserController extends Controller
         return view('dashboard.master.user.create', [
             'title' => 'Tambah User',
             'level_admins' => LevelAdmin::all(),
-            'seksis' => Seksi::all(),
+            'bidangs' => Bidang::all(),
         ]);
     }
 
@@ -43,7 +43,7 @@ class UserController extends Controller
             'username' => 'required|alpha_dash|min:3|max:100|unique:users',
             'password' => ['required', 'confirmed', Password::min(5)->letters()],
             'level_admin_id' => 'required',
-            'seksi_id' => 'required',
+            'bidang_id' => 'required',
         ]);
 
         $validatedData['password'] = Hash::make($request->password);
@@ -72,7 +72,7 @@ class UserController extends Controller
             'title' => 'Perbarui User',
             'user' => $user,
             'level_admins' => LevelAdmin::all(),
-            'seksis' => Seksi::all(),
+            'bidangs' => Bidang::all(),
         ]);
     }
 
@@ -88,7 +88,7 @@ class UserController extends Controller
         $rules = [
             'password' => ['nullable', 'confirmed', Password::min(5)->letters()],
             'level_admin_id' => 'required',
-            'seksi_id' => 'required',
+            'bidang_id' => 'required',
         ];
 
         if ($request->username != $user->username) {

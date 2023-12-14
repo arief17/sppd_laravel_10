@@ -15,7 +15,7 @@ class Pegawai extends Model
     use HasFactory, Sluggable, SoftDeletes, CascadeSoftDeletes;
     
     protected $guarded = ['id'];
-    protected $with = ['author', 'seksi', 'golongan', 'jabatan', 'pangkat'];
+    protected $with = ['author', 'seksi', 'bidang', 'golongan', 'jabatan', 'pangkat'];
     protected $cascadeDeletes = ['ketentuan'];
     
     public function author(): BelongsTo
@@ -26,6 +26,11 @@ class Pegawai extends Model
     public function seksi(): BelongsTo
     {
         return $this->belongsTo(Seksi::class, 'seksi_id');
+    }
+
+    public function bidang(): BelongsTo
+    {
+        return $this->belongsTo(Bidang::class, 'bidang_id');
     }
     
     public function golongan(): BelongsTo
@@ -73,8 +78,12 @@ class Pegawai extends Model
         return $this->belongsToMany(KwitansiPerdin::class, 'kwitansi_pegawai', 'pegawai_id', 'kwitansi_perdin_id')
         ->withPivot('uang_harian', 'uang_transport', 'uang_tiket', 'uang_penginapan');
     }
-    
-    
+
+    public function bendaharas(): HasMany
+    {
+        return $this->hasMany(Bendahara::class, 'pegawai_id');
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';

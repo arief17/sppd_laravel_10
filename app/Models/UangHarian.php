@@ -27,11 +27,6 @@ class UangHarian extends Model
         return $this->morphTo();
     }
 
-    public function biaya_perdins(): HasMany
-    {
-        return $this->hasMany(BiayaPerdin::class, 'harian_id');
-    }
-
     public function getRouteKeyName()
     {
         return 'slug';

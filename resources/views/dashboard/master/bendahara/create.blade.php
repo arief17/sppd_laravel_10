@@ -7,37 +7,25 @@
 		<div class="card box-shadow-0 ">
 			<div class="card-header d-flex justify-content-between">
 				<h4 class="card-title mb-1">{{ $title }}</h4>
-				<a class="btn btn-secondary btn-sm" href="{{ route('uang-masuk.index') }}">
+				<a class="btn btn-secondary btn-sm" href="{{ route('bendahara.index') }}">
 					<i class="fa fa-reply"></i>
 				</a>
 			</div>
 			<div class="card-body pt-0">
-				<form action="{{ route('uang-masuk.show', $uang_masuk->slug) }}" method="post">
+				<form action="{{ route('bendahara.index') }}" method="post">
 					@csrf
-					@method('put')
 					
 					<div class="form-group">
-						<label for="tgl_saldo">Tanggal Saldo Masuk</label>
-						<input name="tgl_saldo" value="{{ old('tgl_saldo', $uang_masuk->tgl_saldo) }}" type="date" class="form-control @error('tgl_saldo') is-invalid @enderror" id="tgl_saldo" placeholder="Masukan tgl_saldo">
-						@error('tgl_saldo')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
-					<div class="form-group">
-						<label for="keterangan">Keterangan</label>
-						<input name="keterangan" value="{{ old('keterangan', $uang_masuk->keterangan) }}" type="text" class="form-control @error('keterangan') is-invalid @enderror" id="keterangan" placeholder="Masukan keterangan">
-						@error('keterangan')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
-					<div class="form-group">
-						<label for="saldo">Saldo</label>
-						<input name="saldo" value="{{ old('saldo', $uang_masuk->saldo) }}" type="number" class="form-control @error('saldo') is-invalid @enderror" id="saldo" placeholder="Masukan saldo">
-						@error('saldo')
+						<label for="pegawai_id" class="form-label">Pegawai</label>
+						<select name="pegawai_id" id="pegawai_id" class="form-control form-select @error('pegawai_id') is-invalid @enderror">
+							<option value="">Pilih Pegawai</option>
+							@foreach ($pegawais as $pegawai)
+							<option value="{{ $pegawai->id }}" @selected(old('pegawai_id') == $pegawai->id)>
+								{{ $pegawai->nama }}
+							</option>
+							@endforeach
+						</select>
+						@error('pegawai_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>

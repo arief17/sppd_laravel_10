@@ -83,6 +83,22 @@
 						</div>
 						@enderror
 					</div>
+					<div id="bidang_hide" class="form-group">
+						<label for="bidang_id" class="form-label">Bidang</label>
+						<select name="bidang_id" id="bidang_id" class="form-control form-select @error('bidang_id') is-invalid @enderror">
+							<option value="">Pilih Bidang</option>
+							@foreach ($bidangs as $bidang)
+							<option value="{{ $bidang->id }}" @selected(old('bidang_id') == $bidang->id)>
+								{{ $bidang->nama }}
+							</option>
+							@endforeach
+						</select>
+						@error('bidang_id')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+						@enderror
+					</div>
 					<div id="pangkat_hide" class="form-group">
 						<label for="pangkat_id" class="form-label">Pangkat</label>
 						<select name="pangkat_id" id="pangkat_id" class="form-control form-select @error('pangkat_id') is-invalid @enderror">
@@ -151,6 +167,7 @@
 <script>
 	$(document).ready(function() {
 		$('#seksi_hide').hide();
+		$('#bidang_hide').hide();
 		$('#pangkat_hide').hide();
 		$('#golongan_hide').hide();
 		$('#nip_hide').hide();
@@ -159,36 +176,71 @@
 			let selectedJabatan = $('#jabatan_id option:selected').text();
 			let jabatan = selectedJabatan.trim().toLowerCase();
 			
-			if (jabatan.includes('kepala bidang') || jabatan.includes('kepala dinas')) {
+			if (jabatan.includes('kepala dinas')) {
 				$('#seksi_hide').hide();
+				$('#bidang_hide').hide();
 				$('#pangkat_hide').show();
 				$('#golongan_hide').show();
 				$('#nip_hide').show();
 				
 				$('#seksi_id').removeAttr('required').val('');
+				$('#bidang_id').removeAttr('required').val('');
 				$('#pangkat_id').attr('required', 'required');
 				$('#golongan_id').attr('required', 'required');
 				$('#nip').attr('required', 'required');
-			} else if (jabatan.includes('non pns')) {
-				$('#seksi_hide').show();
-				$('#pangkat_hide').hide();
-				$('#golongan_hide').hide();
-				$('#nip_hide').hide();
+
+			} else if (jabatan.includes('kepala bidang')) {
+				$('#seksi_hide').hide();
+				$('#bidang_hide').show();
+				$('#pangkat_hide').show();
+				$('#golongan_hide').show();
+				$('#nip_hide').show();
 				
-				$('#seksi_id').attr('required', 'required');
-				$('#pangkat_id').removeAttr('required').val('');
-				$('#golongan_id').removeAttr('required').val('');
-				$('#nip').removeAttr('required').val('');
-			} else {
+				$('#seksi_id').removeAttr('required').val('');
+				$('#bidang_id').attr('required', 'required');
+				$('#pangkat_id').attr('required', 'required');
+				$('#golongan_id').attr('required', 'required');
+				$('#nip').attr('required', 'required');
+
+			} else if (jabatan.includes('kepala seksi')) {
 				$('#seksi_hide').show();
+				$('#bidang_hide').hide();
 				$('#pangkat_hide').show();
 				$('#golongan_hide').show();
 				$('#nip_hide').show();
 				
 				$('#seksi_id').attr('required', 'required');
+				$('#bidang_id').removeAttr('required').val('');
+				$('#pangkat_id').attr('required', 'required');
+				$('#golongan_id').attr('required', 'required');
+				$('#nip').attr('required', 'required');
+
+			} else if (jabatan.includes('non pns')) {
+				$('#seksi_hide').show();
+				$('#bidang_hide').show();
+				$('#pangkat_hide').hide();
+				$('#golongan_hide').hide();
+				$('#nip_hide').hide();
+				
+				$('#seksi_id').attr('required', 'required');
+				$('#bidang_id').attr('required', 'required');
+				$('#pangkat_id').removeAttr('required').val('');
+				$('#golongan_id').removeAttr('required').val('');
+				$('#nip').removeAttr('required').val('');
+
+			} else {
+				$('#seksi_hide').show();
+				$('#bidang_hide').show();
+				$('#pangkat_hide').show();
+				$('#golongan_hide').show();
+				$('#nip_hide').show();
+				
+				$('#seksi_id').attr('required', 'required');
+				$('#bidang_id').attr('required', 'required');
 				$('#golongan_id').attr('required', 'required');
 				$('#pangkat_id').attr('required', 'required');
 				$('#nip').attr('required', 'required');
+
 			}
 		});
 	});

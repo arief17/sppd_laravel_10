@@ -26,11 +26,6 @@ class Seksi extends Model
         return $this->belongsTo(Bidang::class, 'bidang_id');
     }
 
-    public function users(): HasMany
-    {
-        return $this->hasMany(User::class, 'seksi_id');
-    }
-
     public function kegiatans(): HasMany
     {
         return $this->hasMany(Kegiatan::class, 'seksi_id');

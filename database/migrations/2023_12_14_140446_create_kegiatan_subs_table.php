@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('uang_keluars', function (Blueprint $table) {
+        Schema::create('kegiatan_subs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('nama');
             $table->string('slug')->unique();
-            $table->date('tgl_saldo');
-            $table->string('keterangan');
-            $table->string('saldo')->default('0');
-            $table->string('anggaran_slug');
+            $table->unsignedBigInteger('kegiatan_id');
             $table->unsignedBigInteger('author_id');
             $table->timestamps();
             $table->softDeletes();
@@ -29,7 +27,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('uang_keluars', function (Blueprint $table) {
+        Schema::table('kegiatan_subs', function (Blueprint $table) {
             $table->dropSoftDeletes();
         });
     }

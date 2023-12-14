@@ -24,10 +24,13 @@
 					</tr>
 					@endif
 					<tr>
-						<td class="align-middle">Tanggal Laporan</td>
+						<td colspan="2" class="fw-bold">A. Dasar Hukum Perjalanan Dinas</td>
+					</tr>
+					<tr>
+						<td class="align-middle">Nomor</td>
 						<td>
-							<input name="tgl_laporan" value="{{ old('tgl_laporan', $laporan_perdin->tgl_laporan) }}" type="date" class="form-control @error('tgl_laporan') is-invalid @enderror" id="tgl_laporan" placeholder="Masukan tgl_laporan">
-							@error('tgl_laporan')
+							<input name="no_spt" value="{{ old('no_spt', $laporan_perdin->no_spt) }}" type="text" class="form-control @error('no_spt') is-invalid @enderror" id="no_spt" placeholder="Masukan no_spt">
+							@error('no_spt')
 							<div class="invalid-feedback">
 								{{ $message }}
 							</div>
@@ -35,21 +38,10 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2">
-							Sehubungan adanya Surat Dari {{ $laporan_perdin->data_perdin->surat_dari }} mengenai {{ $laporan_perdin->data_perdin->perihal }} Nomor {{ $laporan_perdin->data_perdin->nomor_surat }} pada {{ Carbon\Carbon::parse($laporan_perdin->data_perdin->tgl_surat)->formatLocalized('%d %B %Y') }} maka kami akan melaksanakan perjalanan dinas untuk mengidentifikasi masalah tersebut.															</td>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2" class="fw-bold">A. Dasar Hukum Perjalanan Dinas</td>
-					</tr>
-					<tr>
-						<td colspan="2">Surat Perintah Tugas dari Atas Nama {{ $laporan_perdin->data_perdin->tanda_tangan->pegawai->seksi->nama ?? '' }}</td>
-					</tr>
-					<tr>
-						<td class="align-middle">Nomor</td>
+						<td class="align-middle">Tanggal Laporan</td>
 						<td>
-							<input name="nomor_surat" value="{{ old('nomor_surat', $laporan_perdin->nomor_surat) }}" type="text" class="form-control @error('nomor_surat') is-invalid @enderror" id="nomor_surat" placeholder="Masukan nomor_surat">
-							@error('nomor_surat')
+							<input name="tgl_laporan" value="{{ old('tgl_laporan', $laporan_perdin->tgl_laporan) }}" type="date" class="form-control @error('tgl_laporan') is-invalid @enderror" id="tgl_laporan" placeholder="Masukan tgl_laporan">
+							@error('tgl_laporan')
 							<div class="invalid-feedback">
 								{{ $message }}
 							</div>

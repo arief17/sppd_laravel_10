@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataPerdin;
 use App\Models\LaporanPerdin;
 use App\Models\StatusPerdin;
 use Illuminate\Http\Request;
@@ -72,7 +73,7 @@ class LaporanPerdinController extends Controller
         return DB::transaction(function () use ($request, $laporanPerdin) {
             $validatedData = $request->validate([
                 'tgl_laporan' => 'required|date',
-                'nomor_surat' => 'required|numeric',
+                'no_spt' => 'required',
                 'maksud' => 'required',
                 'kegiatan' => 'required',
                 'hasil' => 'required',
@@ -91,6 +92,7 @@ class LaporanPerdinController extends Controller
             
             LaporanPerdin::where('id', $laporanPerdin->id)->update($validatedData);
             StatusPerdin::where('id', $laporanPerdin->data_perdin->status_id)->update(['lap' => 1]);
+            DataPerdin::where('laporan_perdin_id', $laporanPerdin->id)->update(['no_spt' => $validatedData['no_spt']]);
             return redirect()->back()->with('success', 'Laporan Perdin berhasil disimpan! Silahkan cetak Laporan!');
         }, 2);
     }

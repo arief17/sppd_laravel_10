@@ -32,11 +32,6 @@ class UangTransport extends Model
         return $this->belongsTo(AlatAngkut::class, 'alat_angkut_id');
     }
 
-    public function biaya_perdins(): HasMany
-    {
-        return $this->hasMany(BiayaPerdin::class, 'transport_id');
-    }
-
     public function getRouteKeyName()
     {
         return 'slug';

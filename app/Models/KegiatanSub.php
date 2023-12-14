@@ -6,31 +6,31 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Carbon;
 
-class UangKeluar extends Model
+class KegiatanSub extends Model
 {
     use HasFactory, Sluggable, SoftDeletes;
 
     protected $guarded = ['id'];
-    protected $with = ['author', 'data_anggaran'];
+    protected $with = ['author', 'kegiatan'];
 
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
     }
-    
-    public function data_anggaran(): BelongsTo
+
+    public function kegiatan(): BelongsTo
     {
-        return $this->belongsTo(DataAnggaran::class, 'anggaran_slug');
+        return $this->belongsTo(Kegiatan::class, 'kegiatan_id');
     }
 
-    public function getTglAnggaranAttribute()
+    public function kwitansi_perdins(): HasMany
     {
-        return Carbon::parse($this->tgl_saldo)->format('d F Y');
+        return $this->hasMany(KwitansiPerdin::class, 'kegiatan_id');
     }
-    
+
     public function getRouteKeyName()
     {
         return 'slug';
@@ -40,7 +40,7 @@ class UangKeluar extends Model
     {
         return [
             'slug' => [
-                'source' => 'keterangan',
+                'source' => 'nama',
                 'includeTrashed' => true,
             ]
         ];

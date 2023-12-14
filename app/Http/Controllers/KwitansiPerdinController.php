@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kegiatan;
+use App\Models\KegiatanSub;
 use App\Models\KwitansiPerdin;
 use App\Http\Controllers\Controller;
 use App\Models\Pegawai;
@@ -57,7 +57,7 @@ class KwitansiPerdinController extends Controller
             'title' => 'Perbarui Kwitansi Perdin',
             'kwitansi_perdin' => $kwitansiPerdin,
             'pptks' => Pegawai::where('pptk', '1')->get(),
-            'kegiatans' => Kegiatan::all(),
+            'kegiatan_subs' => KegiatanSub::all(),
         ]);
     }
     
@@ -74,7 +74,7 @@ class KwitansiPerdinController extends Controller
             $validatedData = $request->validate([
                 'tgl_bayar' => 'required|date',
                 'no_rek' => 'required',
-                'kegiatan_id' => 'required',
+                'kegiatan_sub_id' => 'required',
                 'pptk_id' => 'required',
             ]);
             

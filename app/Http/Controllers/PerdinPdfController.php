@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bendahara;
 use App\Models\KwitansiPerdin;
 use Illuminate\Support\Facades\App;
 use App\Models\DataPerdin;
@@ -79,12 +80,14 @@ class PerdinPdfController extends Controller
     {
         App::setLocale('id');
         $kwitansi_perdin = KwitansiPerdin::where('id', $id)->first();
+        $bendahara = Bendahara::latest()->first();
 
         $imgLogo = base64_encode(file_get_contents(public_path('assets/img/logo-banten.png')));
         
         $pdf = Pdf::loadView('dashboard.perdin.pdf-perdin.kwitansi', [
             'kwitansi_perdin' => $kwitansi_perdin,
             'imgLogo' => $imgLogo,
+            'bendahara' => $bendahara,
         ]);
         
         $pdf->setPaper(array(0,0,609.4488,935.433), 'portrait');

@@ -26,6 +26,11 @@ class Kegiatan extends Model
         return $this->belongsTo(Seksi::class, 'seksi_id');
     }
 
+    public function kegiatan_subs(): HasMany
+    {
+        return $this->hasMany(KegiatanSub::class, 'kegiatan_id');
+    }
+
     public function ketentuans(): HasMany
     {
         return $this->hasMany(Ketentuan::class, 'kegiatan_id');

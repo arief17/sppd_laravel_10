@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\AlatAngkut;
-use App\Models\BiayaPerdin;
 use App\Models\Bidang;
 use App\Models\Golongan;
 use App\Models\Jabatan;
@@ -420,25 +419,6 @@ class DatabaseSeeder extends Seeder
             'golongan_ii' => 150000,
             'golongan_i' => 150000,
             'author_id' => 1,
-        ]);
-
-        BiayaPerdin::create([
-            'slug' => 'biaya-perdin-1',
-            'jenis_perdin_id' => 1,
-            'dari_id' => 1,
-            'ke_id' => 1,
-            'transport_id' => 1,
-            'harian_id' => 1,
-            'author_id' => 1,
-        ]);
-        BiayaPerdin::create([
-            'slug' => 'biaya-perdin-2',
-            'jenis_perdin_id' => 2,
-            'dari_id' => 2,
-            'ke_id' => 2,
-            'transport_id' => 2,
-            'harian_id' => 2,
-            'author_id' => 2,
         ]);
 
         User::where('id', 1)->update([

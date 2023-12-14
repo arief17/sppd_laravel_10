@@ -316,7 +316,6 @@
 									</div>
 									<div class="user-info px-2">
 										<h4 class="fw-semibold mt-3 mb-0">{{ auth()->user()->username }}</h4>
-										<span class="mb-0 text-muted">{{ auth()->user()->seksi->nama ?? 'Belum ditentukan' }}</span>
 									</div>
 								</div>
 							</div>
@@ -332,7 +331,7 @@
 								
 								<li class="side-item side-item-category">General</li>
 								@can('isAdmin')
-								<li class="slide {{ request()->routeIs('bidang*', 'seksi*', 'kegiatan*', 'pangkat*', 'pegawai*', 'tanda-tangan*', 'alat-angkut*', 'jabatan*', 'ketentuan*', 'user*', 'golongan*', 'jenis-perdin*', 'provinsi*', 'kota-kabupaten*', 'uang-harian*', 'uang-transport*', 'uang-penginapan*', 'biaya-perdin*', 'golongan*', 'jenis-perdin*', 'provinsi*', 'kota-kabupaten*') ? 'is-expanded' : '' }}">
+								<li class="slide {{ request()->routeIs('bidang*', 'seksi*', 'kegiatan*', 'kegiatan-sub*', 'pangkat*', 'pegawai*', 'tanda-tangan*', 'alat-angkut*', 'jabatan*', 'bendahara*', 'ketentuan*', 'user*', 'golongan*', 'jenis-perdin*', 'provinsi*', 'kota-kabupaten*', 'uang-harian*', 'uang-transport*', 'uang-penginapan*', 'golongan*', 'jenis-perdin*', 'provinsi*', 'kota-kabupaten*') ? 'is-expanded' : '' }}">
 									<a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
 										<svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M5 9h14V5H5v4zm2-3.5c.83 0 1.5.67 1.5 1.5S7.83 8.5 7 8.5 5.5 7.83 5.5 7 6.17 5.5 7 5.5zM5 19h14v-4H5v4zm2-3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5z" opacity=".3"></path><path d="M20 13H4c-.55 0-1 .45-1 1v6c0 .55.45 1 1 1h16c.55 0 1-.45 1-1v-6c0-.55-.45-1-1-1zm-1 6H5v-4h14v4zm-12-.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5zM20 3H4c-.55 0-1 .45-1 1v6c0 .55.45 1 1 1h16c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1zm-1 6H5V5h14v4zM7 8.5c.83 0 1.5-.67 1.5-1.5S7.83 5.5 7 5.5 5.5 6.17 5.5 7 6.17 8.5 7 8.5z"></path></svg>
 										<span class="side-menu__label">Master</span><i class="angle fe fe-chevron-down"></i>
@@ -342,12 +341,13 @@
 										<li><a class="slide-item {{ request()->routeIs('bidang.index') ? 'active' : '' }}" href="{{ route('bidang.index') }}">Bidang </a></li>
 										<li><a class="slide-item {{ request()->routeIs('seksi.index') ? 'active' : '' }}" href="{{ route('seksi.index') }}">Seksi </a></li>
 										<li><a class="slide-item {{ request()->routeIs('kegiatan.index') ? 'active' : '' }}" href="{{ route('kegiatan.index') }}">Kegiatan </a></li>
+										<li><a class="slide-item {{ request()->routeIs('kegiatan-sub.index') ? 'active' : '' }}" href="{{ route('kegiatan-sub.index') }}">Sub Kegiatan </a></li>
 										<li><a class="slide-item {{ request()->routeIs('golongan.index') ? 'active' : '' }}" href="{{ route('golongan.index') }}">Golongan</a></li>
 										<li><a class="slide-item {{ request()->routeIs('jenis-perdin.index') ? 'active' : '' }}" href="{{ route('jenis-perdin.index') }}">Jenis Perdin</a></li>
 										<li><a class="slide-item {{ request()->routeIs('provinsi.index') ? 'active' : '' }}" href="{{ route('provinsi.index') }}">Provinsi</a></li>
 										<li><a class="slide-item {{ request()->routeIs('kota-kabupaten.index') ? 'active' : '' }}" href="{{ route('kota-kabupaten.index') }}">Kota/Kabupaten</a></li>
 										
-										<li class="sub-slide {{ request()->routeIs('uang-harian*', 'uang-transport*', 'uang-penginapan*', 'biaya-perdin*') ? 'is-expanded' : '' }}">
+										<li class="sub-slide {{ request()->routeIs('uang-harian*', 'uang-transport*', 'uang-penginapan*') ? 'is-expanded' : '' }}">
 											<a class="slide-item" data-bs-toggle="sub-slide" href="javascript:void(0);">
 												<span class="sub-side-menu__label">Setting Biaya</span><i class="sub-angle fe fe-chevron-down"></i>
 											</a>
@@ -355,7 +355,6 @@
 												<li><a class="sub-side-menu__item {{ request()->routeIs('uang-harian.index') ? 'active' : '' }}" href="{{ route('uang-harian.index') }}">Uang Harian</a></li>
 												<li><a class="sub-side-menu__item {{ request()->routeIs('uang-transport.index') ? 'active' : '' }}" href="{{ route('uang-transport.index') }}">Uang Transport</a></li>
 												<li><a class="sub-side-menu__item {{ request()->routeIs('uang-penginapan.index') ? 'active' : '' }}" href="{{ route('uang-penginapan.index') }}">Uang Penginapan</a></li>
-												<li><a class="sub-side-menu__item {{ request()->routeIs('biaya-perdin.index') ? 'active' : '' }}" href="{{ route('biaya-perdin.index') }}">Biaya Perdin</a></li>
 											</ul>
 										</li>
 										
@@ -364,12 +363,13 @@
 										<li><a class="slide-item {{ request()->routeIs('tanda-tangan.index') ? 'active' : '' }}" href="{{ route('tanda-tangan.index') }}">Tanda Tangan </a></li>
 										<li><a class="slide-item {{ request()->routeIs('alat-angkut.index') ? 'active' : '' }}" href="{{ route('alat-angkut.index') }}">Alat Angkut </a></li>
 										<li><a class="slide-item {{ request()->routeIs('jabatan.index') ? 'active' : '' }}" href="{{ route('jabatan.index') }}">Jabatan </a></li>
+										<li><a class="slide-item {{ request()->routeIs('bendahara.index') ? 'active' : '' }}" href="{{ route('bendahara.index') }}">Bendahara </a></li>
 										<li><a class="slide-item {{ request()->routeIs('ketentuan.index') ? 'active' : '' }}" href="{{ route('ketentuan.index') }}">Ketentuan </a></li>
 										<li><a class="slide-item {{ request()->routeIs('user.index') ? 'active' : '' }}" href="{{ route('user.index') }}">User </a></li>
 									</ul>
 								</li>
 								@endcan
-								<li class="slide {{ request()->routeIs('data-perdin*', 'data-anggaran*', 'laporan-perdin*') ? 'is-expanded' : '' }}">
+								<li class="slide {{ request()->routeIs('data-perdin*', 'laporan-perdin*') ? 'is-expanded' : '' }}">
 									<a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
 										<svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M13 4H6v16h12V9h-5V4zm3 14H8v-2h8v2zm0-6v2H8v-2h8z" opacity=".3"></path><path d="M8 16h8v2H8zm0-4h8v2H8zm6-10H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"></path></svg>
 										<span class="side-menu__label">Perdin</span>
@@ -440,7 +440,6 @@
 											</ul>
 											
 										</li>
-										<li><a class="slide-item {{ request()->routeIs('data-anggaran.index') ? 'active' : '' }}" href="{{ route('data-anggaran.index') }}">Data Anggaran </a></li>
 										<li><a class="slide-item {{ request()->routeIs('laporan-perdin.index') ? 'active' : '' }}" href="{{ route('laporan-perdin.index') }}">Arsip Laporan </a></li>
 									</ul>
 								</li>
@@ -461,8 +460,8 @@
 					<!-- breadcrumb -->
 					<div class="breadcrumb-header justify-content-between">
 						<div class="left-content">
-							<h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">Halo {{ auth()->user()->pegawai->nama ?? 'Super Admin' }}, selamat datang kembali!</h2>
-							<p class="mg-b-0">{{ auth()->user()->seksi->nama ?? 'Seksi belum ditentukan' }}</p>
+							<h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">Halo {{ auth()->user()->username }}, selamat datang kembali!</h2>
+							<p class="mg-b-0">{{ auth()->user()->bidang->nama ?? 'Bidang belum ditentukan' }}</p>
 						</div>
 						<div class="main-dashboard-header-right">
 							

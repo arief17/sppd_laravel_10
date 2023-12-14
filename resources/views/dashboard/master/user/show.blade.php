@@ -31,10 +31,6 @@
 							<td>{{ $user->level_admin }}</td>
 						</tr>
 						<tr>
-							<th style="white-space: nowrap; width: 1%;">Seksi:</th>
-							<td>{{ $user->seksi }}</td>
-						</tr>
-						<tr>
 							<th style="white-space: nowrap; width: 1%;">Bidang:</th>
 							<td>{{ $user->bidang }}</td>
 						</tr>

@@ -45,7 +45,12 @@
 				<p style="text-decoration: underline; font-weight: bold; margin: 0;">SURAT PERINTAH TUGAS</p>
 				<p style="margin: 0;">No. </p>
 			</div>
-			<p style="margin: 10px 0; text-transform: capitalize;">Dengan ini, {!! strtolower($data_perdin->ttdFormated) !!}.</p>
+			<p style="margin: 10px 0; text-transform: capitalize;">
+				@if ($data_perdin->surat_dari)
+						Berdasarkan surat dari {{ $data_perdin->surat_dari }} nomor {{ $data_perdin->nomor_surat }} tanggal {{ $data_perdin->tgl_surat }} perihal {{ $data_perdin->perihal }}. <br>
+				@endif
+				Dengan ini, {{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}.
+			</p>
 			<p>MEMERINTAHKAN:</p>
 		</div>	
 		
@@ -103,18 +108,17 @@
 				</tr>
 				<tr>
 					<td>Tempat</td>
-					<td>: {{ $data_perdin->tujuan->nama }}</td>
+					<td>: {{ $data_perdin->lokasi }}</td>
 				</tr>
 			</tr>
 		</table>
 		
-		<p style="margin: 30px 0;">Demikian Surat Perintah Tugas ini dibuat, untuk dilaksanakan dengan penuh rasa tanggung jawab.</p>
+		<p style="margin: 30px 0; text-indent: 50px">Demikian Surat Perintah Tugas ini dibuat, untuk dilaksanakan dengan penuh rasa tanggung jawab.</p>
 		
 		<div style="float: right;">
 			<div style="text-align: center;">
 				<h4 style="margin-top: 20px; text-transform: uppercase">
 					{!! $data_perdin->ttdFormated !!} <br>
-					provinsi banten
 				</h4>
 				<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" width="100">
 				<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>

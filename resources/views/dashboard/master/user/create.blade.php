@@ -59,16 +59,16 @@
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="seksi_id" class="form-label">Seksi</label>
-						<select name="seksi_id" id="seksi_id" class="form-control form-select @error('seksi_id') is-invalid @enderror">
-							<option value="">Pilih Seksi</option>
-							@foreach ($seksis as $seksi)
-							<option value="{{ $seksi->id }}" @selected(old('seksi_id') == $seksi->id)>
-								{{ $seksi->nama }}
+						<label for="bidang_id" class="form-label">Bidang</label>
+						<select name="bidang_id" id="bidang_id" class="form-control form-select @error('bidang_id') is-invalid @enderror">
+							<option value="">Pilih Bidang</option>
+							@foreach ($bidangs as $bidang)
+							<option value="{{ $bidang->id }}" @selected(old('bidang_id') == $bidang->id)>
+								{{ $bidang->nama }}
 							</option>
 							@endforeach
 						</select>
-						@error('seksi_id')
+						@error('bidang_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>

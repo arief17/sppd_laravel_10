@@ -22,7 +22,7 @@
 								<th style="white-space: nowrap; width: 15%">Surat Dari:</th>
 								<td style="width:35%">{{ $kwitansi_perdin->data_perdin->surat_dari }}</td>
 								<th style="white-space: nowrap; width: 15%">No:</th>
-								<td style="width:35%">{{ $kwitansi_perdin->data_perdin->no_surat }}</td>
+								<td style="width:35%">{{ $kwitansi_perdin->data_perdin->nomor_surat }}</td>
 							</tr>
 							<tr>
 								<th style="white-space: nowrap; width: 15%">Perihal:</th>
@@ -34,7 +34,7 @@
 								<th style="white-space: nowrap; width: 15%">Alat Angkut:</th>
 								<td style="width:35%">{{ $kwitansi_perdin->data_perdin->alat_angkut->nama }}</td>
 								<th style="white-space: nowrap; width: 15%">Kegiatan:</th>
-								<td style="width:35%">{{ $kwitansi_perdin->data_perdin->kegiatan->nama ?? $kwitansi_perdin->kegiatan->nama ?? '' }}</td>
+								<td style="width:35%">{{ $kwitansi_perdin->kegiatan_sub->nama ?? '' }}</td>
 							</tr>
 							<tr>
 								<th style="white-space: nowrap; width: 15%">Tanggal Bayar:</th>
@@ -69,15 +69,15 @@
 								<th style="white-space: nowrap; width: 15%">Kegiatan:</th>
 								<td style="width:35%">
 									<div class="form-group">
-										<select name="kegiatan_id" id="kegiatan_id" class="form-control form-select @error('kegiatan_id') is-invalid @enderror">
+										<select name="kegiatan_sub_id" id="kegiatan_sub_id" class="form-control form-select @error('kegiatan_sub_id') is-invalid @enderror">
 											<option value="">Pilih Kegiatan</option>
-											@foreach ($kegiatans as $kegiatan)
-											<option value="{{ $kegiatan->id }}" @selected(old('kegiatan_id', $kwitansi_perdin->kegiatan_id) == $kegiatan->id)>
-												{{ $kegiatan->nama }}
+											@foreach ($kegiatan_subs as $kegiatan_sub)
+											<option value="{{ $kegiatan_sub->id }}" @selected(old('kegiatan_sub_id', $kwitansi_perdin->kegiatan_sub_id) == $kegiatan_sub->id)>
+												{{ $kegiatan_sub->nama }}
 											</option>
 											@endforeach
 										</select>
-										@error('kegiatan_id')
+										@error('kegiatan_sub_id')
 										<div class="invalid-feedback">
 											{{ $message }}
 										</div>

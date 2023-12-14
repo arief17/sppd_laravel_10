@@ -1,14 +1,14 @@
 <?php
 
 use App\Http\Controllers\AlatAngkutController;
-use App\Http\Controllers\BiayaPerdinController;
+use App\Http\Controllers\BendaharaController;
 use App\Http\Controllers\BidangController;
-use App\Http\Controllers\DataAnggaranController;
 use App\Http\Controllers\DataPerdinController;
 use App\Http\Controllers\GolonganController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\JenisPerdinController;
 use App\Http\Controllers\KegiatanController;
+use App\Http\Controllers\KegiatanSubController;
 use App\Http\Controllers\KetentuanController;
 use App\Http\Controllers\KotaKabupatenController;
 use App\Http\Controllers\KwitansiPerdinController;
@@ -23,8 +23,6 @@ use App\Http\Controllers\SeksiController;
 use App\Http\Controllers\StatusPerdinController;
 use App\Http\Controllers\TandaTanganController;
 use App\Http\Controllers\UangHarianController;
-use App\Http\Controllers\UangKeluarController;
-use App\Http\Controllers\UangMasukController;
 use App\Http\Controllers\UangPenginapanController;
 use App\Http\Controllers\UangTransportController;
 use App\Http\Controllers\UserController;
@@ -55,16 +53,17 @@ Route::resource('/dashboard/login', LoginController::class)->middleware('auth');
 
 Route::middleware('can:isAdmin')->group(function(){
 	Route::resource('/dashboard/alat-angkut', AlatAngkutController::class)->middleware('auth');
-	Route::resource('/dashboard/biaya-perdin', BiayaPerdinController::class)->middleware('auth');
 	Route::resource('/dashboard/bidang', BidangController::class)->middleware('auth');
 	Route::resource('/dashboard/golongan', GolonganController::class)->middleware('auth');
 	Route::resource('/dashboard/jabatan', JabatanController::class)->middleware('auth');
 	Route::resource('/dashboard/jenis-perdin', JenisPerdinController::class)->middleware('auth');
 	Route::resource('/dashboard/kegiatan', KegiatanController::class)->middleware('auth');
+	Route::resource('/dashboard/kegiatan-sub', KegiatanSubController::class)->middleware('auth');
 	Route::resource('/dashboard/ketentuan', KetentuanController::class)->except('create', 'store')->middleware('auth');
 	Route::resource('/dashboard/kota-kabupaten', KotaKabupatenController::class)->middleware('auth');
 	Route::resource('/dashboard/pangkat', PangkatController::class)->middleware('auth');
 	Route::resource('/dashboard/pegawai', PegawaiController::class)->middleware('auth');
+	Route::resource('/dashboard/bendahara', BendaharaController::class)->middleware('auth');
 	Route::resource('/dashboard/provinsi', ProvinsiController::class)->middleware('auth');
 	Route::resource('/dashboard/seksi', SeksiController::class)->middleware('auth');
 	Route::resource('/dashboard/tanda-tangan', TandaTanganController::class)->middleware('auth');
@@ -98,9 +97,6 @@ Route::middleware('can:isOperator')->group(function(){
 		Route::get('/dashboard/status-perdin/kwitansi/pdf/{id}', 'kwitansi')->name('kwitansi-pdf')->middleware('auth');
 	});
 
-	Route::resource('/dashboard/data-anggaran', DataAnggaranController::class)->except('create', 'edit', 'update', 'destroy')->middleware('auth');
-	Route::resource('/dashboard/uang-masuk', UangMasukController::class)->except('index')->middleware('auth');
-	Route::resource('/dashboard/uang-keluar', UangKeluarController::class)->except('index')->middleware('auth');
 	Route::resource('/dashboard/laporan-perdin', LaporanPerdinController::class)->except('create', 'store', 'show', 'destroy')->middleware('auth');
 	Route::resource('/dashboard/kwitansi-perdin', KwitansiPerdinController::class)->except('index', 'create', 'store', 'show', 'destroy')->middleware('auth');
 });

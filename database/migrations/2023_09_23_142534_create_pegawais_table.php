@@ -16,10 +16,11 @@ return new class extends Migration
             $table->string('nama');
             $table->string('slug')->unique();
             $table->string('nip')->unique()->nullable();
-            $table->string('email')->unique();
-            $table->string('no_hp')->unique();
+            $table->string('email')->unique()->nullable();
+            $table->string('no_hp')->unique()->nullable();
             $table->unsignedBigInteger('jabatan_id');
             $table->unsignedBigInteger('seksi_id')->nullable();
+            $table->unsignedBigInteger('bidang_id')->nullable();
             $table->unsignedBigInteger('golongan_id')->nullable();
             $table->unsignedBigInteger('pangkat_id')->nullable();
             $table->boolean('pptk');

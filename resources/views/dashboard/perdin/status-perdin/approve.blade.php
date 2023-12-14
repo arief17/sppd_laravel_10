@@ -7,33 +7,42 @@
 			<div class="modal-body">
 				
 				<div class="py-2">
+					<form action="{{ route('status-perdin.approve', $data_perdin->status_id) }}" method="post" class="d-inline">
+						@method('put')
+						@csrf
+						
+						<div class="row">
+							<div class="col-2">
+								<div class="d-grid gap-2">
+									<button class="btn btn-success">
+										<i class="fa fa-times"></i>
+										Setuju
+									</button>
+								</div>
+							</div>
+							<div class="col-10"></div>
+						</div>
+					</form>
+				</div>
+				
+				<div class="py-2">
 					<form action="{{ route('status-perdin.tolak', $data_perdin->status_id) }}" method="post" class="d-inline">
 						@method('put')
 						@csrf
 						
 						<div class="row">
 							<div class="col-2">
-								<button class="btn btn-danger px-5">
-									<i class="fa fa-times"></i>
-									Tolak
-								</button>
+								<div class="d-grid gap-2">
+									<button class="btn btn-danger">
+										<i class="fa fa-times"></i>
+										Tolak
+									</button>
+								</div>
 							</div>
 							<div class="col-10">
 								<input name="alasan_tolak" type="text" class="form-control" id="alasan_tolak" placeholder="Masukan alasan_tolak" required>
 							</div>
 						</div>
-					</form>
-				</div>
-				
-				<div class="py-2">
-					<form action="{{ route('status-perdin.approve', $data_perdin->status_id) }}" method="post" class="d-inline">
-						@method('put')
-						@csrf
-						
-						<button class="btn btn-success px-5">
-							<i class="fa fa-times"></i>
-							Setuju
-						</button>
 					</form>
 				</div>
 				
