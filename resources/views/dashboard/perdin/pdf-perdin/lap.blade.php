@@ -50,8 +50,8 @@
 				<td colspan="2" style="font-weight: bold;">Dasar Hukum Perjalanan Dinas</td>
 			</tr>
 			<tr>
-				<td colspan="2">
-					Surat Perintah Tugas dari Atas Nama {{ $laporan_perdin->data_perdin->author->bidang->nama }}
+				<td colspan="2" style="text-transform: capitalize">
+					Surat Perintah Tugas dari Atas Nama {{ strtolower($laporan_perdin->data_perdin->author->bidang->nama) }}
 				</td>
 			</tr>
 			<tr>

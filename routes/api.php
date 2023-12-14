@@ -3,6 +3,7 @@
 use App\Http\Controllers\DataPerdinController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StatusPerdinController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,3 +31,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/status-perdin/approve', [StatusPerdinController::class, 'apiApprove']);
     Route::put('/status-perdin/tolak', [StatusPerdinController::class, 'apiTolak']);
 });
+
+Route::get('/get-users', [UserController::class, 'getUser']);

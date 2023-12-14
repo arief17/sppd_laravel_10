@@ -11,6 +11,11 @@ use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
+    public function getUser()
+    {
+        return response()->json(User::all(), 200);
+    }
+
     /**
      * Display a listing of the resource.
      */
