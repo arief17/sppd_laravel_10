@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('laporan_perdins', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->date('tgl_laporan')->nullable();
-            $table->string('nomor_surat')->nullable();
             $table->text('maksud')->nullable();
             $table->text('kegiatan')->nullable();
             $table->text('hasil')->nullable();

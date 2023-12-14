@@ -89,10 +89,11 @@ class LaporanPerdinController extends Controller
             }
             
             $validatedData['author_id'] = auth()->user()->id;
+            unset($validatedData['no_spt']);
             
             LaporanPerdin::where('id', $laporanPerdin->id)->update($validatedData);
             StatusPerdin::where('id', $laporanPerdin->data_perdin->status_id)->update(['lap' => 1]);
-            DataPerdin::where('laporan_perdin_id', $laporanPerdin->id)->update(['no_spt' => $validatedData['no_spt']]);
+            DataPerdin::where('laporan_perdin_id', $laporanPerdin->id)->update(['no_spt' => $request->no_spt]);
             return redirect()->back()->with('success', 'Laporan Perdin berhasil disimpan! Silahkan cetak Laporan!');
         }, 2);
     }
