@@ -32,4 +32,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/status-perdin/tolak', [StatusPerdinController::class, 'apiTolak']);
 });
 
-Route::get('/get-users', [UserController::class, 'getUser']);
+Route::get('/get-user/{user}', [UserController::class, 'getUser']);
