@@ -3,7 +3,7 @@
 @section('container')
 
 <div class="row row-sm">
-	<div class="col-xl-6">
+	<div class="col-xl-12">
 		<div class="card box-shadow-0 ">
 			<div class="card-header">
 				@if(session()->has('failedSave'))

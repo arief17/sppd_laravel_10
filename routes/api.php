@@ -26,6 +26,7 @@ Route::post('/login', [LoginController::class, 'apiLogin']);
 Route::middleware('auth:sanctum')->post('/logout', [LoginController::class, 'apiLogout']);
 
 Route::post('/data-perdin', [DataPerdinController::class, 'apiDataPerdin']);
+Route::get('/data-perdin-not-approve', [DataPerdinController::class, 'apiDataPerdinNotApprove']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::put('/status-perdin/approve', [StatusPerdinController::class, 'apiApprove']);

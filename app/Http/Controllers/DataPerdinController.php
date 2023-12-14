@@ -68,6 +68,13 @@ class DataPerdinController extends Controller
         ]);
     }
     
+    public function apiDataPerdinNotApprove(Request $request)
+    {
+        $data_perdins = DataPerdin::filterByStatus('baru');
+        
+        return response()->json($data_perdins);
+    }
+    
     /**
     * Display a listing of the resource.
     */
