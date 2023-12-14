@@ -9,6 +9,7 @@
 		.gap-t td {
 			padding: 5px;
 			border: 1px solid black;
+			vertical-align: top;
 		}
 		
 		p, td {
@@ -66,112 +67,120 @@
 			<table class="gap-t" style="width: 100%; border-collapse: collapse; border: 1px solid black;">
 				<tr>
 					<td style="text-align: center;">1</td>
-					<td>Pejabat yang berwenang memberikan perintah</td>
-					<td colspan="2" style="text-transform: capitalize;">{{ strtolower($data_perdin->tanda_tangan->pegawai->jabatan->nama) }}</td>
+					<td colspan="2">Pejabat yang berwenang memberikan perintah</td>
+					<td style="border-right: 0;">:</td>
+					<td colspan="2" style="border-left: 0; text-transform: capitalize;">{{ strtolower($data_perdin->tanda_tangan->pegawai->jabatan->nama) }}</td>
 				</tr>
 				<tr>
 					<td style="text-align: center;">2</td>
-					<td>Nama/NIP. Pegawai yang diperintah mengadakan perjalanan dinas</td>
-					<td colspan="2">
+					<td colspan="2">Nama/NIP. Pegawai yang diperintah mengadakan perjalanan dinas</td>
+					<td style="border-right: 0;">:</td>
+					<td colspan="2" style="border-left: 0;">
 						{{ $data_perdin->pegawai_diperintah->nama }} / {{ $data_perdin->pegawai_diperintah->nip }}
 					</td>
 				</tr>
 				<tr>
-					<td style="text-align: center;">3</td>
-					<td style="vertical-align: top;">
-						<ol style="list-style-type: lower-alpha; padding-left: 20px;">
-							<li>Pangkat dan Golongan ruang gaji menurut PP No.6 Tahun 1997</li>
-							<li>Jabatan/Instansi</li>
-							<li>Tingkat Biaya Perjalanan Dinas</li>
-						</ol>
-					</td>
-					<td style="vertical-align: top;" colspan="2">
-						<ol style="list-style-type: lower-alpha; padding-left: 20px;">
-							<li>{{ $data_perdin->pegawai_diperintah->pangkat->nama }}</li><br>
-							<li>{{ $data_perdin->pegawai_diperintah->jabatan->nama }}</li>
-							<li></li>
-						</ol>
-					</td>
+					<td rowspan="3" style="text-align: center;">3</td>
+					<td style="border-right: 0; border-bottom: 0;">a. </td>
+					<td style="border-left: 0; border-bottom: 0;">Pangkat dan Golongan ruang gaji menurut PP No.6 Tahun 1997</td>
+					<td style="border-right: 0; border-bottom: 0;">a. </td>
+					<td colspan="2" style="border-left: 0; border-bottom: 0;">{{ $data_perdin->pegawai_diperintah->pangkat->nama }}</td>
 				</tr>
 				<tr>
+					<td style="border-right: 0; border-bottom: 0; border-top: 0;">b. </td>
+					<td style="border-left: 0; border-bottom: 0; border-top: 0;">Jabatan/Instansi</td>
+					<td style="border-right: 0; border-bottom: 0; border-top: 0;">b. </td>
+					<td colspan="2" style="border-left: 0; border-bottom: 0; border-top: 0;">{{ $data_perdin->pegawai_diperintah->jabatan->nama }}</td>
+				</tr>
+				<tr>
+					<td style="border-right: 0; border-top: 0;">c. </td>
+					<td style="border-left: 0; border-top: 0;">Tingkat Biaya Perjalanan Dinas</td>
+					<td style="border-right: 0; border-top: 0;">c. </td>
+					<td colspan="2" style="border-left: 0; border-top: 0;"></td>
+				</tr>
+
+				<tr>
 					<td style="text-align: center;">4</td>
-					<td>Maksud Perjalanan Dinas</td>
-					<td colspan="2">{{ $data_perdin->maksud }}</td>
+					<td colspan="2">Maksud Perjalanan Dinas</td>
+					<td style="border-right: 0; width: 1%;">:</td>
+					<td colspan="2" style="border-left: 0;">{{ $data_perdin->maksud }}</td>
 				</tr>
 				<tr>
 					<td style="text-align: center;">5</td>
-					<td>Alat angkutan yang di Pergunakan</td>
-					<td colspan="2">{{ $data_perdin->alat_angkut->nama }}</td>
+					<td colspan="2">Alat angkutan yang di Pergunakan</td>
+					<td style="border-right: 0; width: 1%;">:</td>
+					<td colspan="2" style="border-left: 0;">{{ $data_perdin->alat_angkut->nama }}</td>
+				</tr>
+
+				<tr>
+					<td rowspan="2" style="text-align: center;">6</td>
+					<td style="border-right: 0; border-bottom: 0;">a. </td>
+					<td style="border-left: 0; border-bottom: 0;">Tempat Berangkat</td>
+					<td style="border-right: 0; border-bottom: 0;">a. </td>
+					<td colspan="2" style="border-left: 0; border-bottom: 0;">{{ $data_perdin->kedudukan->nama }}</td>
 				</tr>
 				<tr>
-					<td style="text-align: center;">6</td>
-					<td>
-						<ol style="list-style-type: lower-alpha; padding-left: 20px;">
-							<li>Tempat Berangkat</li>
-							<li>Tempat Tujuan</li>
-						</ol>
-					</td>
-					<td colspan="2">
-						<ol style="list-style-type: lower-alpha; padding-left: 20px;">
-							<li>{{ $data_perdin->kedudukan->nama }}</li>
-							<li>{{ $data_perdin->tujuan->nama }}</li>
-						</ol>
-					</td>
+					<td style="border-right: 0; border-top: 0;">b. </td>
+					<td style="border-left: 0; border-top: 0;">Tempat Tujuan</td>
+					<td style="border-right: 0; border-top: 0;">b. </td>
+					<td colspan="2" style="border-left: 0; border-top: 0;">{{ $data_perdin->tujuan->nama }}</td>
+				</tr>
+				
+				<tr>
+					<td rowspan="3" style="text-align: center;">7</td>
+					<td style="border-right: 0; border-bottom: 0;">a. </td>
+					<td style="border-left: 0; border-bottom: 0;">Lamanya Perjalanan Dinas</td>
+					<td style="border-right: 0; border-bottom: 0;">a. </td>
+					<td colspan="2" style="border-left: 0; border-bottom: 0;">{{ $data_perdin->lama }} hari</td>
 				</tr>
 				<tr>
-					<td style="text-align: center;">7</td>
-					<td>
-						<ol style="list-style-type: lower-alpha; padding-left: 20px;">
-							<li>Lamanya Perjalanan Dinas</li>
-							<li>Tanggal Berangkat</li>
-							<li>Tanggal kembali/tiba di tempat baru</li>
-						</ol>
-					</td>
-					<td colspan="2">
-						<ol style="list-style-type: lower-alpha; padding-left: 20px;">
-							<li>{{ $data_perdin->lama }} hari</li>
-							<li>{{ Carbon\Carbon::parse($data_perdin->tgl_berangkat)->isoFormat('D MMMM YYYY') }}</li>
-							<li>{{ Carbon\Carbon::parse($data_perdin->tgl_kembali)->isoFormat('D MMMM YYYY') }}</li>
-						</ol>
-					</td>
+					<td style="border-right: 0; border-bottom: 0; border-top: 0;">b. </td>
+					<td style="border-left: 0; border-bottom: 0; border-top: 0;">Tanggal Berangkat</td>
+					<td style="border-right: 0; border-bottom: 0; border-top: 0;">b. </td>
+					<td colspan="2" style="border-left: 0; border-bottom: 0; border-top: 0;">{{ Carbon\Carbon::parse($data_perdin->tgl_berangkat)->isoFormat('D MMMM YYYY') }}</td>
 				</tr>
+				<tr>
+					<td style="border-right: 0; border-top: 0;">c. </td>
+					<td style="border-left: 0; border-top: 0;">Tanggal kembali/tiba di tempat baru</td>
+					<td style="border-right: 0; border-top: 0;">c. </td>
+					<td colspan="2" style="border-left: 0; border-top: 0;">{{ Carbon\Carbon::parse($data_perdin->tgl_kembali)->isoFormat('D MMMM YYYY') }}</td>
+				</tr>				
+
 				<tr>
 					<td rowspan="{{ $data_perdin->pegawai_mengikuti->count() + 1 }}" style="text-align: center;">8</td>
-					<td style="text-align: center;">Pengikut: Nama</td>
-					<td style="text-align: center;">NIP</td>
+					<td colspan="2" style="text-align: center;">Pengikut: Nama</td>
+					<td colspan="2" style="text-align: center;">NIP</td>
 					<td style="text-align: center;">Keterangan</td>
 				</tr>
 				@foreach ($data_perdin->pegawai_mengikuti as $pengikut)
 				<tr>
-					<td>{{ $pengikut->nama }}</td>
-					<td>{{ $pengikut->nip }}</td>
+					<td colspan="2">{{ $pengikut->nama }}</td>
+					<td colspan="2">{{ $pengikut->nip }}</td>
 					<td></td>
 				</tr>
 				@endforeach
 				
 				<tr>
-					<td style="text-align: center;" rowspan="2">9</td>
-					<td style="border-bottom: 0; padding-bottom: 0;">Pembebanan Anggaran</td>
-					<td style="border-bottom: 0; padding-bottom: 0;" colspan="2"></td>
+					<td rowspan="3" style="text-align: center;">9</td>
+					<td colspan="2" style="border-bottom: 0; padding-bottom: 0;">Pembebanan Anggaran</td>
+					<td colspan="4" style="border-bottom: 0; padding-bottom: 0;"></td>
 				</tr>
 				<tr>
-					<td style="border-top: 0; vertical-align: top;">
-						<ol style="list-style-type: lower-alpha; padding-left: 20px;">
-							<li>Instansi</li> <br>
-							<li>Mata Anggaran</li>
-						</ol>
-					</td>
-					<td style="border-top: 0; vertical-align: top;" colspan="2">
-						<ol style="list-style-type: lower-alpha; padding-left: 20px;">
-							<li>Dinas Pekerjaan Umum dan Penataan Ruang</li>
-							<li>5.1.02.04.01.0003</li>
-						</ol>
-					</td>
+					<td style="border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top;">a. </td>
+					<td style="border-left: 0; border-top: 0; border-bottom: 0; vertical-align: top;">Instansi</td>
+					<td style="border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top;">a. </td>
+					<td colspan="2" style="border-left: 0; border-top: 0; border-bottom: 0; vertical-align: top;">Dinas Pekerjaan Umum dan Penataan Ruang</td>
+				</tr>
+				<tr>
+					<td style="border-right: 0; border-top: 0; vertical-align: top;">b. </td>
+					<td style="border-left: 0; border-top: 0; vertical-align: top;">Mata Anggaran</td>
+					<td style="border-right: 0; border-top: 0; vertical-align: top;">b. </td>
+					<td colspan="2" style="border-left: 0; border-top: 0; vertical-align: top;">5.1.02.04.01.0003</td>
 				</tr>
 				<tr>
 					<td style="text-align: center;">10</td>
-					<td>Keterangan Lain-lain</td>
-					<td colspan="2"></td>
+					<td colspan="2">Keterangan Lain-lain</td>
+					<td colspan="4"></td>
 				</tr>
 			</table>
 		</div>

@@ -51,16 +51,16 @@
 			</tr>
 			<tr>
 				<td colspan="2" style="text-transform: capitalize">
-					Surat Perintah Tugas dari Atas Nama {{ strtolower($laporan_perdin->data_perdin->author->bidang->nama) }}
+					Surat Perintah Tugas dari Atas Nama {{ strtolower($laporan_perdin->data_perdin->tanda_tangan->pegawai->jabatan->nama) }}
 				</td>
 			</tr>
 			<tr>
 				<td style="width: 1%;">Nomor</td>
-				<td>: {{ $laporan_perdin->data_perdin->nomor_surat }}</td>
+				<td>: {{ $laporan_perdin->data_perdin->no_spt }}</td>
 			</tr>
 			<tr>
 				<td style="width: 1%;">Tanggal</td>
-				<td>: {{ $laporan_perdin->data_perdin->tgl_surat }}</td>
+				<td>: {{ $laporan_perdin->data_perdin->tgl_berangkat }}</td>
 			</tr>
 			<tr>
 				<td rowspan="2" style="width: 1%; font-weight: bold;">B. </td>
