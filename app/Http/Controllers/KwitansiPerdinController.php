@@ -93,7 +93,7 @@ class KwitansiPerdinController extends Controller
                 ]);
             }
             
-            return redirect()->route('data-perdin.index', 'dibayar')->with('success', 'Kwitansi Perdin berhasil disimpan! Silahkan cetak Kwitansi!');
+            return redirect()->route('data-perdin.index', 'sudah_bayar')->with('success', 'Kwitansi Perdin berhasil disimpan! Silahkan cetak Kwitansi!');
         }, 2);
     }
     

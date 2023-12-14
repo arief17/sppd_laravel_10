@@ -50,7 +50,7 @@
 	border-top: 3px solid;
 	border-bottom: 1px solid;
 	padding: 1px 0;
-	margin: 10px 0;
+	margin: 10px 0 5px 0;
 	">
 	
 	<div style="text-align: center; margin: 0 0 5px 0;">
@@ -149,7 +149,7 @@
 				<span style="padding: 0 20px 0 50px;">Rp.</span>
 				{{ number_format($kwitansi_perdin->totalSemua, 2, ',', '.') }}
 			</td>
-			<td colspan="3" style="padding-top: 50px;"></td>
+			<td colspan="3" style="padding-top: 40px;"></td>
 		</tr>
 		<tr>
 			<td colspan="3"></td>
@@ -175,7 +175,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td style="padding-top: 50px;" colspan="3"></td>
+			<td style="padding-top: 40px;" colspan="3"></td>
 		</tr>
 		<tr>
 			<td style="text-align: center;">
@@ -213,7 +213,7 @@
 	border-top: 3px solid;
 	border-bottom: 1px solid;
 	padding: 1px 0;
-	margin: 10px 0;
+	margin: 10px 0 5px 0;
 	">
 	
 	<div style="text-align: center; margin: 0 0 5px 0;">
@@ -312,7 +312,7 @@
 				<span style="padding: 0 20px 0 50px;">Rp.</span>
 				{{ number_format($kwitansi_perdin->totalSemua, 2, ',', '.') }}
 			</td>
-			<td colspan="3" style="padding-top: 50px;"></td>
+			<td colspan="3" style="padding-top: 40px;"></td>
 		</tr>
 		<tr>
 			<td colspan="3"></td>
@@ -338,7 +338,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td style="padding-top: 50px;" colspan="3"></td>
+			<td style="padding-top: 40px;" colspan="3"></td>
 		</tr>
 		<tr>
 			<td style="text-align: center;">
