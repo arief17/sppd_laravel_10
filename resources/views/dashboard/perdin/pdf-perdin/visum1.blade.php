@@ -66,13 +66,13 @@
 		<div style="border: 1px solid black; padding: 2px;">
 			<table class="gap-t" style="width: 100%; border-collapse: collapse; border: 1px solid black;">
 				<tr>
-					<td style="text-align: center;">1</td>
+					<td style="text-align: center; width: 1%">1</td>
 					<td colspan="2">Pejabat yang berwenang memberikan perintah</td>
 					<td style="border-right: 0;">:</td>
 					<td colspan="2" style="border-left: 0; text-transform: capitalize;">{{ strtolower($data_perdin->tanda_tangan->pegawai->jabatan->nama) }}</td>
 				</tr>
 				<tr>
-					<td style="text-align: center;">2</td>
+					<td style="text-align: center; width: 1%">2</td>
 					<td colspan="2">Nama/NIP. Pegawai yang diperintah mengadakan perjalanan dinas</td>
 					<td style="border-right: 0;">:</td>
 					<td colspan="2" style="border-left: 0;">
@@ -80,7 +80,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td rowspan="3" style="text-align: center;">3</td>
+					<td rowspan="3" style="text-align: center; width: 1%">3</td>
 					<td style="border-right: 0; border-bottom: 0;">a. </td>
 					<td style="border-left: 0; border-bottom: 0;">Pangkat dan Golongan ruang gaji menurut PP No.6 Tahun 1997</td>
 					<td style="border-right: 0; border-bottom: 0;">a. </td>
@@ -100,20 +100,20 @@
 				</tr>
 
 				<tr>
-					<td style="text-align: center;">4</td>
+					<td style="text-align: center; width: 1%">4</td>
 					<td colspan="2">Maksud Perjalanan Dinas</td>
 					<td style="border-right: 0; width: 1%;">:</td>
 					<td colspan="2" style="border-left: 0;">{{ $data_perdin->maksud }}</td>
 				</tr>
 				<tr>
-					<td style="text-align: center;">5</td>
+					<td style="text-align: center; width: 1%">5</td>
 					<td colspan="2">Alat angkutan yang di Pergunakan</td>
 					<td style="border-right: 0; width: 1%;">:</td>
 					<td colspan="2" style="border-left: 0;">{{ $data_perdin->alat_angkut->nama }}</td>
 				</tr>
 
 				<tr>
-					<td rowspan="2" style="text-align: center;">6</td>
+					<td rowspan="2" style="text-align: center; width: 1%">6</td>
 					<td style="border-right: 0; border-bottom: 0;">a. </td>
 					<td style="border-left: 0; border-bottom: 0;">Tempat Berangkat</td>
 					<td style="border-right: 0; border-bottom: 0;">a. </td>
@@ -127,7 +127,7 @@
 				</tr>
 				
 				<tr>
-					<td rowspan="3" style="text-align: center;">7</td>
+					<td rowspan="3" style="text-align: center; width: 1%">7</td>
 					<td style="border-right: 0; border-bottom: 0;">a. </td>
 					<td style="border-left: 0; border-bottom: 0;">Lamanya Perjalanan Dinas</td>
 					<td style="border-right: 0; border-bottom: 0;">a. </td>
@@ -147,7 +147,7 @@
 				</tr>				
 
 				<tr>
-					<td rowspan="{{ $data_perdin->pegawai_mengikuti->count() + 1 }}" style="text-align: center;">8</td>
+					<td rowspan="{{ $data_perdin->pegawai_mengikuti->count() + 1 }}" style="text-align: center; width: 1%">8</td>
 					<td colspan="2" style="text-align: center;">Pengikut: Nama</td>
 					<td colspan="2" style="text-align: center;">NIP</td>
 					<td style="text-align: center;">Keterangan</td>
@@ -161,7 +161,7 @@
 				@endforeach
 				
 				<tr>
-					<td rowspan="3" style="text-align: center;">9</td>
+					<td rowspan="3" style="text-align: center; width: 1%">9</td>
 					<td colspan="2" style="border-bottom: 0; padding-bottom: 0;">Pembebanan Anggaran</td>
 					<td colspan="4" style="border-bottom: 0; padding-bottom: 0;"></td>
 				</tr>
@@ -178,7 +178,7 @@
 					<td colspan="2" style="border-left: 0; border-top: 0; vertical-align: top;">5.1.02.04.01.0003</td>
 				</tr>
 				<tr>
-					<td style="text-align: center;">10</td>
+					<td style="text-align: center; width: 1%">10</td>
 					<td colspan="2">Keterangan Lain-lain</td>
 					<td colspan="4"></td>
 				</tr>
