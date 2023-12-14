@@ -68,17 +68,27 @@ class DataPerdinController extends Controller
     public function apiDataPerdinNotApprove(Request $request)
     {
         $data_perdins = DataPerdin::latest()
-        ->whereHas('status', function($query) {
-            $query->whereNull('approve');
-        })
-        ->without('author', 'tanda_tangan', 'pegawai', 'alat_angkut', 'jenis_perdin', 'kedudukan', 'tujuan', 'pegawai_diperintah', 'status')
-        ->get();
-        
+            ->whereHas('status', function($query) {
+                $query->whereNull('approve');
+            })
+            ->without('author', 'alat_angkut', 'jenis_perdin', 'kedudukan', 'tujuan', 'status')
+            ->get()
+            ->map(function ($perdin) {
+                return [
+                    'id' => $perdin->id,
+                    'slug' => $perdin->slug,
+                    'nomor_surat' => $perdin->nomor_surat,
+                    'tgl_berangkat' => $perdin->tgl_berangkat,
+                    'tgl_kembali' => $perdin->tgl_kembali,
+                    'jumlah_pegawai' => $perdin->jumlah_pegawai,
+                    'tanda_tangan' => $perdin->tanda_tangan->pegawai->bidang->nama ?? $perdin->tanda_tangan->pegawai->seksi->nama,
+                    'pegawai_diperintah' => $perdin->pegawai_diperintah->nama ?? null,
+                ];
+            });
+    
         return response()->json($data_perdins);
     }
-    
-    
-    
+        
     /**
     * Display a listing of the resource.
     */
