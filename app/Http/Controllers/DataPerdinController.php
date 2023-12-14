@@ -298,31 +298,6 @@ class DataPerdinController extends Controller
             $selectedPegawaiIds = explode(',', $request->pegawai_mengikuti_id);
             $validatedData['jumlah_pegawai'] = count($selectedPegawaiIds);
             
-            $oldPegawaiIds = $dataPerdin->pegawai_mengikuti()->pluck('id')->toArray();
-            $updatedPegawaiIds = explode(',', $request->pegawai_mengikuti_id);
-            
-            $removedPegawaiIds = array_diff($oldPegawaiIds, $updatedPegawaiIds);
-            
-            $allKetentuanIds = collect([$dataPerdin->pegawai_diperintah->ketentuan_id])->merge($updatedPegawaiIds)->unique();
-            
-            $ketentuans = Ketentuan::whereIn('id', $allKetentuanIds)->get();
-            $pegawaiBatasMaksimal = [];
-            
-            foreach ($ketentuans as $ketentuan) {
-                if ($ketentuan->jumlah_perdin >= $ketentuan->max_perdin) {
-                    $pegawaiBatasMaksimal[] = $ketentuan->pegawai->nama;
-                }
-            }
-            
-            if (!empty($pegawaiBatasMaksimal)) {
-                return redirect()->back()->withInput()->with('failedSave', implode(', ', $pegawaiBatasMaksimal) . ' telah mencapai batas maksimal perdin!');
-            }
-            
-            Ketentuan::whereIn('id', $allKetentuanIds)->increment('jumlah_perdin');
-            
-            Ketentuan::whereIn('id', Ketentuan::whereIn('id', $dataPerdin->pegawai_mengikuti()->whereIn('id', $removedPegawaiIds)->pluck('ketentuan_id'))->get()->pluck('id'))
-            ->decrement('jumlah_perdin');
-            
             $dataPerdin->update($validatedData);
             $dataPerdin->pegawai_mengikuti()->sync($selectedPegawaiIds);
             
@@ -336,13 +311,7 @@ class DataPerdinController extends Controller
     public function destroy(DataPerdin $dataPerdin)
     {
         return DB::transaction(function () use ($dataPerdin) {
-            $pegawaiIds = $dataPerdin->pegawai_mengikuti()->pluck('id')->toArray();
-            
-            Ketentuan::whereIn('id', Ketentuan::whereIn('id', $pegawaiIds)->pluck('ketentuan_id')->get())
-            ->decrement('jumlah_perdin');
-            
             $dataPerdin->delete();
-            
             return redirect()->route('data-perdin.index', 'baru')->with('success', 'Data Perdin berhasil dihapus!');
         }, 2);
     }
