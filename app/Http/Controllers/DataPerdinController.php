@@ -89,14 +89,8 @@ class DataPerdinController extends Controller
             case 'tolak':
                 $queryConditions = ['approve' => 0];
                 break;
-            case 'no-laporan':
-                $queryConditions = ['approve' => 1, 'lap' => null];
-                break;
-            case 'belum-bayar':
-                $queryConditions = ['approve' => 1, 'lap' => 1];
-                break;
-            case 'sudah-bayar':
-                $queryConditions = ['approve' => 1, 'lap' => 1, 'kwitansi' => 1];
+            case 'terima':
+                $queryConditions = ['approve' => 1];
                 break;
             default:
                 $queryConditions = null;
