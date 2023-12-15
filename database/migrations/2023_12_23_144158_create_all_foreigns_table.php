@@ -111,7 +111,7 @@ return new class extends Migration
         });
         
         Schema::table('kwitansi_perdins', function (Blueprint $table) {
-            $table->foreign('kegiatan_id')->references('id')->on('kegiatans');
+            $table->foreign('kegiatan_sub_id')->references('id')->on('kegiatan_subs');
             $table->foreign('pptk_id')->references('id')->on('pegawais');
             $table->foreign('author_id')->references('id')->on('users');
         });

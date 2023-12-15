@@ -422,10 +422,10 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::where('id', 1)->update([
-            'seksi_id' => 1
+            'bidang_id' => 1
         ]);
         User::where('id', 2)->update([
-            'seksi_id' => 2
+            'bidang_id' => 2
         ]);
     }
 }
