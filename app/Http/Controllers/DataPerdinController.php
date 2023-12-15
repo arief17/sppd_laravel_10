@@ -60,8 +60,10 @@ class DataPerdinController extends Controller
     private function getDataPerdins($queryConditions)
     {
         return DataPerdin::latest()
-            ->whereHas('status', function ($query) use ($queryConditions) {
-                $query->where($queryConditions);
+            ->when($queryConditions, function ($query) use ($queryConditions) {
+                return $query->whereHas('status', function ($query) use ($queryConditions) {
+                    $query->where($queryConditions);
+                });
             })
             ->get()
             ->map(function ($data_perdin) {
@@ -76,7 +78,7 @@ class DataPerdinController extends Controller
             });
     }
     
-    public function apiDataPerdins(Request $request, $status)
+    public function apiDataPerdins(Request $request, $status = null)
     {
         $queryConditions = [];
     
@@ -97,7 +99,8 @@ class DataPerdinController extends Controller
                 $queryConditions = ['approve' => 1, 'lap' => 1, 'kwitansi' => 1];
                 break;
             default:
-                return response()->json(['message' => 'Invalid status'], 400);
+                $queryConditions = null;
+                break;
         }
     
         $data_perdins = $this->getDataPerdins($queryConditions);
