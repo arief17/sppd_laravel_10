@@ -26,7 +26,12 @@ Route::post('/login', [LoginController::class, 'apiLogin']);
 Route::middleware('auth:sanctum')->post('/logout', [LoginController::class, 'apiLogout']);
 
 Route::post('/data-perdin', [DataPerdinController::class, 'apiDataPerdin']);
-Route::get('/data-perdin-not-approve', [DataPerdinController::class, 'apiDataPerdinNotApprove']);
+
+Route::get('/data-perdin-new', [DataPerdinController::class, 'apiDataPerdinNew']);
+Route::get('/data-perdin-tolak', [DataPerdinController::class, 'apiDataPerdinTolak']);
+Route::get('/data-perdin-no-laporan', [DataPerdinController::class, 'apiDataPerdinNoLaporan']);
+Route::get('/data-perdin-belum-bayar', [DataPerdinController::class, 'apiDataPerdinBelumBayar']);
+Route::get('/data-perdin-sudah-bayar', [DataPerdinController::class, 'apiDataPerdinSudahBayar']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::put('/status-perdin/approve', [StatusPerdinController::class, 'apiApprove']);

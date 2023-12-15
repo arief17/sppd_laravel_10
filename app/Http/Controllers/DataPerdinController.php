@@ -65,30 +65,55 @@ class DataPerdinController extends Controller
         return response()->json($data_perdins);
     }
     
-    public function apiDataPerdinNotApprove(Request $request)
+    private function getDataPerdins($queryConditions)
     {
-        $data_perdins = DataPerdin::latest()
-            ->whereHas('status', function($query) {
-                $query->whereNull('approve');
+        return DataPerdin::latest()
+            ->with(['status', 'pegawai_diperintah', 'pegawai_mengikuti', 'tujuan'])
+            ->whereHas('status', function ($query) use ($queryConditions) {
+                $query->where($queryConditions);
             })
-            ->without('author', 'alat_angkut', 'jenis_perdin', 'kedudukan', 'tujuan', 'status')
-            ->get()
-            ->map(function ($perdin) {
+            ->get(['id', 'tgl_berangkat', 'lama',])
+            ->map(function ($data_perdin) {
                 return [
-                    'id' => $perdin->id,
-                    'slug' => $perdin->slug,
-                    'nomor_surat' => $perdin->nomor_surat,
-                    'tgl_berangkat' => $perdin->tgl_berangkat,
-                    'tgl_kembali' => $perdin->tgl_kembali,
-                    'jumlah_pegawai' => $perdin->jumlah_pegawai,
-                    'tanda_tangan' => $perdin->tanda_tangan->pegawai->nama,
-                    'pegawai_diperintah' => $perdin->pegawai_diperintah->nama,
+                    'id' => $data_perdin->id,
+                    'pegawai_diperintah' => $data_perdin->pegawai_diperintah->nama,
+                    'pegawai_mengikuti' => $data_perdin->pegawai_mengikuti->pluck('nama'),
+                    'tujuan' => $data_perdin->tujuan->nama,
+                    'tgl_berangkat' => $data_perdin->tgl_berangkat,
+                    'lama' => $data_perdin->lama,
                 ];
             });
-    
+    }
+
+    public function apiDataPerdinNew(Request $request)
+    {
+        $data_perdins = $this->getDataPerdins(['approve' => null]);
         return response()->json($data_perdins);
     }
-        
+    
+    public function apiDataPerdinTolak(Request $request)
+    {
+        $data_perdins = $this->getDataPerdins(['approve' => 0]);
+        return response()->json($data_perdins);
+    }
+    
+    public function apiDataPerdinNoLaporan(Request $request)
+    {
+        $data_perdins = $this->getDataPerdins(['approve' => 1, 'lap' => null]);
+        return response()->json($data_perdins);
+    }
+    
+    public function apiDataPerdinBelumBayar(Request $request)
+    {
+        $data_perdins = $this->getDataPerdins(['approve' => 1, 'lap' => 1]);
+        return response()->json($data_perdins);
+    }
+    
+    public function apiDataPerdinSudahBayar(Request $request)
+    {
+        $data_perdins = $this->getDataPerdins(['approve' => 1, 'lap' => 1, 'kwitansi' => 1]);
+        return response()->json($data_perdins);
+    }
     /**
     * Display a listing of the resource.
     */
