@@ -66,11 +66,11 @@
 								</td>
 							</tr>
 							<tr>
-								<th style="white-space: nowrap; width: 15%">Kegiatan:</th>
+								<th style="white-space: nowrap; width: 15%">Sub Kegiatan:</th>
 								<td style="width:35%">
 									<div class="form-group">
 										<select name="kegiatan_sub_id" id="kegiatan_sub_id" class="form-control form-select @error('kegiatan_sub_id') is-invalid @enderror">
-											<option value="">Pilih Kegiatan</option>
+											<option value="">Pilih Sub Kegiatan</option>
 											@foreach ($kegiatan_subs as $kegiatan_sub)
 											<option value="{{ $kegiatan_sub->id }}" @selected(old('kegiatan_sub_id', $kwitansi_perdin->kegiatan_sub_id) == $kegiatan_sub->id)>
 												{{ $kegiatan_sub->nama }}

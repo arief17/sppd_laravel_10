@@ -46,11 +46,13 @@
 				<p style="margin: 0;">No. </p>
 			</div>
 		</div>
-		<p style="margin: 10px 0; text-transform: capitalize; text-indent: 50px;">
+		<p style="margin: 10px 0; text-indent: 50px;">
 			@if ($data_perdin->surat_dari)
-			Berdasarkan surat dari {{ $data_perdin->surat_dari }} nomor {{ $data_perdin->nomor_surat }} tanggal {{ $data_perdin->tgl_surat }} perihal {{ $data_perdin->perihal }}. 
+			<span style="text-transform: capitalize">
+				Berdasarkan surat dari {{ $data_perdin->surat_dari }} nomor {{ $data_perdin->nomor_surat }} tanggal {{ Carbon\Carbon::parse($data_perdin->tgl_surat)->isoFormat('D MMMM YYYY') }} perihal {{ $data_perdin->perihal }}. 
+			</span>
 			@endif
-			Dengan ini, {{ strtolower($data_perdin->tanda_tangan->pegawai->jabatan->nama) }}.
+			Dengan ini, <span style="text-transform: capitalize">{{ strtolower($data_perdin->tanda_tangan->pegawai->jabatan->nama) }}.</span>
 		</p>
 		<p style="text-align: center;">MEMERINTAHKAN:</p>
 		

@@ -24,10 +24,10 @@
 					</tr>
 					@endif
 					<tr>
-						<td colspan="2" class="fw-bold">A. Dasar Hukum Perjalanan Dinas</td>
+						<td colspan="2" class="fw-bold">A. Dasar Perjalanan Dinas</td>
 					</tr>
 					<tr>
-						<td class="align-middle">Nomor</td>
+						<td class="align-middle">Nomor SPT</td>
 						<td>
 							<input name="no_spt" value="{{ old('no_spt', $laporan_perdin->no_spt) }}" type="text" class="form-control @error('no_spt') is-invalid @enderror" id="no_spt" placeholder="Masukan no_spt">
 							@error('no_spt')
@@ -36,6 +36,10 @@
 							</div>
 							@enderror
 						</td>
+					</tr>
+					<tr>
+						<td class="align-middle">Tanggal SPT</td>
+						<td>{{ Carbon\Carbon::parse($laporan_perdin->data_perdin->tgl_berangkat)->isoFormat('D MMMM YYYY') }}</td>
 					</tr>
 					<tr>
 						<td class="align-middle">Tanggal Laporan</td>
@@ -47,10 +51,6 @@
 							</div>
 							@enderror
 						</td>
-					</tr>
-					<tr>
-						<td class="align-middle">Tanggal</td>
-						<td>{{ $laporan_perdin->data_perdin->tgl_surat }}</td>
 					</tr>
 					<tr><td></td><td></td></tr>
 				</table>
@@ -65,7 +65,7 @@
 					</tr>
 					<tr>
 						<td>
-							<textarea name="maksud" class="form-control @error('maksud') is-invalid @enderror" placeholder="Masukan Maksud" rows="3">{{ old('maksud', $laporan_perdin->maksud) }}</textarea>
+							<textarea name="maksud" class="form-control @error('maksud') is-invalid @enderror" rows="3">{{ old('maksud', $laporan_perdin->maksud) }}</textarea>
 							@error('maksud')
 							<div class="invalid-feedback">
 								{{ $message }}
@@ -86,7 +86,7 @@
 					</tr>
 					<tr>
 						<td>
-							<textarea name="kegiatan" class="form-control @error('kegiatan') is-invalid @enderror" placeholder="Masukan Maksud" rows="3">{{ old('kegiatan', $laporan_perdin->kegiatan) }}</textarea>
+							<textarea name="kegiatan" class="form-control @error('kegiatan') is-invalid @enderror" rows="3">{{ old('kegiatan', $laporan_perdin->kegiatan) }}</textarea>
 							@error('kegiatan')
 							<div class="invalid-feedback">
 								{{ $message }}
@@ -107,7 +107,7 @@
 					</tr>
 					<tr>
 						<td>
-							<textarea name="hasil" class="form-control @error('hasil') is-invalid @enderror" placeholder="Masukan Maksud" rows="3">{{ old('hasil', $laporan_perdin->hasil) }}</textarea>
+							<textarea name="hasil" class="form-control @error('hasil') is-invalid @enderror" rows="3">{{ old('hasil', $laporan_perdin->hasil) }}</textarea>
 							@error('hasil')
 							<div class="invalid-feedback">
 								{{ $message }}
@@ -128,7 +128,7 @@
 					</tr>
 					<tr>
 						<td>
-							<textarea name="kesimpulan" class="form-control @error('kesimpulan') is-invalid @enderror" placeholder="Masukan Maksud" rows="3">{{ old('kesimpulan', $laporan_perdin->kesimpulan) }}</textarea>
+							<textarea name="kesimpulan" class="form-control @error('kesimpulan') is-invalid @enderror" rows="3">{{ old('kesimpulan', $laporan_perdin->kesimpulan) }}</textarea>
 							@error('kesimpulan')
 							<div class="invalid-feedback">
 								{{ $message }}

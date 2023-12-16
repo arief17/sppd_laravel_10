@@ -175,7 +175,7 @@
 					<td style="width: 1%; border-right: 0; border-top: 0; vertical-align: top;">b. </td>
 					<td style="border-left: 0; border-top: 0; vertical-align: top;">Mata Anggaran</td>
 					<td style="width: 1%; border-right: 0; border-top: 0; vertical-align: top;">b. </td>
-					<td colspan="2" style="border-left: 0; border-top: 0; vertical-align: top;">{{ $data_perdin->kwitansi_perdin->no_rek ?? '' }}</td>
+					<td colspan="2" style="border-left: 0; border-top: 0; vertical-align: top;">{{ $data_perdin->jenis_perdin->no_rek }}</td>
 				</tr>
 				<tr>
 					<td style="text-align: center; width: 1%">10</td>

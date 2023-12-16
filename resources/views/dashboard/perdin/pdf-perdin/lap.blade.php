@@ -47,11 +47,11 @@
 			</tr>
 			<tr>
 				<td rowspan="4" style="width: 1%; font-weight: bold;">A. </td>
-				<td colspan="2" style="font-weight: bold;">Dasar Hukum Perjalanan Dinas</td>
+				<td colspan="2" style="font-weight: bold;">Dasar Perjalanan Dinas</td>
 			</tr>
 			<tr>
 				<td colspan="2" style="text-transform: capitalize">
-					Surat Perintah Tugas dari Atas Nama {{ strtolower($laporan_perdin->data_perdin->tanda_tangan->pegawai->jabatan->nama) }}
+					Surat Perintah Tugas dari {{ strtolower($laporan_perdin->data_perdin->tanda_tangan->pegawai->jabatan->nama) }}
 				</td>
 			</tr>
 			<tr>
@@ -60,7 +60,7 @@
 			</tr>
 			<tr>
 				<td style="width: 1%;">Tanggal</td>
-				<td>: {{ $laporan_perdin->data_perdin->tgl_berangkat }}</td>
+				<td>: {{ Carbon\Carbon::parse($laporan_perdin->data_perdin->tgl_berangkat)->isoFormat('D MMMM YYYY') }}</td>
 			</tr>
 			<tr>
 				<td rowspan="2" style="width: 1%; font-weight: bold;">B. </td>
@@ -110,7 +110,7 @@
 			</tr>
 			<tr>
 				<td colspan="3">
-					Demikian laporan hasil perjalanan, atas perhatiannya diucapkan terima kasih.
+					Demikian laporan hasil perjalanan dinas, atas perhatiannya diucapkan terima kasih.
 				</td>
 			</tr>
 		</table>
@@ -121,14 +121,22 @@
 		</p>
 		
 		<table style="width: 100%;">
+			<tr>
+				<td style="width: 1%;">1.</td>
+				<td>
+					{{ $laporan_perdin->data_perdin->pegawai_diperintah->nama }} <br> 
+					NIP.{{ $laporan_perdin->data_perdin->pegawai_diperintah->nip }}
+				</td>
+				<td style="vertical-align: bottom;">1........................................</td>
+			</tr>
 			@foreach ($laporan_perdin->data_perdin->pegawai_mengikuti as $pegawai)
 			<tr>
-				<td style="width: 1%;">{{ $loop->iteration }}.</td>
+				<td style="width: 1%;">{{ $loop->iteration + 1 }}.</td>
 				<td>
 					{{ $pegawai->nama }} <br> 
 					NIP.{{ $pegawai->nip }}
 				</td>
-				<td style="vertical-align: bottom;">{{ $loop->iteration }}........................................</td>
+				<td style="vertical-align: bottom;">{{ $loop->iteration + 1 }}........................................</td>
 			</tr>
 			@endforeach
 		</table>

@@ -44,16 +44,28 @@ class DataPerdinController extends Controller
         return response()->json($tujuan);
     }
     
-    public function getPegawaiInfo($kotaKabupatenId, $pegawaiId)
+    public function getPegawaiInfo($tujuanId, $jenisPerdinId, $dalamLuar, $pegawaiId)
     {
         $pegawai = Pegawai::find($pegawaiId);
         $pegawaiGolongan = str_replace('-', '_', $pegawai->golongan->slug);
-        $uangHarian = UangHarian::where('wilayah_id', $kotaKabupatenId)->value($pegawaiGolongan);
+
+        $wilayah_type = '';
+        $jenis_perdin = JenisPerdin::find($jenisPerdinId);
+        if ($jenis_perdin->slug === 'perjalanan-dinas-dalam-kota') {
+            $wilayah_type = 'App\Models\KotaKabupaten';
+        } elseif ($jenis_perdin->slug === 'perjalanan-dinas-biasa') {
+            if ($dalamLuar === 'Dalam Provinsi') {
+                $wilayah_type = 'App\Models\KotaKabupaten';
+            } elseif ($dalamLuar === 'Luar Provinsi') {
+                $wilayah_type = 'App\Models\Provinsi';
+            }
+        }
+        $uangHarian = UangHarian::where('wilayah_id', $tujuanId)->where('wilayah_type', $wilayah_type)->value($pegawaiGolongan);
         
         return response()->json(['data_pegawai' => [
             'nip' => $pegawai->nip,
             'jabatan' => $pegawai->jabatan->nama,
-            'uang_harian'=> $uangHarian,
+            'uang_harian'=> $uangHarian ?? 0,
             ]
         ]);
     }
@@ -205,7 +217,6 @@ class DataPerdinController extends Controller
                 $uangTransport = UangTransport::where('wilayah_id', $validatedData['tujuan_id'])->where('wilayah_type', $validatedData['tujuan_type'])->value($pegawaiGolongan);
                 $uangTiket = UangTransport::where('wilayah_id', $validatedData['tujuan_id'])->where('wilayah_type', $validatedData['tujuan_type'])->value('harga_tiket');
                 $uangPenginapan = UangPenginapan::where('wilayah_id', $validatedData['tujuan_id'])->where('wilayah_type', $validatedData['tujuan_type'])->value($pegawaiGolongan);
-                
                 $kwitansi_perdin->pegawais()->attach($pegawaiId, [
                     'uang_harian' => $uangHarian ?? 0,
                     'uang_transport' => $uangTransport ?? 0,

@@ -327,10 +327,12 @@ function addPegawaiDiperintah() {
 	const selectedOption = pegawaiDiperintahSelect.find(':selected');
 	const pegawaiId = selectedOption.val();
 	const pegawaiNama = selectedOption.text();
-	const kotaKabupatenId = $('#tujuan_id').val();
+	const tujuanId = $('#tujuan_id').val();
+	let jenisPerdinId = $('#jenis_perdin_id').val();
+	let dalamLuar = $('#dalamLuar').val();
 	
 	if (!selectedPegawai.find(pegawai => pegawai.id === pegawaiId)) {
-		getPegawaiInfo(kotaKabupatenId, pegawaiId, function(dataPegawai) {
+		getPegawaiInfo(tujuanId, jenisPerdinId, dalamLuar ? dalamLuar : 'null', pegawaiId, function(dataPegawai) {
 			selectedPegawai.push({
 				id: pegawaiId,
 				nama: pegawaiNama,
@@ -350,10 +352,12 @@ function addPegawaiToSelected() {
 	const selectedOption = pegawaiSelect.find(':selected');
 	const pegawaiId = selectedOption.val();
 	const pegawaiNama = selectedOption.text();
-	const kotaKabupatenId = $('#tujuan_id').val();
-	
+	const tujuanId = $('#tujuan_id').val();
+	let jenisPerdinId = $('#jenis_perdin_id').val();
+	let dalamLuar = $('#dalamLuar').val();
+
 	if (!selectedPegawai.find(pegawai => pegawai.id === pegawaiId)) {
-		getPegawaiInfo(kotaKabupatenId, pegawaiId, function(dataPegawai) {
+		getPegawaiInfo(tujuanId, jenisPerdinId, dalamLuar ? dalamLuar : 'null', pegawaiId, function(dataPegawai) {
 			selectedPegawai.push({
 				id: pegawaiId,
 				nama: pegawaiNama,
@@ -372,9 +376,9 @@ function addPegawaiToSelected() {
 	}
 }
 
-function getPegawaiInfo(kotaKabupatenId, pegawaiId, callback) {
+function getPegawaiInfo(tujuanId, jenisPerdinId, dalamLuar, pegawaiId, callback) {
 	$.ajax({
-		url: `/get-pegawai-info/${kotaKabupatenId}/${pegawaiId}`,
+		url: `/get-pegawai-info/${tujuanId}/${jenisPerdinId}/${dalamLuar}/${pegawaiId}`,
 		success: function(data) {
 			callback(data.data_pegawai);
 		},
@@ -470,7 +474,7 @@ $(document).ready(function() {
 	$('#jenis_perdin_id').on('change', function() {
 		let jenisPerdinId = $('#jenis_perdin_id').val();
 		let jenisPerdinSelected = $('#jenis_perdin_id option:selected').text();
-		jenisPerdinText = jenisPerdinSelected.trim().toLowerCase();
+		let jenisPerdinText = jenisPerdinSelected.trim().toLowerCase();
 		
 		$('#tujuan_id').empty();
 		$('#tujuan_id').append('<option value="">Pilih Tujuan</option>');

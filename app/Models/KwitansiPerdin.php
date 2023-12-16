@@ -15,28 +15,6 @@ class KwitansiPerdin extends Model
     protected $guarded = ['id'];
     protected $with = ['author', 'kegiatan_sub', 'pptk'];
     
-    public function getTotalUangHarianAttribute()
-    {
-        return $this->pegawais->sum('pivot.uang_harian');
-    }
-    
-    public function getTotalUangTransportAttribute()
-    {
-        return $this->pegawais->sum('pivot.uang_transport');
-    }
-
-    public function getTotalUangAkomodasiAttribute()
-    {
-        return $this->pegawais->sum('pivot.uang_tiket') + $this->pegawais->sum('pivot.uang_penginapan');
-    }
-    
-    public function getTotalSemuaAttribute()
-    {
-        return $this->getTotalUangHarianAttribute() +
-            $this->getTotalUangTransportAttribute() +
-            $this->getTotalUangAkomodasiAttribute();
-    }
-    
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
