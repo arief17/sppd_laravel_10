@@ -58,6 +58,10 @@
 							<th style="white-space: nowrap; width: 1%;">Golongan I</th>
 							<td>Rp {{ number_format($uang_transport->golongan_i, 0, ',', '.') }}</td>
 						</tr>
+						<tr>
+							<th style="white-space: nowrap; width: 1%;">Non ASN</th>
+							<td>Rp {{ number_format($uang_transport->non_asn, 0, ',', '.') }}</td>
+						</tr>
 					</table>
 				</div>
 			</div>

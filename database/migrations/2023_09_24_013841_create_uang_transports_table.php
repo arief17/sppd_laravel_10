@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('golongan_iii');
             $table->integer('golongan_ii');
             $table->integer('golongan_i');
+            $table->integer('non_asn');
             $table->unsignedBigInteger('wilayah_id');
             $table->string('wilayah_type');
             $table->unsignedBigInteger('alat_angkut_id');

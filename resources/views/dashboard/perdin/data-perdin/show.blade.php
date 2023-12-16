@@ -58,10 +58,6 @@
 				</div>
 			</div>
 			<div class="card-footer">
-				<a class="btn btn-info me-2" href="{{ route('data-perdin.edit', $data_perdin->slug) }}">
-					<i class="fas fa-pencil-alt"></i>
-					Edit
-				</a>
 				<form action="{{ route('data-perdin.destroy', $data_perdin->slug) }}" method="post" class="d-inline">
 					@method('delete')
 					@csrf

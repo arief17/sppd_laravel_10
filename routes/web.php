@@ -12,6 +12,7 @@ use App\Http\Controllers\KegiatanSubController;
 use App\Http\Controllers\KetentuanController;
 use App\Http\Controllers\KotaKabupatenController;
 use App\Http\Controllers\KwitansiPerdinController;
+use App\Http\Controllers\LamaController;
 use App\Http\Controllers\LaporanPerdinController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PageController;
@@ -59,6 +60,7 @@ Route::middleware('can:isAdmin')->group(function(){
 	Route::resource('/dashboard/jenis-perdin', JenisPerdinController::class)->middleware('auth');
 	Route::resource('/dashboard/kegiatan', KegiatanController::class)->middleware('auth');
 	Route::resource('/dashboard/kegiatan-sub', KegiatanSubController::class)->middleware('auth');
+	Route::resource('/dashboard/lama', LamaController::class)->middleware('auth');
 	Route::resource('/dashboard/ketentuan', KetentuanController::class)->except('create', 'store')->middleware('auth');
 	Route::resource('/dashboard/kota-kabupaten', KotaKabupatenController::class)->middleware('auth');
 	Route::resource('/dashboard/pangkat', PangkatController::class)->middleware('auth');
@@ -102,7 +104,7 @@ Route::middleware('can:isOperator')->group(function(){
 });
 
 Route::middleware('can:isOperator')->group(function(){
-	Route::resource('/dashboard/data-perdin', DataPerdinController::class)->except('index')->middleware('auth');
+	Route::resource('/dashboard/data-perdin', DataPerdinController::class)->except('index', 'edit', 'update')->middleware('auth');
 });
 
 Route::redirect('/dashboard', '/');

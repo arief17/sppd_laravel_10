@@ -51,6 +51,7 @@ class UangTransportController extends Controller
             'golongan_iii' => 'required|numeric',
             'golongan_ii' => 'required|numeric',
             'golongan_i' => 'required|numeric',
+            'non_asn' => 'required|numeric',
         ]);
 
         $wilayah = null;
@@ -115,6 +116,7 @@ class UangTransportController extends Controller
             'golongan_iii' => 'required|numeric',
             'golongan_ii' => 'required|numeric',
             'golongan_i' => 'required|numeric',
+            'non_asn' => 'required|numeric',
         ]);
 
         $validatedData['harga_tiket'] = $request->harga_tiket ?? 0;

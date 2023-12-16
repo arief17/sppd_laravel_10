@@ -8,6 +8,7 @@ use App\Models\JenisPerdin;
 use App\Models\Ketentuan;
 use App\Models\KotaKabupaten;
 use App\Models\KwitansiPerdin;
+use App\Models\Lama;
 use App\Models\LaporanPerdin;
 use App\Models\Pegawai;
 use App\Models\Provinsi;
@@ -136,6 +137,7 @@ class DataPerdinController extends Controller
             'alat_angkuts' => AlatAngkut::all(),
             'jenis_perdins' => JenisPerdin::all(),
             'tanda_tangans' => TandaTangan::all(),
+            'lamas' => Lama::all(),
             'pegawais' => $pegawais
         ]);
     }
@@ -256,26 +258,7 @@ class DataPerdinController extends Controller
     */
     public function edit(DataPerdin $dataPerdin)
     {
-        $authBidangId = auth()->user()->bidang_id;
-        
-        if (empty($authBidangId)) {
-            $pegawais = Pegawai::whereNotNull('golongan_id')->get();
-        } else {
-            $pegawais = Pegawai::whereNotNull('golongan_id')
-            ->whereHas('seksi', function ($query) use ($authBidangId) {
-                $query->where('bidang_id', $authBidangId);
-            })->get();
-        }
-        
-        return view('dashboard.perdin.data-perdin.edit', [
-            'title' => 'Perbarui Data Perdin',
-            'data_perdin' => $dataPerdin,
-            'kota_kabupatens' => KotaKabupaten::all(),
-            'alat_angkuts' => AlatAngkut::all(),
-            'jenis_perdins' => JenisPerdin::all(),
-            'tanda_tangans' => TandaTangan::all(),
-            'pegawais' => $pegawais,
-        ]);
+        //
     }
     
     /**
@@ -283,38 +266,7 @@ class DataPerdinController extends Controller
     */
     public function update(Request $request, DataPerdin $dataPerdin)
     {
-        return DB::transaction(function () use ($request, $dataPerdin) {
-            $validatedData = $request->validate([
-                'surat_dari' => 'nullable',
-                'nomor_surat' => 'nullable',
-                'tgl_surat' => 'date',
-                'perihal' => 'nullable',
-                'tanda_tangan_id' => 'required',
-                'maksud' => 'required',
-                'lama' => 'required',
-                'tgl_berangkat' => 'required|date',
-                'tgl_kembali' => 'required|date',
-                'alat_angkut_id' => 'required',
-                'jenis_perdin_id' => 'required',
-                'tujuan_id' => 'required',
-                'lokasi' => 'required',
-                'pegawai_diperintah_id' => 'required',
-                'biaya' => 'required',
-                'pegawai_mengikuti_id' => 'required',
-            ]);
-            
-            $validatedData['slug'] = SlugService::createSlug(DataPerdin::class, 'slug', $request->maksud);
-            $validatedData['author_id'] = auth()->user()->id;
-            $validatedData['kedudukan_id'] = KotaKabupaten::where('nama', 'LIKE', '%' . $request->kedudukan_id . '%')->value('id');
-            
-            $selectedPegawaiIds = explode(',', $request->pegawai_mengikuti_id);
-            $validatedData['jumlah_pegawai'] = count($selectedPegawaiIds);
-            
-            $dataPerdin->update($validatedData);
-            $dataPerdin->pegawai_mengikuti()->sync($selectedPegawaiIds);
-            
-            return redirect()->route('data-perdin.index', 'baru')->with('success', 'Data Perdin berhasil diperbarui!');
-        }, 2);
+        //
     }
     
     /**
@@ -323,7 +275,17 @@ class DataPerdinController extends Controller
     public function destroy(DataPerdin $dataPerdin)
     {
         return DB::transaction(function () use ($dataPerdin) {
+            $pegawaiDiperintah = $dataPerdin->pegawai_diperintah;
+            $pegawaiMengikuti = $dataPerdin->pegawai_mengikuti;
+    
+            $pegawaiDiperintah->ketentuan->decrement('jumlah_perdin');
+    
+            foreach ($pegawaiMengikuti as $pegawai) {
+                $pegawai->ketentuan->decrement('jumlah_perdin');
+            }
+    
             $dataPerdin->delete();
+    
             return redirect()->route('data-perdin.index', 'baru')->with('success', 'Data Perdin berhasil dihapus!');
         }, 2);
     }

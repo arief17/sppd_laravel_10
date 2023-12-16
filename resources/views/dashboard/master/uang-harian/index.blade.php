@@ -27,6 +27,7 @@
 								<th class="border-bottom-0">Golongan III</th>
 								<th class="border-bottom-0">Golongan II</th>
 								<th class="border-bottom-0">Golongan I</th>
+								<th class="border-bottom-0">Non ASN</th>
 								<th class="border-bottom-0" style="width: 1%">Aksi</th>
 							</tr>
 						</thead>
@@ -44,6 +45,7 @@
 								<td>Rp {{ number_format($uang_harian->golongan_iii, 0, ',', '.') }}</td>
 								<td>Rp {{ number_format($uang_harian->golongan_ii, 0, ',', '.') }}</td>
 								<td>Rp {{ number_format($uang_harian->golongan_i, 0, ',', '.') }}</td>
+								<td>Rp {{ number_format($uang_harian->non_asn, 0, ',', '.') }}</td>
 								
 								<td>
 									<a class="btn btn-primary btn-sm" href="{{ route('uang-harian.show', $uang_harian->slug) }}">

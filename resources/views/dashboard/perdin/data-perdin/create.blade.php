@@ -102,9 +102,11 @@
 						<label for="lama" class="form-label">Lamanya Perjalanan Dinas</label>
 						<select name="lama" id="lama" class="form-control form-select @error('lama') is-invalid @enderror">
 							<option value="">Pilih Lama Hari</option>
-							<option value="1">1 hari</option>
-							<option value="2">2 hari</option>
-							<option value="3">3 hari</option>
+							@foreach ($lamas as $lama)
+							<option value="{{ $lama->lama_hari }}" @selected(old('lama') == $lama->lama_hari)>
+								{{ $lama->lama_hari }} hari
+							</option>
+							@endforeach
 						</select>
 						@error('lama')
 						<div class="invalid-feedback">

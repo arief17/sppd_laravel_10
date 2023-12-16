@@ -67,9 +67,6 @@
 										<a class="btn btn-primary btn-sm" href="{{ route('data-perdin.show', $data_perdin->slug) }}">
 											<i class="fas fa-folder"></i>
 										</a>
-										<a class="btn btn-info btn-sm" href="{{ route('data-perdin.edit', $data_perdin->slug) }}">
-											<i class="fas fa-pencil-alt"></i>
-										</a>
 										<form action="{{ route('data-perdin.destroy', $data_perdin->slug) }}" method="post" class="d-inline">
 											@method('delete')
 											@csrf

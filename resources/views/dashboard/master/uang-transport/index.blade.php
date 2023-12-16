@@ -28,6 +28,7 @@
 								<th class="border-bottom-0">Golongan III</th>
 								<th class="border-bottom-0">Golongan II</th>
 								<th class="border-bottom-0">Golongan I</th>
+								<th class="border-bottom-0">Non ASN</th>
 								<th class="border-bottom-0" style="width: 1%">Aksi</th>
 							</tr>
 						</thead>

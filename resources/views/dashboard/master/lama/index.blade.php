@@ -8,7 +8,7 @@
 			<div class="card-header">
 				<div class="d-flex align-items-center">
 					<h3 class="card-title">{{ $title }}</h3>
-					<a href="{{ route('uang-penginapan.create') }}" class="btn btn-primary mg-l-auto">Tambah</a>
+					<a href="{{ route('lama.create') }}" class="btn btn-primary mg-l-auto">Tambah</a>
 				</div>
 			</div>
 			<div class="card-body">
@@ -17,49 +17,28 @@
 						<thead>
 							<tr>
 								<th class="border-bottom-0" style="width: 1%">No</th>
-								<th class="border-bottom-0">Keterangan</th>
-								<th class="border-bottom-0">Wilayah</th>
-								<th class="border-bottom-0">Eselon I</th>
-								<th class="border-bottom-0">Eselon II</th>
-								<th class="border-bottom-0">Eselon III</th>
-								<th class="border-bottom-0">Eselon IV</th>
-								<th class="border-bottom-0">Golongan IV</th>
-								<th class="border-bottom-0">Golongan III</th>
-								<th class="border-bottom-0">Golongan II</th>
-								<th class="border-bottom-0">Golongan I</th>
-								<th class="border-bottom-0">Non ASN</th>
+								<th class="border-bottom-0">Lama Hari</th>
 								<th class="border-bottom-0" style="width: 1%">Aksi</th>
 							</tr>
 						</thead>
 						<tbody>
-							@foreach ($uang_penginapans as $uang_penginapan)
+							@foreach ($lamas as $lama)
 							<tr>
 								<td>{{ $loop->iteration }}</td>
-								<td>{{ $uang_penginapan->keterangan }}</td>
-								<td>{{ $uang_penginapan->wilayah->nama }}</td>
-								<td>Rp {{ number_format($uang_penginapan->eselon_i, 0, ',', '.') }}</td>
-								<td>Rp {{ number_format($uang_penginapan->eselon_ii, 0, ',', '.') }}</td>
-								<td>Rp {{ number_format($uang_penginapan->eselon_iii, 0, ',', '.') }}</td>
-								<td>Rp {{ number_format($uang_penginapan->eselon_iv, 0, ',', '.') }}</td>
-								<td>Rp {{ number_format($uang_penginapan->golongan_iv, 0, ',', '.') }}</td>
-								<td>Rp {{ number_format($uang_penginapan->golongan_iii, 0, ',', '.') }}</td>
-								<td>Rp {{ number_format($uang_penginapan->golongan_ii, 0, ',', '.') }}</td>
-								<td>Rp {{ number_format($uang_penginapan->golongan_i, 0, ',', '.') }}</td>
-								<td>Rp {{ number_format($uang_penginapan->non_asn, 0, ',', '.') }}</td>
-								
+								<td>{{ $lama->lama_hari }} Hari</td>
 								<td>
-									<a class="btn btn-primary btn-sm" href="{{ route('uang-penginapan.show', $uang_penginapan->slug) }}">
+									<a class="btn btn-primary btn-sm" href="{{ route('lama.show', $lama->id) }}">
 										<i class="fas fa-folder"></i>
 										View
 									</a>
-									<a class="btn btn-info btn-sm" href="{{ route('uang-penginapan.edit', $uang_penginapan->slug) }}">
+									<a class="btn btn-info btn-sm" href="{{ route('lama.edit', $lama->id) }}">
 										<i class="fas fa-pencil-alt"></i>
 										Edit
 									</a>
-									<form action="{{ route('uang-penginapan.destroy', $uang_penginapan->slug) }}" method="post" class="d-inline">
+									<form action="{{ route('lama.destroy', $lama->id) }}" method="post" class="d-inline">
 										@method('delete')
 										@csrf
-										<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $uang_penginapan->nama }}">
+										<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $lama->lama_hari }}">
 											<i class="fas fa-trash"></i>
 											Delete
 										</button>
@@ -90,24 +69,24 @@
 
 @if(session()->has('success'))
 <script>
-	$(document).ready(function() {
-		var Toast = Swal.mixin({
-			toast: true,
-			position: 'top',
-			showConfirmButton: false,
-			timer: 5000,
-			timerProgressBar: true,
-			didOpen: (toast) => {
-				toast.addEventListener('mouseenter', Swal.stopTimer)
-				toast.addEventListener('mouseleave', Swal.resumeTimer)
-			}
-		});
-		
-		Toast.fire({
-			icon: 'success',
-			title: '{{ session('success') }}'
-		});
-	});
+    $(document).ready(function() {
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 5000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
+        
+        Toast.fire({
+            icon: 'success',
+            title: '{{ session('success') }}'
+        });
+    });
 </script>
 @endif
 

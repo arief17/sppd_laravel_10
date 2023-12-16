@@ -7,7 +7,7 @@
 		<div class="card">
 			<div class="card-header d-flex justify-content-between">
 				<h4 class="card-title mb-1">{{ $title }}</h4>
-				<a class="btn btn-secondary btn-sm" href="{{ route('uang-penginapan.index') }}">
+				<a class="btn btn-secondary btn-sm" href="{{ route('lama.index') }}">
 					<i class="fa fa-reply"></i>
 				</a>
 			</div>
@@ -15,61 +15,21 @@
 				<div class="table-responsive">
 					<table class="table mg-b-0 text-md-nowrap border-bottom">
 						<tr>
-							<th style="white-space: nowrap; width: 1%;">Keterangan:</th>
-							<td>{{ $uang_penginapan->keterangan }}</td>
-						</tr>
-						<tr>
-							<th style="white-space: nowrap; width: 1%;">Wilayah:</th>
-							<td>{{ $uang_penginapan->wilayah->nama }}</td>
-						</tr>
-						<tr>
-							<th style="white-space: nowrap; width: 1%;">Eselon I:</th>
-							<td>Rp {{ number_format($uang_penginapan->eselon_i, 0, ',', '.') }}</td>
-						</tr>
-						<tr>
-							<th style="white-space: nowrap; width: 1%;">Eselon II:</th>
-							<td>Rp {{ number_format($uang_penginapan->eselon_ii, 0, ',', '.') }}</td>
-						</tr>
-						<tr>
-							<th style="white-space: nowrap; width: 1%;">Eselon III:</th>
-							<td>Rp {{ number_format($uang_penginapan->eselon_iii, 0, ',', '.') }}</td>
-						</tr>
-						<tr>
-							<th style="white-space: nowrap; width: 1%;">Eselon IV:</th>
-							<td>Rp {{ number_format($uang_penginapan->eselon_iv, 0, ',', '.') }}</td>
-						</tr>
-						<tr>
-							<th style="white-space: nowrap; width: 1%;">Golongan IV:</th>
-							<td>Rp {{ number_format($uang_penginapan->golongan_iv, 0, ',', '.') }}</td>
-						</tr>
-						<tr>
-							<th style="white-space: nowrap; width: 1%;">Golongan III:</th>
-							<td>Rp {{ number_format($uang_penginapan->golongan_iii, 0, ',', '.') }}</td>
-						</tr>
-						<tr>
-							<th style="white-space: nowrap; width: 1%;">Golongan II:</th>
-							<td>Rp {{ number_format($uang_penginapan->golongan_ii, 0, ',', '.') }}</td>
-						</tr>
-						<tr>
-							<th style="white-space: nowrap; width: 1%;">Golongan I:</th>
-							<td>Rp {{ number_format($uang_penginapan->golongan_i, 0, ',', '.') }}</td>
-						</tr>
-						<tr>
-							<th style="white-space: nowrap; width: 1%;">Non ASN:</th>
-							<td>Rp {{ number_format($uang_penginapan->non_asn, 0, ',', '.') }}</td>
+							<th style="white-space: nowrap; width: 1%;">Lama Hari:</th>
+							<td>{{ $lama->lama_hari }} Hari</td>
 						</tr>
 					</table>
 				</div>
 			</div>
 			<div class="card-footer">
-				<a class="btn btn-info me-2" href="{{ route('uang-penginapan.edit', $uang_penginapan->slug) }}">
+				<a class="btn btn-info me-2" href="{{ route('lama.edit', $lama->id) }}">
 					<i class="fas fa-pencil-alt"></i>
 					Edit
 				</a>
-				<form action="{{ route('uang-penginapan.destroy', $uang_penginapan->slug) }}" method="post" class="d-inline">
+				<form action="{{ route('lama.destroy', $lama->id) }}" method="post" class="d-inline">
 					@method('delete')
 					@csrf
-					<button class="btn btn-danger" id='deleteData' data-title="{{ $uang_penginapan->nama }}">
+					<button class="btn btn-danger" id='deleteData' data-title="{{ $lama->lama_hari }}">
 						<i class="fas fa-trash"></i>
 						Delete
 					</button>

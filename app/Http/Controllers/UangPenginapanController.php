@@ -40,14 +40,15 @@ class UangPenginapanController extends Controller
     {
         $validatedData = $request->validate([
             'keterangan' => 'required',
-            'eselon_i' => 'required|integer',
-            'eselon_ii' => 'required|integer',
-            'eselon_iii' => 'required|integer',
-            'eselon_iv' => 'required|integer',
-            'golongan_iv' => 'required|integer',
-            'golongan_iii' => 'required|integer',
-            'golongan_ii' => 'required|integer',
-            'golongan_i' => 'required|integer',
+            'eselon_i' => 'required|numeric',
+            'eselon_ii' => 'required|numeric',
+            'eselon_iii' => 'required|numeric',
+            'eselon_iv' => 'required|numeric',
+            'golongan_iv' => 'required|numeric',
+            'golongan_iii' => 'required|numeric',
+            'golongan_ii' => 'required|numeric',
+            'golongan_i' => 'required|numeric',
+            'non_asn' => 'required|numeric',
         ]);
 
         $wilayah = null;
@@ -97,14 +98,15 @@ class UangPenginapanController extends Controller
     {
         $validatedData = $request->validate([
             'keterangan' => 'required',
-            'eselon_i' => 'required|integer',
-            'eselon_ii' => 'required|integer',
-            'eselon_iii' => 'required|integer',
-            'eselon_iv' => 'required|integer',
-            'golongan_iv' => 'required|integer',
-            'golongan_iii' => 'required|integer',
-            'golongan_ii' => 'required|integer',
-            'golongan_i' => 'required|integer',
+            'eselon_i' => 'required|numeric',
+            'eselon_ii' => 'required|numeric',
+            'eselon_iii' => 'required|numeric',
+            'eselon_iv' => 'required|numeric',
+            'golongan_iv' => 'required|numeric',
+            'golongan_iii' => 'required|numeric',
+            'golongan_ii' => 'required|numeric',
+            'golongan_i' => 'required|numeric',
+            'non_asn' => 'required|numeric',
         ]);
         
         $validatedData['slug'] = SlugService::createSlug(UangPenginapan::class, 'slug', $request->keterangan);

@@ -156,6 +156,15 @@
 						</div>
 						@enderror
 					</div>
+					<div class="form-group">
+						<label for="non_asn">Non ASN</label>
+						<input name="non_asn" value="{{ old('non_asn', $uang_transport->non_asn) }}" type="number" class="form-control @error('non_asn') is-invalid @enderror" id="non_asn" placeholder="Masukan non_asn">
+						@error('non_asn')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+						@enderror
+					</div>
 					
 					<div class="form-group mb-0 mt-3 justify-content-end">
 						<button type="submit" class="btn btn-primary">Simpan</button>

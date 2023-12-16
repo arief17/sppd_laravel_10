@@ -174,6 +174,11 @@ class DatabaseSeeder extends Seeder
             'slug' => 'golongan-i',
             'author_id' => 1,
         ]);
+        Golongan::create([
+            'nama' => 'Non ASN',
+            'slug' => 'non-asn',
+            'author_id' => 1,
+        ]);
 
         Pangkat::create([
             'nama' => 'I - A - Juru Muda',
@@ -339,6 +344,7 @@ class DatabaseSeeder extends Seeder
             'golongan_iii' => 150000,
             'golongan_ii' => 150000,
             'golongan_i' => 150000,
+            'non_asn' => 150000,
             'author_id' => 1,
         ]);
         UangHarian::create([
@@ -354,6 +360,7 @@ class DatabaseSeeder extends Seeder
             'golongan_iii' => 150000,
             'golongan_ii' => 150000,
             'golongan_i' => 150000,
+            'non_asn' => 150000,
             'author_id' => 1,
         ]);
 
@@ -371,6 +378,7 @@ class DatabaseSeeder extends Seeder
             'golongan_iii' => 400000,
             'golongan_ii' => 400000,
             'golongan_i' => 400000,
+            'non_asn' => 150000,
             'author_id' => 1,
         ]);
         UangTransport::create([
@@ -387,6 +395,7 @@ class DatabaseSeeder extends Seeder
             'golongan_iii' => 350000,
             'golongan_ii' => 350000,
             'golongan_i' => 350000,
+            'non_asn' => 150000,
             'author_id' => 1,
         ]);
 
@@ -403,6 +412,7 @@ class DatabaseSeeder extends Seeder
             'golongan_iii' => 150000,
             'golongan_ii' => 150000,
             'golongan_i' => 150000,
+            'non_asn' => 150000,
             'author_id' => 1,
         ]);
         UangPenginapan::create([
@@ -418,6 +428,7 @@ class DatabaseSeeder extends Seeder
             'golongan_iii' => 150000,
             'golongan_ii' => 150000,
             'golongan_i' => 150000,
+            'non_asn' => 150000,
             'author_id' => 1,
         ]);
 
