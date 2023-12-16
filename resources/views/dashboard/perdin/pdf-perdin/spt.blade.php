@@ -45,14 +45,14 @@
 				<p style="text-decoration: underline; font-weight: bold; margin: 0;">SURAT PERINTAH TUGAS</p>
 				<p style="margin: 0;">No. </p>
 			</div>
-			<p style="margin: 10px 0; text-transform: capitalize;">
-				@if ($data_perdin->surat_dari)
-						Berdasarkan surat dari {{ $data_perdin->surat_dari }} nomor {{ $data_perdin->nomor_surat }} tanggal {{ $data_perdin->tgl_surat }} perihal {{ $data_perdin->perihal }}. <br>
-				@endif
-				Dengan ini, {{ $data_perdin->tanda_tangan->pegawai->jabatan->nama }}.
-			</p>
-			<p>MEMERINTAHKAN:</p>
-		</div>	
+		</div>
+		<p style="margin: 10px 0; text-transform: capitalize; text-indent: 50px;">
+			@if ($data_perdin->surat_dari)
+			Berdasarkan surat dari {{ $data_perdin->surat_dari }} nomor {{ $data_perdin->nomor_surat }} tanggal {{ $data_perdin->tgl_surat }} perihal {{ $data_perdin->perihal }}. 
+			@endif
+			Dengan ini, {{ strtolower($data_perdin->tanda_tangan->pegawai->jabatan->nama) }}.
+		</p>
+		<p style="text-align: center;">MEMERINTAHKAN:</p>
 		
 		<table style="width: 100%;">
 			<tr>
@@ -120,7 +120,7 @@
 				<h4 style="margin-top: 20px; text-transform: uppercase">
 					{!! $data_perdin->ttdFormated !!} <br>
 				</h4>
-				<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" height="100">
+				<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" height="80">
 				<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
 				<p>NIP.{{ $data_perdin->tanda_tangan->pegawai->nip }}</p>
 			</div>
