@@ -55,16 +55,16 @@ Route::resource('/dashboard/login', LoginController::class)->middleware('auth');
 Route::middleware('can:isAdmin')->group(function(){
 	Route::resource('/dashboard/alat-angkut', AlatAngkutController::class)->middleware('auth');
 	Route::resource('/dashboard/bidang', BidangController::class)->middleware('auth');
-	Route::resource('/dashboard/golongan', GolonganController::class)->middleware('auth');
+	Route::resource('/dashboard/golongan', GolonganController::class)->only('index', 'show')->middleware('auth');
 	Route::resource('/dashboard/jabatan', JabatanController::class)->middleware('auth');
-	Route::resource('/dashboard/jenis-perdin', JenisPerdinController::class)->middleware('auth');
+	Route::resource('/dashboard/jenis-perdin', JenisPerdinController::class)->only('index', 'show')->middleware('auth');
 	Route::resource('/dashboard/kegiatan', KegiatanController::class)->middleware('auth');
 	Route::resource('/dashboard/kegiatan-sub', KegiatanSubController::class)->middleware('auth');
 	Route::resource('/dashboard/lama', LamaController::class)->middleware('auth');
-	Route::resource('/dashboard/ketentuan', KetentuanController::class)->except('create', 'store')->middleware('auth');
 	Route::resource('/dashboard/kota-kabupaten', KotaKabupatenController::class)->middleware('auth');
 	Route::resource('/dashboard/pangkat', PangkatController::class)->middleware('auth');
 	Route::resource('/dashboard/pegawai', PegawaiController::class)->middleware('auth');
+	Route::resource('/dashboard/ketentuan', KetentuanController::class)->except('create', 'store', 'destroy')->middleware('auth');
 	Route::resource('/dashboard/bendahara', BendaharaController::class)->middleware('auth');
 	Route::resource('/dashboard/provinsi', ProvinsiController::class)->middleware('auth');
 	Route::resource('/dashboard/seksi', SeksiController::class)->middleware('auth');
@@ -81,7 +81,6 @@ Route::middleware('can:isApproval')->group(function(){
 		Route::put('/dashboard/status-perdin/tolak/{id}', 'tolak')->name('status-perdin.tolak')->middleware('auth');
 	});
 });
-
 
 Route::middleware('can:isOperator')->group(function(){
 	Route::controller(DataPerdinController::class)->group(function(){

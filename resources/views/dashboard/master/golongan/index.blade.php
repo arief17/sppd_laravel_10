@@ -8,7 +8,6 @@
 			<div class="card-header">
 				<div class="d-flex align-items-center">
 					<h3 class="card-title">{{ $title }}</h3>
-					<a href="{{ route('golongan.create') }}" class="btn btn-primary mg-l-auto">Tambah</a>
 				</div>
 			</div>
 			<div class="card-body">
@@ -31,18 +30,6 @@
 										<i class="fas fa-folder"></i>
 										View
 									</a>
-									<a class="btn btn-info btn-sm" href="{{ route('golongan.edit', $golongan->slug) }}">
-										<i class="fas fa-pencil-alt"></i>
-										Edit
-									</a>
-									<form action="{{ route('golongan.destroy', $golongan->slug) }}" method="post" class="d-inline">
-										@method('delete')
-										@csrf
-										<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $golongan->nama }}">
-											<i class="fas fa-trash"></i>
-											Delete
-										</button>
-									</form>
 								</td>
 							</tr>
 							@endforeach

@@ -59,7 +59,13 @@ class PegawaiController extends Controller
                 'pangkat_id' => 'nullable',
                 'pptk' => 'boolean',
             ]);
-            
+
+            $jabatan = Jabatan::find($request->jabatan_id);
+            if (str_contains($jabatan->slug, 'non-asn')) {
+                $golongan = Golongan::where('slug', 'non-asn')->first();
+                $validatedData['golongan_id'] = $golongan->id;
+            }
+
             if (!$request->pptk) {
                 $validatedData['pptk'] = 0;
             }
@@ -128,6 +134,12 @@ class PegawaiController extends Controller
         }
         $validatedData = $request->validate($rules);
         
+        $jabatan = Jabatan::find($request->jabatan_id);
+        if (str_contains($jabatan->slug, 'non-asn')) {
+            $golongan = Golongan::where('slug', 'non-asn')->first();
+            $validatedData['golongan_id'] = $golongan->id;
+        }
+
         if (!$request->pptk) {
             $validatedData['pptk'] = 0;
         }

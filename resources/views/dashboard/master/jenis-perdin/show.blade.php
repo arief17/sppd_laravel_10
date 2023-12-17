@@ -25,20 +25,6 @@
 					</table>
 				</div>
 			</div>
-			<div class="card-footer">
-				<a class="btn btn-info me-2" href="{{ route('jenis-perdin.edit', $jenis_perdin->slug) }}">
-					<i class="fas fa-pencil-alt"></i>
-					Edit
-				</a>
-				<form action="{{ route('jenis-perdin.destroy', $jenis_perdin->slug) }}" method="post" class="d-inline">
-					@method('delete')
-					@csrf
-					<button class="btn btn-danger" id='deleteData' data-title="{{ $jenis_perdin->nama }}">
-						<i class="fas fa-trash"></i>
-						Delete
-					</button>
-				</form>
-			</div>
 		</div>
 	</div>
 </div>

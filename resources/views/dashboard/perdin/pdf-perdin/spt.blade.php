@@ -46,7 +46,7 @@
 				<p style="margin: 0;">No. </p>
 			</div>
 		</div>
-		<p style="margin: 10px 0; text-indent: 50px;">
+		<p style="margin: 10px 0; text-indent: 50px; text-align: justify;">
 			@if ($data_perdin->surat_dari)
 			<span style="text-transform: capitalize">
 				Berdasarkan surat dari {{ $data_perdin->surat_dari }} nomor {{ $data_perdin->nomor_surat }} tanggal {{ Carbon\Carbon::parse($data_perdin->tgl_surat)->isoFormat('D MMMM YYYY') }} perihal {{ $data_perdin->perihal }}. 

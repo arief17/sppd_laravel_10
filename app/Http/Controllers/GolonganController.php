@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Golongan;
-use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 
 class GolonganController extends Controller
@@ -24,9 +23,7 @@ class GolonganController extends Controller
      */
     public function create()
     {
-        return view('dashboard.master.golongan.create', [
-            'title' => 'Tambah Golongan',
-        ]);
+        //
     }
 
     /**
@@ -34,15 +31,7 @@ class GolonganController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'nama' => 'required|min:3|max:100',
-        ]);
-        
-        $validatedData['slug'] = SlugService::createSlug(Golongan::class, 'slug', $request->nama);
-        $validatedData['author_id'] = auth()->user()->id;
-        
-        Golongan::create($validatedData);
-        return redirect()->route('golongan.index')->with('success', 'Golongan berhasil ditambahkan!');
+        //
     }
 
     /**
@@ -61,10 +50,7 @@ class GolonganController extends Controller
      */
     public function edit(Golongan $golongan)
     {
-        return view('dashboard.master.golongan.edit', [
-            'title' => 'Perbarui Golongan',
-            'golongan' => $golongan,
-        ]);
+        //
     }
 
     /**
@@ -72,15 +58,7 @@ class GolonganController extends Controller
      */
     public function update(Request $request, Golongan $golongan)
     {
-        $validatedData = $request->validate([
-            'nama' => 'required|min:3|max:100',
-        ]);
-        
-        $validatedData['slug'] = SlugService::createSlug(Golongan::class, 'slug', $request->nama);
-        $validatedData['author_id'] = auth()->user()->id;
-        
-        Golongan::where('id', $golongan->id)->update($validatedData);
-        return redirect()->route('golongan.index')->with('success', 'Golongan berhasil diperbarui!');
+        //
     }
 
     /**
@@ -88,7 +66,6 @@ class GolonganController extends Controller
      */
     public function destroy(Golongan $golongan)
     {
-        $golongan->delete();
-        return redirect()->route('golongan.index')->with('success', 'Golongan berhasil dihapus!');
+        //
     }
 }

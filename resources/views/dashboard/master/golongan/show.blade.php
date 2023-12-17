@@ -21,20 +21,6 @@
 					</table>
 				</div>
 			</div>
-			<div class="card-footer">
-				<a class="btn btn-info me-2" href="{{ route('golongan.edit', $golongan->slug) }}">
-					<i class="fas fa-pencil-alt"></i>
-					Edit
-				</a>
-				<form action="{{ route('golongan.destroy', $golongan->slug) }}" method="post" class="d-inline">
-					@method('delete')
-					@csrf
-					<button class="btn btn-danger" id='deleteData' data-title="{{ $golongan->nama }}">
-						<i class="fas fa-trash"></i>
-						Delete
-					</button>
-				</form>
-			</div>
 		</div>
 	</div>
 </div>

@@ -76,7 +76,6 @@ class KetentuanController extends Controller
      */
     public function destroy(Ketentuan $ketentuan)
     {
-        $ketentuan->delete();
-        return redirect()->route('ketentuan.index')->with('success', 'Ketentuan berhasil dihapus!');
+        //
     }
 }

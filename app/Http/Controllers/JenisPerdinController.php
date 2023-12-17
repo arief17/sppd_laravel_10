@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\JenisPerdin;
-use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 
 class JenisPerdinController extends Controller
@@ -24,9 +23,7 @@ class JenisPerdinController extends Controller
      */
     public function create()
     {
-        return view('dashboard.master.jenis-perdin.create', [
-            'title' => 'Tambah Jenis Perdin',
-        ]);
+        //
     }
 
     /**
@@ -34,16 +31,7 @@ class JenisPerdinController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'nama' => 'required|min:3|max:100',
-            'no_rek' => 'required',
-        ]);
-        
-        $validatedData['slug'] = SlugService::createSlug(JenisPerdin::class, 'slug', $request->nama);
-        $validatedData['author_id'] = auth()->user()->id;
-        
-        JenisPerdin::create($validatedData);
-        return redirect()->route('jenis-perdin.index')->with('success', 'Jenis Perdin berhasil ditambahkan!');
+        //
     }
 
     /**
@@ -62,10 +50,7 @@ class JenisPerdinController extends Controller
      */
     public function edit(JenisPerdin $jenis_perdin)
     {
-        return view('dashboard.master.jenis-perdin.edit', [
-            'title' => 'Perbarui Jenis  Perdin',
-            'jenis_perdin' => $jenis_perdin,
-        ]);
+        //
     }
 
     /**
@@ -73,16 +58,7 @@ class JenisPerdinController extends Controller
      */
     public function update(Request $request, JenisPerdin $jenis_perdin)
     {
-        $validatedData = $request->validate([
-            'nama' => 'required|min:3|max:100',
-            'no_rek' => 'required',
-        ]);
-
-        $validatedData['slug'] = SlugService::createSlug(JenisPerdin::class, 'slug', $request->nama);
-        $validatedData['author_id'] = auth()->user()->id;
-        
-        JenisPerdin::where('id', $jenis_perdin->id)->update($validatedData);
-        return redirect()->route('jenis-perdin.index')->with('success', 'Jenis Perdin berhasil diperbarui!');
+        //
     }
 
     /**
@@ -90,7 +66,6 @@ class JenisPerdinController extends Controller
      */
     public function destroy(JenisPerdin $jenis_perdin)
     {
-        $jenis_perdin->delete();
-        return redirect()->route('jenis-perdin.index')->with('success', 'Jenis Perdin berhasil dihapus!');
+        //
     }
 }

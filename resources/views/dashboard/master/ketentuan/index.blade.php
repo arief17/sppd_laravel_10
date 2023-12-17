@@ -38,14 +38,6 @@
 										<i class="fas fa-pencil-alt"></i>
 										Edit
 									</a>
-									<form action="{{ route('ketentuan.destroy', $ketentuan->id) }}" method="post" class="d-inline">
-										@method('delete')
-										@csrf
-										<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $ketentuan->id }}">
-											<i class="fas fa-trash"></i>
-											Delete
-										</button>
-									</form>
 								</td>
 							</tr>
 							@endforeach

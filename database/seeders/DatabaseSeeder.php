@@ -272,8 +272,8 @@ class DatabaseSeeder extends Seeder
             'author_id' => 1,
         ]);
         Jabatan::create([
-            'nama' => 'Non PNS',
-            'slug' => 'non-pns',
+            'nama' => 'Non ASN',
+            'slug' => 'non-asn',
             'author_id' => 1,
         ]);
         Jabatan::create([
