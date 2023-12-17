@@ -84,7 +84,7 @@
 					<td style="width: 1%; border-right: 0; border-bottom: 0;">a. </td>
 					<td style="border-left: 0; border-bottom: 0;">Pangkat dan Golongan ruang gaji menurut PP No.6 Tahun 1997</td>
 					<td style="width: 1%; border-right: 0; border-bottom: 0;">a. </td>
-					<td colspan="2" style="border-left: 0; border-bottom: 0;">{{ $data_perdin->pegawai_diperintah->pangkat->nama }}</td>
+					<td colspan="2" style="border-left: 0; border-bottom: 0;">{{ $data_perdin->pegawai_diperintah->pangkat->nama ?? '' }}</td>
 				</tr>
 				<tr>
 					<td style="width: 1%; border-right: 0; border-bottom: 0; border-top: 0;">b. </td>
