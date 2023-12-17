@@ -149,7 +149,7 @@
 			<td style="white-space: nowrap;" colspan="3">
 				JUMLAH
 				<span style="padding: 0 20px 0 50px;">Rp.</span>
-				{{ number_format($kwitansi_perdin->totalSemua, 2, ',', '.') }}
+				{{ number_format($pegawai->pivot->uang_harian + $pegawai->pivot->uang_transport + $pegawai->pivot->uang_tiket + $pegawai->pivot->uang_penginapan, 2, ',', '.') }}
 			</td>
 			<td colspan="3" style="padding-top: 40px;"></td>
 		</tr>
