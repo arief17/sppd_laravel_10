@@ -35,7 +35,7 @@
 					</div>
 					<div id="kotaKabupatenHide" class="form-group">
 						<label for="kota_kabupaten_id" class="form-label">Kota Kabupaten</label>
-						<select name="kota_kabupaten_id" id="kota_kabupaten_id" class="form-control form-select @error('kota_kabupaten_id') is-invalid @enderror">
+						<select name="kota_kabupaten_id" id="kota_kabupaten_id" class="form-control form-select select2 @error('kota_kabupaten_id') is-invalid @enderror">
 							<option value="">Pilih Kota Kabupaten</option>
 							@foreach ($kota_kabupatens as $kota_kabupaten)
 							<option value="{{ $kota_kabupaten->id }}" @selected(old('kota_kabupaten_id') == $kota_kabupaten->id)>
@@ -51,7 +51,7 @@
 					</div>
 					<div id="provinsiHide" class="form-group">
 						<label for="provinsi_id" class="form-label">Provinsi</label>
-						<select name="provinsi_id" id="provinsi_id" class="form-control form-select @error('provinsi_id') is-invalid @enderror">
+						<select name="provinsi_id" id="provinsi_id" class="form-control form-select select2 @error('provinsi_id') is-invalid @enderror">
 							<option value="">Pilih Provinsi</option>
 							@foreach ($provinsis as $provinsi)
 							<option value="{{ $provinsi->id }}" @selected(old('provinsi_id') == $provinsi->id)>

@@ -63,7 +63,7 @@ class DataPerdinController extends Controller
         $uangHarian = UangHarian::where('wilayah_id', $tujuanId)->where('wilayah_type', $wilayah_type)->value($pegawaiGolongan);
         
         return response()->json(['data_pegawai' => [
-            'nip' => $pegawai->nip,
+            'nip' => $pegawai->nip ?? '-',
             'jabatan' => $pegawai->jabatan->nama,
             'uang_harian'=> $uangHarian ?? 0,
             ]

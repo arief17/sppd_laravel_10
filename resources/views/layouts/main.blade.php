@@ -47,8 +47,8 @@
 					<div class="main-header-left ">
 						<div class="responsive-logo">
 							<a href="/" class="header-logo">
-								<img src="/assets/img/brand/logo.png" class="logo-1" alt="logo">
-								<img src="/assets/img/brand/logo-white.png" class="dark-logo-1" alt="logo">
+								<img src="/assets/img/logo-banten.png" class="logo-1" alt="logo">
+								<img src="/assets/img/logo-banten.png" class="dark-logo-1" alt="logo">
 							</a>
 						</div>
 						<div class="app-sidebar__toggle" data-bs-toggle="sidebar">
@@ -651,7 +651,7 @@
 			<!-- Footer opened -->
 			<div class="main-footer ht-45">
 				<div class="container-fluid pd-t-0 ht-100p">
-					<span> Copyright © 2022 <a href="javascript:void(0);" class="text-primary">Valex</a>. Designed with <span class="fa fa-heart text-danger"></span> by <a href="javascript:void(0);"> Spruko </a> All rights reserved.</span>
+					<span> Copyright © 2023 <a href="/" class="text-primary">SPPD</a> Provinsi Banten All rights reserved.</span>
 				</div>
 			</div>
 			<!-- Footer closed -->

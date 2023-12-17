@@ -47,6 +47,7 @@
 								<td>Rp {{ number_format($uang_transport->golongan_iii, 0, ',', '.') }}</td>
 								<td>Rp {{ number_format($uang_transport->golongan_ii, 0, ',', '.') }}</td>
 								<td>Rp {{ number_format($uang_transport->golongan_i, 0, ',', '.') }}</td>
+								<td>Rp {{ number_format($uang_transport->non_asn, 0, ',', '.') }}</td>
 								
 								<td>
 									<a class="btn btn-primary btn-sm" href="{{ route('uang-transport.show', $uang_transport->slug) }}">

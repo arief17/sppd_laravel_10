@@ -26,7 +26,7 @@
 					</div>
 					<div id="kotaKabupatenHide" class="form-group">
 						<label for="kota_kabupaten_id" class="form-label">Kota Kabupaten</label>
-						<select name="kota_kabupaten_id" id="kota_kabupaten_id" class="form-control form-select @error('kota_kabupaten_id') is-invalid @enderror">
+						<select name="kota_kabupaten_id" id="kota_kabupaten_id" class="form-control form-select select2 @error('kota_kabupaten_id') is-invalid @enderror">
 							<option value="">Pilih Kota Kabupaten</option>
 							@foreach ($kota_kabupatens as $kota_kabupaten)
 							<option value="{{ $kota_kabupaten->id }}" @selected(old('kota_kabupaten_id') == $kota_kabupaten->id)>
@@ -42,7 +42,7 @@
 					</div>
 					<div id="provinsiHide" class="form-group">
 						<label for="provinsi_id" class="form-label">Provinsi</label>
-						<select name="provinsi_id" id="provinsi_id" class="form-control form-select @error('provinsi_id') is-invalid @enderror">
+						<select name="provinsi_id" id="provinsi_id" class="form-control form-select select2 @error('provinsi_id') is-invalid @enderror">
 							<option value="">Pilih Provinsi</option>
 							@foreach ($provinsis as $provinsi)
 							<option value="{{ $provinsi->id }}" @selected(old('provinsi_id') == $provinsi->id)>
@@ -58,7 +58,7 @@
 					</div>
 					<div class="form-group">
 						<label for="alat_angkut_id" class="form-label">Alat Angkut</label>
-						<select name="alat_angkut_id" id="alat_angkut_id" class="form-control form-select @error('alat_angkut_id') is-invalid @enderror">
+						<select name="alat_angkut_id" id="alat_angkut_id" class="form-control form-select select2 @error('alat_angkut_id') is-invalid @enderror">
 							<option value="">Pilih Alat Angkut</option>
 							@foreach ($alat_angkuts as $alat_angkut)
 							<option value="{{ $alat_angkut->id }}" @selected(old('alat_angkut_id', $uang_transport->alat_angkut_id) == $alat_angkut->id)>

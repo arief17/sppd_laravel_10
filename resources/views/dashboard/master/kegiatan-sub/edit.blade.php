@@ -27,7 +27,7 @@
 					</div>
 					<div class="form-group">
 						<label for="kegiatan_id" class="form-label">Kegiatan</label>
-						<select name="kegiatan_id" id="kegiatan_id" class="form-control form-select @error('kegiatan_id') is-invalid @enderror">
+						<select name="kegiatan_id" id="kegiatan_id" class="form-control form-select select2 @error('kegiatan_id') is-invalid @enderror">
 							<option value="">Pilih Kegiatan</option>
 							@foreach ($kegiatans as $kegiatan)
 							<option value="{{ $kegiatan->id }}" @selected(old('kegiatan_id', $kegiatan_sub->kegiatan_id) == $kegiatan->id)>

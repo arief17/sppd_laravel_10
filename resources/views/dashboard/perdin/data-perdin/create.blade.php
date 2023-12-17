@@ -74,7 +74,7 @@
 					
 					<div class="form-group">
 						<label for="tanda_tangan_id" class="form-label">Pejabat yang memberi perintah</label>
-						<select name="tanda_tangan_id" id="tanda_tangan_id" class="form-control form-select @error('tanda_tangan_id') is-invalid @enderror">
+						<select name="tanda_tangan_id" id="tanda_tangan_id" class="form-control form-select select2 @error('tanda_tangan_id') is-invalid @enderror">
 							<option value="">Pilih Pejabat</option>
 							@foreach ($tanda_tangans as $tanda_tangan)
 							<option value="{{ $tanda_tangan->id }}" @selected(old('tanda_tangan_id') == $tanda_tangan->id)>
@@ -100,7 +100,7 @@
 					
 					<div class="form-group">
 						<label for="lama" class="form-label">Lamanya Perjalanan Dinas</label>
-						<select name="lama" id="lama" class="form-control form-select @error('lama') is-invalid @enderror">
+						<select name="lama" id="lama" class="form-control form-select select2 @error('lama') is-invalid @enderror">
 							<option value="">Pilih Lama Hari</option>
 							@foreach ($lamas as $lama)
 							<option value="{{ $lama->lama_hari }}" @selected(old('lama') == $lama->lama_hari)>
@@ -141,7 +141,7 @@
 					
 					<div class="form-group">
 						<label for="alat_angkut_id" class="form-label">Alat Angkut</label>
-						<select name="alat_angkut_id" id="alat_angkut_id" class="form-control form-select @error('alat_angkut_id') is-invalid @enderror">
+						<select name="alat_angkut_id" id="alat_angkut_id" class="form-control form-select select2 @error('alat_angkut_id') is-invalid @enderror">
 							<option value="">Pilih Alat Angkut</option>
 							@foreach ($alat_angkuts as $alat_angkut)
 							<option value="{{ $alat_angkut->id }}" @selected(old('alat_angkut_id') == $alat_angkut->id)>
@@ -192,7 +192,7 @@
 					</div>
 					<div class="form-group">
 						<label for="tujuan_id" class="form-label">Tujuan</label>
-						<select name="tujuan_id" id="tujuan_id" class="form-control form-select @error('tujuan_id') is-invalid @enderror">
+						<select name="tujuan_id" id="tujuan_id" class="form-control form-select select2 @error('tujuan_id') is-invalid @enderror">
 							<option value="">Pilih Tujuan</option>
 						</select>
 						@error('tujuan_id')
@@ -213,7 +213,7 @@
 					
 					<div class="form-group">
 						<label for="pegawai_diperintah_id" class="form-label">Pegawai Yang Diperintahkan</label>
-						<select name="pegawai_diperintah_id" id="pegawai_diperintah_id" class="form-control form-select @error('pegawai_diperintah_id') is-invalid @enderror" disabled>
+						<select name="pegawai_diperintah_id" id="pegawai_diperintah_id" class="form-control form-select select2 @error('pegawai_diperintah_id') is-invalid @enderror" disabled>
 							<option value="">Pilih Pegawai Yang Diperintahkan</option>
 							@foreach ($pegawais as $pegawai)
 							<option value="{{ $pegawai->id }}" @selected(old('pegawai_diperintah_id') == $pegawai->id)>
@@ -230,7 +230,7 @@
 					
 					<div class="form-group">
 						<label for="pegawai_mengikuti_id" class="form-label">Pegawai Yang Mengikuti</label>
-						<select name="pegawai" id="pegawai_mengikuti_id" class="form-control form-select @error('pegawai_mengikuti_id') is-invalid @enderror" disabled>
+						<select name="pegawai" id="pegawai_mengikuti_id" class="form-control form-select select2 @error('pegawai_mengikuti_id') is-invalid @enderror" disabled>
 							<option value="">Pilih Pegawai Yang Mengikuti</option>
 							@foreach ($pegawais as $pegawai)
 							<option value="{{ $pegawai->id }}">{{ $pegawai->nama }}</option>
@@ -323,11 +323,11 @@ $(document).ready(function() {
 let selectedPegawai = [];
 
 function addPegawaiDiperintah() {
-	const pegawaiDiperintahSelect = $('#pegawai_diperintah_id');
-	const selectedOption = pegawaiDiperintahSelect.find(':selected');
-	const pegawaiId = selectedOption.val();
-	const pegawaiNama = selectedOption.text();
-	const tujuanId = $('#tujuan_id').val();
+	let pegawaiDiperintahSelect = $('#pegawai_diperintah_id');
+	let selectedOption = pegawaiDiperintahSelect.find(':selected');
+	let pegawaiId = selectedOption.val();
+	let pegawaiNama = selectedOption.text();
+	let tujuanId = $('#tujuan_id').val();
 	let jenisPerdinId = $('#jenis_perdin_id').val();
 	let dalamLuar = $('#dalamLuar').val();
 	
@@ -348,11 +348,11 @@ function addPegawaiDiperintah() {
 }
 
 function addPegawaiToSelected() {
-	const pegawaiSelect = $('#pegawai_mengikuti_id');
-	const selectedOption = pegawaiSelect.find(':selected');
-	const pegawaiId = selectedOption.val();
-	const pegawaiNama = selectedOption.text();
-	const tujuanId = $('#tujuan_id').val();
+	let pegawaiSelect = $('#pegawai_mengikuti_id');
+	let selectedOption = pegawaiSelect.find(':selected');
+	let pegawaiId = selectedOption.val();
+	let pegawaiNama = selectedOption.text();
+	let tujuanId = $('#tujuan_id').val();
 	let jenisPerdinId = $('#jenis_perdin_id').val();
 	let dalamLuar = $('#dalamLuar').val();
 
@@ -382,9 +382,6 @@ function getPegawaiInfo(tujuanId, jenisPerdinId, dalamLuar, pegawaiId, callback)
 		success: function(data) {
 			callback(data.data_pegawai);
 		},
-		error: function(jqXHR, textStatus, errorThrown) {
-			console.error('There was a problem with the fetch operation:', errorThrown);
-		}
 	});
 }
 
@@ -395,16 +392,16 @@ function removePegawaiFromSelected(pegawaiId) {
 }
 
 function updateSelectedPegawaiInput() {
-	const selectedPegawaiInput = $('#selected_pegawais');
+	let selectedPegawaiInput = $('#selected_pegawais');
 	selectedPegawaiInput.val(selectedPegawai.map(pegawai => pegawai.id).join(','));
 }
 
 function updatePegawaiList() {
-	const pegawaiList = $('#pegawai-list');
+	let pegawaiList = $('#pegawai-list');
 	pegawaiList.empty();
 	
 	selectedPegawai.forEach((pegawai, index) => {
-		const row = `
+		let row = `
 		<tr>
 		<td>${index + 1}</td>
 		<td>${pegawai.nama}</td>
@@ -427,8 +424,8 @@ $('#pegawai_diperintah_id').on('change', addPegawaiDiperintah);
 $('#pegawai_mengikuti_id').on('change', addPegawaiToSelected);
 
 function resetSelectedEmployees() {
-    $('#pegawai_diperintah_id').val('').trigger('change');
-    $('#pegawai_mengikuti_id').val('').trigger('change');
+    $('#pegawai_diperintah_id').val('');
+    $('#pegawai_mengikuti_id').val('');
     selectedPegawai = [];
     updatePegawaiList();
     updateSelectedPegawaiInput();
@@ -458,7 +455,7 @@ function calculateTotal() {
 		totalUangHarian += pegawai.uang_harian;
 	});
 	
-	const tfootRow = `
+	let tfootRow = `
 	<tr>
 	<th colspan="4">Total:</th>
 	<td colspan="4">${formatToRupiah(totalUangHarian)}</td>

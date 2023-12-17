@@ -17,7 +17,7 @@
 					
 					<div class="form-group">
 						<label for="jabatan_id" class="form-label">Jabatan</label>
-						<select name="jabatan_id" id="jabatan_id" class="form-control form-select @error('jabatan_id') is-invalid @enderror">
+						<select name="jabatan_id" id="jabatan_id" class="form-control form-select select2 @error('jabatan_id') is-invalid @enderror">
 							<option value="">Pilih Jabatan</option>
 							@foreach ($jabatans as $jabatan)
 							<option value="{{ $jabatan->id }}" @selected(old('jabatan_id') == $jabatan->id)>
@@ -69,7 +69,7 @@
 					</div>
 					<div id="seksi_hide" class="form-group">
 						<label for="seksi_id" class="form-label">Seksi</label>
-						<select name="seksi_id" id="seksi_id" class="form-control form-select @error('seksi_id') is-invalid @enderror">
+						<select name="seksi_id" id="seksi_id" class="form-control form-select select2 @error('seksi_id') is-invalid @enderror">
 							<option value="">Pilih Seksi</option>
 							@foreach ($seksis as $seksi)
 							<option value="{{ $seksi->id }}" @selected(old('seksi_id') == $seksi->id)>
@@ -85,7 +85,7 @@
 					</div>
 					<div id="bidang_hide" class="form-group">
 						<label for="bidang_id" class="form-label">Bidang</label>
-						<select name="bidang_id" id="bidang_id" class="form-control form-select @error('bidang_id') is-invalid @enderror">
+						<select name="bidang_id" id="bidang_id" class="form-control form-select select2 @error('bidang_id') is-invalid @enderror">
 							<option value="">Pilih Bidang</option>
 							@foreach ($bidangs as $bidang)
 							<option value="{{ $bidang->id }}" @selected(old('bidang_id') == $bidang->id)>
@@ -101,7 +101,7 @@
 					</div>
 					<div id="pangkat_hide" class="form-group">
 						<label for="pangkat_id" class="form-label">Pangkat</label>
-						<select name="pangkat_id" id="pangkat_id" class="form-control form-select @error('pangkat_id') is-invalid @enderror">
+						<select name="pangkat_id" id="pangkat_id" class="form-control form-select select2 @error('pangkat_id') is-invalid @enderror">
 							<option value="">Pilih Pangkat</option>
 							@foreach ($pangkats as $pangkat)
 							<option value="{{ $pangkat->id }}" @selected(old('pangkat_id') == $pangkat->id)>
@@ -117,7 +117,7 @@
 					</div>
 					<div id="golongan_hide" class="form-group">
 						<label for="golongan_id" class="form-label">Golongan</label>
-						<select name="golongan_id" id="golongan_id" class="form-control form-select @error('golongan_id') is-invalid @enderror">
+						<select name="golongan_id" id="golongan_id" class="form-control form-select select2 @error('golongan_id') is-invalid @enderror">
 							<option value="">Pilih Golongan</option>
 							@foreach ($golongans as $golongan)
 							<option value="{{ $golongan->id }}" @selected(old('golongan_id') == $golongan->id)>

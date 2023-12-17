@@ -27,7 +27,7 @@
 					</div>
 					<div class="form-group">
 						<label for="jenis_perdin_id" class="form-label">Jenis Perdin</label>
-						<select name="jenis_perdin_id" id="jenis_perdin_id" class="form-control form-select @error('jenis_perdin_id') is-invalid @enderror">
+						<select name="jenis_perdin_id" id="jenis_perdin_id" class="form-control form-select select2 @error('jenis_perdin_id') is-invalid @enderror">
 							<option value="">Pilih Jenis Perdin</option>
 							@foreach ($jenis_perdins as $jenis_perdin)
 							<option value="{{ $jenis_perdin->id }}" @selected(old('jenis_perdin_id', $provinsi->jenis_perdin_id) == $jenis_perdin->id)>
