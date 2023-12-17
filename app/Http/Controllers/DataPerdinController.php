@@ -80,8 +80,11 @@ class DataPerdinController extends Controller
             })
             ->get()
             ->map(function ($data_perdin) {
+                $status = ($data_perdin->status->approve === null) ? 'Baru' : (($data_perdin->status->approve === 0) ? 'Ditolak' : 'Diterima');
+                
                 return [
                     'id' => $data_perdin->id,
+                    'status' => $status,
                     'pegawai_diperintah' => $data_perdin->pegawai_diperintah->nama,
                     'pegawai_mengikuti' => $data_perdin->pegawai_mengikuti->pluck('nama'),
                     'tujuan' => $data_perdin->tujuan->nama,
@@ -90,7 +93,7 @@ class DataPerdinController extends Controller
                 ];
             });
     }
-    
+
     public function apiDataPerdins(Request $request, $status = null)
     {
         $queryConditions = [];
