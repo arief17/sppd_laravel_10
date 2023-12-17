@@ -43,7 +43,7 @@ class DataPerdin extends Model
             } elseif ($status === 'no_laporan') {
                 $query->where('approve', 1)->where('lap', null);
             } elseif ($status === 'belum_bayar') {
-                $query->where('approve', 1)->where('lap', 1);
+                $query->where('approve', 1)->where('lap', 1)->where('kwitansi', null);
             } elseif ($status === 'sudah_bayar') {
                 $query->where('approve', 1)->where('lap', 1)->where('kwitansi', 1);
             }

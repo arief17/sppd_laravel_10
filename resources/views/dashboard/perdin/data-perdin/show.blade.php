@@ -7,7 +7,7 @@
 		<div class="card">
 			<div class="card-header d-flex justify-content-between">
 				<h4 class="card-title mb-1">{{ $title }}</h4>
-				<a class="btn btn-secondary btn-sm" href="{{ route('data-perdin.index') }}">
+				<a class="btn btn-secondary btn-sm" href="{{ route('data-perdin.index', 'baru') }}">
 					<i class="fa fa-reply"></i>
 				</a>
 			</div>
