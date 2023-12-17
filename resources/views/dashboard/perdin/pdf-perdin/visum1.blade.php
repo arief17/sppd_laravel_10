@@ -180,7 +180,8 @@
 				<tr>
 					<td style="text-align: center; width: 1%">10</td>
 					<td colspan="2">Keterangan Lain-lain</td>
-					<td colspan="3"></td>
+					<td style="border-right: 0; width: 1%;">:</td>
+					<td colspan="2" style="border-left: 0;"></td>
 				</tr>
 			</table>
 		</div>
@@ -200,7 +201,7 @@
 			<div style="text-align: center;">
 				<p style="margin-top: 10px;" style="text-transform: uppercase; font-weight: bold;">{!! $data_perdin->ttdFormated !!}</p>
 				
-				<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" height="80">
+				<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" height="70">
 				<p style="text-decoration: underline; font-weight: bold;">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
 				<p>NIP.{{ $data_perdin->tanda_tangan->pegawai->nip }}</p>
 			</div>
