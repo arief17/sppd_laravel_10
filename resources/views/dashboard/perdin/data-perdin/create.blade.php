@@ -330,6 +330,8 @@ function addPegawaiDiperintah() {
 	let tujuanId = $('#tujuan_id').val();
 	let jenisPerdinId = $('#jenis_perdin_id').val();
 	let dalamLuar = $('#dalamLuar').val();
+
+	selectedPegawai = selectedPegawai.filter(pegawai => pegawai.keterangan !== 'Pegawai yang ditugaskan');
 	
 	if (!selectedPegawai.find(pegawai => pegawai.id === pegawaiId)) {
 		getPegawaiInfo(tujuanId, jenisPerdinId, dalamLuar ? dalamLuar : 'null', pegawaiId, function(dataPegawai) {
