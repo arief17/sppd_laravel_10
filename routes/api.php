@@ -28,8 +28,8 @@ Route::middleware('auth:sanctum')->post('/logout', [LoginController::class, 'api
 Route::get('/data-perdin/status/{status?}', [DataPerdinController::class, 'apiDataPerdins']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::put('/status-perdin/approve', [StatusPerdinController::class, 'apiApprove']);
-    Route::put('/status-perdin/tolak', [StatusPerdinController::class, 'apiTolak']);
 });
+Route::get('/status-perdin/approve', [StatusPerdinController::class, 'apiApprove']);
+Route::get('/status-perdin/tolak', [StatusPerdinController::class, 'apiTolak']);
 
 Route::get('/get-user/{user}', [UserController::class, 'getUser']);
