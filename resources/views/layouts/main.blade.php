@@ -421,7 +421,7 @@
 												<li>
 													@php
 													$totalBelumBayar = \App\Models\DataPerdin::whereHas('status', function ($query) {
-														$query->where('approve', 1)->where('lap', 1);
+														$query->where('approve', 1)->where('lap', 1)->where('kwitansi', null);
 													})->count();
 													@endphp
 													<a class="sub-side-menu__item {{ request()->routeIs('data-perdin.index') && request('status') == 'belum_bayar' ? 'active' : '' }}" href="{{ route('data-perdin.index', 'belum_bayar') }}">Belum Bayar 

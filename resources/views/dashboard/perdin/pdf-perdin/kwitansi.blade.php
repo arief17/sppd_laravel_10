@@ -32,7 +32,7 @@
 	</style>
 </head>
 <body style="font-family: Times, serif; margin: 30px;">
-	@foreach ($kwitansi_perdin->pegawais as $pegawai)
+	@foreach ($kwitansi_perdin->pegawais as $index => $pegawai)
 
 	<div style="float: left;">
 		<img src="data:image/png;base64,{{ $imgLogo }}" width="80">
@@ -195,7 +195,9 @@
 		</tr>
 	</table>
 
-	<hr style="margin: 10px 0; border: 1px dashed black;"> {{-- Pemisah --}}
+	@if ($index % 2 === 0)
+        <hr style="margin: 10px 0; border: 1px dashed black;"> {{-- Pemisah --}}
+    @endif
 	
 	@endforeach
 </body>
