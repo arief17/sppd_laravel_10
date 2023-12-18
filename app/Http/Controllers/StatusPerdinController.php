@@ -29,15 +29,13 @@ class StatusPerdinController extends Controller
     public function apiApprove(Request $request)
     {
         $id = $request->get('id');
-        DB::table('data_perdins')
-            ->join('status_perdins','data_perdins.status_id','=','status_perdins.id')
-            ->where('data_perdins.id',$id)
-            ->update([
-                'status_perdins.approve' => 1,
-            ]);
+       $status_id = DB::table('data_perdins')
+            ->select('status_id')
+            ->where('id',$id)
+            ->first();
         // StatusPerdin::where('id', $id)->update(['approve' => 1]);
-        return response()->json(['message' => 'Status Perdin berhasil diapprove'], 200);
-        // return response()->json(['message' => $id], 200);
+        // return response()->json(['message' => 'Status Perdin berhasil diapprove'], 200);
+        return response()->json(['message' => $status_id], 200);
     }
     
     public function apiTolak(Request $request)
