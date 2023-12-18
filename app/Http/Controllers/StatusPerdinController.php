@@ -33,6 +33,12 @@ class StatusPerdinController extends Controller
             ->select('status_id')
             ->where('id',$id)
             ->first();
+        
+        DB::table('status_perdins')
+            ->where('id',$status_id)
+            ->update([
+                'approve' => 1
+            ]);
         // StatusPerdin::where('id', $id)->update(['approve' => 1]);
         // return response()->json(['message' => 'Status Perdin berhasil diapprove'], 200);
         return response()->json(['message' => $status_id], 200);
