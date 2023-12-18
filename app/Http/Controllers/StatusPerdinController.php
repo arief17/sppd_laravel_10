@@ -27,7 +27,7 @@ class StatusPerdinController extends Controller
 
     public function apiApprove(Request $request)
     {
-        $id = $request->input('id');
+        $id = $request->query('id');
         StatusPerdin::where('id', $id)->update(['approve' => 1]);
         return response()->json(['message' => 'Status Perdin berhasil diapprove'], 200);
     }
@@ -39,7 +39,7 @@ class StatusPerdinController extends Controller
         ]);
 
         $validatedData['approve'] = 0;
-        $id = $request->input('id');
+        $id = $request->query('id');
         
         StatusPerdin::where('id', $id)->update($validatedData);
         return response()->json(['message' => 'Status Perdin berhasil ditolak'], 200);
