@@ -27,9 +27,10 @@ class StatusPerdinController extends Controller
     
     public function apiApprove(Request $request)
     {
-        $id = $request->query('id');
-        StatusPerdin::where('id', $id)->update(['approve' => 1]);
-        return response()->json(['message' => 'Status Perdin berhasil diapprove'], 200);
+        $id = $request->get('id');
+        // StatusPerdin::where('id', $id)->update(['approve' => 1]);
+        // return response()->json(['message' => 'Status Perdin berhasil diapprove'], 200);
+        return response()->json(['message' => $id], 200);
     }
     
     public function apiTolak(Request $request)
