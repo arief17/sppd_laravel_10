@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bendahara;
+use App\Models\Jabatan;
 use App\Models\KwitansiPerdin;
 use Illuminate\Support\Facades\App;
 use App\Models\DataPerdin;
@@ -32,12 +33,14 @@ class PerdinPdfController extends Controller
     {
         App::setLocale('id');
         $data_perdin = DataPerdin::where('slug', $slug)->first();
+        $ttd_kepala = Jabatan::where('nama', 'like', '%Kepala Dinas%')->first();
 
         $imgLogo = base64_encode(file_get_contents(public_path('assets/img/logo-banten2.png')));
         
         $pdf = Pdf::loadView('dashboard.perdin.pdf-perdin.visum1', [
             'data_perdin' => $data_perdin,
             'imgLogo' => $imgLogo,
+            'ttd_kepala' => $ttd_kepala,
         ]);
         
         $pdf->setPaper(array(0,0,609.4488,935.433), 'portrait');
