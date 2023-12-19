@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bendahara;
-use App\Models\Jabatan;
 use App\Models\KwitansiPerdin;
+use App\Models\TandaTangan;
 use Illuminate\Support\Facades\App;
 use App\Models\DataPerdin;
 use App\Models\LaporanPerdin;
@@ -33,7 +33,7 @@ class PerdinPdfController extends Controller
     {
         App::setLocale('id');
         $data_perdin = DataPerdin::where('slug', $slug)->first();
-        $ttd_kepala = Jabatan::where('nama', 'like', '%Kepala Dinas%')->first();
+        $ttd_kepala = TandaTangan::where('nama', 'like', '%Kepala Dinas%')->first();
 
         $imgLogo = base64_encode(file_get_contents(public_path('assets/img/logo-banten2.png')));
         
