@@ -26,41 +26,28 @@ class DataPerdinController extends Controller
 {
     public function getTujuan($jenisPerdinId)
     {
-        $tujuan = [];
+        $tujuan = collect();
         $jenisPerdin = JenisPerdin::find($jenisPerdinId);
         
-        if ($jenisPerdin->slug === 'perjalanan-dinas-dalam-kota') {
-            $tujuan = $jenisPerdin->kota_kabupatens->pluck('nama', 'id');
-        } elseif ($jenisPerdin->slug === 'perjalanan-dinas-biasa') {
-            $dalamLuarValue = request()->query('dalam_luar');
-            
-            if ($dalamLuarValue === 'Dalam Provinsi') {
-                $tujuan = $jenisPerdin->kota_kabupatens->pluck('nama', 'id');
-            } elseif ($dalamLuarValue === 'Luar Provinsi') {
-                $tujuan = $jenisPerdin->provinsis->pluck('nama', 'id');
-            }
-        }
+        $kotaKabupatenTujuan = $jenisPerdin->kota_kabupatens->map(function ($item) {
+            return ['id' => $item->id, 'nama' => $item->nama, 'wilayah_type' => 'App\Models\KotaKabupaten'];
+        });
+        
+        $provinsiTujuan = $jenisPerdin->provinsis->map(function ($item) {
+            return ['id' => $item->id, 'nama' => $item->nama, 'wilayah_type' => 'App\Models\Provinsi'];
+        });
+        
+        $tujuan = $kotaKabupatenTujuan->merge($provinsiTujuan);
         
         return response()->json($tujuan);
     }
     
-    public function getPegawaiInfo($tujuanId, $jenisPerdinId, $dalamLuar, $pegawaiId)
+    public function getPegawaiInfo($tujuanId, $wilayahType, $pegawaiId)
     {
         $pegawai = Pegawai::find($pegawaiId);
         $pegawaiGolongan = str_replace('-', '_', $pegawai->golongan->slug);
-
-        $wilayah_type = '';
-        $jenis_perdin = JenisPerdin::find($jenisPerdinId);
-        if ($jenis_perdin->slug === 'perjalanan-dinas-dalam-kota') {
-            $wilayah_type = 'App\Models\KotaKabupaten';
-        } elseif ($jenis_perdin->slug === 'perjalanan-dinas-biasa') {
-            if ($dalamLuar === 'Dalam Provinsi') {
-                $wilayah_type = 'App\Models\KotaKabupaten';
-            } elseif ($dalamLuar === 'Luar Provinsi') {
-                $wilayah_type = 'App\Models\Provinsi';
-            }
-        }
-        $uangHarian = UangHarian::where('wilayah_id', $tujuanId)->where('wilayah_type', $wilayah_type)->value($pegawaiGolongan);
+        
+        $uangHarian = UangHarian::where('wilayah_id', $tujuanId)->where('wilayah_type', $wilayahType)->value($pegawaiGolongan);
         
         return response()->json(['data_pegawai' => [
             'nip' => $pegawai->nip ?? '-',
@@ -73,50 +60,45 @@ class DataPerdinController extends Controller
     private function getDataPerdins($queryConditions)
     {
         return DataPerdin::latest()
-            ->when($queryConditions, function ($query) use ($queryConditions) {
-                return $query->whereHas('status', function ($query) use ($queryConditions) {
-                    $query->where($queryConditions);
-                });
-            })
-            ->get()
-            ->map(function ($data_perdin) {
-                $status = ($data_perdin->status->approve === null) ? 'Baru' : (($data_perdin->status->approve === 0) ? 'Ditolak' : 'Diterima');
-                
-                return [
-                    'id' => $data_perdin->id,
-                    'status' => $status,
-                    'pegawai_diperintah' => $data_perdin->pegawai_diperintah->nama,
-                    'pegawai_mengikuti' => $data_perdin->pegawai_mengikuti->pluck('nama'),
-                    'tujuan' => $data_perdin->tujuan->nama,
-                    'tgl_berangkat' => $data_perdin->tgl_berangkat,
-                    'lama' => $data_perdin->lama,
-                ];
+        ->when($queryConditions, function ($query) use ($queryConditions) {
+            return $query->whereHas('status', function ($query) use ($queryConditions) {
+                $query->where($queryConditions);
             });
+        })
+        ->get()
+        ->map(function ($data_perdin) {
+            $status = ($data_perdin->status->approve === null) ? 'Baru' : (($data_perdin->status->approve === 0) ? 'Ditolak' : 'Diterima');
+            
+            return [
+                'id' => $data_perdin->id,
+                'status' => $status,
+                'pegawai_diperintah' => $data_perdin->pegawai_diperintah->nama,
+                'pegawai_mengikuti' => $data_perdin->pegawai_mengikuti->pluck('nama'),
+                'tujuan' => $data_perdin->tujuan->nama,
+                'tgl_berangkat' => $data_perdin->tgl_berangkat,
+                'lama' => $data_perdin->lama,
+            ];
+        });
     }
-
+    
     public function apiDataPerdins(Request $request, $status = null)
     {
         $queryConditions = [];
-    
-        switch ($status) {
-            case 'baru':
-                $queryConditions = ['approve' => null];
-                break;
-            case 'tolak':
-                $queryConditions = ['approve' => 0];
-                break;
-            case 'terima':
-                $queryConditions = ['approve' => 1];
-                break;
-            default:
-                $queryConditions = null;
-                break;
+        
+        if ($status === 'baru') {
+            $queryConditions = ['approve' => null];
+        } elseif ($status === 'tolak') {
+            $queryConditions = ['approve' => 0];
+        } elseif ($status === 'terima') {
+            $queryConditions = ['approve' => 1];
+        } else {
+            $queryConditions = null;
         }
-    
+        
         $data_perdins = $this->getDataPerdins($queryConditions);
         return response()->json($data_perdins);
     }
-
+    
     /**
     * Display a listing of the resource.
     */
@@ -186,20 +168,7 @@ class DataPerdinController extends Controller
             $validatedData['author_id'] = auth()->user()->id;
             $validatedData['kedudukan_id'] = KotaKabupaten::where('nama', 'LIKE', '%' . $request->kedudukan_id . '%')->value('id');
             
-            $jenis_perdin = JenisPerdin::find($request->jenis_perdin_id);
-            $tujuan = null;
-            
-            if ($jenis_perdin->slug === 'perjalanan-dinas-dalam-kota') {
-                $tujuan = KotaKabupaten::find($request->tujuan_id);
-            } elseif ($jenis_perdin->slug === 'perjalanan-dinas-biasa') {
-                if ($request->dalamLuar === 'Dalam Provinsi') {
-                    $tujuan = KotaKabupaten::find($request->tujuan_id);
-                } elseif ($request->dalamLuar === 'Luar Provinsi') {
-                    $tujuan = Provinsi::find($request->tujuan_id);
-                }
-            }
-            $validatedData['tujuan_type'] = get_class($tujuan);
-            $validatedData['tujuan_id'] = $tujuan->id;
+            $validatedData['tujuan_type'] = $request->tujuan_type;
             
             $selectedPegawaiIds = explode(',', $request->pegawai_mengikuti_id);
             $validatedData['jumlah_pegawai'] = count($selectedPegawaiIds);
@@ -291,15 +260,15 @@ class DataPerdinController extends Controller
         return DB::transaction(function () use ($dataPerdin) {
             $pegawaiDiperintah = $dataPerdin->pegawai_diperintah;
             $pegawaiMengikuti = $dataPerdin->pegawai_mengikuti;
-    
+            
             $pegawaiDiperintah->ketentuan->decrement('jumlah_perdin');
-    
+            
             foreach ($pegawaiMengikuti as $pegawai) {
                 $pegawai->ketentuan->decrement('jumlah_perdin');
             }
-    
+            
             $dataPerdin->delete();
-    
+            
             return redirect()->route('data-perdin.index', 'baru')->with('success', 'Data Perdin berhasil dihapus!');
         }, 2);
     }
