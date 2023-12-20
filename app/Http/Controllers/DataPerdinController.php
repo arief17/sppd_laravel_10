@@ -11,7 +11,6 @@ use App\Models\KwitansiPerdin;
 use App\Models\Lama;
 use App\Models\LaporanPerdin;
 use App\Models\Pegawai;
-use App\Models\Provinsi;
 use App\Models\StatusPerdin;
 use App\Models\TandaTangan;
 use App\Models\UangHarian;
@@ -168,7 +167,7 @@ class DataPerdinController extends Controller
             $validatedData['author_id'] = auth()->user()->id;
             $validatedData['kedudukan_id'] = KotaKabupaten::where('nama', 'LIKE', '%' . $request->kedudukan_id . '%')->value('id');
             
-            $validatedData['tujuan_type'] = $request->tujuan_type;
+            $validatedData['tujuan_type'] = 'App\Models\\' . $request->tujuan_type;
             
             $selectedPegawaiIds = explode(',', $request->pegawai_mengikuti_id);
             $validatedData['jumlah_pegawai'] = count($selectedPegawaiIds);
