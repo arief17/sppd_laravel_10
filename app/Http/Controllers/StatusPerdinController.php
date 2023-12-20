@@ -11,6 +11,7 @@ class StatusPerdinController extends Controller
     public function approve($id)
     {
         $status_id = DataPerdin::find($id)->select('status_id');
+        dd($status_id);
         StatusPerdin::where('id', $status_id)->update(['approve' => 1]);
         return redirect()->route('data-perdin.index', 'no_laporan')->with('success', 'Status Perdin berhasil diperbarui!');
     }
