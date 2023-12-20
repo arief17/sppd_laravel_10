@@ -10,8 +10,7 @@ class StatusPerdinController extends Controller
 {
     public function approve($id)
     {
-        $status_id = DataPerdin::find($id)->value('status_id');
-        StatusPerdin::where('id', $status_id)->update(['approve' => 1]);
+        StatusPerdin::where('id', $id)->update(['approve' => 1]);
         return redirect()->route('data-perdin.index', 'no_laporan')->with('success', 'Status Perdin berhasil diperbarui!');
     }
     
@@ -23,8 +22,7 @@ class StatusPerdinController extends Controller
         
         $validatedData['approve'] = 0;
         
-        $status_id = DataPerdin::find($id)->value('status_id');
-        StatusPerdin::where('id', $status_id)->update($validatedData);
+        StatusPerdin::where('id', $id)->update($validatedData);
         return redirect()->route('data-perdin.index', 'no_laporan')->with('success', 'Status Perdin berhasil diperbarui!');
     }
     
