@@ -30,11 +30,11 @@ class DataPerdinController extends Controller
         $jenisPerdin = JenisPerdin::find($jenisPerdinId);
         
         $kotaKabupatenTujuan = $jenisPerdin->kota_kabupatens->map(function ($item) {
-            return ['id' => $item->id, 'nama' => $item->nama, 'wilayah_type' => 'App\Models\KotaKabupaten'];
+            return ['id' => $item->id, 'nama' => $item->nama, 'wilayah_type' => 'KotaKabupaten'];
         });
         
         $provinsiTujuan = $jenisPerdin->provinsis->map(function ($item) {
-            return ['id' => $item->id, 'nama' => $item->nama, 'wilayah_type' => 'App\Models\Provinsi'];
+            return ['id' => $item->id, 'nama' => $item->nama, 'wilayah_type' => 'Provinsi'];
         });
         
         $tujuan = $kotaKabupatenTujuan->merge($provinsiTujuan);
@@ -47,7 +47,7 @@ class DataPerdinController extends Controller
         $pegawai = Pegawai::find($pegawaiId);
         $pegawaiGolongan = str_replace('-', '_', $pegawai->golongan->slug);
         
-        $uangHarian = UangHarian::where('wilayah_id', $tujuanId)->where('wilayah_type', $wilayahType)->value($pegawaiGolongan);
+        $uangHarian = UangHarian::where('wilayah_id', $tujuanId)->where('wilayah_type', 'App\Models\\' . $wilayahType)->value($pegawaiGolongan);
         
         return response()->json(['data_pegawai' => [
             'nip' => $pegawai->nip ?? '-',
