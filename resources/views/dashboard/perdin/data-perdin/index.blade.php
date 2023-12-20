@@ -184,7 +184,6 @@
 				confirmButtonText: 'Ok',
 			});
 		});
-		
 	});
 </script>
 

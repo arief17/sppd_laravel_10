@@ -205,27 +205,4 @@
 	});
 </script>
 
-@if(session()->has('success'))
-<script>
-	$(document).ready(function() {
-		var Toast = Swal.mixin({
-			toast: true,
-			position: 'top',
-			showConfirmButton: false,
-			timer: 10000,
-			timerProgressBar: true,
-			didOpen: (toast) => {
-				toast.addEventListener('mouseenter', Swal.stopTimer)
-				toast.addEventListener('mouseleave', Swal.resumeTimer)
-			}
-		});
-		
-		Toast.fire({
-			icon: 'success',
-			title: '{{ session('success') }}'
-		});
-	});
-</script>
-@endif
-
 @endsection
