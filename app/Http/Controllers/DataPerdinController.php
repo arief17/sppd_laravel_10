@@ -6,7 +6,6 @@ use App\Models\AlatAngkut;
 use App\Models\DataPerdin;
 use App\Models\JenisPerdin;
 use App\Models\Ketentuan;
-use App\Models\KotaKabupaten;
 use App\Models\KwitansiPerdin;
 use App\Models\Lama;
 use App\Models\LaporanPerdin;
@@ -25,28 +24,23 @@ class DataPerdinController extends Controller
 {
     public function getTujuan($jenisPerdinId)
     {
-        $tujuan = collect();
         $jenisPerdin = JenisPerdin::find($jenisPerdinId);
-        
-        $kotaKabupatenTujuan = $jenisPerdin->kota_kabupatens->map(function ($item) {
-            return ['id' => $item->id, 'nama' => $item->nama, 'wilayah_type' => 'KotaKabupaten'];
+        $tujuan = $jenisPerdin->wilayahs->map(function ($wilayah) {
+            return [
+                'id' => $wilayah->id,
+                'nama' => $wilayah->nama,
+            ];
         });
-        
-        $provinsiTujuan = $jenisPerdin->provinsis->map(function ($item) {
-            return ['id' => $item->id, 'nama' => $item->nama, 'wilayah_type' => 'Provinsi'];
-        });
-        
-        $tujuan = $kotaKabupatenTujuan->merge($provinsiTujuan);
         
         return response()->json($tujuan);
     }
     
-    public function getPegawaiInfo($tujuanId, $wilayahType, $pegawaiId)
+    public function getPegawaiInfo($tujuanId, $pegawaiId)
     {
         $pegawai = Pegawai::find($pegawaiId);
         $pegawaiGolongan = str_replace('-', '_', $pegawai->golongan->slug);
         
-        $uangHarian = UangHarian::where('wilayah_id', $tujuanId)->where('wilayah_type', 'App\Models\\' . $wilayahType)->value($pegawaiGolongan);
+        $uangHarian = UangHarian::where('wilayah_id', $tujuanId)->value($pegawaiGolongan);
         
         return response()->json(['data_pegawai' => [
             'nip' => $pegawai->nip ?? '-',
@@ -129,7 +123,6 @@ class DataPerdinController extends Controller
         
         return view('dashboard.perdin.data-perdin.create', [
             'title' => 'Tambah Data Perdin',
-            'kota_kabupatens' => KotaKabupaten::all(),
             'alat_angkuts' => AlatAngkut::all(),
             'jenis_perdins' => JenisPerdin::all(),
             'tanda_tangans' => TandaTangan::all(),
@@ -165,10 +158,8 @@ class DataPerdinController extends Controller
             
             $validatedData['slug'] = SlugService::createSlug(DataPerdin::class, 'slug', $request->maksud);
             $validatedData['author_id'] = auth()->user()->id;
-            $validatedData['kedudukan_id'] = KotaKabupaten::where('nama', 'LIKE', '%' . $request->kedudukan_id . '%')->value('id');
-            
-            $validatedData['tujuan_type'] = 'App\Models\\' . $request->tujuan_type;
-            
+            $validatedData['kedudukan'] = 'Kota Serang';
+
             $selectedPegawaiIds = explode(',', $request->pegawai_mengikuti_id);
             $validatedData['jumlah_pegawai'] = count($selectedPegawaiIds);
             
@@ -184,10 +175,10 @@ class DataPerdinController extends Controller
             foreach ($selectedPegawaiIds as $pegawaiId) {
                 $pegawai = Pegawai::find($pegawaiId);
                 $pegawaiGolongan = str_replace('-', '_', $pegawai->golongan->slug);
-                $uangHarian = UangHarian::where('wilayah_id', $validatedData['tujuan_id'])->where('wilayah_type', $validatedData['tujuan_type'])->value($pegawaiGolongan);
-                $uangTransport = UangTransport::where('wilayah_id', $validatedData['tujuan_id'])->where('wilayah_type', $validatedData['tujuan_type'])->value($pegawaiGolongan);
-                $uangTiket = UangTransport::where('wilayah_id', $validatedData['tujuan_id'])->where('wilayah_type', $validatedData['tujuan_type'])->value('harga_tiket');
-                $uangPenginapan = UangPenginapan::where('wilayah_id', $validatedData['tujuan_id'])->where('wilayah_type', $validatedData['tujuan_type'])->value($pegawaiGolongan);
+                $uangHarian = UangHarian::where('wilayah_id', $validatedData['tujuan_id'])->value($pegawaiGolongan);
+                $uangTransport = UangTransport::where('wilayah_id', $validatedData['tujuan_id'])->value($pegawaiGolongan);
+                $uangTiket = UangTransport::where('wilayah_id', $validatedData['tujuan_id'])->value('harga_tiket');
+                $uangPenginapan = UangPenginapan::where('wilayah_id', $validatedData['tujuan_id'])->value($pegawaiGolongan);
                 $kwitansi_perdin->pegawais()->attach($pegawaiId, [
                     'uang_harian' => $uangHarian ?? 0,
                     'uang_transport' => $uangTransport ?? 0,

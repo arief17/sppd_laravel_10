@@ -7,35 +7,18 @@
 		<div class="card box-shadow-0 ">
 			<div class="card-header d-flex justify-content-between">
 				<h4 class="card-title mb-1">{{ $title }}</h4>
-				<a class="btn btn-secondary btn-sm" href="{{ route('kota-kabupaten.index') }}">
+				<a class="btn btn-secondary btn-sm" href="{{ route('wilayah.index') }}">
 					<i class="fa fa-reply"></i>
 				</a>
 			</div>
 			<div class="card-body pt-0">
-				<form action="{{ route('kota-kabupaten.show', $kota_kabupaten->slug) }}" method="post">
+				<form action="{{ route('wilayah.index') }}" method="post">
 					@csrf
-					@method('put')
 					
 					<div class="form-group">
 						<label for="nama">Nama</label>
-						<input name="nama" value="{{ old('nama', $kota_kabupaten->nama) }}" type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukan nama">
+						<input name="nama" value="{{ old('nama') }}" type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukan nama">
 						@error('nama')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
-					<div class="form-group">
-						<label for="provinsi_id" class="form-label">Provinsi</label>
-						<select name="provinsi_id" id="provinsi_id" class="form-control form-select select2 @error('provinsi_id') is-invalid @enderror">
-							<option value="">Pilih Provinsi</option>
-							@foreach ($provinsis as $provinsi)
-							<option value="{{ $provinsi->id }}" @selected(old('provinsi_id', $kota_kabupaten->provinsi_id) == $provinsi->id)>
-								{{ $provinsi->nama }}
-							</option>
-							@endforeach
-						</select>
-						@error('provinsi_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
@@ -46,7 +29,7 @@
 						<select name="jenis_perdin_id" id="jenis_perdin_id" class="form-control form-select select2 @error('jenis_perdin_id') is-invalid @enderror">
 							<option value="">Pilih Jenis Perdin</option>
 							@foreach ($jenis_perdins as $jenis_perdin)
-							<option value="{{ $jenis_perdin->id }}" @selected(old('jenis_perdin_id', $kota_kabupaten->jenis_perdin_id) == $jenis_perdin->id)>
+							<option value="{{ $jenis_perdin->id }}" @selected(old('jenis_perdin_id') == $jenis_perdin->id)>
 								{{ $jenis_perdin->nama }}
 							</option>
 							@endforeach

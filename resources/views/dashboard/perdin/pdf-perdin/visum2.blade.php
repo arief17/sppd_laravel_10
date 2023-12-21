@@ -24,7 +24,7 @@
 					<tr>
 						<td rowspan="4" style="vertical-align: top; width: 1%;">I.</td>
 						<td style="white-space: nowrap; width: 1%; padding-right: 20px;">Berangkat dari</td>
-						<td>: {{ $data_perdin->kedudukan->nama }}</td>
+						<td>: {{ $data_perdin->kedudukan }}</td>
 					</tr>
 					<tr>
 						<td colspan="2">(Tempat Kedudukan)</td>
@@ -41,9 +41,9 @@
 				<div style="text-align: center;">
 					<p style="margin-top: 10px;" style="text-transform: uppercase; font-weight: bold;">Kepala Dinas</p>
 					
-					<img src="data:image/png;base64,{{ $ttd_kepala->fileTtdEncoded }}" alt="{{ $ttd_kepala->nama }}" height="60">
-					<p style="text-decoration: underline; font-weight: bold;">{{ $ttd_kepala->pegawai->nama }}</p>
-					<p>NIP.{{ $ttd_kepala->pegawai->nip }}</p>
+					<img src="data:image/png;base64,{{ $ttd_kepala->fileTtdEncoded ?? '' }}" alt="{{ $ttd_kepala->nama ?? '' }}" height="60">
+					<p style="text-decoration: underline; font-weight: bold;">{{ $ttd_kepala->pegawai->nama ?? '' }}</p>
+					<p>NIP.{{ $ttd_kepala->pegawai->nip ?? '' }}</p>
 				</div>
 			</td>
 		</tr>
@@ -81,7 +81,7 @@
 					</tr>
 					<tr>
 						<td style="white-space: nowrap; width: 1%; padding-right: 20px;">Ke</td>
-						<td>: {{ $data_perdin->kedudukan->nama }}</td>
+						<td>: {{ $data_perdin->kedudukan }}</td>
 					</tr>
 					<tr>
 						<td style="white-space: nowrap; width: 1%; padding-right: 20px;">Pada Tanggal</td>
@@ -273,7 +273,7 @@
 					<tr>
 						<td rowspan="4" style="vertical-align: top; width: 1%;">VI.</td>
 						<td style="white-space: nowrap; width: 1%; padding-right: 20px;">Tiba di</td>
-						<td>: {{ $data_perdin->kedudukan->nama }}</td>
+						<td>: {{ $data_perdin->kedudukan }}</td>
 					</tr>
 					<tr>
 						<td style="white-space: nowrap; width: 1%; padding-right: 20px;">Pada Tanggal</td>
@@ -283,9 +283,9 @@
 				<div style="text-align: center;">
 					<p style="margin-top: 10px;" style="text-transform: uppercase; font-weight: bold;">Kepala Dinas</p>
 					
-					<img src="data:image/png;base64,{{ $ttd_kepala->fileTtdEncoded }}" alt="{{ $ttd_kepala->nama }}" height="60">
-					<p style="text-decoration: underline; font-weight: bold;">{{ $ttd_kepala->pegawai->nama }}</p>
-					<p>NIP.{{ $ttd_kepala->pegawai->nip }}</p>
+					<img src="data:image/png;base64,{{ $ttd_kepala->fileTtdEncoded ?? '' }}" alt="{{ $ttd_kepala->nama ?? '' }}" height="60">
+					<p style="text-decoration: underline; font-weight: bold;">{{ $ttd_kepala->pegawai->nama ?? '' }}</p>
+					<p>NIP.{{ $ttd_kepala->pegawai->nip ?? '' }}</p>
 				</div>
 			</td>
 			<td style="border: 1px solid black; width: 50%;">
@@ -293,9 +293,9 @@
 				<div style="text-align: center;">
 					<p style="margin-top: 10px;" style="text-transform: uppercase; font-weight: bold;">Kepala Dinas</p>
 					
-					<img src="data:image/png;base64,{{ $ttd_kepala->fileTtdEncoded }}" alt="{{ $ttd_kepala->nama }}" height="60">
-					<p style="text-decoration: underline; font-weight: bold;">{{ $ttd_kepala->pegawai->nama }}</p>
-					<p>NIP.{{ $ttd_kepala->pegawai->nip }}</p>
+					<img src="data:image/png;base64,{{ $ttd_kepala->fileTtdEncoded ?? '' }}" alt="{{ $ttd_kepala->nama ?? '' }}" height="60">
+					<p style="text-decoration: underline; font-weight: bold;">{{ $ttd_kepala->pegawai->nama ?? '' }}</p>
+					<p>NIP.{{ $ttd_kepala->pegawai->nip ?? '' }}</p>
 				</div>
 			</td>
 		</tr>

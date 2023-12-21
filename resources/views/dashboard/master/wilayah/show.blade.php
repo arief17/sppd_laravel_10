@@ -7,7 +7,7 @@
 		<div class="card">
 			<div class="card-header d-flex justify-content-between">
 				<h4 class="card-title mb-1">{{ $title }}</h4>
-				<a class="btn btn-secondary btn-sm" href="{{ route('provinsi.index') }}">
+				<a class="btn btn-secondary btn-sm" href="{{ route('wilayah.index') }}">
 					<i class="fa fa-reply"></i>
 				</a>
 			</div>
@@ -16,24 +16,24 @@
 					<table class="table mg-b-0 text-md-nowrap border-bottom">
 						<tr>
 							<th style="white-space: nowrap; width: 1%;">Nama:</th>
-							<td>{{ $provinsi->nama }}</td>
+							<td>{{ $wilayah->nama }}</td>
 						</tr>
 						<tr>
 							<th style="white-space: nowrap; width: 1%;">Jenis Perdin:</th>
-							<td>{{ $provinsi->jenis_perdin->nama }}</td>
+							<td>{{ $wilayah->jenis_perdin->nama }}</td>
 						</tr>
 					</table>
 				</div>
 			</div>
 			<div class="card-footer">
-				<a class="btn btn-info me-2" href="{{ route('provinsi.edit', $provinsi->slug) }}">
+				<a class="btn btn-info me-2" href="{{ route('wilayah.edit', $wilayah->slug) }}">
 					<i class="fas fa-pencil-alt"></i>
 					Edit
 				</a>
-				<form action="{{ route('provinsi.destroy', $provinsi->slug) }}" method="post" class="d-inline">
+				<form action="{{ route('wilayah.destroy', $wilayah->slug) }}" method="post" class="d-inline">
 					@method('delete')
 					@csrf
-					<button class="btn btn-danger" id='deleteData' data-title="{{ $provinsi->nama }}">
+					<button class="btn btn-danger" id='deleteData' data-title="{{ $wilayah->nama }}">
 						<i class="fas fa-trash"></i>
 						Delete
 					</button>

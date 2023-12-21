@@ -88,14 +88,9 @@ class User extends Authenticatable
         return $this->hasMany(JenisPerdin::class, 'author_id');
     }
 
-    public function provinsis(): HasMany
+    public function wilayahs(): HasMany
     {
-        return $this->hasMany(Provinsi::class, 'author_id');
-    }
-
-    public function kota_kabupatens(): HasMany
-    {
-        return $this->hasMany(KotaKabupaten::class, 'author_id');
+        return $this->hasMany(Wilayah::class, 'author_id');
     }
 
     public function uang_harians(): HasMany

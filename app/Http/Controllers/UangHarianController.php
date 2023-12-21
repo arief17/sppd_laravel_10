@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KotaKabupaten;
-use App\Models\Provinsi;
+use App\Models\Wilayah;
 use App\Models\UangHarian;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
@@ -28,8 +27,7 @@ class UangHarianController extends Controller
     {
         return view('dashboard.master.uang-harian.create', [
             'title' => 'Tambah Uang Harian',
-            'kota_kabupatens' => KotaKabupaten::all(),
-            'provinsis' => Provinsi::all(),
+            'wilayahs' => Wilayah::all(),
         ]);
     }
 
@@ -40,6 +38,7 @@ class UangHarianController extends Controller
     {
         $validatedData = $request->validate([
             'keterangan' => 'required',
+            'wilayah_id' => 'required',
             'eselon_i' => 'required|numeric',
             'eselon_ii' => 'required|numeric',
             'eselon_iii' => 'required|numeric',
@@ -51,15 +50,6 @@ class UangHarianController extends Controller
             'non_asn' => 'required|numeric',
         ]);
 
-        $wilayah = null;
-        if ($request->wilayah == 'kota_kabupaten') {
-            $wilayah = KotaKabupaten::find($request->kota_kabupaten_id);
-        } elseif ($request->wilayah == 'provinsi') {
-            $wilayah = Provinsi::find($request->provinsi_id);
-        }
-        $validatedData['wilayah_type'] = get_class($wilayah);
-        $validatedData['wilayah_id'] = $wilayah->id;
-        
         $validatedData['slug'] = SlugService::createSlug(UangHarian::class, 'slug', $request->keterangan);
         $validatedData['author_id'] = auth()->user()->id;
         
@@ -86,8 +76,7 @@ class UangHarianController extends Controller
         return view('dashboard.master.uang-harian.edit', [
             'title' => 'Perbarui Uang Harian',
             'uang_harian' => $uangHarian,
-            'kota_kabupatens' => KotaKabupaten::all(),
-            'provinsis' => Provinsi::all(),
+            'wilayahs' => Wilayah::all(),
         ]);
     }
 
@@ -98,6 +87,7 @@ class UangHarianController extends Controller
     {
         $validatedData = $request->validate([
             'keterangan' => 'required',
+            'wilayah_id' => 'required',
             'eselon_i' => 'required|numeric',
             'eselon_ii' => 'required|numeric',
             'eselon_iii' => 'required|numeric',

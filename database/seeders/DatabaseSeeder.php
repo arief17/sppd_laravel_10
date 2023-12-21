@@ -10,13 +10,12 @@ use App\Models\Jabatan;
 use App\Models\JenisPerdin;
 use App\Models\Kegiatan;
 use App\Models\Ketentuan;
-use App\Models\KotaKabupaten;
+use App\Models\Lama;
 use App\Models\LevelAdmin;
 use App\Models\Pegawai;
-use App\Models\Provinsi;
+use App\Models\Wilayah;
 use App\Models\Pangkat;
 use App\Models\Seksi;
-use App\Models\TandaTangan;
 use App\Models\UangHarian;
 use App\Models\UangPenginapan;
 use App\Models\UangTransport;
@@ -106,30 +105,15 @@ class DatabaseSeeder extends Seeder
             'author_id' => 1,
         ]);
 
-        Provinsi::create([
+        Wilayah::create([
             'nama' => 'Banten',
             'slug' => 'banten',
             'jenis_perdin_id' => 1,
             'author_id' => 1,
         ]);
-        Provinsi::create([
+        Wilayah::create([
             'nama' => 'BALI',
             'slug' => 'bali',
-            'jenis_perdin_id' => 2,
-            'author_id' => 1,
-        ]);
-
-        KotaKabupaten::create([
-            'nama' => 'Serang',
-            'slug' => 'serang',
-            'provinsi_id' => 1,
-            'jenis_perdin_id' => 1,
-            'author_id' => 1,
-        ]);
-        KotaKabupaten::create([
-            'nama' => 'Balikpapan',
-            'slug' => 'balikpapan',
-            'provinsi_id' => 2,
             'jenis_perdin_id' => 2,
             'author_id' => 1,
         ]);
@@ -335,7 +319,6 @@ class DatabaseSeeder extends Seeder
             'keterangan' => 'U Harian Dinas luar',
             'slug' => 'u-harian-dinas-luar',
             'wilayah_id' => 1,
-            'wilayah_type' => 'App\Models\KotaKabupaten',
             'eselon_i' => 150000,
             'eselon_ii' => 150000,
             'eselon_iii' => 150000,
@@ -351,7 +334,6 @@ class DatabaseSeeder extends Seeder
             'keterangan' => 'U Harian Dinas Luar (Kunjungan Kerja)',
             'slug' => 'u-harian-dinas-luar-(kunjungan-kerja)',
             'wilayah_id' => 2,
-            'wilayah_type' => 'App\Models\Provinsi',
             'eselon_i' => 150000,
             'eselon_ii' => 150000,
             'eselon_iii' => 150000,
@@ -366,7 +348,6 @@ class DatabaseSeeder extends Seeder
 
         UangTransport::create([
             'wilayah_id' => 1,
-            'wilayah_type' => 'App\Models\KotaKabupaten',
             'alat_angkut_id' => 1,
             'slug' => 'uang-transport-1',
             'harga_tiket' => 100000,
@@ -383,7 +364,6 @@ class DatabaseSeeder extends Seeder
         ]);
         UangTransport::create([
             'wilayah_id' => 2,
-            'wilayah_type' => 'App\Models\Provinsi',
             'alat_angkut_id' => 2,
             'slug' => 'uang-transport-2',
             'harga_tiket' => 100000,
@@ -403,7 +383,6 @@ class DatabaseSeeder extends Seeder
             'keterangan' => 'U Harian Dinas luar',
             'slug' => 'u-harian-dinas-luar',
             'wilayah_id' => 1,
-            'wilayah_type' => 'App\Models\KotaKabupaten',
             'eselon_i' => 150000,
             'eselon_ii' => 150000,
             'eselon_iii' => 150000,
@@ -419,7 +398,6 @@ class DatabaseSeeder extends Seeder
             'keterangan' => 'U Harian Dinas Luar (Kunjungan Kerja)',
             'slug' => 'u-harian-dinas-luar-(kunjungan-kerja)',
             'wilayah_id' => 2,
-            'wilayah_type' => 'App\Models\Provinsi',
             'eselon_i' => 150000,
             'eselon_ii' => 150000,
             'eselon_iii' => 150000,
@@ -429,6 +407,15 @@ class DatabaseSeeder extends Seeder
             'golongan_ii' => 150000,
             'golongan_i' => 150000,
             'non_asn' => 150000,
+            'author_id' => 1,
+        ]);
+
+        Lama::create([
+            'lama_hari' => 2,
+            'author_id' => 1,
+        ]);
+        Lama::create([
+            'lama_hari' => 3,
             'author_id' => 1,
         ]);
 

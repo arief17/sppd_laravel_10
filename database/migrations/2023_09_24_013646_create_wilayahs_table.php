@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kota_kabupatens', function (Blueprint $table) {
+        Schema::create('wilayahs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama');
             $table->string('slug')->unique();
-            $table->unsignedBigInteger('provinsi_id');
             $table->unsignedBigInteger('jenis_perdin_id');
             $table->unsignedBigInteger('author_id');
             $table->timestamps();
@@ -28,7 +27,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('kota_kabupatens', function (Blueprint $table) {
+        Schema::table('wilayahs', function (Blueprint $table) {
             $table->dropSoftDeletes();
         });
     }

@@ -6,8 +6,6 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class UangHarian extends Model
@@ -22,9 +20,9 @@ class UangHarian extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
-    public function wilayah(): MorphTo
+    public function wilayah(): BelongsTo
     {
-        return $this->morphTo();
+        return $this->belongsTo(Wilayah::class, 'wilayah_id');
     }
 
     public function getRouteKeyName()

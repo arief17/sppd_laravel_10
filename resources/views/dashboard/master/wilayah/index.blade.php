@@ -8,7 +8,7 @@
 			<div class="card-header">
 				<div class="d-flex align-items-center">
 					<h3 class="card-title">{{ $title }}</h3>
-					<a href="{{ route('provinsi.create') }}" class="btn btn-primary mg-l-auto">Tambah</a>
+					<a href="{{ route('wilayah.create') }}" class="btn btn-primary mg-l-auto">Tambah</a>
 				</div>
 			</div>
 			<div class="card-body">
@@ -23,24 +23,24 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach ($provinsis as $provinsi)
+							@foreach ($wilayahs as $wilayah)
 							<tr>
 								<td>{{ $loop->iteration }}</td>
-								<td>{{ $provinsi->nama }}</td>
-								<td>{{ $provinsi->jenis_perdin->nama }}</td>
+								<td>{{ $wilayah->nama }}</td>
+								<td>{{ $wilayah->jenis_perdin->nama }}</td>
 								<td>
-									<a class="btn btn-primary btn-sm" href="{{ route('provinsi.show', $provinsi->slug) }}">
+									<a class="btn btn-primary btn-sm" href="{{ route('wilayah.show', $wilayah->slug) }}">
 										<i class="fas fa-folder"></i>
 										View
 									</a>
-									<a class="btn btn-info btn-sm" href="{{ route('provinsi.edit', $provinsi->slug) }}">
+									<a class="btn btn-info btn-sm" href="{{ route('wilayah.edit', $wilayah->slug) }}">
 										<i class="fas fa-pencil-alt"></i>
 										Edit
 									</a>
-									<form action="{{ route('provinsi.destroy', $provinsi->slug) }}" method="post" class="d-inline">
+									<form action="{{ route('wilayah.destroy', $wilayah->slug) }}" method="post" class="d-inline">
 										@method('delete')
 										@csrf
-										<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $provinsi->nama }}">
+										<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $wilayah->nama }}">
 											<i class="fas fa-trash"></i>
 											Delete
 										</button>

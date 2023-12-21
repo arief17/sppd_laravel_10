@@ -117,7 +117,7 @@
 					<td style="width: 1%; border-right: 0; border-bottom: 0;">a. </td>
 					<td style="border-left: 0; border-bottom: 0;">Tempat Berangkat</td>
 					<td style="width: 1%; border-right: 0; border-bottom: 0;">a. </td>
-					<td colspan="2" style="border-left: 0; border-bottom: 0;">{{ $data_perdin->kedudukan->nama }}</td>
+					<td colspan="2" style="border-left: 0; border-bottom: 0;">{{ $data_perdin->kedudukan }}</td>
 				</tr>
 				<tr>
 					<td style="width: 1%; border-right: 0; border-top: 0;">b. </td>
@@ -201,9 +201,9 @@
 			<div style="text-align: center;">
 				<p style="margin-top: 10px;" style="text-transform: uppercase; font-weight: bold;">Kepala Dinas</p>
 				
-				<img src="data:image/png;base64,{{ $ttd_kepala->fileTtdEncoded }}" alt="{{ $ttd_kepala->nama }}" height="70">
-				<p style="text-decoration: underline; font-weight: bold;">{{ $ttd_kepala->pegawai->nama }}</p>
-				<p>NIP.{{ $ttd_kepala->pegawai->nip }}</p>
+				<img src="data:image/png;base64,{{ $ttd_kepala->fileTtdEncoded ?? '' }}" alt="{{ $ttd_kepala->nama ?? '' }}" height="70">
+				<p style="text-decoration: underline; font-weight: bold;">{{ $ttd_kepala->pegawai->nama ?? '' }}</p>
+				<p>NIP.{{ $ttd_kepala->pegawai->nip ?? '' }}</p>
 			</div>
 		</div>
 	</div>

@@ -70,35 +70,32 @@ return new class extends Migration
             $table->foreign('author_id')->references('id')->on('users');
         });
         
-        Schema::table('provinsis', function (Blueprint $table) {
-            $table->foreign('jenis_perdin_id')->references('id')->on('jenis_perdins');
-            $table->foreign('author_id')->references('id')->on('users');
-        });
-
-        Schema::table('kota_kabupatens', function (Blueprint $table) {
-            $table->foreign('provinsi_id')->references('id')->on('provinsis');
+        Schema::table('wilayahs', function (Blueprint $table) {
             $table->foreign('jenis_perdin_id')->references('id')->on('jenis_perdins');
             $table->foreign('author_id')->references('id')->on('users');
         });
 
         Schema::table('uang_harians', function (Blueprint $table) {
+            $table->foreign('wilayah_id')->references('id')->on('wilayahs');
             $table->foreign('author_id')->references('id')->on('users');
         });
         
         Schema::table('uang_transports', function (Blueprint $table) {
             $table->foreign('alat_angkut_id')->references('id')->on('alat_angkuts');
+            $table->foreign('wilayah_id')->references('id')->on('wilayahs');
             $table->foreign('author_id')->references('id')->on('users');
         });
 
         Schema::table('uang_penginapans', function (Blueprint $table) {
+            $table->foreign('wilayah_id')->references('id')->on('wilayahs');
             $table->foreign('author_id')->references('id')->on('users');
         });
         
         Schema::table('data_perdins', function (Blueprint $table) {
             $table->foreign('tanda_tangan_id')->references('id')->on('tanda_tangans');
             $table->foreign('alat_angkut_id')->references('id')->on('alat_angkuts');
+            $table->foreign('tujuan_id')->references('id')->on('wilayahs');
             $table->foreign('jenis_perdin_id')->references('id')->on('jenis_perdins');
-            $table->foreign('kedudukan_id')->references('id')->on('kota_kabupatens');
             $table->foreign('pegawai_diperintah_id')->references('id')->on('pegawais');
             $table->foreign('status_id')->references('id')->on('status_perdins');
             $table->foreign('laporan_perdin_id')->references('id')->on('laporan_perdins');
@@ -138,9 +135,8 @@ return new class extends Migration
         Schema::dropIfExists('ketentuans');
         Schema::dropIfExists('golongans');
         Schema::dropIfExists('jenis_perdins');
-        Schema::dropIfExists('provinsis');
+        Schema::dropIfExists('wilayahs');
         Schema::dropIfExists('seksis');
-        Schema::dropIfExists('kota_kabupatens');
         Schema::dropIfExists('uang_harians');
         Schema::dropIfExists('uang_transports');
         Schema::dropIfExists('uang_penginapans');

@@ -16,41 +16,17 @@
 					@csrf
 					@method('put')
 					
-					<div class="form-group">
-						<label for="wilayah" class="form-label">Wilayah Kota Kabupaten atau Provinsi</label>
-						<select name="wilayah" id="wilayah" class="form-control form-select" required>
-							<option value="">Pilih Wilayah Kota Kabupaten atau Provinsi</option>
-							<option value="kota_kabupaten">Kota Kabupaten</option>
-							<option value="provinsi">Provinsi</option>
-						</select>
-					</div>
-					<div id="kotaKabupatenHide" class="form-group">
-						<label for="kota_kabupaten_id" class="form-label">Kota Kabupaten</label>
-						<select name="kota_kabupaten_id" id="kota_kabupaten_id" class="form-control form-select select2 @error('kota_kabupaten_id') is-invalid @enderror">
-							<option value="">Pilih Kota Kabupaten</option>
-							@foreach ($kota_kabupatens as $kota_kabupaten)
-							<option value="{{ $kota_kabupaten->id }}" @selected(old('kota_kabupaten_id') == $kota_kabupaten->id)>
-								{{ $kota_kabupaten->nama }}
+					<div id="wilayahHide" class="form-group">
+						<label for="wilayah_id" class="form-label">Wilayah</label>
+						<select name="wilayah_id" id="wilayah_id" class="form-control form-select select2 @error('wilayah_id') is-invalid @enderror">
+							<option value="">Pilih Wilayah</option>
+							@foreach ($wilayahs as $wilayah)
+							<option value="{{ $wilayah->id }}" @selected(old('wilayah_id') == $wilayah->id)>
+								{{ $wilayah->nama }}
 							</option>
 							@endforeach
 						</select>
-						@error('kota_kabupaten_id')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
-					<div id="provinsiHide" class="form-group">
-						<label for="provinsi_id" class="form-label">Provinsi</label>
-						<select name="provinsi_id" id="provinsi_id" class="form-control form-select select2 @error('provinsi_id') is-invalid @enderror">
-							<option value="">Pilih Provinsi</option>
-							@foreach ($provinsis as $provinsi)
-							<option value="{{ $provinsi->id }}" @selected(old('provinsi_id') == $provinsi->id)>
-								{{ $provinsi->nama }}
-							</option>
-							@endforeach
-						</select>
-						@error('provinsi_id')
+						@error('wilayah_id')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>
@@ -204,28 +180,6 @@
 		if (initialTiketStatus === 0) {
 			$('#tiketHide').hide();
 		}
-	});
-</script>
-
-<script>
-	$(document).ready(function(){
-		$('#kotaKabupatenHide, #provinsiHide').hide();
-		
-		$('#wilayah').change(function(){
-			let selectedValue = $(this).val();
-			
-			if(selectedValue === 'kota_kabupaten'){
-				$('#provinsi_id').val('').prop('required', false);
-				$('#provinsiHide').hide();
-				$('#kota_kabupaten_id').prop('required', true);
-				$('#kotaKabupatenHide').show();
-			} else if(selectedValue === 'provinsi'){
-				$('#kota_kabupaten_id').val('').prop('required', false);
-				$('#kotaKabupatenHide').hide();
-				$('#provinsi_id').prop('required', true);
-				$('#provinsiHide').show();
-			}
-		});
 	});
 </script>
 

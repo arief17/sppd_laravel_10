@@ -15,7 +15,7 @@
 							<div class="col-2">
 								<div class="d-grid gap-2">
 									<button class="btn btn-success">
-										<i class="fa fa-times"></i>
+										<i class="fa fa-check"></i>
 										Setuju
 									</button>
 								</div>

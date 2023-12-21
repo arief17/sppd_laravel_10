@@ -7,10 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Provinsi extends Model
+class Wilayah extends Model
 {
     use HasFactory, Sluggable, SoftDeletes;
 
@@ -27,29 +26,24 @@ class Provinsi extends Model
         return $this->belongsTo(JenisPerdin::class, 'jenis_perdin_id');
     }
 
-    public function kota_kabupatens(): HasMany
+    public function uang_harians(): HasMany
     {
-        return $this->hasMany(KotaKabupaten::class, 'provinsi_id');
+        return $this->hasMany(UangHarian::class, 'wilayah');
     }
 
-    public function uang_harians(): MorphMany
+    public function uang_transports(): HasMany
     {
-        return $this->morphMany(UangHarian::class, 'wilayah');
+        return $this->hasMany(UangTransport::class, 'wilayah');
     }
 
-    public function uang_transports(): MorphMany
+    public function uang_penginapans(): HasMany
     {
-        return $this->morphMany(UangTransport::class, 'wilayah');
+        return $this->hasMany(UangPenginapan::class, 'wilayah');
     }
 
-    public function uang_penginapans(): MorphMany
+    public function data_perdins(): HasMany
     {
-        return $this->morphMany(UangPenginapan::class, 'wilayah');
-    }
-
-    public function data_perdins(): MorphMany
-    {
-        return $this->morphMany(DataPerdin::class, 'tujuan');
+        return $this->hasMany(DataPerdin::class, 'tujuan');
     }
 
     public function getRouteKeyName()

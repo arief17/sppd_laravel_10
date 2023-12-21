@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DataPerdin extends Model
@@ -16,7 +15,7 @@ class DataPerdin extends Model
     use HasFactory, Sluggable, SoftDeletes, CascadeSoftDeletes;
     
     protected $guarded = ['id'];
-    protected $with = ['author', 'tanda_tangan', 'alat_angkut', 'jenis_perdin', 'kedudukan', 'tujuan', 'pegawai_diperintah', 'status'];
+    protected $with = ['author', 'tanda_tangan', 'alat_angkut', 'jenis_perdin', 'tujuan', 'pegawai_diperintah', 'status'];
     protected $cascadeDeletes = ['status', 'laporan_perdin', 'kwitansi_perdin'];
     
     public function getTtdFormatedAttribute()
@@ -89,14 +88,9 @@ class DataPerdin extends Model
         return $this->belongsTo(JenisPerdin::class, 'jenis_perdin_id');
     }
     
-    public function kedudukan(): BelongsTo
+    public function tujuan(): BelongsTo
     {
-        return $this->belongsTo(KotaKabupaten::class, 'kedudukan_id');
-    }
-    
-    public function tujuan(): MorphTo
-    {
-        return $this->morphTo();
+        return $this->belongsTo(Wilayah::class, 'tujuan_id');
     }
     
     public function pegawai_diperintah(): BelongsTo
