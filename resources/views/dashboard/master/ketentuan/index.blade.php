@@ -26,7 +26,7 @@
 							@foreach ($ketentuans as $ketentuan)
 							<tr>
 								<td>{{ $loop->iteration }}</td>
-								<td>{{ $ketentuan->pegawai->nama ?? '' }}</td>
+								<td>{{ $ketentuan->pegawai->nama }}</td>
 								<td>{{ $ketentuan->jumlah_perdin }}</td>
 								<td>{{ $ketentuan->max_perdin }}</td>
 								<td>
