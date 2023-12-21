@@ -83,7 +83,7 @@
 			<td>dengan perincian sbb</td>
 			<td>:</td>
 			<td style="white-space: nowrap;">
-				<span style="margin: 0 20px 0 70px;">-</span>
+				<span style="margin: 0 10px 0 70px;">-</span>
 				Uang Harian
 			</td>
 			<td>Rp.</td>
@@ -92,7 +92,7 @@
 		<tr>
 			<td colspan="3"></td>
 			<td style="white-space: nowrap;">
-				<span style="margin: 0 20px 0 70px;">-</span>
+				<span style="margin: 0 10px 0 70px;">-</span>
 				Uang Transport
 			</td>
 			<td>Rp.</td>
@@ -101,7 +101,7 @@
 		<tr>
 			<td colspan="3"></td>
 			<td style="white-space: nowrap;">
-				<span style="margin: 0 20px 0 70px;">-</span>
+				<span style="margin: 0 10px 0 70px;">-</span>
 				Uang Akomodasi
 			</td>
 			<td style="border-bottom: 1px solid black;">Rp.</td>
@@ -110,7 +110,7 @@
 		<tr>
 			<td colspan="3"></td>
 			<td style="white-space: nowrap;">
-				<span style="margin: 0 20px 0 70px;">-</span>
+				<span style="margin: 0 10px 0 70px;">-</span>
 				Total
 			</td>
 			<td>Rp.</td>
