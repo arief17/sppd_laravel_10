@@ -83,8 +83,8 @@
 			<td>dengan perincian sbb</td>
 			<td>:</td>
 			<td style="white-space: nowrap;">
-				<span style="margin: 0 10px 0 70px;">-</span>
-				Uang Harian
+				<span style="margin: 0 20px 0 70px;">-</span>
+				<span>Uang Harian</span>
 			</td>
 			<td>Rp.</td>
 			<td style="text-align: right;">{{ number_format($pegawai->pivot->uang_harian, 2, ',', '.') }}</td>
@@ -92,8 +92,8 @@
 		<tr>
 			<td colspan="3"></td>
 			<td style="white-space: nowrap;">
-				<span style="margin: 0 10px 0 70px;">-</span>
-				Uang Transport
+				<span style="margin: 0 20px 0 70px;">-</span>
+				<span>Uang Transport</span>
 			</td>
 			<td>Rp.</td>
 			<td style="text-align: right;">{{ number_format($pegawai->pivot->uang_transport, 2, ',', '.') }}</td>
@@ -101,8 +101,8 @@
 		<tr>
 			<td colspan="3"></td>
 			<td style="white-space: nowrap;">
-				<span style="margin: 0 10px 0 70px;">-</span>
-				Uang Akomodasi
+				<span style="margin: 0 20px 0 70px;">-</span>
+				<span>Uang Akomodasi</span>
 			</td>
 			<td style="border-bottom: 1px solid black;">Rp.</td>
 			<td style="text-align: right; border-bottom: 1px solid black;">{{ number_format($pegawai->pivot->uang_tiket + $pegawai->pivot->uang_penginapan, 2, ',', '.') }}</td>
@@ -110,8 +110,8 @@
 		<tr>
 			<td colspan="3"></td>
 			<td style="white-space: nowrap;">
-				<span style="margin: 0 10px 0 70px;">-</span>
-				Total
+				<span style="margin: 0 20px 0 70px;">-</span>
+				<span>Total</span>
 			</td>
 			<td>Rp.</td>
 			<td style="text-align: right;">{{ number_format($pegawai->pivot->uang_harian + $pegawai->pivot->uang_transport + $pegawai->pivot->uang_tiket + $pegawai->pivot->uang_penginapan, 2, ',', '.') }}</td>
