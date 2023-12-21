@@ -66,7 +66,7 @@
 		</tr>
 		<tr>
 			<td style="white-space: nowrap;">TERBILANG</td>
-			<td colspan="5" style="text-transform: capitalize">: {{ $kwitansi_perdin->terbilang($pegawai->pivot->uang_harian + $pegawai->pivot->uang_transport + $pegawai->pivot->uang_tiket + $pegawai->pivot->uang_penginapan) }}</td>
+			<td colspan="5" style="text-transform: capitalize">: {{ $kwitansi_perdin->terbilang($pegawai->pivot->uang_harian + $pegawai->pivot->uang_transport + $pegawai->pivot->uang_tiket + $pegawai->pivot->uang_penginapan) }} Rupiah</td>
 		</tr>
 		<tr>
 			<td style="white-space: nowrap;">UNTUK PEMBAYARAN</td>
