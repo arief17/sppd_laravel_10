@@ -345,7 +345,7 @@
 										<li><a class="slide-item {{ request()->routeIs('lama.index') ? 'active' : '' }}" href="{{ route('lama.index') }}">Lama </a></li>
 										<li><a class="slide-item {{ request()->routeIs('golongan.index') ? 'active' : '' }}" href="{{ route('golongan.index') }}">Golongan</a></li>
 										<li><a class="slide-item {{ request()->routeIs('jenis-perdin.index') ? 'active' : '' }}" href="{{ route('jenis-perdin.index') }}">Jenis Perdin</a></li>
-										<li><a class="slide-item {{ request()->routeIs('wilayah.index') ? 'active' : '' }}" href="{{ route('wilayah.index') }}">Provinsi</a></li>
+										<li><a class="slide-item {{ request()->routeIs('wilayah.index') ? 'active' : '' }}" href="{{ route('wilayah.index') }}">Wilayah</a></li>
 										
 										<li class="sub-slide {{ request()->routeIs('uang-harian*', 'uang-transport*', 'uang-penginapan*') ? 'is-expanded' : '' }}">
 											<a class="slide-item" data-bs-toggle="sub-slide" href="javascript:void(0);">

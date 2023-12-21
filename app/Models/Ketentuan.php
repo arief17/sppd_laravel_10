@@ -13,7 +13,7 @@ class Ketentuan extends Model
     use HasFactory, SoftDeletes;
 
     protected $guarded = ['id'];
-    protected $with = ['author', 'pegawai'];
+    protected $with = ['author'];
 
     public function author(): BelongsTo
     {

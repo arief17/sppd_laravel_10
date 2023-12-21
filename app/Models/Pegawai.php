@@ -15,7 +15,7 @@ class Pegawai extends Model
     use HasFactory, Sluggable, SoftDeletes, CascadeSoftDeletes;
     
     protected $guarded = ['id'];
-    protected $with = ['author', 'seksi', 'bidang', 'golongan', 'jabatan', 'pangkat'];
+    protected $with = ['author', 'seksi', 'bidang', 'golongan', 'jabatan', 'pangkat', 'ketentuan'];
     protected $cascadeDeletes = ['ketentuan'];
     
     public function author(): BelongsTo
