@@ -15,8 +15,11 @@ class KwitansiPerdin extends Model
     protected $guarded = ['id'];
     protected $with = ['author', 'kegiatan_sub', 'pptk'];
     
-    public function terbilang($angka) {
-        $bilangan = array(
+    public function terbilang($angka)
+    {
+        $angka = ltrim($angka, '0');
+    
+        $bilangan = [
             '',
             'satu',
             'dua',
@@ -29,37 +32,37 @@ class KwitansiPerdin extends Model
             'sembilan',
             'sepuluh',
             'sebelas'
-        );
+        ];
     
-        if ($angka < 12) {
-            return $bilangan[$angka];
-        } elseif ($angka < 20) {
-            return $this->terbilang($angka - 10) . ' belas';
-        } elseif ($angka < 100) {
-            return $this->terbilang($angka / 10) . ' puluh ' . $this->terbilang($angka % 10);
-        } elseif ($angka < 200) {
-            return 'seratus ' . $this->terbilang($angka - 100);
-        } elseif ($angka < 1000) {
-            return $this->terbilang($angka / 100) . ' ratus ' . $this->terbilang($angka % 100);
-        } elseif ($angka < 2000) {
-            return 'seribu ' . $this->terbilang($angka - 1000);
-        } elseif ($angka < 1000000) {
-            return $this->terbilang($angka / 1000) . ' ribu ' . $this->terbilang($angka % 1000);
-        } elseif ($angka < 1000000000) {
-            return $this->terbilang($angka / 1000000) . ' juta ' . $this->terbilang($angka % 1000000);
-        } elseif ($angka < 1000000000000) {
-            return $this->terbilang($angka / 1000000000) . ' miliar ' . $this->terbilang($angka % 1000000000);
-        } elseif ($angka < 1000000000000000) {
-            return $this->terbilang($angka / 1000000000000) . ' triliun ' . $this->terbilang($angka % 1000000000000);
-        } elseif ($angka < 1000000000000000000) {
-            return $this->terbilang($angka / 1000000000000000) . ' kuadriliun ' . $this->terbilang($angka % 1000000000000000);
-        } elseif ($angka < 1000000000000000000000) {
-            return $this->terbilang($angka / 1000000000000000000) . ' kuintiliun ' . $this->terbilang($angka % 1000000000000000000);
+        if (bccomp($angka, '12') == -1) {
+            return $bilangan[intval($angka)];
+        } elseif (bccomp($angka, '20') == -1) {
+            return $this->terbilang(bcsub($angka, '10')) . ' belas';
+        } elseif (bccomp($angka, '100') == -1) {
+            return $this->terbilang(bcdiv($angka, '10')) . ' puluh ' . $this->terbilang(bcmod($angka, '10'));
+        } elseif (bccomp($angka, '200') == -1) {
+            return 'seratus ' . $this->terbilang(bcsub($angka, '100'));
+        } elseif (bccomp($angka, '1000') == -1) {
+            return $this->terbilang(bcdiv($angka, '100')) . ' ratus ' . $this->terbilang(bcmod($angka, '100'));
+        } elseif (bccomp($angka, '2000') == -1) {
+            return 'seribu ' . $this->terbilang(bcsub($angka, '1000'));
+        } elseif (bccomp($angka, '1000000') == -1) {
+            return $this->terbilang(bcdiv($angka, '1000')) . ' ribu ' . $this->terbilang(bcmod($angka, '1000'));
+        } elseif (bccomp($angka, '1000000000') == -1) {
+            return $this->terbilang(bcdiv($angka, '1000000')) . ' juta ' . $this->terbilang(bcmod($angka, '1000000'));
+        } elseif (bccomp($angka, '1000000000000') == -1) {
+            return $this->terbilang(bcdiv($angka, '1000000000')) . ' miliar ' . $this->terbilang(bcmod($angka, '1000000000'));
+        } elseif (bccomp($angka, '1000000000000000') == -1) {
+            return $this->terbilang(bcdiv($angka, '1000000000000')) . ' triliun ' . $this->terbilang(bcmod($angka, '1000000000000'));
+        } elseif (bccomp($angka, '1000000000000000000') == -1) {
+            return $this->terbilang(bcdiv($angka, '1000000000000000')) . ' kuadriliun ' . $this->terbilang(bcmod($angka, '1000000000000000'));
+        } elseif (bccomp($angka, '1000000000000000000000') == -1) {
+            return $this->terbilang(bcdiv($angka, '1000000000000000000')) . ' kuintiliun ' . $this->terbilang(bcmod($angka, '1000000000000000000'));
         } else {
             return 'Angka terlalu besar';
         }
     }
-    
+
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
