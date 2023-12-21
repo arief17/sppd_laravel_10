@@ -15,6 +15,51 @@ class KwitansiPerdin extends Model
     protected $guarded = ['id'];
     protected $with = ['author', 'kegiatan_sub', 'pptk'];
     
+    public function terbilang($angka) {
+        $bilangan = array(
+            '',
+            'satu',
+            'dua',
+            'tiga',
+            'empat',
+            'lima',
+            'enam',
+            'tujuh',
+            'delapan',
+            'sembilan',
+            'sepuluh',
+            'sebelas'
+        );
+    
+        if ($angka < 12) {
+            return $bilangan[$angka];
+        } elseif ($angka < 20) {
+            return $this->terbilang($angka - 10) . ' belas';
+        } elseif ($angka < 100) {
+            return $this->terbilang($angka / 10) . ' puluh ' . $this->terbilang($angka % 10);
+        } elseif ($angka < 200) {
+            return 'seratus ' . $this->terbilang($angka - 100);
+        } elseif ($angka < 1000) {
+            return $this->terbilang($angka / 100) . ' ratus ' . $this->terbilang($angka % 100);
+        } elseif ($angka < 2000) {
+            return 'seribu ' . $this->terbilang($angka - 1000);
+        } elseif ($angka < 1000000) {
+            return $this->terbilang($angka / 1000) . ' ribu ' . $this->terbilang($angka % 1000);
+        } elseif ($angka < 1000000000) {
+            return $this->terbilang($angka / 1000000) . ' juta ' . $this->terbilang($angka % 1000000);
+        } elseif ($angka < 1000000000000) {
+            return $this->terbilang($angka / 1000000000) . ' miliar ' . $this->terbilang($angka % 1000000000);
+        } elseif ($angka < 1000000000000000) {
+            return $this->terbilang($angka / 1000000000000) . ' triliun ' . $this->terbilang($angka % 1000000000000);
+        } elseif ($angka < 1000000000000000000) {
+            return $this->terbilang($angka / 1000000000000000) . ' kuadriliun ' . $this->terbilang($angka % 1000000000000000);
+        } elseif ($angka < 1000000000000000000000) {
+            return $this->terbilang($angka / 1000000000000000000) . ' kuintiliun ' . $this->terbilang($angka % 1000000000000000000);
+        } else {
+            return 'Angka terlalu besar';
+        }
+    }
+    
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
