@@ -22,12 +22,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/login', [LoginController::class, 'apiLogin']);
-Route::middleware('auth:sanctum')->post('/logout', [LoginController::class, 'apiLogout']);
-
 Route::get('/data-perdin/status/{status?}', [DataPerdinController::class, 'apiDataPerdins']);
 
+Route::post('/login', [LoginController::class, 'apiLogin']);
+
 Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [LoginController::class, 'apiLogout']);
     Route::post('/status-perdin/approve', [StatusPerdinController::class, 'apiApprove']);
     Route::post('/status-perdin/tolak', [StatusPerdinController::class, 'apiTolak']);
 });
