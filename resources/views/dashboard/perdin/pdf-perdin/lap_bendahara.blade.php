@@ -65,7 +65,7 @@
                 <td>{{ number_format($pegawai->pivot->uang_harian + $pegawai->pivot->uang_transport + $pegawai->pivot->uang_tiket + $pegawai->pivot->uang_penginapan, 2, ',', '.') }}</td>
             </tr>
             <tr>
-                <td colspan="3" style="text-transform: capitalize">({{ $kwitansi_perdin->terbilang($pegawai->pivot->uang_harian + $pegawai->pivot->uang_transport + $pegawai->pivot->uang_tiket + $pegawai->pivot->uang_penginapan) }} Rupiah)</td>
+                <td colspan="3">({{ strtoupper($kwitansi_perdin->terbilang($pegawai->pivot->uang_harian + $pegawai->pivot->uang_transport + $pegawai->pivot->uang_tiket + $pegawai->pivot->uang_penginapan)) }} Rupiah)</td>
             </tr>
         </table>
         <table style="margin-top: 20px; margin-bottom: 20px;">
