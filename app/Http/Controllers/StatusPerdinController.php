@@ -26,26 +26,10 @@ class StatusPerdinController extends Controller
         return redirect()->route('data-perdin.index', 'no_laporan')->with('success', 'Status Perdin berhasil diperbarui!');
     }
 
-    // public function apiApprove(Request $request)
-    // {
-    //     $id = $request->get('id');
-    //     $status_id = DB::table('data_perdins')
-    //         ->select('status_id')
-    //         ->where('id',$id)
-    //         ->first();
-
-    //     DB::table('status_perdins')
-    //         ->where('id',json_encode($status_id))
-    //         ->update([
-    //             'approve' => '1'
-    //         ]);
-    //     return response()->json(['message' => 'Status Perdin berhasil diapprove'], 200);
-    // }
-
     public function apiApprove(Request $request)
     {
         $id = $request->input('id');
-        $status_id = DataPerdin::find($id)->value('status_id');
+        $status_id = DataPerdin::find($id)->status_id;
 
         StatusPerdin::where('id', $status_id)->update(['approve' => 1]);
         return response()->json(['message' => 'Status Perdin berhasil diapprove'], 200);
@@ -65,7 +49,7 @@ class StatusPerdinController extends Controller
             'alasan_tolak' => $alasan_tolak,
         ];
 
-        $status_id = DataPerdin::find($id)->value('status_id');
+        $status_id = DataPerdin::find($id)->status_id;
         StatusPerdin::where('id', $status_id)->update($dataToUpdate);
 
         return response()->json(['message' => 'Status Perdin berhasil ditolak'], 200);
