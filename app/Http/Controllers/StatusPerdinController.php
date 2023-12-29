@@ -13,19 +13,19 @@ class StatusPerdinController extends Controller
         StatusPerdin::where('id', $id)->update(['approve' => 1]);
         return redirect()->route('data-perdin.index', 'no_laporan')->with('success', 'Status Perdin berhasil diperbarui!');
     }
-    
+
     public function tolak($id)
     {
         $validatedData = request()->validate([
             'alasan_tolak' => 'required',
         ]);
-        
+
         $validatedData['approve'] = 0;
-        
+
         StatusPerdin::where('id', $id)->update($validatedData);
         return redirect()->route('data-perdin.index', 'no_laporan')->with('success', 'Status Perdin berhasil diperbarui!');
     }
-    
+
     // public function apiApprove(Request $request)
     // {
     //     $id = $request->get('id');
@@ -33,7 +33,7 @@ class StatusPerdinController extends Controller
     //         ->select('status_id')
     //         ->where('id',$id)
     //         ->first();
-        
+
     //     DB::table('status_perdins')
     //         ->where('id',json_encode($status_id))
     //         ->update([
@@ -44,26 +44,30 @@ class StatusPerdinController extends Controller
 
     public function apiApprove(Request $request)
     {
-        $id = $request->get('id');
+        $id = $request->input('id');
         $status_id = DataPerdin::find($id)->value('status_id');
-        
+
         StatusPerdin::where('id', $status_id)->update(['approve' => 1]);
         return response()->json(['message' => 'Status Perdin berhasil diapprove'], 200);
     }
-    
+
     public function apiTolak(Request $request)
     {
-        $id = $request->query('id');
-        $alasan_tolak = $request->query('alasan_tolak');
-        
+        $id = $request->input('id');
+        $alasan_tolak = $request->input('alasan_tolak');
+
         $dataToUpdate = [
             'approve' => 0,
             'alasan_tolak' => $alasan_tolak,
         ];
-        
+
+        if (!$request->alasan_tolak) {
+            response()->json(['message' => 'alasan_tolak tidak boleh kosong'], 400);
+        }
+
         $status_id = DataPerdin::find($id)->value('status_id');
         StatusPerdin::where('id', $status_id)->update($dataToUpdate);
-        
+
         return response()->json(['message' => 'Status Perdin berhasil ditolak'], 200);
     }
 }
