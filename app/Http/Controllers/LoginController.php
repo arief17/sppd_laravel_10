@@ -49,14 +49,13 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $user = $request->user();
-            $token = $user->createToken($request->token_name);
+            $token = $user->createToken($user->username);
 
             return response()->json(['token' => $token->plainTextToken, 'user' => $user], 200);
         }
 
         return response()->json(['message' => 'Invalid credentials'], 401);
     }
-
 
     public function apiLogout(Request $request)
     {
