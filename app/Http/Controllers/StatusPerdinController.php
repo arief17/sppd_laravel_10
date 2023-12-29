@@ -56,14 +56,14 @@ class StatusPerdinController extends Controller
         $id = $request->input('id');
         $alasan_tolak = $request->input('alasan_tolak');
 
+        if (empty($alasan_tolak)) {
+            return response()->json(['message' => 'alasan_tolak tidak boleh kosong'], 400);
+        }
+
         $dataToUpdate = [
             'approve' => 0,
             'alasan_tolak' => $alasan_tolak,
         ];
-
-        if (!$request->alasan_tolak) {
-            response()->json(['message' => 'alasan_tolak tidak boleh kosong'], 400);
-        }
 
         $status_id = DataPerdin::find($id)->value('status_id');
         StatusPerdin::where('id', $status_id)->update($dataToUpdate);
