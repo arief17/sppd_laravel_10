@@ -16,39 +16,30 @@
 						<thead>
 							<tr>
 								<th class="border-bottom-0" style="width: 1%">No</th>
-								<th class="border-bottom-0">Surat Dari</th>
-								<th class="border-bottom-0">Tanggal Surat</th>
-								<th class="border-bottom-0">Maksud</th>
 								<th class="border-bottom-0">Petugas</th>
+								<th class="border-bottom-0">Maksud</th>
 								<th class="border-bottom-0">Tanggal Berangkat</th>
 								<th class="border-bottom-0" style="width: 1%">Aksi</th>
 							</tr>
 						</thead>
 						<tbody>
-							@foreach ($laporan_perdins as $laporan_perdin)
+							@foreach ($kwitansi_perdins as $kwitansi_perdin)
 							<tr>
 								<td>{{ $loop->iteration }}</td>
-								<td>{{ $laporan_perdin->data_perdin->surat_dari ?? '' }}</td>
-								<td>{{ $laporan_perdin->data_perdin->tgl_surat ?? '' }}</td>
-								<td>{{ $laporan_perdin->data_perdin->maksud }}</td>
-								<td>{{ $laporan_perdin->data_perdin->pegawai_diperintah->nama }}</td>
-								<td>{{ $laporan_perdin->data_perdin->tgl_berangkat }}</td>
+								<td>{{ $kwitansi_perdin->data_perdin->pegawai_diperintah->nama }}</td>
+								<td>{{ $kwitansi_perdin->data_perdin->maksud }}</td>
+								<td>{{ $kwitansi_perdin->data_perdin->tgl_berangkat }}</td>
 								<td>
-									@if ($laporan_perdin->data_perdin->status->lap)
-									<a class="modal-effect btn btn-secondary btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#lap-input-{{ $laporan_perdin->id }}">
-										Laporan yang diinput
-									</a>
-									<a class="modal-effect btn btn-secondary btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#lap-{{ $laporan_perdin->id }}">
-										Laporan perdin
+									@if ($kwitansi_perdin->data_perdin->status->kwitansi)
+									<a class="modal-effect btn btn-secondary btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#lap-bendahara-{{ $kwitansi_perdin->id }}">
+										Laporan Bendahara
 									</a>
 									@else
-									<button class="not-laporan btn btn-danger btn-sm">Laporan yang diinput</button>
-									<button class="not-laporan btn btn-danger btn-sm">Laporan perdin</button>
+									<button class="not-bayar btn btn-danger btn-sm">Laporan Bendahara</button>
 									@endif
 								</td>
-								@if ($laporan_perdin->data_perdin->status->lap)
-								@include('dashboard.perdin.status-perdin.lap_input')
-								@include('dashboard.perdin.status-perdin.lap_cetak')
+								@if ($kwitansi_perdin->data_perdin->status->kwitansi)
+								@include('dashboard.perdin.status-perdin.lap_bendahara')
 								@endif
 							</tr>
 							@endforeach
@@ -74,9 +65,9 @@
 <script src="/assets/plugins/sweet-alert/sweetalert2.all.min.js"></script>
 
 <script>
-	$('.not-laporan').click(function(e) {
+	$('.not-bayar').click(function(e) {
 		Swal.fire({
-			title: 'Belum ada laporan',
+			title: 'Belum bayar',
 			icon: 'warning',
 			confirmButtonColor: '#3085d6',
 			confirmButtonText: 'Ok',

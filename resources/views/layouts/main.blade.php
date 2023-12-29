@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	
+
 	<meta charset="UTF-8">
 	<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,35 +9,35 @@
 	<meta name="Description" content="Bootstrap Responsive Admin Web Dashboard HTML5 Template">
 	<meta name="Author" content="Spruko Technologies Private Limited">
 	<meta name="Keywords" content="admin,admin dashboard,admin dashboard template,admin panel template,admin template,admin theme,bootstrap 4 admin template,bootstrap 4 dashboard,bootstrap admin,bootstrap admin dashboard,bootstrap admin panel,bootstrap admin template,bootstrap admin theme,bootstrap dashboard,bootstrap form template,bootstrap panel,bootstrap ui kit,dashboard bootstrap 4,dashboard design,dashboard html,dashboard template,dashboard ui kit,envato templates,flat ui,html,html and css templates,html dashboard template,html5,jquery html,premium,premium quality,sidebar bootstrap 4,template admin bootstrap 4"/>
-	
+
 	<!-- Title -->
 	<title>SPPD | {{ $title }}</title>
-	
+
 	<!-- Favicon -->
 	<link rel="icon" href="/assets/img/logo-banten.png" type="image/x-icon"/>
-	
+
 	<!-- Icons css -->
 	<link href="/assets/css/icons.css" rel="stylesheet">
-	
+
 	<!-- Bootstrap css -->
 	<link href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	
+
 	<!-- style css -->
 	<link href="/assets/css/style.css" rel="stylesheet">
-	
+
 	<!--- Animations css-->
 	<link href="/assets/css/animate.css" rel="stylesheet">
-	
+
 </head>
 
 <body class="main-body app sidebar-mini ltr">
-	
+
 	<!-- Loader -->
 	<div id="global-loader">
 		<img src="/assets/img/loader.svg" class="loader-img" alt="Loader">
 	</div>
 	<!-- /Loader -->
-	
+
 	<!-- Page -->
 	<div class="page custom-index">
 		<div>
@@ -277,7 +277,7 @@
 					</div>
 				</div>
 				<!-- /main-header -->
-				
+
 				<!-- main-sidebar -->
 				<div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
 				<div class="sticky">
@@ -328,7 +328,7 @@
 										<span class="side-menu__label">Dashboard</span>
 									</a>
 								</li>
-								
+
 								<li class="side-item side-item-category">General</li>
 								@can('isAdmin')
 								<li class="slide {{ request()->routeIs('bidang*', 'seksi*', 'kegiatan*', 'kegiatan-sub*', 'lama*', 'pangkat*', 'pegawai*', 'tanda-tangan*', 'alat-angkut*', 'jabatan*', 'bendahara*', 'ketentuan*', 'user*', 'golongan*', 'jenis-perdin*', 'wilayah*', 'uang-harian*', 'uang-transport*', 'uang-penginapan*', 'golongan*', 'jenis-perdin*', 'wilayah*') ? 'is-expanded' : '' }}">
@@ -346,7 +346,7 @@
 										<li><a class="slide-item {{ request()->routeIs('golongan.index') ? 'active' : '' }}" href="{{ route('golongan.index') }}">Golongan</a></li>
 										<li><a class="slide-item {{ request()->routeIs('jenis-perdin.index') ? 'active' : '' }}" href="{{ route('jenis-perdin.index') }}">Jenis Perdin</a></li>
 										<li><a class="slide-item {{ request()->routeIs('wilayah.index') ? 'active' : '' }}" href="{{ route('wilayah.index') }}">Wilayah</a></li>
-										
+
 										<li class="sub-slide {{ request()->routeIs('uang-harian*', 'uang-transport*', 'uang-penginapan*') ? 'is-expanded' : '' }}">
 											<a class="slide-item" data-bs-toggle="sub-slide" href="javascript:void(0);">
 												<span class="sub-side-menu__label">Setting Biaya</span><i class="sub-angle fe fe-chevron-down"></i>
@@ -357,7 +357,7 @@
 												<li><a class="sub-side-menu__item {{ request()->routeIs('uang-penginapan.index') ? 'active' : '' }}" href="{{ route('uang-penginapan.index') }}">Uang Penginapan</a></li>
 											</ul>
 										</li>
-										
+
 										<li><a class="slide-item {{ request()->routeIs('pegawai.index') ? 'active' : '' }}" href="{{ route('pegawai.index') }}">Pegawai </a></li>
 										<li><a class="slide-item {{ request()->routeIs('pangkat.index') ? 'active' : '' }}" href="{{ route('pangkat.index') }}">Pangkat </a></li>
 										<li><a class="slide-item {{ request()->routeIs('tanda-tangan.index') ? 'active' : '' }}" href="{{ route('tanda-tangan.index') }}">Tanda Tangan </a></li>
@@ -385,7 +385,7 @@
 												<span class="sub-side-menu__label">Data Perdin</span>
 												<i class="sub-angle fe fe-chevron-down"></i>
 											</a>
-											
+
 											<ul class="sub-slide-menu">
 												<li>
 													@php
@@ -393,7 +393,7 @@
 														$query->where('approve', null);
 													})->count();
 													@endphp
-													<a class="sub-side-menu__item {{ request()->routeIs('data-perdin.index') && request('status') == 'baru' ? 'active' : '' }}" href="{{ route('data-perdin.index', 'baru') }}">Baru 
+													<a class="sub-side-menu__item {{ request()->routeIs('data-perdin.index') && request('status') == 'baru' ? 'active' : '' }}" href="{{ route('data-perdin.index', 'baru') }}">Baru
 														<span class="badge bg-success text-light" id="bg-side-text">{{ $totalBaru }}</span>
 													</a>
 												</li>
@@ -403,7 +403,7 @@
 														$query->where('approve', 0);
 													})->count();
 													@endphp
-													<a class="sub-side-menu__item {{ request()->routeIs('data-perdin.index') && request('status') == 'tolak' ? 'active' : '' }}" href="{{ route('data-perdin.index', 'tolak') }}">Ditolak 
+													<a class="sub-side-menu__item {{ request()->routeIs('data-perdin.index') && request('status') == 'tolak' ? 'active' : '' }}" href="{{ route('data-perdin.index', 'tolak') }}">Ditolak
 														<span class="badge bg-danger text-light" id="bg-side-text">{{ $totalDitolak }}</span>
 													</a>
 												</li>
@@ -413,7 +413,7 @@
 														$query->where('approve', 1)->where('lap', null);
 													})->count();
 													@endphp
-													<a class="sub-side-menu__item {{ request()->routeIs('data-perdin.index') && request('status') == 'no_laporan' ? 'active' : '' }}" href="{{ route('data-perdin.index', 'no_laporan') }}">Belum Ada Laporan 
+													<a class="sub-side-menu__item {{ request()->routeIs('data-perdin.index') && request('status') == 'no_laporan' ? 'active' : '' }}" href="{{ route('data-perdin.index', 'no_laporan') }}">Belum Ada Laporan
 														<span class="badge bg-warning text-light" id="bg-side-text">{{ $totalNoLaporan }}</span>
 													</a>
 												</li>
@@ -423,7 +423,7 @@
 														$query->where('approve', 1)->where('lap', 1)->where('kwitansi', null);
 													})->count();
 													@endphp
-													<a class="sub-side-menu__item {{ request()->routeIs('data-perdin.index') && request('status') == 'belum_bayar' ? 'active' : '' }}" href="{{ route('data-perdin.index', 'belum_bayar') }}">Belum Bayar 
+													<a class="sub-side-menu__item {{ request()->routeIs('data-perdin.index') && request('status') == 'belum_bayar' ? 'active' : '' }}" href="{{ route('data-perdin.index', 'belum_bayar') }}">Belum Bayar
 														<span class="badge bg-danger text-light" id="bg-side-text">{{ $totalBelumBayar }}</span>
 													</a>
 												</li>
@@ -433,14 +433,15 @@
 														$query->where('approve', 1)->where('lap', 1)->where('kwitansi', 1);
 													})->count();
 													@endphp
-													<a class="sub-side-menu__item {{ request()->routeIs('data-perdin.index') && request('status') == 'sudah_bayar' ? 'active' : '' }}" href="{{ route('data-perdin.index', 'sudah_bayar') }}">Sudah Bayar 
+													<a class="sub-side-menu__item {{ request()->routeIs('data-perdin.index') && request('status') == 'sudah_bayar' ? 'active' : '' }}" href="{{ route('data-perdin.index', 'sudah_bayar') }}">Sudah Bayar
 														<span class="badge bg-success text-light" id="bg-side-text">{{ $totalSudahBayar }}</span>
 													</a>
 												</li>
 											</ul>
-											
+
 										</li>
 										<li><a class="slide-item {{ request()->routeIs('laporan-perdin.index') ? 'active' : '' }}" href="{{ route('laporan-perdin.index') }}">Arsip Laporan </a></li>
+										<li><a class="slide-item {{ request()->routeIs('kwitansi-perdin.index') ? 'active' : '' }}" href="{{ route('kwitansi-perdin.index') }}">Laporan Bendahara </a></li>
 									</ul>
 								</li>
 							</ul>
@@ -450,13 +451,13 @@
 				</div>
 				<!-- main-sidebar -->
 			</div>
-			
+
 			<!-- main-content -->
 			<div class="main-content app-content">
-				
+
 				<!-- container -->
 				<div class="main-container container-fluid">
-					
+
 					<!-- breadcrumb -->
 					<div class="breadcrumb-header justify-content-between">
 						<div class="left-content">
@@ -464,18 +465,18 @@
 							<p class="mg-b-0">{{ auth()->user()->bidang->nama ?? 'Bidang belum ditentukan' }}</p>
 						</div>
 						<div class="main-dashboard-header-right">
-							
+
 						</div>
 					</div>
 					<!-- breadcrumb -->
-					
+
 					@yield('container')
-					
+
 				</div>
 				<!-- /Container -->
 			</div>
 			<!-- /main-content -->
-			
+
 			<!-- Message Modal -->
 			<div class="modal fade" id="chatmodel" tabindex="-1" role="dialog"  aria-hidden="true">
 				<div class="modal-dialog modal-dialog-right chatbox" role="document">
@@ -522,7 +523,7 @@
 								</ul>
 							</div>
 							<!-- action-header end -->
-							
+
 							<!-- msg_card_body -->
 							<div class="card-body msg_card_body">
 								<div class="chat-box-single-line">
@@ -646,7 +647,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<!-- Footer opened -->
 			<div class="main-footer ht-45">
 				<div class="container-fluid pd-t-0 ht-100p">
@@ -654,10 +655,10 @@
 				</div>
 			</div>
 			<!-- Footer closed -->
-			
+
 		</div>
 		<!-- End Page -->
-		
+
 		@yield('js')
 	</body>
 	</html>

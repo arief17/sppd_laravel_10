@@ -17,9 +17,12 @@ class KwitansiPerdinController extends Controller
     */
     public function index()
     {
-        //
+        return view('dashboard.perdin.kwitansi-perdin.index', [
+            'title' => 'Daftar Laporan Perdin',
+            'kwitansi_perdins' => KwitansiPerdin::all(),
+        ]);
     }
-    
+
     /**
     * Show the form for creating a new resource.
     */
@@ -27,7 +30,7 @@ class KwitansiPerdinController extends Controller
     {
         //
     }
-    
+
     /**
     * Store a newly created resource in storage.
     */
@@ -35,7 +38,7 @@ class KwitansiPerdinController extends Controller
     {
         //
     }
-    
+
     /**
     * Display the specified resource.
     */
@@ -43,7 +46,7 @@ class KwitansiPerdinController extends Controller
     {
         //
     }
-    
+
     /**
     * Show the form for editing the specified resource.
     */
@@ -60,7 +63,7 @@ class KwitansiPerdinController extends Controller
             'kegiatan_subs' => KegiatanSub::all(),
         ]);
     }
-    
+
     /**
     * Update the specified resource in storage.
     */
@@ -77,12 +80,12 @@ class KwitansiPerdinController extends Controller
                 'kegiatan_sub_id' => 'required',
                 'pptk_id' => 'required',
             ]);
-            
+
             $validatedData['author_id'] = auth()->user()->id;
-            
+
             $kwitansiPerdin->update($validatedData);
             StatusPerdin::where('id', $kwitansiPerdin->data_perdin->status_id)->update(['kwitansi' => 1]);
-            
+
             foreach ($kwitansiPerdin->pegawais as $pegawai) {
                 $pegawaiId = $pegawai->id;
                 $pegawai->pivot->update([
@@ -92,12 +95,12 @@ class KwitansiPerdinController extends Controller
                     'uang_penginapan' => $request->input("uang_penginapan.$pegawaiId"),
                 ]);
             }
-            
+
             return redirect()->route('data-perdin.index', 'sudah_bayar')->with('success', 'Kwitansi Perdin berhasil disimpan! Silahkan cetak Kwitansi!');
         }, 2);
     }
-    
-    
+
+
     /**
     * Remove the specified resource from storage.
     */
