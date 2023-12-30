@@ -58,6 +58,7 @@ class DataPerdinController extends Controller
                 $query->where($queryConditions);
             });
         })
+        ->orderBy('id','desc')
         ->get()
         ->map(function ($data_perdin) {
             $status = ($data_perdin->status->approve === null) ? 'Baru' : (($data_perdin->status->approve === 0) ? 'Ditolak' : 'Diterima');
