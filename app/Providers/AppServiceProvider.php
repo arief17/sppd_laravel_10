@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         View::composer('*', function ($view) {
-            if (!auth()->user()) {
+            if (auth()->user()) {
                 $authUser = auth()->user();
 
                 if ($authUser->level_admin->slug === 'approval' && (str_contains($authUser->username, 'kadis') || str_contains($authUser->username, 'sekdis'))) {
