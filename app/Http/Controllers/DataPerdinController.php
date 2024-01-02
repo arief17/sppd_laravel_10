@@ -102,17 +102,13 @@ class DataPerdinController extends Controller
     {
         $authUser = auth()->user()->username;
 
-        if (auth()->user()->level_admin->slug === 'approval') {
-            if (str_contains($authUser, 'kadis') || str_contains($authUser, 'sekdis')) {
-                $userDinas = str_contains($authUser, 'kadis') ? 'Kepala Dinas' : 'Sekertaris Dinas';
+        if (auth()->user()->level_admin->slug === 'approval' && (str_contains($authUser, 'kadis') || str_contains($authUser, 'sekdis'))) {
+            $userDinas = str_contains($authUser, 'kadis') ? 'Kepala Dinas' : 'Sekretaris Dinas';
 
-                $data_perdins = DataPerdin::filterByStatus($status)
-                ->whereHas('tanda_tangan.pegawai.jabatan', function ($query) use ($userDinas) {
-                    $query->where('nama', 'like', '%' . $userDinas . '%');
-                })->get();
-            } else {
-                $data_perdins = DataPerdin::filterByStatus($status)->get();
-            }
+            $data_perdins = DataPerdin::filterByStatus($status)
+            ->whereHas('tanda_tangan.pegawai.jabatan', function ($query) use ($userDinas) {
+                $query->where('nama', 'like', '%' . $userDinas . '%');
+            })->get();
         } else {
             $data_perdins = DataPerdin::filterByStatus($status)->get();
         }

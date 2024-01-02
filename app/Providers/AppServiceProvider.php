@@ -41,7 +41,7 @@ class AppServiceProvider extends ServiceProvider
                 $authUser = auth()->user();
 
                 if ($authUser->level_admin->slug === 'approval' && (str_contains($authUser->username, 'kadis') || str_contains($authUser->username, 'sekdis'))) {
-                    $userDinas = str_contains($authUser->username, 'kadis') ? 'Kepala Dinas' : 'Sekertaris Dinas';
+                    $userDinas = str_contains($authUser->username, 'kadis') ? 'Kepala Dinas' : 'Sekretaris Dinas';
 
                     $data_perdins = DataPerdin::whereHas('tanda_tangan.pegawai.jabatan', function ($query) use ($userDinas) {
                         $query->where('nama', 'like', '%' . $userDinas . '%');
