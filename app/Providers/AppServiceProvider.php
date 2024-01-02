@@ -37,45 +37,47 @@ class AppServiceProvider extends ServiceProvider
         });
 
         View::composer('*', function ($view) {
-            $authUser = auth()->user();
+            if ($view->getName() !== 'login') {
+                $authUser = auth()->user();
 
-            if ($authUser->level_admin->slug === 'approval' && (str_contains($authUser->username, 'kadis') || str_contains($authUser->username, 'sekdis'))) {
-                $userDinas = str_contains($authUser->username, 'kadis') ? 'Kepala Dinas' : 'Sekertaris Dinas';
+                if ($authUser->level_admin->slug === 'approval' && (str_contains($authUser->username, 'kadis') || str_contains($authUser->username, 'sekdis'))) {
+                    $userDinas = str_contains($authUser->username, 'kadis') ? 'Kepala Dinas' : 'Sekertaris Dinas';
 
-                $data_perdins = DataPerdin::whereHas('tanda_tangan.pegawai.jabatan', function ($query) use ($userDinas) {
-                    $query->where('nama', 'like', '%' . $userDinas . '%');
-                })->get();
-            } else {
-                $data_perdins = DataPerdin::all();
+                    $data_perdins = DataPerdin::whereHas('tanda_tangan.pegawai.jabatan', function ($query) use ($userDinas) {
+                        $query->where('nama', 'like', '%' . $userDinas . '%');
+                    })->get();
+                } else {
+                    $data_perdins = DataPerdin::all();
+                }
+
+                $totalBaru = $data_perdins->filter(function ($data) {
+                    return $data->status->approve === null;
+                })->count();
+
+                $totalDitolak = $data_perdins->filter(function ($data) {
+                    return $data->status->approve === 0;
+                })->count();
+
+                $totalNoLaporan = $data_perdins->filter(function ($data) {
+                    return $data->status->approve === 1 && $data->status->lap === null;
+                })->count();
+
+                $totalBelumBayar = $data_perdins->filter(function ($data) {
+                    return $data->status->approve === 1 && $data->status->lap === 1 && $data->status->kwitansi === null;
+                })->count();
+
+                $totalSudahBayar = $data_perdins->filter(function ($data) {
+                    return $data->status->approve === 1 && $data->status->lap === 1 && $data->status->kwitansi === 1;
+                })->count();
+
+                $view->with([
+                    'totalBaru' => $totalBaru,
+                    'totalDitolak' => $totalDitolak,
+                    'totalNoLaporan' => $totalNoLaporan,
+                    'totalBelumBayar' => $totalBelumBayar,
+                    'totalSudahBayar' => $totalSudahBayar,
+                ]);
             }
-
-            $totalBaru = $data_perdins->filter(function ($data) {
-                return $data->status->approve === null;
-            })->count();
-
-            $totalDitolak = $data_perdins->filter(function ($data) {
-                return $data->status->approve === 0;
-            })->count();
-
-            $totalNoLaporan = $data_perdins->filter(function ($data) {
-                return $data->status->approve === 1 && $data->status->lap === null;
-            })->count();
-
-            $totalBelumBayar = $data_perdins->filter(function ($data) {
-                return $data->status->approve === 1 && $data->status->lap === 1 && $data->status->kwitansi === null;
-            })->count();
-
-            $totalSudahBayar = $data_perdins->filter(function ($data) {
-                return $data->status->approve === 1 && $data->status->lap === 1 && $data->status->kwitansi === 1;
-            })->count();
-
-            $view->with([
-                'totalBaru' => $totalBaru,
-                'totalDitolak' => $totalDitolak,
-                'totalNoLaporan' => $totalNoLaporan,
-                'totalBelumBayar' => $totalBelumBayar,
-                'totalSudahBayar' => $totalSudahBayar,
-            ]);
         });
     }
 }
