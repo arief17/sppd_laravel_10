@@ -102,7 +102,7 @@ class DataPerdinController extends Controller
     {
         $authUser = auth()->user()->username;
 
-        if (auth()->user()->level_admin->slug != 'approval') {
+        if (auth()->user()->level_admin->slug === 'approval') {
             if (str_contains($authUser, 'kadis') || str_contains($authUser, 'sekdis')) {
                 $userDinas = str_contains($authUser, 'kadis') ? 'Kepala Dinas' : 'Sekertaris Dinas';
 
@@ -110,6 +110,8 @@ class DataPerdinController extends Controller
                 ->whereHas('tanda_tangan.pegawai.jabatan', function ($query) use ($userDinas) {
                     $query->where('nama', 'like', '%' . $userDinas . '%');
                 })->get();
+            } else {
+                $data_perdins = DataPerdin::filterByStatus($status)->get();
             }
         } else {
             $data_perdins = DataPerdin::filterByStatus($status)->get();
