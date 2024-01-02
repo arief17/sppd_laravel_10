@@ -30,5 +30,8 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('isApproval', function(User $user){
             return $user->level_admin->slug === 'approval'|| $user->level_admin->slug === 'admin';
         });
+        Gate::define('isApprovalOperator', function(User $user){
+            return $user->level_admin->slug === 'approval'|| $user->level_admin->slug === 'operator' || $user->level_admin->slug === 'admin';
+        });
     }
 }

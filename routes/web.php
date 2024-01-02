@@ -80,13 +80,12 @@ Route::middleware('can:isApproval')->group(function(){
 	});
 });
 
-Route::middleware('can:isOperator')->group(function(){
+Route::middleware('can:isApprovalOperator')->group(function(){
 	Route::controller(DataPerdinController::class)->group(function(){
 		Route::get('/dashboard/data-perdin/status/{status}', 'index')->name('data-perdin.index')->middleware('auth');
 		Route::get('/get-tujuan/{jenisPerdinId}', 'getTujuan')->name('data-perdin.jenis_perdin')->middleware('auth');
 		Route::get('/get-pegawai-info/{tujuanId}/{pegawaiId}', 'getPegawaiInfo')->name('data-perdin.get-pegawai')->middleware('auth');
 	});
-
 
 	Route::controller(PerdinPdfController::class)->group(function(){
 		Route::get('/dashboard/status-perdin/spt/pdf/{slug}', 'spt')->name('spt-pdf')->middleware('auth');
@@ -97,12 +96,14 @@ Route::middleware('can:isOperator')->group(function(){
 		Route::get('/dashboard/status-perdin/kwitansi/pdf/{id}', 'kwitansi')->name('kwitansi-pdf')->middleware('auth');
 	});
 
-	Route::resource('/dashboard/laporan-perdin', LaporanPerdinController::class)->except('create', 'store', 'show', 'destroy')->middleware('auth');
-	Route::resource('/dashboard/kwitansi-perdin', KwitansiPerdinController::class)->except('create', 'store', 'show', 'destroy')->middleware('auth');
+	Route::resource('/dashboard/laporan-perdin', LaporanPerdinController::class)->only('index')->middleware('auth');
+	Route::resource('/dashboard/kwitansi-perdin', KwitansiPerdinController::class)->only('index')->middleware('auth');
 });
 
 Route::middleware('can:isOperator')->group(function(){
 	Route::resource('/dashboard/data-perdin', DataPerdinController::class)->except('index', 'edit', 'update')->middleware('auth');
+	Route::resource('/dashboard/laporan-perdin', LaporanPerdinController::class)->only('edit', 'update')->middleware('auth');
+	Route::resource('/dashboard/kwitansi-perdin', KwitansiPerdinController::class)->only('edit', 'update')->middleware('auth');
 });
 
 Route::redirect('/dashboard', '/');
