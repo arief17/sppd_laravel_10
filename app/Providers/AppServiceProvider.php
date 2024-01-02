@@ -2,23 +2,25 @@
 
 namespace App\Providers;
 
+use App\Models\DataPerdin;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
-     */
+    * Register any application services.
+    */
     public function register(): void
     {
         //
     }
 
     /**
-     * Bootstrap any application services.
-     */
+    * Bootstrap any application services.
+    */
     public function boot(): void
     {
         Gate::define('isAdmin', function(User $user){
@@ -32,6 +34,48 @@ class AppServiceProvider extends ServiceProvider
         });
         Gate::define('isApprovalOperator', function(User $user){
             return $user->level_admin->slug === 'approval'|| $user->level_admin->slug === 'operator' || $user->level_admin->slug === 'admin';
+        });
+
+        View::composer('*', function ($view) {
+            $authUser = auth()->user();
+
+            if ($authUser->level_admin->slug === 'approval' && (str_contains($authUser->username, 'kadis') || str_contains($authUser->username, 'sekdis'))) {
+                $userDinas = str_contains($authUser->username, 'kadis') ? 'Kepala Dinas' : 'Sekertaris Dinas';
+
+                $data_perdins = DataPerdin::whereHas('tanda_tangan.pegawai.jabatan', function ($query) use ($userDinas) {
+                    $query->where('nama', 'like', '%' . $userDinas . '%');
+                })->get();
+            } else {
+                $data_perdins = DataPerdin::all();
+            }
+
+            $totalBaru = $data_perdins->filter(function ($data) {
+                return $data->status->approve === null;
+            })->count();
+
+            $totalDitolak = $data_perdins->filter(function ($data) {
+                return $data->status->approve === 0;
+            })->count();
+
+            $totalNoLaporan = $data_perdins->filter(function ($data) {
+                return $data->status->approve === 1 && $data->status->lap === null;
+            })->count();
+
+            $totalBelumBayar = $data_perdins->filter(function ($data) {
+                return $data->status->approve === 1 && $data->status->lap === 1 && $data->status->kwitansi === null;
+            })->count();
+
+            $totalSudahBayar = $data_perdins->filter(function ($data) {
+                return $data->status->approve === 1 && $data->status->lap === 1 && $data->status->kwitansi === 1;
+            })->count();
+
+            $view->with([
+                'totalBaru' => $totalBaru,
+                'totalDitolak' => $totalDitolak,
+                'totalNoLaporan' => $totalNoLaporan,
+                'totalBelumBayar' => $totalBelumBayar,
+                'totalSudahBayar' => $totalSudahBayar,
+            ]);
         });
     }
 }

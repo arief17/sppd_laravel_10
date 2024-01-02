@@ -388,51 +388,26 @@
 
 											<ul class="sub-slide-menu">
 												<li>
-													@php
-													$totalBaru = \App\Models\DataPerdin::whereHas('status', function ($query) {
-														$query->where('approve', null);
-													})->count();
-													@endphp
 													<a class="sub-side-menu__item {{ request()->routeIs('data-perdin.index') && request('status') == 'baru' ? 'active' : '' }}" href="{{ route('data-perdin.index', 'baru') }}">Baru
 														<span class="badge bg-success text-light" id="bg-side-text">{{ $totalBaru }}</span>
 													</a>
 												</li>
 												<li>
-													@php
-													$totalDitolak = \App\Models\DataPerdin::whereHas('status', function ($query) {
-														$query->where('approve', 0);
-													})->count();
-													@endphp
 													<a class="sub-side-menu__item {{ request()->routeIs('data-perdin.index') && request('status') == 'tolak' ? 'active' : '' }}" href="{{ route('data-perdin.index', 'tolak') }}">Ditolak
 														<span class="badge bg-danger text-light" id="bg-side-text">{{ $totalDitolak }}</span>
 													</a>
 												</li>
 												<li>
-													@php
-													$totalNoLaporan = \App\Models\DataPerdin::whereHas('status', function ($query) {
-														$query->where('approve', 1)->where('lap', null);
-													})->count();
-													@endphp
 													<a class="sub-side-menu__item {{ request()->routeIs('data-perdin.index') && request('status') == 'no_laporan' ? 'active' : '' }}" href="{{ route('data-perdin.index', 'no_laporan') }}">Belum Ada Laporan
 														<span class="badge bg-warning text-light" id="bg-side-text">{{ $totalNoLaporan }}</span>
 													</a>
 												</li>
 												<li>
-													@php
-													$totalBelumBayar = \App\Models\DataPerdin::whereHas('status', function ($query) {
-														$query->where('approve', 1)->where('lap', 1)->where('kwitansi', null);
-													})->count();
-													@endphp
 													<a class="sub-side-menu__item {{ request()->routeIs('data-perdin.index') && request('status') == 'belum_bayar' ? 'active' : '' }}" href="{{ route('data-perdin.index', 'belum_bayar') }}">Belum Bayar
 														<span class="badge bg-danger text-light" id="bg-side-text">{{ $totalBelumBayar }}</span>
 													</a>
 												</li>
 												<li>
-													@php
-													$totalSudahBayar = \App\Models\DataPerdin::whereHas('status', function ($query) {
-														$query->where('approve', 1)->where('lap', 1)->where('kwitansi', 1);
-													})->count();
-													@endphp
 													<a class="sub-side-menu__item {{ request()->routeIs('data-perdin.index') && request('status') == 'sudah_bayar' ? 'active' : '' }}" href="{{ route('data-perdin.index', 'sudah_bayar') }}">Sudah Bayar
 														<span class="badge bg-success text-light" id="bg-side-text">{{ $totalSudahBayar }}</span>
 													</a>

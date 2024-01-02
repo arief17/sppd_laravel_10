@@ -50,7 +50,7 @@
             </tr>
         </table>
 
-        <h3 style="text-decoration: underline; font-weight: bold; text-align: center;">SURAT PERINTAH TUGAS</h3>
+        <h3 style="text-decoration: underline; font-weight: bold; text-align: center;">SURAT PERINTAH</h3>
 
         <table style="margin-top: 20px; margin-bottom: 20px;">
             <tr>
@@ -72,7 +72,7 @@
                 <td>Keperluan</td>
                 <td>:</td>
                 <td>
-                    <p>{{ $kwitansi_perdin->data_perdin->maksud }}</p>
+                    <p>Belanja {{ $kwitansi_perdin->data_perdin->jenis_perdin->nama }} untuk {{ $kwitansi_perdin->data_perdin->maksud }}</p>
                     <p>{{ $kwitansi_perdin->data_perdin->tujuan->nama }} pada Tanggal {{ Carbon\Carbon::parse($kwitansi_perdin->data_perdin->tgl_berangkat)->isoFormat('D MMMM YYYY') }}</p>
                     <p>Kode Rekening {{ $kwitansi_perdin->no_rek }}</p>
                     <p>Kegiatan {{ $kwitansi_perdin->kegiatan_sub->kegiatan->nama }}</p>
@@ -81,14 +81,12 @@
             </tr>
         </table>
 
-        <div style="float: right; margin-right: 200px">
-            <div style="text-align: center;">
-                <span style="padding-right: 120px">Serang,</span> {{ now()->isoFormat('YYYY') }}
-                <h4>Kepala Dinas</h4>
-				<img src="data:image/png;base64,{{ $ttd_kepala->fileTtdEncoded ?? '' }}" alt="{{ $ttd_kepala->nama ?? '' }}" height="70">
-                <p style="text-decoration: underline; font-weight: bold;">{{ $ttd_kepala->pegawai->nama ?? '' }}</p>
-                <p>NIP.{{ $ttd_kepala->pegawai->nip ?? '' }}</p>
-            </div>
+        <div style="text-align: center;">
+            <span style="padding-right: 120px">Serang,</span> {{ now()->isoFormat('YYYY') }}
+            <h4>Kepala Dinas</h4>
+            <img src="data:image/png;base64,{{ $ttd_kepala->fileTtdEncoded ?? '' }}" alt="{{ $ttd_kepala->nama ?? '' }}" height="70">
+            <p style="text-decoration: underline; font-weight: bold;">{{ $ttd_kepala->pegawai->nama ?? '' }}</p>
+            <p>NIP.{{ $ttd_kepala->pegawai->nip ?? '' }}</p>
         </div>
     </div>
 </body>
