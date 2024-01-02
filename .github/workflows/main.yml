@@ -37,6 +37,7 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
             cd public_html/sppd
+            rm -f .git/index.lock
             git fetch origin production
             git reset --hard origin/production
             composer update --ignore-platform-reqs
