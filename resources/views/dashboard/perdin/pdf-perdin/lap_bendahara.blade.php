@@ -12,17 +12,11 @@
         }
 
         p, td {
-            font-size: 17px;
-        }
-
-        .page-break {
-            page-break-after: always;
+            font-size: 18px;
         }
     </style>
 </head>
 <body style="font-family: Times, serif; margin: 30px;">
-    @foreach ($kwitansi_perdin->pegawais as $pegawai)
-
     <div style="float: left;">
         <img src="data:image/png;base64,{{ $imgLogo }}" width="80">
     </div>
@@ -62,10 +56,10 @@
             <tr>
                 <td>Berikan/Keluarkan uang sebesar</td>
                 <td>: Rp.</td>
-                <td>{{ number_format($pegawai->pivot->uang_harian + $pegawai->pivot->uang_transport + $pegawai->pivot->uang_tiket + $pegawai->pivot->uang_penginapan, 2, ',', '.') }}</td>
+                <td>{{ number_format($total_uang, 2, ',', '.') }}</td>
             </tr>
             <tr>
-                <td colspan="3">({{ strtoupper($kwitansi_perdin->terbilang($pegawai->pivot->uang_harian + $pegawai->pivot->uang_transport + $pegawai->pivot->uang_tiket + $pegawai->pivot->uang_penginapan)) }} Rupiah)</td>
+                <td colspan="3">({{ ucwords($kwitansi_perdin->terbilang($total_uang)) }} Rupiah)</td>
             </tr>
         </table>
         <table style="margin-top: 20px; margin-bottom: 20px;">
@@ -87,21 +81,15 @@
             </tr>
         </table>
 
-        <div style="float: right;">
+        <div style="float: right; margin-right: 200px">
             <div style="text-align: center;">
-                <span>Serang, {{ now()->isoFormat('D MMMM YYYY') }}</span>
-                <h4 style="margin-bottom: 70px">
-                    Pengguna Anggaran
-                </h4>
-                <p style="text-decoration: underline; font-weight: bold;">{{ $pegawai->nama }}</p>
-                <p>NIP.{{ $pegawai->nip }}</p>
+                <span style="padding-right: 120px">Serang,</span> {{ now()->isoFormat('YYYY') }}
+                <h4>Kepala Dinas</h4>
+				<img src="data:image/png;base64,{{ $ttd_kepala->fileTtdEncoded ?? '' }}" alt="{{ $ttd_kepala->nama ?? '' }}" height="70">
+                <p style="text-decoration: underline; font-weight: bold;">{{ $ttd_kepala->pegawai->nama ?? '' }}</p>
+                <p>NIP.{{ $ttd_kepala->pegawai->nip ?? '' }}</p>
             </div>
         </div>
-
-        @if (!$loop->last)
-        <div class="page-break"></div>
-        @endif
     </div>
-    @endforeach
 </body>
 </html>

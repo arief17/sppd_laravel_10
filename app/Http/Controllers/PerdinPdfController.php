@@ -90,6 +90,14 @@ class PerdinPdfController extends Controller
         App::setLocale('id');
         $kwitansi_perdin = KwitansiPerdin::where('id', $id)->first();
         $bendahara = Bendahara::latest()->first();
+        $ttd_kepala = TandaTangan::whereHas('pegawai.jabatan', function ($query) {
+            $query->where('nama', 'like', '%Kepala Dinas%');
+        })->first();
+
+        $total_uang = 0;
+        foreach ($kwitansi_perdin->pegawais as $pegawai) {
+            $total_uang += $pegawai->pivot->uang_harian + $pegawai->pivot->uang_transport + $pegawai->pivot->uang_tiket + $pegawai->pivot->uang_penginapan;
+        }
 
         $imgLogo = base64_encode(file_get_contents(public_path('assets/img/logo-banten2.png')));
 
@@ -97,6 +105,8 @@ class PerdinPdfController extends Controller
             'kwitansi_perdin' => $kwitansi_perdin,
             'imgLogo' => $imgLogo,
             'bendahara' => $bendahara,
+            'ttd_kepala' => $ttd_kepala,
+            'total_uang' => $total_uang,
         ]);
 
         $pdf->setPaper(array(0,0,609.4488,935.433), 'portrait');

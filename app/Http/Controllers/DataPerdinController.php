@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AlatAngkut;
+use App\Models\Bidang;
 use App\Models\DataPerdin;
 use App\Models\JenisPerdin;
 use App\Models\Ketentuan;
@@ -52,8 +53,7 @@ class DataPerdinController extends Controller
 
     private function getDataPerdins($queryConditions)
     {
-        return DataPerdin::latest()
-        ->when($queryConditions, function ($query) use ($queryConditions) {
+        return DataPerdin::when($queryConditions, function ($query) use ($queryConditions) {
             return $query->whereHas('status', function ($query) use ($queryConditions) {
                 $query->where($queryConditions);
             });
@@ -72,6 +72,7 @@ class DataPerdinController extends Controller
                 'tujuan' => $data_perdin->tujuan->nama,
                 'tgl_berangkat' => $data_perdin->tgl_berangkat,
                 'lama' => $data_perdin->lama,
+                'tanda_tangan' => $data_perdin->tanda_tangan->pegawai->jabatan->nama,
             ];
         });
     }
@@ -99,7 +100,20 @@ class DataPerdinController extends Controller
     */
     public function index($status = null)
     {
-        $data_perdins = DataPerdin::filterByStatus($status);
+        $authUser = auth()->user()->username;
+
+        if (auth()->user()->level_admin->slug != 'approval') {
+            if (str_contains($authUser, 'kadis') || str_contains($authUser, 'sekdis')) {
+                $userDinas = str_contains($authUser, 'kadis') ? 'Kepala Dinas' : 'Sekertaris Dinas';
+
+                $data_perdins = DataPerdin::filterByStatus($status)
+                ->whereHas('tanda_tangan.pegawai.jabatan', function ($query) use ($userDinas) {
+                    $query->where('nama', 'like', '%' . $userDinas . '%');
+                })->get();
+            }
+        } else {
+            $data_perdins = DataPerdin::filterByStatus($status)->get();
+        }
 
         return view('dashboard.perdin.data-perdin.index', [
             'title' => 'Daftar Data Perdin',
