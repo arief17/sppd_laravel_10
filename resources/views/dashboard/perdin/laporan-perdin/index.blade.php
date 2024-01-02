@@ -34,21 +34,30 @@
 								<td>{{ $laporan_perdin->data_perdin->pegawai_diperintah->nama }}</td>
 								<td>{{ $laporan_perdin->data_perdin->tgl_berangkat }}</td>
 								<td>
-									@if ($laporan_perdin->data_perdin->status->lap && $laporan_perdin->file_laporan)
-									<a class="modal-effect btn btn-secondary btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#lap-input-{{ $laporan_perdin->id }}">
-										Laporan yang diinput
-									</a>
-									<a class="modal-effect btn btn-secondary btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#lap-{{ $laporan_perdin->id }}">
-										Laporan perdin
-									</a>
+									@if ($laporan_perdin->data_perdin->status->lap)
+										@if ($laporan_perdin->file_laporan)
+											<a class="modal-effect btn btn-secondary btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#lap-input-{{ $laporan_perdin->id }}">
+												Laporan yang diinput
+											</a>
+										@else
+											<button class="not-laporan btn btn-danger btn-sm">Laporan yang diinput</button>
+										@endif
+
+										<a class="modal-effect btn btn-secondary btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#lap-{{ $laporan_perdin->id }}">
+											Laporan perdin
+										</a>
 									@else
-									<button class="not-laporan btn btn-danger btn-sm">Laporan yang diinput</button>
-									<button class="not-laporan btn btn-danger btn-sm">Laporan perdin</button>
+										<button class="not-laporan btn btn-danger btn-sm">Laporan yang diinput</button>
+										<button class="not-laporan btn btn-danger btn-sm">Laporan perdin</button>
 									@endif
+
 								</td>
-								@if ($laporan_perdin->data_perdin->status->lap && $laporan_perdin->file_laporan)
-								@include('dashboard.perdin.status-perdin.lap_input')
-								@include('dashboard.perdin.status-perdin.lap_cetak')
+
+								@if ($laporan_perdin->data_perdin->status->lap)
+									@include('dashboard.perdin.status-perdin.lap_cetak')
+									@if ($laporan_perdin->file_laporan)
+										@include('dashboard.perdin.status-perdin.lap_input')
+									@endif
 								@endif
 							</tr>
 							@endforeach
