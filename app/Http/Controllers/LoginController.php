@@ -50,6 +50,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $user = $request->user();
             $token = $user->createToken($user->username);
+            User::where('id', $user->id)->update(['last_login' => now()]);
 
             return response()->json([
                 'token' => $token->plainTextToken,
