@@ -52,15 +52,16 @@ class LoginController extends Controller
             $token = $user->createToken($user->username);
 
             return response()->json([
-            'token' => $token->plainTextToken,
-            'user' => [
-                'id' => $user->id,
-                'username' => $user->username,
-                'level_admin' => $user->level_admin->slug,
-                'bidang' => $user->bidang->nama ?? '',
-                'last_login' => $user->last_login,
-            ]
-        ], 200);
+                'token' => $token->plainTextToken,
+                'user' => [
+                    'id' => $user->id,
+                    'username' => $user->username,
+                    'level_admin' => $user->level_admin->slug,
+                    'bidang' => $user->bidang->nama ?? '',
+                    'jabatan' => $user->jabatan->nama ?? '',
+                    'last_login' => $user->last_login,
+                ]
+            ], 200);
         }
 
         return response()->json(['message' => 'Invalid credentials'], 401);
