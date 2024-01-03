@@ -27,17 +27,22 @@ class User extends Authenticatable
     {
         return $this->belongsTo(LevelAdmin::class, 'level_admin_id');
     }
-    
+
     public function bidang(): BelongsTo
     {
         return $this->belongsTo(Bidang::class, 'bidang_id');
     }
-    
+
+    public function jabatan(): BelongsTo
+    {
+        return $this->belongsTo(Jabatan::class, 'jabatan_id');
+    }
+
     public function bidang_authors(): HasMany
     {
         return $this->hasMany(Bidang::class, 'author_id');
     }
-    
+
     public function seksi(): HasMany
     {
         return $this->hasMany(Seksi::class, 'author_id');

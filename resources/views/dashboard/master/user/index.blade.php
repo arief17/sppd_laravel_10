@@ -20,6 +20,7 @@
 								<th class="border-bottom-0">Username</th>
 								<th class="border-bottom-0">Level Admin</th>
 								<th class="border-bottom-0">Bidang</th>
+								<th class="border-bottom-0">Jabatan</th>
 								<th class="border-bottom-0">Last Login</th>
 								<th class="border-bottom-0" style="width: 1%">Aksi</th>
 							</tr>
@@ -31,6 +32,7 @@
 								<td>{{ $user->username }}</td>
 								<td>{{ $user->level_admin->nama }}</td>
 								<td>{{ $user->bidang->nama ?? 'Belum ditentukan' }}</td>
+								<td>{{ $user->jabatan->nama ?? 'Belum ditentukan' }}</td>
 								<td>{{ $user->last_login }}</td>
 								<td>
 									<a class="btn btn-primary btn-sm" href="{{ route('user.show', $user->username) }}">
@@ -87,7 +89,7 @@
                 toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
         });
-        
+
         Toast.fire({
             icon: 'success',
             title: '{{ session('success') }}'
@@ -101,7 +103,7 @@
 		$('#deleteData').click(function(e) {
 			e.preventDefault();
 			var title = $(this).data('title');
-			
+
 			Swal.fire({
 				title: 'Hapus ' + title + '?',
 				html: "Apakah kamu yakin ingin menghapus <b>" + title + "</b>? Data yang sudah dihapus tidak bisa dikembalikan!",

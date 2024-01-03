@@ -21,6 +21,11 @@ class Jabatan extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class, 'jabatan_id');
+    }
+
     public function pegawais(): HasMany
     {
         return $this->hasMany(Pegawai::class, 'jabatan_id');

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('password');
             $table->unsignedBigInteger('level_admin_id');
             $table->unsignedBigInteger('bidang_id')->nullable();
+            $table->unsignedBigInteger('jabatan_id')->nullable();
             $table->dateTime('last_login')->nullable();
             $table->rememberToken();
             $table->timestamps();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jabatan;
 use App\Models\LevelAdmin;
 use App\Models\Bidang;
 use App\Models\User;
@@ -15,7 +16,7 @@ class UserController extends Controller
     {
         return response()->json($user, 200);
     }
-    
+
     /**
     * Display a listing of the resource.
     */
@@ -26,7 +27,7 @@ class UserController extends Controller
             'users' => User::all(),
         ]);
     }
-    
+
     /**
     * Show the form for creating a new resource.
     */
@@ -36,9 +37,10 @@ class UserController extends Controller
             'title' => 'Tambah User',
             'level_admins' => LevelAdmin::all(),
             'bidangs' => Bidang::all(),
+            'jabatans' => Jabatan::all(),
         ]);
     }
-    
+
     /**
     * Store a newly created resource in storage.
     */
@@ -49,14 +51,15 @@ class UserController extends Controller
             'password' => ['required', 'confirmed', Password::min(5)->letters()],
             'level_admin_id' => 'required',
             'bidang_id' => 'required',
+            'jabatan_id' => 'required',
         ]);
-        
+
         $validatedData['password'] = Hash::make($request->password);
-        
+
         User::create($validatedData);
         return redirect()->route('user.index')->with('success', 'User berhasil ditambahkan!');
     }
-    
+
     /**
     * Display the specified resource.
     */
@@ -67,7 +70,7 @@ class UserController extends Controller
             'user' => $user,
         ]);
     }
-    
+
     /**
     * Show the form for editing the specified resource.
     */
@@ -78,9 +81,10 @@ class UserController extends Controller
             'user' => $user,
             'level_admins' => LevelAdmin::all(),
             'bidangs' => Bidang::all(),
+            'jabatans' => Jabatan::all(),
         ]);
     }
-    
+
     /**
     * Update the specified resource in storage.
     */
@@ -89,29 +93,30 @@ class UserController extends Controller
         if(auth()->user()->username === $request->username) {
             return redirect()->route('user.index')->with('success', 'Tidak dapat memperbarui data milik pribadi');
         }
-        
+
         $rules = [
             'password' => ['nullable', 'confirmed', Password::min(5)->letters()],
             'level_admin_id' => 'required',
             'bidang_id' => 'required',
+            'jabatan_id' => 'required',
         ];
-        
+
         if ($request->username != $user->username) {
             $rules['username'] = 'alpha_dash|min:3|max:100|unique:users';
         }
-        
+
         $validatedData = $request->validate($rules);
-        
+
         if ($request->password) {
             $validatedData['password'] = Hash::make($request->password);
         } else {
             unset($validatedData['password']);
         }
-        
+
         User::where('id', $user->id)->update($validatedData);
         return redirect()->route('user.index')->with('success', 'User berhasil diperbarui!');
     }
-    
+
     /**
     * Remove the specified resource from storage.
     */

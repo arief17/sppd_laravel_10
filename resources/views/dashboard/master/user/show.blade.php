@@ -35,6 +35,10 @@
 							<td>{{ $user->bidang }}</td>
 						</tr>
 						<tr>
+							<th style="white-space: nowrap; width: 1%;">Jabatan:</th>
+							<td>{{ $user->jabatan }}</td>
+						</tr>
+						<tr>
 							<th style="white-space: nowrap; width: 1%;">Last Login:</th>
 							<td>{{ $user->last_login }}</td>
 						</tr>
@@ -77,7 +81,7 @@
 		$('#deleteData').click(function(e) {
 			e.preventDefault();
 			var title = $(this).data('title');
-			
+
 			Swal.fire({
 				title: 'Hapus ' + title + '?',
 				html: "Apakah kamu yakin ingin menghapus <b>" + title + "</b>? Data yang sudah dihapus tidak bisa dikembalikan!",

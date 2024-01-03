@@ -15,7 +15,7 @@
 				<form action="{{ route('user.show', $user->username) }}" method="post">
 					@csrf
 					@method('put')
-					
+
 					<div class="form-group">
 						<label for="username">Username</label>
 						<input name="username" value="{{ old('username', $user->username) }}" type="text" class="form-control @error('username') is-invalid @enderror" id="username" placeholder="Masukan username">
@@ -75,7 +75,23 @@
 						</div>
 						@enderror
 					</div>
-					
+					<div class="form-group">
+						<label for="jabatan_id" class="form-label">Jabatan</label>
+						<select name="jabatan_id" id="jabatan_id" class="form-control form-select select2 @error('jabatan_id') is-invalid @enderror">
+							<option value="">Pilih Jabatan</option>
+							@foreach ($jabatans as $jabatan)
+							<option value="{{ $jabatan->id }}" @selected(old('jabatan_id', $user->jabatan_id) == $jabatan->id)>
+								{{ $jabatan->nama }}
+							</option>
+							@endforeach
+						</select>
+						@error('jabatan_id')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+						@enderror
+					</div>
+
 					<div class="form-group mb-0 mt-3 justify-content-end">
 						<button type="submit" class="btn btn-primary">Simpan</button>
 						<button type="reset" class="btn btn-secondary ms-3">Batal</button>

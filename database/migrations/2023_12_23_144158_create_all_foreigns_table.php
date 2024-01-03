@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->foreign('level_admin_id')->references('id')->on('level_admins');
             $table->foreign('bidang_id')->references('id')->on('bidangs');
+            $table->foreign('jabatan_id')->references('id')->on('jabatans');
         });
 
         Schema::table('bidangs', function (Blueprint $table) {
             $table->foreign('author_id')->references('id')->on('users');
         });
-        
+
         Schema::table('kegiatans', function (Blueprint $table) {
             $table->foreign('seksi_id')->references('id')->on('seksis');
             $table->foreign('author_id')->references('id')->on('users');
@@ -69,7 +70,7 @@ return new class extends Migration
             $table->foreign('bidang_id')->references('id')->on('bidangs');
             $table->foreign('author_id')->references('id')->on('users');
         });
-        
+
         Schema::table('wilayahs', function (Blueprint $table) {
             $table->foreign('jenis_perdin_id')->references('id')->on('jenis_perdins');
             $table->foreign('author_id')->references('id')->on('users');
@@ -79,7 +80,7 @@ return new class extends Migration
             $table->foreign('wilayah_id')->references('id')->on('wilayahs');
             $table->foreign('author_id')->references('id')->on('users');
         });
-        
+
         Schema::table('uang_transports', function (Blueprint $table) {
             $table->foreign('alat_angkut_id')->references('id')->on('alat_angkuts');
             $table->foreign('wilayah_id')->references('id')->on('wilayahs');
@@ -90,7 +91,7 @@ return new class extends Migration
             $table->foreign('wilayah_id')->references('id')->on('wilayahs');
             $table->foreign('author_id')->references('id')->on('users');
         });
-        
+
         Schema::table('data_perdins', function (Blueprint $table) {
             $table->foreign('tanda_tangan_id')->references('id')->on('tanda_tangans');
             $table->foreign('alat_angkut_id')->references('id')->on('alat_angkuts');
@@ -106,7 +107,7 @@ return new class extends Migration
         Schema::table('laporan_perdins', function (Blueprint $table) {
             $table->foreign('author_id')->references('id')->on('users');
         });
-        
+
         Schema::table('kwitansi_perdins', function (Blueprint $table) {
             $table->foreign('kegiatan_sub_id')->references('id')->on('kegiatan_subs');
             $table->foreign('pptk_id')->references('id')->on('pegawais');
