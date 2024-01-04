@@ -66,7 +66,7 @@
             <tr>
                 <td>Kepada</td>
                 <td>:</td>
-                <td>{{ $bendahara->pegawai->nama ?? '' }} dkk</td>
+                <td>{{ $kwitansi_perdin->data_perdin->pegawai_diperintah->nama }} dkk</td>
             </tr>
             <tr>
                 <td>Keperluan</td>
