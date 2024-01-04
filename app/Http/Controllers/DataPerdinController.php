@@ -102,9 +102,9 @@ class DataPerdinController extends Controller
     {
         $authUser = auth()->user();
 
-        if ($authUser->level_admin->slug === 'approval') {
+        if ($authUser->level_admin->slug === 'approval' && $authUser->jabatan_id) {
             $data_perdins = DataPerdin::filterByStatus($status)->whereHas('tanda_tangan.pegawai.jabatan', function ($query) use ($authUser) {
-                $query->where('id', $authUser);
+                $query->where('id', $authUser->jabatan_id);
             })->get();
         } else {
             $data_perdins = DataPerdin::filterByStatus($status)->get();
