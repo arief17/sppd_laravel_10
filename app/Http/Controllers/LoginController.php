@@ -57,7 +57,7 @@ class LoginController extends Controller
                 'user' => [
                     'id' => $user->id,
                     'username' => $user->username,
-                    'level_admin' => $user->level_admin->slug,
+                    'level_admin_id' => $user->level_admin_id,
                     'bidang' => $user->bidang->nama ?? '',
                     'jabatan' => $user->jabatan->nama ?? '',
                     'last_login' => $user->last_login,
