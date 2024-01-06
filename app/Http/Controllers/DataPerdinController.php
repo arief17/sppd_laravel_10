@@ -51,15 +51,18 @@ class DataPerdinController extends Controller
         ]);
     }
 
-    private function getDataPerdins($queryConditions)
+    private function getDataPerdins($queryConditions, $jabatan_id = null)
     {
         return DataPerdin::when($queryConditions, function ($query) use ($queryConditions) {
             return $query->whereHas('status', function ($query) use ($queryConditions) {
                 $query->where($queryConditions);
             });
         })
-        ->orderBy('id','desc')
+        ->orderBy('id', 'desc')
         ->get()
+        ->filter(function ($data_perdin) use ($jabatan_id) {
+            return $jabatan_id ? $data_perdin->tanda_tangan->pegawai->jabatan->id == $jabatan_id : true;
+        })
         ->map(function ($data_perdin) {
             $status = ($data_perdin->status->approve === null) ? 'Baru' : (($data_perdin->status->approve === 0) ? 'Ditolak' : 'Diterima');
 
@@ -77,7 +80,7 @@ class DataPerdinController extends Controller
         });
     }
 
-    public function apiDataPerdins(Request $request, $status = null)
+    public function apiDataPerdins(Request $request, $status = null, $jabatan_id = null)
     {
         $queryConditions = [];
 
@@ -91,7 +94,7 @@ class DataPerdinController extends Controller
             $queryConditions = null;
         }
 
-        $data_perdins = $this->getDataPerdins($queryConditions);
+        $data_perdins = $this->getDataPerdins($queryConditions, $jabatan_id);
         return response()->json($data_perdins);
     }
 
