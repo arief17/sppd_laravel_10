@@ -77,7 +77,7 @@
 			<tr>
                 <td></td>
                 <td></td>
-				<td colspan="2" style="text-align: justify-all">
+				<td colspan="2" style="text-align: justify">
 					{!! nl2br($laporan_perdin->maksud) !!}
 				</td>
 			</tr>
@@ -87,7 +87,7 @@
 			</tr>
 			<tr>
                 <td></td>
-				<td colspan="3" style="text-align: justify-all">
+				<td colspan="3" style="text-align: justify">
 					{!! nl2br($laporan_perdin->kegiatan) !!}
 				</td>
 			</tr>
@@ -97,7 +97,7 @@
 			</tr>
 			<tr>
                 <td></td>
-				<td colspan="3" style="text-align: justify-all">
+				<td colspan="3" style="text-align: justify">
 					{!! nl2br($laporan_perdin->hasil) !!}
 				</td>
 			</tr>
@@ -107,7 +107,7 @@
 			</tr>
 			<tr>
                 <td></td>
-				<td colspan="3" style="text-align: justify-all">
+				<td colspan="3" style="text-align: justify">
 					{!! nl2br($laporan_perdin->kesimpulan) !!}
 				</td>
 			</tr>
@@ -117,7 +117,7 @@
 			</tr>
 			<tr>
                 <td></td>
-				<td colspan="3" style="text-align: justify-all">
+				<td colspan="3" style="text-align: justify">
 					Demikian laporan hasil perjalanan dinas, atas perhatiannya diucapkan terima kasih.
 				</td>
 			</tr>
