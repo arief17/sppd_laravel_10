@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/data-perdin/status/{status?}/{jabatan_id}', [DataPerdinController::class, 'apiDataPerdins']);
+Route::get('/data-perdin/status/{status}/{jabatan_id}', [DataPerdinController::class, 'apiDataPerdins']);
 
 Route::post('/login', [LoginController::class, 'apiLogin']);
 
