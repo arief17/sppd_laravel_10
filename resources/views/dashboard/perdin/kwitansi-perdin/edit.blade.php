@@ -15,7 +15,7 @@
 				<form action="{{ route('kwitansi-perdin.update', $kwitansi_perdin->id) }}" method="post">
 					@csrf
 					@method('put')
-					
+
 					<div class="table-responsive">
 						<table class="table mg-b-0 text-md-nowrap border-bottom">
 							<tr>
@@ -69,7 +69,7 @@
 								<th style="white-space: nowrap; width: 15%">Sub Kegiatan:</th>
 								<td style="width:35%">
 									<div class="form-group">
-										<select name="kegiatan_sub_id" id="kegiatan_sub_id" class="form-control form-select @error('kegiatan_sub_id') is-invalid @enderror">
+										<select name="kegiatan_sub_id" id="kegiatan_sub_id" class="form-control form-select select2 @error('kegiatan_sub_id') is-invalid @enderror">
 											<option value="">Pilih Sub Kegiatan</option>
 											@foreach ($kegiatan_subs as $kegiatan_sub)
 											<option value="{{ $kegiatan_sub->id }}" @selected(old('kegiatan_sub_id', $kwitansi_perdin->kegiatan_sub_id) == $kegiatan_sub->id)>
@@ -162,12 +162,12 @@
 									<td>0</td>
 									<td>0</td>
 									<td>0</td>
-									<td>0</td> 
+									<td>0</td>
 								</tr>
 							</tfoot>
 						</table>
 					</div>
-					
+
 					<div class="d-flex justify-content-between mb-0 mt-3">
 						<div>
 							<button type="submit" class="btn btn-primary me-3">Simpan</button>
@@ -203,25 +203,25 @@
 			currency: 'IDR'
 		}).format(angka);
 	}
-	
+
 	$(document).ready(function() {
 		function hitungTotalPerBaris(row) {
 			let uangHarian = parseFloat(row.find('input[name^="uang_harian"]').val()) || 0;
 			let uangTransport = parseFloat(row.find('input[name^="uang_transport"]').val()) || 0;
 			let uangTiket = parseFloat(row.find('input[name^="uang_tiket"]').val()) || 0;
 			let uangPenginapan = parseFloat(row.find('input[name^="uang_penginapan"]').val()) || 0;
-			
+
 			let total = uangHarian + uangTransport + uangTiket + uangPenginapan;
 			row.find('td:last-child').text(formatToRupiah(total));
 			return total;
 		}
-		
+
 		function hitungTotalKeseluruhan() {
 			let totalHarian = 0,
 			totalTransport = 0,
 			totalTiket = 0,
 			totalPenginapan = 0;
-			
+
 			$('#pegawai_table tbody tr').each(function() {
 				let rowTotal = hitungTotalPerBaris($(this));
 				totalHarian += parseFloat($(this).find('input[name^="uang_harian"]').val()) || 0;
@@ -229,21 +229,21 @@
 				totalTiket += parseFloat($(this).find('input[name^="uang_tiket"]').val()) || 0;
 				totalPenginapan += parseFloat($(this).find('input[name^="uang_penginapan"]').val()) || 0;
 			});
-			
+
 			$('tfoot tr td:nth-child(2)').text(formatToRupiah(totalHarian));
 			$('tfoot tr td:nth-child(3)').text(formatToRupiah(totalTransport));
 			$('tfoot tr td:nth-child(4)').text(formatToRupiah(totalTiket));
 			$('tfoot tr td:nth-child(5)').text(formatToRupiah(totalPenginapan));
-			
+
 			let totalKeseluruhan = totalHarian + totalTransport + totalTiket + totalPenginapan;
 			$('tfoot tr td:last-child').text(formatToRupiah(totalKeseluruhan));
 		}
-		
+
 		$('#pegawai_table tbody tr').each(function() {
 			hitungTotalPerBaris($(this));
 		});
 		hitungTotalKeseluruhan();
-		
+
 		$('#pegawai_table tbody input').on('blur', function() {
 			let row = $(this).closest('tr');
 			hitungTotalPerBaris(row);

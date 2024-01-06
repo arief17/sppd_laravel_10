@@ -261,7 +261,7 @@
 													<div class="d-flex wd-100p">
 														<div class="main-img-user"><img alt="" src="/assets/img/profile.jpg" class=""></div>
 														<div class="ms-3 my-auto">
-															<h6>Petey Cruiser</h6><span>Premium Member</span>
+															<h6>{{ auth()->user()->username }}</h6>
 														</div>
 													</div>
 												</div>
