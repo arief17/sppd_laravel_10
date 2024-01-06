@@ -49,7 +49,7 @@
 								<th style="white-space: nowrap; width: 15%">PPTK:</th>
 								<td style="width:35%">
 									<div class="form-group">
-										<select name="pptk_id" id="pptk_id" class="form-control form-select @error('pptk_id') is-invalid @enderror">
+										<select name="pptk_id" id="pptk_id" class="form-control form-select select2 @error('pptk_id') is-invalid @enderror">
 											<option value="">Pilih PPTK</option>
 											@foreach ($pptks as $pptk)
 											<option value="{{ $pptk->id }}" @selected(old('pptk_id', $kwitansi_perdin->pptk_id) == $pptk->id)>
