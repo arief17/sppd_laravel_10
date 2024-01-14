@@ -27,7 +27,7 @@
 								<td>{{ $loop->iteration }}</td>
 								<td>{{ $rekap->nama }}</td>
 								<td>{{ $rekap->jumlah_sppd }}</td>
-								<td>{{ $rekap->jumlah_uang }}</td>
+                                <td>Rp {{ number_format($rekap->jumlah_uang, 0, ',', '.') }}</td>
 							</tr>
 							@endforeach
 						</tbody>
