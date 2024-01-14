@@ -61,7 +61,7 @@ class RekapController extends Controller
             ];
         }
 
-        return view('dashboard.perdin.rekap-data.bidang', [
+        return view('dashboard.perdin.rekap-data.index', [
             'title' => 'Daftar Rekap Data Bidang',
             'rekaps' => $rekaps,
         ]);
