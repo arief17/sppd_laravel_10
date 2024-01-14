@@ -18,6 +18,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\PangkatController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PerdinPdfController;
+use App\Http\Controllers\RekapController;
 use App\Http\Controllers\WilayahController;
 use App\Http\Controllers\SeksiController;
 use App\Http\Controllers\StatusPerdinController;
@@ -98,6 +99,11 @@ Route::middleware('can:isApprovalOperator')->group(function(){
 
 	Route::resource('/dashboard/laporan-perdin', LaporanPerdinController::class)->only('index')->middleware('auth');
 	Route::resource('/dashboard/kwitansi-perdin', KwitansiPerdinController::class)->only('index')->middleware('auth');
+
+	Route::controller(RekapController::class)->group(function(){
+		Route::get('/dashboard/rekap-pegawai', 'rekap_pegawai')->name('rekap-pegawai')->middleware('auth');
+		Route::get('/dashboard/rekap-bidang', 'rekap_bidang')->name('rekap-bidang')->middleware('auth');
+	});
 });
 
 Route::middleware('can:isOperator')->group(function(){
