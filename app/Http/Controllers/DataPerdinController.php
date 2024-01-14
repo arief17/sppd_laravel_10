@@ -77,7 +77,8 @@ class DataPerdinController extends Controller
                 'lama' => $data_perdin->lama,
                 'tanda_tangan' => $data_perdin->tanda_tangan->pegawai->jabatan->nama,
             ];
-        });
+        })
+        ->values();
     }
 
     public function apiDataPerdins(Request $request, $status = null, $jabatan_id = null)
