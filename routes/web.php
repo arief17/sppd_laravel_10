@@ -72,6 +72,11 @@ Route::middleware('can:isAdmin')->group(function(){
 	Route::resource('/dashboard/uang-transport', UangTransportController::class)->middleware('auth');
 	Route::resource('/dashboard/uang-penginapan', UangPenginapanController::class)->middleware('auth');
 	Route::resource('/dashboard/user', UserController::class)->middleware('auth');
+
+	Route::controller(RekapController::class)->group(function(){
+		Route::get('/dashboard/rekap-pegawai', 'rekap_pegawai')->name('rekap-pegawai')->middleware('auth');
+		Route::get('/dashboard/rekap-bidang', 'rekap_bidang')->name('rekap-bidang')->middleware('auth');
+	});
 });
 
 Route::middleware('can:isApproval')->group(function(){
@@ -99,11 +104,6 @@ Route::middleware('can:isApprovalOperator')->group(function(){
 
 	Route::resource('/dashboard/laporan-perdin', LaporanPerdinController::class)->only('index')->middleware('auth');
 	Route::resource('/dashboard/kwitansi-perdin', KwitansiPerdinController::class)->only('index')->middleware('auth');
-
-	Route::controller(RekapController::class)->group(function(){
-		Route::get('/dashboard/rekap-pegawai', 'rekap_pegawai')->name('rekap-pegawai')->middleware('auth');
-		Route::get('/dashboard/rekap-bidang', 'rekap_bidang')->name('rekap-bidang')->middleware('auth');
-	});
 });
 
 Route::middleware('can:isOperator')->group(function(){
