@@ -10,6 +10,10 @@ class StatusPerdinController extends Controller
 {
     public function approve($id)
     {
+        if (StatusPerdin::find($id)->approve == '0') {
+            return redirect()->route('data-perdin.index', 'tolak')->with('success', 'Status Perdin telah dinonaktifkan karena telah ditolak');
+        }
+
         StatusPerdin::where('id', $id)->update(['approve' => 1]);
         return redirect()->route('data-perdin.index', 'no_laporan')->with('success', 'Status Perdin berhasil diperbarui!');
     }
@@ -30,6 +34,10 @@ class StatusPerdinController extends Controller
     {
         $id = $request->input('id');
         $status_id = DataPerdin::find($id)->status_id;
+
+        if (StatusPerdin::find($status_id)->approve == '0') {
+            return response()->json(['message' => 'Status Perdin telah dinonaktifkan karena telah ditolak'], 200);
+        }
 
         StatusPerdin::where('id', $status_id)->update(['approve' => 1]);
         return response()->json(['message' => 'Status Perdin berhasil diapprove'], 200);
