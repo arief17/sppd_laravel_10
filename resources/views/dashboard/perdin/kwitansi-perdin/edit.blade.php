@@ -176,7 +176,7 @@
 						@if ($kwitansi_perdin->data_perdin->status->kwitansi)
 						<a class="modal-effect btn btn-secondary" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#kwitansi-{{ $kwitansi_perdin->id }}">
 							<i class="fa fa-file"></i>
-							Cetak Laporan
+							Cetak Kwitansi
 						</a>
 						@endif
 					</div>
