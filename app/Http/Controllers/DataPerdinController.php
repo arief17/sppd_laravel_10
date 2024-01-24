@@ -130,10 +130,7 @@ class DataPerdinController extends Controller
         if (empty($authBidangId)) {
             $pegawais = Pegawai::whereNotNull('golongan_id')->get();
         } else {
-            $pegawais = Pegawai::whereNotNull('golongan_id')
-            ->whereHas('seksi', function ($query) use ($authBidangId) {
-                $query->where('bidang_id', $authBidangId);
-            })->get();
+            $pegawais = Pegawai::whereNotNull('golongan_id')->where('bidang_id', $authBidangId)->get();
         }
 
         return view('dashboard.perdin.data-perdin.create', [
