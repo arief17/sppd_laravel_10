@@ -12,8 +12,8 @@
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
-					<table class="table border-top-0 table-bordered text-nowrap border-bottom" id="responsive-datatable">
-						<thead>
+					<table class="table border-top-0 table-bordered border-bottom" id="responsive-datatable">
+						<thead class="text-nowrap">
 							<tr>
 								<th class="border-bottom-0" style="width: 1%">No</th>
 								<th class="border-bottom-0">Surat Dari</th>
@@ -33,7 +33,7 @@
 								<td>{{ $laporan_perdin->data_perdin->maksud }}</td>
 								<td>{{ $laporan_perdin->data_perdin->pegawai_diperintah->nama }}</td>
 								<td>{{ $laporan_perdin->data_perdin->tgl_berangkat }}</td>
-								<td>
+								<td class="text-nowrap">
 									@if ($laporan_perdin->data_perdin->status->lap)
 										@if ($laporan_perdin->file_laporan)
 											<a class="modal-effect btn btn-secondary btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#lap-input-{{ $laporan_perdin->id }}">

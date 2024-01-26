@@ -15,13 +15,13 @@
 				<form action="{{ route('uang-transport.show', $uang_transport->slug) }}" method="post">
 					@csrf
 					@method('put')
-					
+
 					<div id="wilayahHide" class="form-group">
 						<label for="wilayah_id" class="form-label">Wilayah</label>
 						<select name="wilayah_id" id="wilayah_id" class="form-control form-select select2 @error('wilayah_id') is-invalid @enderror">
 							<option value="">Pilih Wilayah</option>
 							@foreach ($wilayahs as $wilayah)
-							<option value="{{ $wilayah->id }}" @selected(old('wilayah_id') == $wilayah->id)>
+							<option value="{{ $wilayah->id }}" @selected(old('wilayah_id', $uang_transport->wilayah_id) == $wilayah->id)>
 								{{ $wilayah->nama }}
 							</option>
 							@endforeach
@@ -58,7 +58,7 @@
 						</div>
 						@enderror
 					</div>
-					
+
 
 					<div class="form-group">
 						<label for="eselon_i">Eselon I</label>
@@ -141,7 +141,7 @@
 						</div>
 						@enderror
 					</div>
-					
+
 					<div class="form-group mb-0 mt-3 justify-content-end">
 						<button type="submit" class="btn btn-primary">Simpan</button>
 						<button type="reset" class="btn btn-secondary ms-3">Batal</button>
@@ -167,14 +167,14 @@
 		$('#alat_angkut_id').on('change', function() {
 			const selectedOption = $(this).find(':selected');
 			const tiketStatus = selectedOption.data('tiket');
-			
+
 			if (tiketStatus === 1) {
 				$('#tiketHide').show();
 			} else {
 				$('#tiketHide').hide();
 			}
 		});
-		
+
 		// Cek kondisi saat halaman dimuat
 		const initialTiketStatus = $('#alat_angkut_id').find(':selected').data('tiket');
 		if (initialTiketStatus === 0) {

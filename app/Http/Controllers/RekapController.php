@@ -16,11 +16,14 @@ class RekapController extends Controller
         foreach ($pegawais as $pegawai) {
             $nama = $pegawai->nama;
             $jumlah_sppd = $pegawai->ketentuan->jumlah_perdin;
+            $jumlah_uang = 0;
 
-            $jumlah_uang = ($pegawai->pivot->uang_harian ?? 0) +
-            ($pegawai->pivot->uang_transport ?? 0) +
-            ($pegawai->pivot->uang_tiket ?? 0) +
-            ($pegawai->pivot->uang_penginapan ?? 0);
+            foreach ($pegawai->kwitansi_perdins as $kwitansi) {
+                $jumlah_uang += $kwitansi->pivot->uang_harian +
+                                $kwitansi->pivot->uang_transport +
+                                $kwitansi->pivot->uang_tiket +
+                                $kwitansi->pivot->uang_penginapan;
+            }
 
             $rekaps[] = (object) [
                 'nama' => $nama,
@@ -35,9 +38,8 @@ class RekapController extends Controller
         ]);
     }
 
-
     public function rekap_bidang() {
-        $bidangs = Bidang::all();
+        $bidangs = Bidang::with('pegawais')->get();
         $rekaps = [];
 
         foreach ($bidangs as $bidang) {
@@ -48,10 +50,12 @@ class RekapController extends Controller
             foreach ($bidang->pegawais as $pegawai) {
                 $jumlah_sppd += $pegawai->ketentuan->jumlah_perdin ?? 0;
 
-                $jumlah_uang += ($pegawai->pivot->uang_harian ?? 0) +
-                            ($pegawai->pivot->uang_transport ?? 0) +
-                            ($pegawai->pivot->uang_tiket ?? 0) +
-                            ($pegawai->pivot->uang_penginapan ?? 0);
+                foreach ($pegawai->kwitansi_perdins as $kwitansi) {
+                    $jumlah_uang += $kwitansi->pivot->uang_harian +
+                                    $kwitansi->pivot->uang_transport +
+                                    $kwitansi->pivot->uang_tiket +
+                                    $kwitansi->pivot->uang_penginapan;
+                }
             }
 
             $rekaps[] = (object) [

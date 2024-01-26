@@ -15,7 +15,7 @@
 				<form action="{{ route('uang-penginapan.show', $uang_penginapan->slug) }}" method="post">
 					@csrf
 					@method('put')
-					
+
 					<div class="form-group">
 						<label for="keterangan">Keterangan</label>
 						<input name="keterangan" value="{{ old('keterangan', $uang_penginapan->keterangan) }}" type="text" class="form-control @error('keterangan') is-invalid @enderror" id="keterangan" placeholder="Masukan keterangan">
@@ -30,7 +30,7 @@
 						<select name="wilayah_id" id="wilayah_id" class="form-control form-select select2 @error('wilayah_id') is-invalid @enderror">
 							<option value="">Pilih Wilayah</option>
 							@foreach ($wilayahs as $wilayah)
-							<option value="{{ $wilayah->id }}" @selected(old('wilayah_id') == $wilayah->id)>
+							<option value="{{ $wilayah->id }}" @selected(old('wilayah_id', $uang_penginapan->wilayah_id) == $wilayah->id)>
 								{{ $wilayah->nama }}
 							</option>
 							@endforeach
@@ -122,7 +122,7 @@
 						</div>
 						@enderror
 					</div>
-					
+
 					<div class="form-group mb-0 mt-3 justify-content-end">
 						<button type="submit" class="btn btn-primary">Simpan</button>
 						<button type="reset" class="btn btn-secondary ms-3">Batal</button>

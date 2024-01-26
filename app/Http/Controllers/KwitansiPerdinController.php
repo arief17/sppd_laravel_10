@@ -75,7 +75,7 @@ class KwitansiPerdinController extends Controller
 
         return DB::transaction(function () use ($request, $kwitansiPerdin) {
             $validatedData = $request->validate([
-                'tgl_bayar' => 'required|date',
+                'tgl_bayar' => 'nullable|date',
                 'no_rek' => 'required',
                 'kegiatan_sub_id' => 'required',
                 'pptk_id' => 'required',

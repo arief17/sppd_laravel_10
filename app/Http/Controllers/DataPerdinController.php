@@ -21,7 +21,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class DataPerdinController extends Controller
-
 {
     public function getTujuan($jenisPerdinId)
     {
