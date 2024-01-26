@@ -222,8 +222,8 @@
 				$('#golongan_hide').hide();
 				$('#nip_hide').hide();
 
-				$('#seksi_id').attr('required', 'required');
-				$('#bidang_id').removeAttr('required').val('');
+				$('#seksi_id').removeAttr('required').val('');
+				$('#bidang_id').attr('required', 'required');
 				$('#pangkat_id').removeAttr('required').val('');
 				$('#golongan_id').removeAttr('required').val('');
 				$('#nip').removeAttr('required').val('');
