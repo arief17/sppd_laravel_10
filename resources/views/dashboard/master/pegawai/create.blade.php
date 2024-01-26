@@ -14,7 +14,7 @@
 			<div class="card-body pt-0">
 				<form action="{{ route('pegawai.store') }}" method="post">
 					@csrf
-					
+
 					<div class="form-group">
 						<label for="jabatan_id" class="form-label">Jabatan</label>
 						<select name="jabatan_id" id="jabatan_id" class="form-control form-select select2 @error('jabatan_id') is-invalid @enderror">
@@ -144,7 +144,7 @@
 							@enderror
 						</div>
 					</div>
-					
+
 					<div class="form-group mb-0 mt-3 justify-content-end">
 						<button type="submit" class="btn btn-primary">Simpan</button>
 						<button type="reset" class="btn btn-secondary ms-3">Batal</button>
@@ -171,18 +171,18 @@
 		$('#pangkat_hide').hide();
 		$('#golongan_hide').hide();
 		$('#nip_hide').hide();
-		
+
 		$('#jabatan_id').on('change', function() {
 			let selectedJabatan = $('#jabatan_id option:selected').text();
 			let jabatan = selectedJabatan.trim().toLowerCase();
-			
+
 			if (jabatan.includes('kepala dinas')) {
 				$('#seksi_hide').hide();
 				$('#bidang_hide').hide();
 				$('#pangkat_hide').show();
 				$('#golongan_hide').show();
 				$('#nip_hide').show();
-				
+
 				$('#seksi_id').removeAttr('required').val('');
 				$('#bidang_id').removeAttr('required').val('');
 				$('#pangkat_id').attr('required', 'required');
@@ -195,7 +195,7 @@
 				$('#pangkat_hide').show();
 				$('#golongan_hide').show();
 				$('#nip_hide').show();
-				
+
 				$('#seksi_id').removeAttr('required').val('');
 				$('#bidang_id').attr('required', 'required');
 				$('#pangkat_id').attr('required', 'required');
@@ -208,7 +208,7 @@
 				$('#pangkat_hide').show();
 				$('#golongan_hide').show();
 				$('#nip_hide').show();
-				
+
 				$('#seksi_id').attr('required', 'required');
 				$('#bidang_id').removeAttr('required').val('');
 				$('#pangkat_id').attr('required', 'required');
@@ -221,9 +221,9 @@
 				$('#pangkat_hide').hide();
 				$('#golongan_hide').hide();
 				$('#nip_hide').hide();
-				
+
 				$('#seksi_id').attr('required', 'required');
-				$('#bidang_id').attr('required', 'required');
+				$('#bidang_id').removeAttr('required').val('');
 				$('#pangkat_id').removeAttr('required').val('');
 				$('#golongan_id').removeAttr('required').val('');
 				$('#nip').removeAttr('required').val('');
@@ -234,7 +234,7 @@
 				$('#pangkat_hide').show();
 				$('#golongan_hide').show();
 				$('#nip_hide').show();
-				
+
 				$('#seksi_id').attr('required', 'required');
 				$('#bidang_id').attr('required', 'required');
 				$('#golongan_id').attr('required', 'required');
