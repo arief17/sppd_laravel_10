@@ -300,6 +300,8 @@
 
 <!-- JQuery min js -->
 <script src="/assets/plugins/jquery/jquery.min.js"></script>
+
+<!-- Data Perdin -->
 <script src="/assets/js/data-perdin.js"></script>
 
 <!--Internal  Datepicker js -->

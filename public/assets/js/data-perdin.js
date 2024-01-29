@@ -59,46 +59,50 @@ function addPegawaiDiperintah() {
 
     selectedPegawai = selectedPegawai.filter(pegawai => pegawai.keterangan !== 'Pegawai yang ditugaskan');
 
-    if (!selectedPegawai.find(pegawai => pegawai.id === pegawaiId)) {
-        getPegawaiInfo(tujuanId, pegawaiId, function(dataPegawai) {
-            selectedPegawai.push({
-                id: pegawaiId,
-                nama: pegawaiNama,
-                nip: dataPegawai.nip,
-                jabatan: dataPegawai.jabatan,
-                uang_harian: dataPegawai.uang_harian,
-                keterangan: 'Pegawai yang ditugaskan'
+    if (tujuanId && pegawaiId) {
+        if (!selectedPegawai.find(pegawai => pegawai.id === pegawaiId)) {
+            getPegawaiInfo(tujuanId, pegawaiId, function(dataPegawai) {
+                selectedPegawai.push({
+                    id: pegawaiId,
+                    nama: pegawaiNama,
+                    nip: dataPegawai.nip,
+                    jabatan: dataPegawai.jabatan,
+                    uang_harian: dataPegawai.uang_harian,
+                    keterangan: 'Pegawai yang ditugaskan'
+                });
+                updatePegawaiList();
+                updateSelectedPegawaiInput();
             });
-            updatePegawaiList();
-            updateSelectedPegawaiInput();
-        });
+        }
     }
 }
 
-function addPegawaiToSelected() {
+function addPegawaiMengikuti() {
     let pegawaiSelect = $('#pegawai_mengikuti_id');
     let selectedOption = pegawaiSelect.find(':selected');
     let pegawaiId = selectedOption.val();
     let pegawaiNama = selectedOption.text();
     let tujuanId = $('#tujuan_id').val();
 
-    if (!selectedPegawai.find(pegawai => pegawai.id === pegawaiId)) {
-        getPegawaiInfo(tujuanId, pegawaiId, function(dataPegawai) {
-            selectedPegawai.push({
-                id: pegawaiId,
-                nama: pegawaiNama,
-                nip: dataPegawai.nip,
-                jabatan: dataPegawai.jabatan,
-                uang_harian: dataPegawai.uang_harian,
-                keterangan: 'Pegawai sebagai pengikut'
-            });
-            updatePegawaiList();
-            updateSelectedPegawaiInput();
+    if (tujuanId && pegawaiId) {
+        if (!selectedPegawai.find(pegawai => pegawai.id === pegawaiId)) {
+            getPegawaiInfo(tujuanId, pegawaiId, function(dataPegawai) {
+                selectedPegawai.push({
+                    id: pegawaiId,
+                    nama: pegawaiNama,
+                    nip: dataPegawai.nip,
+                    jabatan: dataPegawai.jabatan,
+                    uang_harian: dataPegawai.uang_harian,
+                    keterangan: 'Pegawai sebagai pengikut'
+                });
+                updatePegawaiList();
+                updateSelectedPegawaiInput();
 
-            pegawaiSelect.val('');
-        });
-    } else {
-        pegawaiSelect.val('');
+                pegawaiSelect.val(null).trigger('change');
+            });
+        } else {
+            pegawaiSelect.val(null).trigger('change');
+        }
     }
 }
 
@@ -112,7 +116,7 @@ function getPegawaiInfo(tujuanId, pegawaiId, callback) {
 }
 
 function removePegawaiFromSelected(pegawaiId) {
-    selectedPegawai = selectedPegawai.filter(pegawai => pegawai.id !== pegawaiId);
+    selectedPegawai = selectedPegawai.filter(pegawai => pegawai.id != pegawaiId);
     updatePegawaiList();
     updateSelectedPegawaiInput();
 }
@@ -146,8 +150,21 @@ function updatePegawaiList() {
     calculateTotal();
 }
 
+$(document).ready(function() {
+    selectedPegawai = [...selected_pegawai];
+
+    if (selectedPegawai) {
+        $('#pegawai_diperintah_id').prop('disabled', false);
+        $('#pegawai_mengikuti_id').prop('disabled', false);
+
+        updatePegawaiList();
+        updateSelectedPegawaiInput();
+    }
+});
+
+
 $('#pegawai_diperintah_id').on('change', addPegawaiDiperintah);
-$('#pegawai_mengikuti_id').on('change', addPegawaiToSelected);
+$('#pegawai_mengikuti_id').on('change', addPegawaiMengikuti);
 
 function resetSelectedEmployees() {
     $('#pegawai_diperintah_id').val('');

@@ -107,7 +107,7 @@ Route::middleware('can:isApprovalOperator')->group(function(){
 });
 
 Route::middleware('can:isOperator')->group(function(){
-	Route::resource('/dashboard/data-perdin', DataPerdinController::class)->except('index', 'edit', 'update')->middleware('auth');
+	Route::resource('/dashboard/data-perdin', DataPerdinController::class)->except('index')->middleware('auth');
 	Route::resource('/dashboard/laporan-perdin', LaporanPerdinController::class)->only('edit', 'update')->middleware('auth');
 	Route::resource('/dashboard/kwitansi-perdin', KwitansiPerdinController::class)->only('edit', 'update')->middleware('auth');
 });

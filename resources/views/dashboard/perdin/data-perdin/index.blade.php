@@ -43,7 +43,7 @@
 										@else
 										<button class="not-approval btn {{ $data_perdin->status->approve ? 'btn-success' : 'btn-danger' }} btn-sm">Approve</button>
 										@endcan
-										
+
 										@if ($data_perdin->status->approve)
 										<a class="modal-effect btn btn-success btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#spt-{{ $data_perdin->slug }}">SPT</a>
 										<a class="modal-effect btn btn-success btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#visum1-{{ $data_perdin->slug }}">Visum 1</a>
@@ -55,17 +55,20 @@
 										<button class="not-approve btn btn-danger btn-sm">Visum 2</button>
 										<button class="not-approve btn btn-danger btn-sm">Lap</button>
 										@endif
-										
+
 										@if ($data_perdin->status->approve && $data_perdin->status->lap)
 										<a class="btn {{ $data_perdin->status->kwitansi ? 'btn-success' : 'btn-danger' }} btn-sm" href="{{ route('kwitansi-perdin.edit', $data_perdin->kwitansi_perdin_id) }}">Kwitansi</a>
 										@else
 										<button class="not-laporan btn btn-danger btn-sm">Kwitansi</button>
 										@endif
 									</div>
-									
+
 									<div class="btn-group" role="group">
 										<a class="btn btn-primary btn-sm" href="{{ route('data-perdin.show', $data_perdin->slug) }}">
 											<i class="fas fa-folder"></i>
+										</a>
+										<a class="btn btn-info btn-sm" href="{{ route('data-perdin.edit', $data_perdin->slug) }}">
+											<i class="fas fa-pencil-alt"></i>
 										</a>
 										<form action="{{ route('data-perdin.destroy', $data_perdin->slug) }}" method="post" class="d-inline">
 											@method('delete')
@@ -86,7 +89,7 @@
 								<td>{{ $data_perdin->jumlah_pegawai }}</td>
 								<td>{{ $data_perdin->jenis_perdin->nama }}</td>
 								<td>{{ $data_perdin->author->username }}</td>
-								
+
 								@include('dashboard.perdin.status-perdin.approve')
 								@if ($data_perdin->status->approve)
 								@include('dashboard.perdin.status-perdin.spt')
@@ -131,7 +134,7 @@
 				toast.addEventListener('mouseleave', Swal.resumeTimer)
 			}
 		});
-		
+
 		Toast.fire({
 			icon: 'success',
 			title: '{{ session('success') }}'
@@ -145,7 +148,7 @@
 		$('#deleteData').click(function(e) {
 			e.preventDefault();
 			var title = $(this).data('title');
-			
+
 			Swal.fire({
 				title: 'Hapus ' + title + '?',
 				html: "Apakah kamu yakin ingin menghapus <b>" + title + "</b>? Data yang sudah dihapus tidak bisa dikembalikan!",
@@ -161,7 +164,7 @@
 				}
 			});
 		});
-		
+
 		$('.not-approve').click(function(e) {
 			Swal.fire({
 				title: 'Belum Approve',
