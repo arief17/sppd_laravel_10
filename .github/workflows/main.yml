@@ -28,6 +28,7 @@ jobs:
             rm -f .git/index.lock
             git fetch origin production
             git reset --hard origin/production
+            composer clear-cache
             composer self-update --2
             composer update --ignore-platform-reqs
             chmod -R 777 storage bootstrap/cache
