@@ -77,6 +77,8 @@ Route::middleware('can:isAdmin')->group(function(){
 		Route::get('/dashboard/rekap-pegawai', 'rekap_pegawai')->name('rekap-pegawai')->middleware('auth');
 		Route::get('/dashboard/rekap-bidang', 'rekap_bidang')->name('rekap-bidang')->middleware('auth');
 	});
+
+	Route::post('/dashboard/pegawai/import', [PegawaiController::class, 'import'])->name('pegawai.import')->middleware('auth');
 });
 
 Route::middleware('can:isApproval')->group(function(){

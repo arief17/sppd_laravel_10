@@ -5,12 +5,34 @@
 <div class="row row-sm">
 	<div class="col-xl-6">
 		<div class="card box-shadow-0 ">
-			<div class="card-header d-flex justify-content-between">
-				<h4 class="card-title mb-1">{{ $title }}</h4>
-				<a class="btn btn-secondary btn-sm" href="{{ route('pegawai.index') }}">
-					<i class="fa fa-reply"></i>
-				</a>
+			<div class="card-header">
+				@if(session()->has('failedSave'))
+				<div class="alert alert-danger mg-b-0 mb-5" role="alert">
+					<button aria-label="Close" class="close" data-bs-dismiss="alert" type="button">
+						<span aria-hidden="true">×</span>
+					</button>
+					<strong>Gagal Impor!</strong> <br>
+					{!! session('failedSave') !!}
+				</div>
+				@endif
+				<div class="d-flex justify-content-between">
+					<h4 class="card-title mb-1">{{ $title }}</h4>
+					<div>
+						<a href="/assets/pegawai-import-format.xlsx" class="modal-effect btn btn-info btn-sm" download="Contoh Format Import Pegawai">
+							<i class="fa fa-download"></i>
+							Format
+						</a>
+						<a class="modal-effect btn btn-success btn-sm" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#pegawai-import">
+							<i class="fa fa-upload"></i>
+							Import
+						</a>
+						<a class="btn btn-secondary btn-sm" href="{{ route('pegawai.index') }}">
+							<i class="fa fa-reply"></i>
+						</a>
+					</div>
+				</div>
 			</div>
+			@include('dashboard.master.pegawai.import')
 			<div class="card-body pt-0">
 				<form action="{{ route('pegawai.store') }}" method="post">
 					@csrf
@@ -165,84 +187,80 @@
 <script src="/assets/plugins/jquery/jquery.min.js"></script>
 
 <script>
-	$(document).ready(function() {
-		$('#seksi_hide').hide();
-		$('#bidang_hide').hide();
-		$('#pangkat_hide').hide();
-		$('#golongan_hide').hide();
-		$('#nip_hide').hide();
+	function updateVisibility(selectedJabatan) {
+		let jabatan = selectedJabatan.trim().toLowerCase();
 
-		$('#jabatan_id').on('change', function() {
-			let selectedJabatan = $('#jabatan_id option:selected').text();
-			let jabatan = selectedJabatan.trim().toLowerCase();
+		if (jabatan.includes('kepala dinas')) {
+			$('#seksi_hide').hide();
+			$('#bidang_hide').hide();
+			$('#pangkat_hide').show();
+			$('#golongan_hide').show();
+			$('#nip_hide').show();
 
-			if (jabatan.includes('kepala dinas')) {
-				$('#seksi_hide').hide();
-				$('#bidang_hide').hide();
-				$('#pangkat_hide').show();
-				$('#golongan_hide').show();
-				$('#nip_hide').show();
+			$('#seksi_id').removeAttr('required').val('');
+			$('#bidang_id').removeAttr('required').val('');
+			$('#pangkat_id').attr('required', 'required');
+			$('#golongan_id').attr('required', 'required');
+			$('#nip').attr('required', 'required');
 
-				$('#seksi_id').removeAttr('required').val('');
-				$('#bidang_id').removeAttr('required').val('');
-				$('#pangkat_id').attr('required', 'required');
-				$('#golongan_id').attr('required', 'required');
-				$('#nip').attr('required', 'required');
+		} else if (jabatan.includes('kepala bidang')) {
+			$('#seksi_hide').hide();
+			$('#bidang_hide').show();
+			$('#pangkat_hide').show();
+			$('#golongan_hide').show();
+			$('#nip_hide').show();
 
-			} else if (jabatan.includes('kepala bidang')) {
-				$('#seksi_hide').hide();
-				$('#bidang_hide').show();
-				$('#pangkat_hide').show();
-				$('#golongan_hide').show();
-				$('#nip_hide').show();
+			$('#seksi_id').removeAttr('required').val('');
+			$('#bidang_id').attr('required', 'required');
+			$('#pangkat_id').attr('required', 'required');
+			$('#golongan_id').attr('required', 'required');
+			$('#nip').attr('required', 'required');
 
-				$('#seksi_id').removeAttr('required').val('');
-				$('#bidang_id').attr('required', 'required');
-				$('#pangkat_id').attr('required', 'required');
-				$('#golongan_id').attr('required', 'required');
-				$('#nip').attr('required', 'required');
+		} else if (jabatan.includes('kepala seksi')) {
+			$('#seksi_hide').show();
+			$('#bidang_hide').hide();
+			$('#pangkat_hide').show();
+			$('#golongan_hide').show();
+			$('#nip_hide').show();
 
-			} else if (jabatan.includes('kepala seksi')) {
-				$('#seksi_hide').show();
-				$('#bidang_hide').hide();
-				$('#pangkat_hide').show();
-				$('#golongan_hide').show();
-				$('#nip_hide').show();
+			$('#seksi_id').attr('required', 'required');
+			$('#bidang_id').removeAttr('required').val('');
+			$('#pangkat_id').attr('required', 'required');
+			$('#golongan_id').attr('required', 'required');
+			$('#nip').attr('required', 'required');
 
-				$('#seksi_id').attr('required', 'required');
-				$('#bidang_id').removeAttr('required').val('');
-				$('#pangkat_id').attr('required', 'required');
-				$('#golongan_id').attr('required', 'required');
-				$('#nip').attr('required', 'required');
+		} else if (jabatan.includes('non pns')) {
+			$('#seksi_hide').show();
+			$('#bidang_hide').show();
+			$('#pangkat_hide').hide();
+			$('#golongan_hide').hide();
+			$('#nip_hide').hide();
 
-			} else if (jabatan.includes('non asn')) {
-				$('#seksi_hide').show();
-				$('#bidang_hide').show();
-				$('#pangkat_hide').hide();
-				$('#golongan_hide').hide();
-				$('#nip_hide').hide();
+			$('#seksi_id').attr('required', 'required');
+			$('#bidang_id').attr('required', 'required');
+			$('#pangkat_id').removeAttr('required').val('');
+			$('#golongan_id').removeAttr('required').val('');
+			$('#nip').removeAttr('required').val('');
 
-				$('#seksi_id').removeAttr('required').val('');
-				$('#bidang_id').attr('required', 'required');
-				$('#pangkat_id').removeAttr('required').val('');
-				$('#golongan_id').removeAttr('required').val('');
-				$('#nip').removeAttr('required').val('');
+		} else {
+			$('#seksi_hide').show();
+			$('#bidang_hide').show();
+			$('#pangkat_hide').show();
+			$('#golongan_hide').show();
+			$('#nip_hide').show();
 
-			} else {
-				$('#seksi_hide').show();
-				$('#bidang_hide').show();
-				$('#pangkat_hide').show();
-				$('#golongan_hide').show();
-				$('#nip_hide').show();
+			$('#seksi_id').attr('required', 'required');
+			$('#bidang_id').attr('required', 'required');
+			$('#golongan_id').attr('required', 'required');
+			$('#pangkat_id').attr('required', 'required');
+			$('#nip').attr('required', 'required');
+		}
+	}
 
-				$('#seksi_id').attr('required', 'required');
-				$('#bidang_id').attr('required', 'required');
-				$('#golongan_id').attr('required', 'required');
-				$('#pangkat_id').attr('required', 'required');
-				$('#nip').attr('required', 'required');
+	updateVisibility($('#jabatan_id option:selected').text());
 
-			}
-		});
+	$('#jabatan_id').on('change', function() {
+		updateVisibility($('#jabatan_id option:selected').text());
 	});
 </script>
 
