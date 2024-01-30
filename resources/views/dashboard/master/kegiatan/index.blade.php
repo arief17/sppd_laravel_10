@@ -83,7 +83,7 @@
                 toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
         });
-        
+
         Toast.fire({
             icon: 'success',
             title: '{{ session('success') }}'
@@ -97,7 +97,7 @@
 		$('#deleteData').click(function(e) {
 			e.preventDefault();
 			var title = $(this).data('title');
-			
+
 			Swal.fire({
 				title: 'Hapus ' + title + '?',
 				html: "Apakah kamu yakin ingin menghapus <b>" + title + "</b>? Data yang sudah dihapus tidak bisa dikembalikan!",
