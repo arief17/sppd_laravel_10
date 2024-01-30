@@ -46,7 +46,7 @@
 								<td>Rp {{ number_format($uang_harian->golongan_ii, 0, ',', '.') }}</td>
 								<td>Rp {{ number_format($uang_harian->golongan_i, 0, ',', '.') }}</td>
 								<td>Rp {{ number_format($uang_harian->non_asn, 0, ',', '.') }}</td>
-								
+
 								<td>
 									<a class="btn btn-primary btn-sm" href="{{ route('uang-harian.show', $uang_harian->slug) }}">
 										<i class="fas fa-folder"></i>
@@ -59,7 +59,7 @@
 									<form action="{{ route('uang-harian.destroy', $uang_harian->slug) }}" method="post" class="d-inline">
 										@method('delete')
 										@csrf
-										<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $uang_harian->nama }}">
+										<button type="button" class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $uang_harian->nama }}">
 											<i class="fas fa-trash"></i>
 											Delete
 										</button>
@@ -102,7 +102,7 @@
 				toast.addEventListener('mouseleave', Swal.resumeTimer)
 			}
 		});
-		
+
 		Toast.fire({
 			icon: 'success',
 			title: '{{ session('success') }}'
@@ -112,25 +112,22 @@
 @endif
 
 <script>
-	$(document).ready(function() {
-		$('#deleteData').click(function(e) {
-			e.preventDefault();
-			var title = $(this).data('title');
-			
-			Swal.fire({
-				title: 'Hapus ' + title + '?',
-				html: "Apakah kamu yakin ingin menghapus <b>" + title + "</b>? Data yang sudah dihapus tidak bisa dikembalikan!",
-				icon: 'warning',
-				showCancelButton: true,
-				confirmButtonColor: '#3085d6',
-				cancelButtonColor: '#d33',
-				confirmButtonText: 'Ya, Hapus',
-				cancelButtonText: 'Batal'
-			}).then((result) => {
-				if (result.isConfirmed) {
-					$(this).closest('form').submit();
-				}
-			});
+	$(document).on('click', '#deleteData', function() {
+		let title = $(this).data('title');
+
+		Swal.fire({
+			title: 'Hapus ' + title + '?',
+			html: "Apakah kamu yakin ingin menghapus <b>" + title + "</b>? Data yang sudah dihapus tidak bisa dikembalikan!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Ya, Hapus',
+			cancelButtonText: 'Batal'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$(this).closest('form').submit();
+			}
 		});
 	});
 </script>

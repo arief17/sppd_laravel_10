@@ -29,7 +29,7 @@
 				<form action="{{ route('lama.destroy', $lama->id) }}" method="post" class="d-inline">
 					@method('delete')
 					@csrf
-					<button class="btn btn-danger" id='deleteData' data-title="{{ $lama->lama_hari }}">
+					<button type="button" class="btn btn-danger" id='deleteData' data-title="{{ $lama->lama_hari }}">
 						<i class="fas fa-trash"></i>
 						Delete
 					</button>
@@ -53,25 +53,22 @@
 <script src="/assets/plugins/sweet-alert/sweetalert2.all.min.js"></script>
 
 <script>
-	$(document).ready(function() {
-		$('#deleteData').click(function(e) {
-			e.preventDefault();
-			var title = $(this).data('title');
-			
-			Swal.fire({
-				title: 'Hapus ' + title + '?',
-				html: "Apakah kamu yakin ingin menghapus <b>" + title + "</b>? Data yang sudah dihapus tidak bisa dikembalikan!",
-				icon: 'warning',
-				showCancelButton: true,
-				confirmButtonColor: '#3085d6',
-				cancelButtonColor: '#d33',
-				confirmButtonText: 'Ya, Hapus',
-				cancelButtonText: 'Batal'
-			}).then((result) => {
-				if (result.isConfirmed) {
-					$(this).closest('form').submit();
-				}
-			});
+	$(document).on('click', '#deleteData', function() {
+		let title = $(this).data('title');
+
+		Swal.fire({
+			title: 'Hapus ' + title + '?',
+			html: "Apakah kamu yakin ingin menghapus <b>" + title + "</b>? Data yang sudah dihapus tidak bisa dikembalikan!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Ya, Hapus',
+			cancelButtonText: 'Batal'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$(this).closest('form').submit();
+			}
 		});
 	});
 </script>

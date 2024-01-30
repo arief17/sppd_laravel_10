@@ -56,53 +56,6 @@
 <!-- Sweet-alert js  -->
 <script src="/assets/plugins/sweet-alert/sweetalert2.all.min.js"></script>
 
-@if(session()->has('success'))
-<script>
-    $(document).ready(function() {
-        var Toast = Swal.mixin({
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 5000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        });
-        
-        Toast.fire({
-            icon: 'success',
-            title: '{{ session('success') }}'
-        });
-    });
-</script>
-@endif
-
-<script>
-	$(document).ready(function() {
-		$('#deleteData').click(function(e) {
-			e.preventDefault();
-			var title = $(this).data('title');
-			
-			Swal.fire({
-				title: 'Hapus ' + title + '?',
-				html: "Apakah kamu yakin ingin menghapus <b>" + title + "</b>? Data yang sudah dihapus tidak bisa dikembalikan!",
-				icon: 'warning',
-				showCancelButton: true,
-				confirmButtonColor: '#3085d6',
-				cancelButtonColor: '#d33',
-				confirmButtonText: 'Ya, Hapus',
-				cancelButtonText: 'Batal'
-			}).then((result) => {
-				if (result.isConfirmed) {
-					$(this).closest('form').submit();
-				}
-			});
-		});
-	});
-</script>
-
 <!-- Bootstrap Bundle js -->
 <script src="/assets/plugins/bootstrap/js/popper.min.js"></script>
 <script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>

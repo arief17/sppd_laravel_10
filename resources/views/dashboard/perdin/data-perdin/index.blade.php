@@ -73,7 +73,7 @@
 										<form action="{{ route('data-perdin.destroy', $data_perdin->slug) }}" method="post" class="d-inline">
 											@method('delete')
 											@csrf
-											<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $data_perdin->perihal }}">
+											<button type="button" class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $data_perdin->perihal }}">
 												<i class="fas fa-trash"></i>
 											</button>
 										</form>
@@ -144,50 +144,48 @@
 @endif
 
 <script>
-	$(document).ready(function() {
-		$('#deleteData').click(function(e) {
-			e.preventDefault();
-			var title = $(this).data('title');
+	$(document).on('click', '#deleteData', function() {
+		let title = $(this).data('title');
 
-			Swal.fire({
-				title: 'Hapus ' + title + '?',
-				html: "Apakah kamu yakin ingin menghapus <b>" + title + "</b>? Data yang sudah dihapus tidak bisa dikembalikan!",
-				icon: 'warning',
-				showCancelButton: true,
-				confirmButtonColor: '#3085d6',
-				cancelButtonColor: '#d33',
-				confirmButtonText: 'Ya, Hapus',
-				cancelButtonText: 'Batal'
-			}).then((result) => {
-				if (result.isConfirmed) {
-					$(this).closest('form').submit();
-				}
-			});
+		Swal.fire({
+			title: 'Hapus ' + title + '?',
+			html: "Apakah kamu yakin ingin menghapus <b>" + title + "</b>? Data yang sudah dihapus tidak bisa dikembalikan!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Ya, Hapus',
+			cancelButtonText: 'Batal'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$(this).closest('form').submit();
+			}
 		});
+	});
 
-		$('.not-approve').click(function(e) {
-			Swal.fire({
-				title: 'Belum Approve',
-				icon: 'warning',
-				confirmButtonColor: '#3085d6',
-				confirmButtonText: 'Ok',
-			});
+
+	$('.not-approve').click(function(e) {
+		Swal.fire({
+			title: 'Belum Approve',
+			icon: 'warning',
+			confirmButtonColor: '#3085d6',
+			confirmButtonText: 'Ok',
 		});
-		$('.not-laporan').click(function(e) {
-			Swal.fire({
-				title: 'Belum ada laporan',
-				icon: 'warning',
-				confirmButtonColor: '#3085d6',
-				confirmButtonText: 'Ok',
-			});
+	});
+	$('.not-laporan').click(function(e) {
+		Swal.fire({
+			title: 'Belum ada laporan',
+			icon: 'warning',
+			confirmButtonColor: '#3085d6',
+			confirmButtonText: 'Ok',
 		});
-		$('.not-approval').click(function(e) {
-			Swal.fire({
-				title: 'Hanya Approval yang bisa approve',
-				icon: 'warning',
-				confirmButtonColor: '#3085d6',
-				confirmButtonText: 'Ok',
-			});
+	});
+	$('.not-approval').click(function(e) {
+		Swal.fire({
+			title: 'Hanya Approval yang bisa approve',
+			icon: 'warning',
+			confirmButtonColor: '#3085d6',
+			confirmButtonText: 'Ok',
 		});
 	});
 </script>
