@@ -27,7 +27,7 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
           source: vendor.zip
-          target: ~/vendor.zip
+          target: public_html/sppd/vendor.zip
 
       # SSH commands
       - name: SSH commands
@@ -42,7 +42,7 @@ jobs:
             rm -f .git/index.lock
             git fetch origin production
             git reset --hard origin/production
-            unzip -o ~/vendor.zip -d ~/public_html/sppd/vendor
+            unzip -o public_html/sppd/vendor.zip -d public_html/sppd/vendor
             chmod -R 777 storage bootstrap/cache
             php -r "file_exists('.env') || copy('.env.example', '.env');"
             php artisan key:generate
