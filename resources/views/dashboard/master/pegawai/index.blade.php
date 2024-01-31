@@ -13,10 +13,11 @@
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
-					<table class="table border-top-0 table-bordered text-nowrap border-bottom" id="responsive-datatable">
+					<table class="table border-top-0 table-bordered border-bottom" id="responsive-datatable">
 						<thead>
-							<tr>
+							<tr class="text-center">
 								<th class="border-bottom-0" style="width: 1%">No</th>
+								<th class="border-bottom-0" style="width: 1%">Aksi</th>
 								<th class="border-bottom-0">Nama</th>
 								<th class="border-bottom-0">NIP</th>
 								<th class="border-bottom-0">PPTK</th>
@@ -25,13 +26,27 @@
 								<th class="border-bottom-0">Jabatan</th>
 								<th class="border-bottom-0">Seksi</th>
 								<th class="border-bottom-0">Bidang</th>
-								<th class="border-bottom-0" style="width: 1%">Aksi</th>
 							</tr>
 						</thead>
 						<tbody>
 							@foreach ($pegawais as $pegawai)
 							<tr>
 								<td>{{ $loop->iteration }}</td>
+								<td class="text-nowrap">
+									<a class="btn btn-primary btn-sm" href="{{ route('pegawai.show', $pegawai->slug) }}">
+										<i class="fas fa-eye"></i>
+									</a>
+									<a class="btn btn-info btn-sm" href="{{ route('pegawai.edit', $pegawai->slug) }}">
+										<i class="fas fa-pencil-alt"></i>
+									</a>
+									<form action="{{ route('pegawai.destroy', $pegawai->slug) }}" method="post" class="d-inline">
+										@method('delete')
+										@csrf
+										<button type="button" class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $pegawai->nama }}">
+											<i class="fas fa-trash"></i>
+										</button>
+									</form>
+								</td>
 								<td>{{ $pegawai->nama }}</td>
 								<td>{{ $pegawai->nip }}</td>
 								<td>{{ $pegawai->pptk ? 'Ya' : 'Tidak' }}</td>
@@ -40,24 +55,6 @@
 								<td>{{ $pegawai->jabatan->nama ?? '-' }}</td>
 								<td>{{ $pegawai->seksi->nama ?? '-' }}</td>
 								<td>{{ $pegawai->bidang->nama ?? '-' }}</td>
-								<td>
-									<a class="btn btn-primary btn-sm" href="{{ route('pegawai.show', $pegawai->slug) }}">
-										<i class="fas fa-folder"></i>
-										View
-									</a>
-									<a class="btn btn-info btn-sm" href="{{ route('pegawai.edit', $pegawai->slug) }}">
-										<i class="fas fa-pencil-alt"></i>
-										Edit
-									</a>
-									<form action="{{ route('pegawai.destroy', $pegawai->slug) }}" method="post" class="d-inline">
-										@method('delete')
-										@csrf
-										<button type="button" class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $pegawai->nama }}">
-											<i class="fas fa-trash"></i>
-											Delete
-										</button>
-									</form>
-								</td>
 							</tr>
 							@endforeach
 						</tbody>
