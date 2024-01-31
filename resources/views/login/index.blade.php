@@ -32,8 +32,6 @@
 </head>
 
 <body class="ltr error-page1 main-body bg-light text-dark error-3">
-
-
 	<!-- Loader -->
 	<div id="global-loader">
 		<img src="/assets/img/loader.svg" class="loader-img" alt="Loader">
@@ -49,8 +47,7 @@
 				<div class="col-md-6 col-lg-6 col-xl-7 d-none d-md-flex bg-primary-transparent">
 					<div class="row wd-100p mx-auto text-center">
 						<div class="col-md-12 col-lg-12 col-xl-12 my-auto mx-auto wd-100p">
-							<img src="/assets/img/jembatan-bogeg.jpeg"
-							class="my-auto wd-md-100p wd-xl-100p mx-auto" style="height: 100vh" alt="logo">
+							<img src="/assets/img/jembatan-bogeg.jpeg" class="my-auto wd-md-100p wd-xl-100p mx-auto" style="height: 100vh" alt="logo">
 						</div>
 					</div>
 				</div>
@@ -75,12 +72,17 @@
 												@csrf
 
 												<div class="form-group">
-													<label>Username</label>
-													<input name="username" class="form-control" placeholder="Masukan Username" type="text">
+													<label for="username">Username</label>
+													<input name="username" id="username" class="form-control" placeholder="Masukan Username" type="text">
 												</div>
 												<div class="form-group">
-													<label>Password</label>
-													<input name="password" class="form-control" placeholder="Masukan Password" type="password">
+													<label for="password">Password</label>
+													<div class="input-group mb-3">
+														<input name="password" id="password" class="form-control" placeholder="Masukan Password" type="password">
+														<span class="input-group-text" id="basic-addon1">
+															<i class="fa fa-eye" id="togglePassword" style="cursor: pointer"></i>
+														</span>
+													</div>
 												</div>
 												<button class="btn btn-main-primary btn-block">
 													Masuk
@@ -102,6 +104,45 @@
 
 	<!-- JQuery min js -->
 	<script src="/assets/plugins/jquery/jquery.min.js"></script>
+
+	<script src="/assets/plugins/sweet-alert/sweetalert2.all.min.js"></script>
+
+	@if(session()->has('loginError'))
+	<script>
+		$(document).ready(function() {
+			var Toast = Swal.mixin({
+				toast: true,
+				position: 'top',
+				showConfirmButton: false,
+				timer: 5000,
+				timerProgressBar: true,
+				didOpen: (toast) => {
+					toast.addEventListener('mouseenter', Swal.stopTimer)
+					toast.addEventListener('mouseleave', Swal.resumeTimer)
+				}
+			});
+
+			Toast.fire({
+				icon: 'error',
+				title: '{{ session('loginError') }}',
+				text: 'Username atau Password salah'
+			});
+		});
+	</script>
+	@endif
+
+	<script>
+		const togglePassword = document.querySelector("#togglePassword");
+		const password = document.querySelector("#password");
+
+		togglePassword.addEventListener("click", function () {
+			const type = password.getAttribute("type") === "password" ? "text" : "password";
+			password.setAttribute("type", type);
+
+			this.classList.toggle('fa-eye');
+			this.classList.toggle('fa-eye-slash');
+		});
+	</script>
 
 	<!-- Bootstrap Bundle js -->
 	<script src="/assets/plugins/bootstrap/js/popper.min.js"></script>
@@ -125,31 +166,5 @@
 
 	<!-- custom js -->
 	<script src="/assets/js/custom.js"></script>
-
-	<script src="/assets/plugins/sweet-alert/sweetalert2.all.min.js"></script>
-
-	@if(session()->has('loginError'))
-	<script>
-		$(document).ready(function() {
-			var Toast = Swal.mixin({
-				toast: true,
-				position: 'top',
-				showConfirmButton: false,
-				timer: 5000,
-				timerProgressBar: true,
-				didOpen: (toast) => {
-					toast.addEventListener('mouseenter', Swal.stopTimer)
-					toast.addEventListener('mouseleave', Swal.resumeTimer)
-				}
-			});
-
-			Toast.fire({
-				icon: 'error',
-				title: '{{ session('loginError') }}'
-			});
-		});
-	</script>
-	@endif
-
 </body>
 </html>

@@ -280,7 +280,7 @@
 				<!-- breadcrumb -->
 				<div class="breadcrumb-header justify-content-between">
 					<div class="left-content">
-						<h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">Halo {{ auth()->user()->username }}, selamat datang kembali!</h2>
+						<h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">Halo {{ auth()->user()->username }}, Selamat Datang Kembali!</h2>
 						<p class="mg-b-0">{{ auth()->user()->bidang->nama ?? 'Bidang belum ditentukan' }}</p>
 					</div>
 					<div class="main-dashboard-header-right">
