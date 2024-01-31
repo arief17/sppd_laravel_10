@@ -13,10 +13,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Update Composer
-        run: composer self-update
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          extensions: mbstring, intl, zip, pdo, pdo_mysql, exif, pcntl
 
-      - name: Deployment
+      - name: Install Composer dependencies
+        run: composer install --no-dev --no-interaction --no-progress --optimize-autoloader
+
+      - name: Zip vendor folder
+        run: zip -r vendor.zip vendor
+
+      - name: Upload vendor folder
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
+          source: vendor.zip
+          target: ~/vendor.zip
+
+      # SSH commands
+      - name: SSH commands
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -28,9 +48,7 @@ jobs:
             rm -f .git/index.lock
             git fetch origin production
             git reset --hard origin/production
-            composer clear-cache
-            composer self-update --2
-            composer update --ignore-platform-reqs
+            unzip -o ~/vendor.zip -d ~/public_html/sppd/vendor
             chmod -R 777 storage bootstrap/cache
             php -r "file_exists('.env') || copy('.env.example', '.env');"
             php artisan key:generate
