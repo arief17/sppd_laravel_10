@@ -8,7 +8,7 @@
 			<div class="card-header">
 				<div class="d-flex align-items-center">
 					<h3 class="card-title">{{ $title }}</h3>
-					<a href="{{ route('pegawai.create') }}" class="btn btn-primary mg-l-auto">Tambah</a>
+					<a href="{{ route('pegawai.create') }}" class="btn btn-primary mg-l-auto"><i class="fas fa-plus"></i></a>
 				</div>
 			</div>
 			<div class="card-body">
@@ -17,22 +17,23 @@
 						<thead>
 							<tr class="text-center">
 								<th class="border-bottom-0" style="width: 1%">No</th>
-								<th class="border-bottom-0" style="width: 1%">Aksi</th>
+								<th class="border-bottom-0" style="width: 12%">Aksi</th>
 								<th class="border-bottom-0">Nama</th>
 								<th class="border-bottom-0">NIP</th>
 								<th class="border-bottom-0">PPTK</th>
 								<th class="border-bottom-0">Pangkat</th>
-								<th class="border-bottom-0">Golongan</th>
+								<!-- <th class="border-bottom-0">Golongan</th> -->
 								<th class="border-bottom-0">Jabatan</th>
-								<th class="border-bottom-0">Seksi</th>
-								<th class="border-bottom-0">Bidang</th>
+								<!-- <th class="border-bottom-0">Seksi</th>
+								<th class="border-bottom-0">Bidang</th> -->
+								
 							</tr>
 						</thead>
 						<tbody>
 							@foreach ($pegawais as $pegawai)
 							<tr>
-								<td>{{ $loop->iteration }}</td>
-								<td class="text-nowrap">
+								<td class="text-center">{{ $loop->iteration }}</td>
+								<td>
 									<a class="btn btn-primary btn-sm" href="{{ route('pegawai.show', $pegawai->slug) }}">
 										<i class="fas fa-eye"></i>
 									</a>
@@ -42,7 +43,7 @@
 									<form action="{{ route('pegawai.destroy', $pegawai->slug) }}" method="post" class="d-inline">
 										@method('delete')
 										@csrf
-										<button type="button" class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $pegawai->nama }}">
+										<button class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $pegawai->nama }}">
 											<i class="fas fa-trash"></i>
 										</button>
 									</form>
@@ -51,10 +52,11 @@
 								<td>{{ $pegawai->nip }}</td>
 								<td>{{ $pegawai->pptk ? 'Ya' : 'Tidak' }}</td>
 								<td>{{ $pegawai->pangkat->nama ?? '-'}}</td>
-								<td>{{ $pegawai->golongan->nama ?? '-' }}</td>
+								<!-- <td>{{ $pegawai->golongan->nama ?? '-' }}</td> -->
 								<td>{{ $pegawai->jabatan->nama ?? '-' }}</td>
-								<td>{{ $pegawai->seksi->nama ?? '-' }}</td>
-								<td>{{ $pegawai->bidang->nama ?? '-' }}</td>
+								<!-- <td>{{ $pegawai->seksi->nama ?? '-' }}</td>
+								<td>{{ $pegawai->bidang->nama ?? '-' }}</td> -->
+								
 							</tr>
 							@endforeach
 						</tbody>
@@ -92,7 +94,7 @@
                 toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
         });
-
+        
         Toast.fire({
             icon: 'success',
             title: '{{ session('success') }}'
@@ -102,22 +104,25 @@
 @endif
 
 <script>
-	$(document).on('click', '#deleteData', function() {
-		let title = $(this).data('title');
-
-		Swal.fire({
-			title: 'Hapus ' + title + '?',
-			html: "Apakah kamu yakin ingin menghapus <b>" + title + "</b>? Data yang sudah dihapus tidak bisa dikembalikan!",
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Ya, Hapus',
-			cancelButtonText: 'Batal'
-		}).then((result) => {
-			if (result.isConfirmed) {
-				$(this).closest('form').submit();
-			}
+	$(document).ready(function() {
+		$('#deleteData').click(function(e) {
+			e.preventDefault();
+			var title = $(this).data('title');
+			
+			Swal.fire({
+				title: 'Hapus ' + title + '?',
+				html: "Apakah kamu yakin ingin menghapus <b>" + title + "</b>? Data yang sudah dihapus tidak bisa dikembalikan!",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya, Hapus',
+				cancelButtonText: 'Batal'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$(this).closest('form').submit();
+				}
+			});
 		});
 	});
 </script>

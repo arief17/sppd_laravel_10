@@ -14,23 +14,22 @@
 				<div class="table-responsive">
 					<table class="table border-top-0 table-bordered text-nowrap border-bottom" id="responsive-datatable">
 						<thead>
-							<tr>
+							<tr class="text-center">
 								<th class="border-bottom-0" style="width: 1%">No</th>
-								<th class="border-bottom-0">Nama</th>
-								<th class="border-bottom-0" style="width: 1%">Aksi</th>
+								<th class="border-bottom-0" style="width: 6%">Aksi</th>
+								<th class="border-bottom-0">Nama Golongan</th>
 							</tr>
 						</thead>
 						<tbody>
 							@foreach ($golongans as $golongan)
 							<tr>
 								<td>{{ $loop->iteration }}</td>
-								<td>{{ $golongan->nama }}</td>
 								<td>
 									<a class="btn btn-primary btn-sm" href="{{ route('golongan.show', $golongan->slug) }}">
-										<i class="fas fa-folder"></i>
-										View
+										<i class="fas fa-eye"></i>
 									</a>
 								</td>
+								<td>{{ $golongan->nama }}</td>
 							</tr>
 							@endforeach
 						</tbody>
@@ -53,6 +52,53 @@
 
 <!-- Sweet-alert js  -->
 <script src="/assets/plugins/sweet-alert/sweetalert2.all.min.js"></script>
+
+@if(session()->has('success'))
+<script>
+    $(document).ready(function() {
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 5000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
+        
+        Toast.fire({
+            icon: 'success',
+            title: '{{ session('success') }}'
+        });
+    });
+</script>
+@endif
+
+<script>
+	$(document).ready(function() {
+		$('#deleteData').click(function(e) {
+			e.preventDefault();
+			var title = $(this).data('title');
+			
+			Swal.fire({
+				title: 'Hapus ' + title + '?',
+				html: "Apakah kamu yakin ingin menghapus <b>" + title + "</b>? Data yang sudah dihapus tidak bisa dikembalikan!",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya, Hapus',
+				cancelButtonText: 'Batal'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$(this).closest('form').submit();
+				}
+			});
+		});
+	});
+</script>
 
 <!-- Bootstrap Bundle js -->
 <script src="/assets/plugins/bootstrap/js/popper.min.js"></script>

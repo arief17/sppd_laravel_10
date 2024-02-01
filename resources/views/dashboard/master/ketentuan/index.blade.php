@@ -16,29 +16,27 @@
 						<thead>
 							<tr>
 								<th class="border-bottom-0" style="width: 1%">No</th>
+								<th class="border-bottom-0 text-center" style="width: 5%">Aksi</th>
 								<th class="border-bottom-0">Nama</th>
 								<th class="border-bottom-0">Jumlah Perdin</th>
 								<th class="border-bottom-0">Maksimal Perdin</th>
-								<th class="border-bottom-0" style="width: 1%">Aksi</th>
 							</tr>
 						</thead>
 						<tbody>
 							@foreach ($ketentuans as $ketentuan)
 							<tr>
 								<td>{{ $loop->iteration }}</td>
-								<td>{{ $ketentuan->pegawai->nama }}</td>
-								<td>{{ $ketentuan->jumlah_perdin }}</td>
-								<td>{{ $ketentuan->max_perdin }}</td>
 								<td>
 									<a class="btn btn-primary btn-sm" href="{{ route('ketentuan.show', $ketentuan->id) }}">
-										<i class="fas fa-folder"></i>
-										View
+										<i class="fas fa-eye"></i>
 									</a>
 									<a class="btn btn-info btn-sm" href="{{ route('ketentuan.edit', $ketentuan->id) }}">
 										<i class="fas fa-pencil-alt"></i>
-										Edit
 									</a>
 								</td>
+								<td>{{ $ketentuan->pegawai->nama }}</td>
+								<td>{{ $ketentuan->jumlah_perdin }}</td>
+								<td>{{ $ketentuan->max_perdin }}</td>
 							</tr>
 							@endforeach
 						</tbody>
@@ -76,7 +74,7 @@
                 toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
         });
-
+        
         Toast.fire({
             icon: 'success',
             title: '{{ session('success') }}'
@@ -84,6 +82,30 @@
     });
 </script>
 @endif
+
+<script>
+	$(document).ready(function() {
+		$('#deleteData').click(function(e) {
+			e.preventDefault();
+			var title = $(this).data('title');
+			
+			Swal.fire({
+				title: 'Hapus ' + title + '?',
+				html: "Apakah kamu yakin ingin menghapus <b>" + title + "</b>? Data yang sudah dihapus tidak bisa dikembalikan!",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya, Hapus',
+				cancelButtonText: 'Batal'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$(this).closest('form').submit();
+				}
+			});
+		});
+	});
+</script>
 
 <!-- Bootstrap Bundle js -->
 <script src="/assets/plugins/bootstrap/js/popper.min.js"></script>
